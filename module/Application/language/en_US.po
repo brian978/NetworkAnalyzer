@@ -2,30 +2,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-05 22:17-0700\n"
-"PO-Revision-Date: 2012-07-05 22:17-0700\n"
-"Last-Translator: Evan Coury <me@evancoury.com>\n"
-"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
+"POT-Creation-Date: 2013-03-17 19:13+0200\n"
+"PO-Revision-Date: 2013-03-17 19:13+0200\n"
+"Last-Translator: brian978 <dbrian89@yahoo.com>\n"
+"Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-Language: English\n"
-"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-Country: ROMANIA\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../view/layout/layout.phtml:6
-#: ../view/layout/layout.phtml:33
+msgid "Network Analyzer"
+msgstr ""
+
+#: ../view/layout/layout.phtml:23
 msgid "Skeleton Application"
 msgstr ""
 
-#: ../view/layout/layout.phtml:36
+#: ../view/layout/layout.phtml:26
 msgid "Home"
 msgstr ""
 
-#: ../view/layout/layout.phtml:50
+#: ../view/layout/layout.phtml:36
 msgid "All rights reserved."
 msgstr ""
 
@@ -82,38 +85,6 @@ msgstr ""
 msgid "Ping us on IRC"
 msgstr ""
 
-#: ../view/error/index.phtml:1
-msgid "An error occurred"
-msgstr ""
-
-#: ../view/error/index.phtml:8
-msgid "Additional information"
-msgstr ""
-
-#: ../view/error/index.phtml:11
-#: ../view/error/index.phtml:35
-msgid "File"
-msgstr ""
-
-#: ../view/error/index.phtml:15
-#: ../view/error/index.phtml:39
-msgid "Message"
-msgstr ""
-
-#: ../view/error/index.phtml:19
-#: ../view/error/index.phtml:43
-#: ../view/error/404.phtml:55
-msgid "Stack trace"
-msgstr ""
-
-#: ../view/error/index.phtml:29
-msgid "Previous exceptions"
-msgstr ""
-
-#: ../view/error/index.phtml:58
-msgid "No Exception available"
-msgstr ""
-
 #: ../view/error/404.phtml:1
 msgid "A 404 error occurred"
 msgstr ""
@@ -147,7 +118,43 @@ msgstr ""
 msgid "resolves to %s"
 msgstr ""
 
-#: ../view/error/404.phtml:51
-msgid "Exception"
+#: ../view/error/404.phtml:53
+#: ../view/error/index.phtml:8
+msgid "Additional information"
+msgstr ""
+
+#: ../view/error/404.phtml:56
+#: ../view/error/404.phtml:80
+#: ../view/error/index.phtml:11
+#: ../view/error/index.phtml:35
+msgid "File"
+msgstr ""
+
+#: ../view/error/404.phtml:60
+#: ../view/error/404.phtml:84
+#: ../view/error/index.phtml:15
+#: ../view/error/index.phtml:39
+msgid "Message"
+msgstr ""
+
+#: ../view/error/404.phtml:64
+#: ../view/error/404.phtml:88
+#: ../view/error/index.phtml:19
+#: ../view/error/index.phtml:43
+msgid "Stack trace"
+msgstr ""
+
+#: ../view/error/404.phtml:74
+#: ../view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr ""
+
+#: ../view/error/404.phtml:103
+#: ../view/error/index.phtml:58
+msgid "No Exception available"
+msgstr ""
+
+#: ../view/error/index.phtml:1
+msgid "An error occurred"
 msgstr ""
 
