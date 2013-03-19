@@ -8,31 +8,12 @@
  */
 
 return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/',
-                    'defaults' => array(
-                        'controller' => 'UI\Controller\Index',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
-        )
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'UI\Controller\Index' => 'UI\Controller\IndexController'
-        )
-    ),
     'view_manager' => array(
         'template_map' => array(
             'layout/layout' => __DIR__ . '/../view/layout/ui.phtml',
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            __DIR__ . '/../view'
         ),
     )
 );

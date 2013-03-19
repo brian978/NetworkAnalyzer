@@ -12,5 +12,8 @@
  */
 
 return array(
-    // ...
+    'locales' => array(
+        'ro' => 'ro_RO',
+        'en' => 'en_US',
+    )
 );

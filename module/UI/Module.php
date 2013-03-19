@@ -9,8 +9,53 @@
 
 namespace UI;
 
+use Zend\Mvc\MvcEvent;
+
 class Module
 {
+    /**
+     *
+     * @var \Zend\Mvc\ApplicationInterface
+     */
+    protected $application;
+
+    /**
+     * @var \Zend\EventManager\EventManager
+     */
+    protected $eventManager;
+
+    /**
+     * @var \Zend\ServiceManager\ServiceManager
+     */
+    protected $serviceManager;
+
+    public function onBootstrap(MvcEvent $e)
+    {
+        $this->application    = $e->getApplication();
+        $this->eventManager   = $this->application->getEventManager();
+        $this->serviceManager = $this->application->getServiceManager();
+
+        // Events
+        $this->eventManager->attach('dispatch', array($this, 'setLocale'));
+    }
+
+    public function setLocale(MvcEvent $e)
+    {
+        $match = $e->getRouteMatch();
+
+        /** @var $config \Zend\Config\Config */
+        $config = $this->serviceManager->get('Config');
+
+        /** @var $translator \Zend\I18n\Translator\Translator */
+        $translator = $this->serviceManager->get('translator');
+
+        if(isset($config['locales'][$match->getParam('lang')]))
+        {
+            $locale = $config['locales'][$match->getParam('lang')];
+            $translator->setLocale($locale);
+        }
+    }
+
     public function getAutoloaderConfig()
     {
         return array(
