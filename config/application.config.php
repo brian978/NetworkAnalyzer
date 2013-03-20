@@ -5,7 +5,7 @@ return array(
         'Application',
         'UI',
         'Dashboard',
-        'Users'
+        'Settings',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

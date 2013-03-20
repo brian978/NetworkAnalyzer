@@ -10,13 +10,9 @@
 
 return array(
     'router' => array(
-        'routes' => array(
-
-        )
+        'routes' => array()
     ),
     'controllers' => array(
-        'invokables' => array(
-
-        )
+        'invokables' => array()
     )
 );

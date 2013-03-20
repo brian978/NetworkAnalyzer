@@ -1,21 +1,20 @@
 <?php
 /**
-* NetworkAnalyzer
-*
-* @link      https://github.com/brian978/NetworkAnalyzer
-* @copyright Copyright (c) 2013
-* @license   Creative Commons Attribution-ShareAlike 3.0
-*/
+ * NetworkAnalyzer
+ *
+ * @link      https://github.com/brian978/NetworkAnalyzer
+ * @copyright Copyright (c) 2013
+ * @license   Creative Commons Attribution-ShareAlike 3.0
+ */
 
-namespace Users\Controller;
+namespace Settings\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
-class IndexController extends AbstractActionController
+class UsersController extends AbstractActionController
 {
     public function indexAction()
     {
-
     }
 
     public function addAction()

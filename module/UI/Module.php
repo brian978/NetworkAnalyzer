@@ -52,7 +52,7 @@ class Module
             /** @var $translator \Zend\I18n\Translator\Translator */
             $translator = $this->serviceManager->get('translator');
 
-            if(isset($config['locales'][$lang]))
+            if (isset($config['locales'][$lang]))
             {
                 $locale = $config['locales'][$lang];
                 $translator->setLocale($locale);

@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Users;
+namespace Settings;
 
 class Module
 {
