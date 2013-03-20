@@ -37,7 +37,6 @@ class Module
 
         // Events
         $this->eventManager->attach('dispatch', array($this, 'setLocale'));
-        $this->eventManager->attach('dispatch', array($this, 'setRouteName'));
     }
 
     public function setLocale(MvcEvent $e)
@@ -59,20 +58,6 @@ class Module
                 $translator->setLocale($locale);
             }
         }
-    }
-
-    /**
-     * Sets the route name into the root view model
-     *
-     * @param MvcEvent $e
-     */
-    public function setRouteName(MvcEvent $e)
-    {
-        $e->getViewModel()
-            ->setVariable(
-                'routeName',
-                $e->getRouteMatch()->getMatchedRouteName()
-            );
     }
 
     public function getAutoloaderConfig()
