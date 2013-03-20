@@ -70,6 +70,10 @@
                 </h1>
 
                 <h2 class="section_title"><?php echo $this->translate('Dashboard') ?></h2>
+                <span id="lang_bar">
+                    <a href="<?php echo $this->url($this->routeName, array('lang' => 'ro'), true) ?>">RO</a>
+                    <a href="<?php echo $this->url($this->routeName, array('lang' => 'en'), true) ?>">EN</a>
+                </span>
             </hgroup>
         </header>
         <!-- end of header bar -->
@@ -117,14 +121,20 @@
             </ul>
             <h3><?php echo $this->translate('Admin') ?></h3>
             <ul class="toggle">
-                <li class="icn_settings"><a
-                        href="#"><?php echo $this->translate('Options') ?></a>
+                <li class="icn_settings">
+                    <a href="<?php echo $this->url('settings', array(), true) ?>">
+                        <?php echo $this->translate('Options') ?>
+                    </a>
                 </li>
-                <li class="icn_security"><a
-                        href="#"><?php echo $this->translate('Security') ?></a>
+                <li class="icn_security">
+                    <a href="<?php echo $this->url('settings/module', array('controller' => 'security'), true) ?>">
+                        <?php echo $this->translate('Security') ?>
+                    </a>
                 </li>
-                <li class="icn_jump_back"><a
-                        href="#"><?php echo $this->translate('Logout') ?></a>
+                <li class="icn_jump_back">
+                    <a href="<?php echo $this->url('auth', array('action' => 'logout'), true) ?>">
+                        <?php echo $this->translate('Logout') ?>
+                    </a>
                 </li>
             </ul>
 

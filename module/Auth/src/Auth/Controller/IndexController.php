@@ -7,10 +7,16 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Controller;
+namespace Auth\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
 {
+    public function logoutAction()
+    {
+        $this->redirect()->toRoute('auth', array('action' => 'index'), true);
+
+        return;
+    }
 }

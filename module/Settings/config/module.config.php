@@ -30,9 +30,6 @@ return array(
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                'lang' => 'en'
                             )
                         )
                     )
@@ -43,7 +40,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Settings\Controller\Index' => 'Settings\Controller\IndexController',
-            'Settings\Controller\Users' => 'Settings\Controller\UsersController'
+            'Settings\Controller\Users' => 'Settings\Controller\UsersController',
+            'Settings\Controller\Options' => 'Settings\Controller\OptionsController'
         )
     )
 );

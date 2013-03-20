@@ -10,22 +10,27 @@
 return array(
     'router' => array(
         'routes' => array(
-            'home' => array(
+            'auth' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/[[:lang/]index]',
+                    'route' => '[/:lang]/auth[/:action]',
                     'defaults' => array(
-                        'controller' => 'Dashboard\Controller\Index',
+                        'controller' => 'Auth\Controller\Index',
                         'action' => 'index',
                         'lang' => 'en'
-                    ),
+                    )
                 )
-            ),
+            )
         )
     ),
     'controllers' => array(
         'invokables' => array(
-            'Dashboard\Controller\Index' => 'Dashboard\Controller\IndexController'
+            'Auth\Controller\Index' => 'Auth\Controller\IndexController'
+        )
+    ),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            __DIR__ . '/../view'
         )
     )
 );

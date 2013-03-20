@@ -7,10 +7,4 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Controller;
-
-use Zend\Mvc\Controller\AbstractActionController;
-
-class IndexController extends AbstractActionController
-{
-}
+return array();

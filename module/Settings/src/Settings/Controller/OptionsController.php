@@ -7,10 +7,10 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Controller;
+namespace Settings\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
-class IndexController extends AbstractActionController
+class OptionsController extends AbstractActionController
 {
 }
