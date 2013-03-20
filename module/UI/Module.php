@@ -42,17 +42,21 @@ class Module
     public function setLocale(MvcEvent $e)
     {
         $match = $e->getRouteMatch();
+        $lang  = $match->getParam('lang');
 
-        /** @var $config \Zend\Config\Config */
-        $config = $this->serviceManager->get('Config');
-
-        /** @var $translator \Zend\I18n\Translator\Translator */
-        $translator = $this->serviceManager->get('translator');
-
-        if(isset($config['locales'][$match->getParam('lang')]))
+        if (is_string($lang))
         {
-            $locale = $config['locales'][$match->getParam('lang')];
-            $translator->setLocale($locale);
+            /** @var $config \Zend\Config\Config */
+            $config = $this->serviceManager->get('Config');
+
+            /** @var $translator \Zend\I18n\Translator\Translator */
+            $translator = $this->serviceManager->get('translator');
+
+            if(isset($config['locales'][$lang]))
+            {
+                $locale = $config['locales'][$lang];
+                $translator->setLocale($locale);
+            }
         }
     }
 
