@@ -12,13 +12,28 @@
  */
 
 return array(
+
+    // Dummy DB config
+    'db' => array(
+        'driver' => 'Pdo_Mysql',
+        'database' => 'network_analyzer',
+        'username' => 'root',
+        'password' => 'root',
+        'hostname' => 'localhost'
+    ),
+
+    // Available locales - used to determine and set translator locale
     'locales' => array(
         'ro' => 'ro_RO',
         'en' => 'en_US',
     ),
-    'snmp' => array(
-        'version' => SNMP::VERSION_1,
-        'hostname' => '127.0.0.1',
-        'community' => 'SNMP::VERSION_1'
+
+    'modules' => array(
+        // Options for the SNMP module
+        'snmp' => array(
+            'version' => SNMP::VERSION_1,
+            'hostname' => '127.0.0.1',
+            'community' => 'SNMP::VERSION_1'
+        )
     )
 );

@@ -65,7 +65,7 @@ class Session implements ServiceManagerAwareInterface
 
             /** @var $config \Zend\Config\Config */
             $config = $this->serviceManager->get('Config');
-            $config = $config['snmp'];
+            $config = $config['modules']['snmp'];
 
             $this->session = new \SNMP(
                 $config['version'],
