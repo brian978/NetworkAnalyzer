@@ -15,5 +15,10 @@ return array(
     'locales' => array(
         'ro' => 'ro_RO',
         'en' => 'en_US',
+    ),
+    'snmp' => array(
+        'version' => SNMP::VERSION_1,
+        'hostname' => '127.0.0.1',
+        'community' => 'SNMP::VERSION_1'
     )
 );

@@ -7,6 +7,7 @@ return array(
         'UI',
         'Dashboard',
         'Settings',
+        'Snmp'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
