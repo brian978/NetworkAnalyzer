@@ -13,6 +13,7 @@ use Zend\Authentication\Adapter\DbTable;
 use Zend\Authentication\AuthenticationService;
 use Zend\Db\Adapter\Adapter;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Settings\Model\Users;
 
 class Authentication extends AuthenticationService
 {
@@ -93,8 +94,9 @@ class Authentication extends AuthenticationService
         {
             if ($result->count() === 1)
             {
-                $row       = $result->current();
-                $tmpPasswd = $row['password'];
+                $row      = $result->current();
+                $data     = Users::processPasswordHash($row['password']);
+                $password = Users::generatePasswordHash($credentials['password'], $data);
             }
         }
 
