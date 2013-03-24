@@ -12,14 +12,17 @@
  */
 
 return array(
-
-    // Dummy DB config
     'db' => array(
-        'driver' => 'Pdo_Mysql',
+        'driver' => 'Pdo_mysql',
+        'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        ),
+
+        // Dummy DB config
         'database' => 'network_analyzer',
         'username' => 'root',
         'password' => 'root',
-        'hostname' => 'localhost'
+        'hostname' => 'localhost',
     ),
 
     // Available locales - used to determine and set translator locale

@@ -9,13 +9,16 @@
 
 namespace Auth\Controller;
 
+use Auth\Model\Authentication;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        $auth = new Authentication($this->serviceLocator);
 
+        $result = $auth->setCredentials(array())->authenticate();
     }
 
     public function logoutAction()
