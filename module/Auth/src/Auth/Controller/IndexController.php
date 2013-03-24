@@ -17,6 +17,7 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         $auth = new Authentication($this->serviceLocator);
+        var_dump($auth->setCredentials(array())->authenticate());
     }
 
     public function logoutAction()
