@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 20:20+0200\n"
-"PO-Revision-Date: 2013-03-17 20:21+0200\n"
+"POT-Creation-Date: 2013-03-25 14:15+0200\n"
+"PO-Revision-Date: 2013-03-25 14:15+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
@@ -16,155 +16,72 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../view/layout/layout.phtml:5
-#: ../view/layout/layout.phtml:66
-#: ../view/layout/layout.phtml:79
-msgid "Network Analyzer"
-msgstr ""
-
-#: ../view/layout/layout.phtml:68
-msgid "Dashboard"
-msgstr ""
-
-#: ../view/layout/layout.phtml:82
-msgid "Admin"
-msgstr ""
-
-#: ../view/layout/layout.phtml:94
-msgid "Users"
-msgstr "Utilizatori"
-
-#: ../view/layout/layout.phtml:96
-msgid "Add new user"
-msgstr ""
-
-#: ../view/layout/layout.phtml:97
-msgid "View users"
-msgstr ""
-
-#: ../view/layout/layout.phtml:109
-msgid "All rights reserved."
-msgstr "Toate drepturile rezervate."
-
-#: ../view/application/index/index.phtml:2
-#, php-format
-msgid "Welcome to %sZend Framework 2%s"
-msgstr ""
-
-#: ../view/application/index/index.phtml:3
-#, php-format
-msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2."
-msgstr ""
-
-#: ../view/application/index/index.phtml:4
-msgid "Fork Zend Framework 2 on GitHub"
-msgstr ""
-
-#: ../view/application/index/index.phtml:10
-msgid "Follow Development"
-msgstr ""
-
-#: ../view/application/index/index.phtml:11
-#, php-format
-msgid "Zend Framework 2 is under active development. If you are interested in following the development of ZF2, there is a special ZF2 portal on the official Zend Framework website which provides links to the ZF2 %swiki%s, %sdev blog%s, %sissue tracker%s, and much more. This is a great resource for staying up to date with the latest developments!"
-msgstr ""
-
-#: ../view/application/index/index.phtml:12
-msgid "ZF2 Development Portal"
-msgstr ""
-
-#: ../view/application/index/index.phtml:16
-msgid "Discover Modules"
-msgstr ""
-
-#: ../view/application/index/index.phtml:17
-#, php-format
-msgid "The community is working on developing a community site to serve as a repository and gallery for ZF2 modules. The project is available %son GitHub%s. The site is currently live and currently contains a list of some of the modules already available for ZF2."
-msgstr ""
-
-#: ../view/application/index/index.phtml:18
-msgid "Explore ZF2 Modules"
-msgstr ""
-
-#: ../view/application/index/index.phtml:22
-msgid "Help &amp; Support"
-msgstr ""
-
-#: ../view/application/index/index.phtml:23
-#, php-format
-msgid "If you need any help or support while developing with ZF2, you may reach us via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the %smailing lists%s."
-msgstr ""
-
-#: ../view/application/index/index.phtml:24
-msgid "Ping us on IRC"
-msgstr ""
-
 #: ../view/error/404.phtml:1
 msgid "A 404 error occurred"
 msgstr ""
 
-#: ../view/error/404.phtml:10
+#: ../view/error/404.phtml:11
 msgid "The requested controller was unable to dispatch the request."
 msgstr ""
 
-#: ../view/error/404.phtml:13
+#: ../view/error/404.phtml:14
 msgid "The requested controller could not be mapped to an existing controller class."
 msgstr ""
 
-#: ../view/error/404.phtml:16
+#: ../view/error/404.phtml:17
 msgid "The requested controller was not dispatchable."
 msgstr ""
 
-#: ../view/error/404.phtml:19
+#: ../view/error/404.phtml:20
 msgid "The requested URL could not be matched by routing."
 msgstr ""
 
-#: ../view/error/404.phtml:22
+#: ../view/error/404.phtml:23
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr ""
 
-#: ../view/error/404.phtml:34
+#: ../view/error/404.phtml:35
 msgid "Controller"
 msgstr ""
 
-#: ../view/error/404.phtml:41
+#: ../view/error/404.phtml:43
 #, php-format
 msgid "resolves to %s"
 msgstr ""
 
-#: ../view/error/404.phtml:53
+#: ../view/error/404.phtml:55
 #: ../view/error/index.phtml:8
 msgid "Additional information"
 msgstr ""
 
-#: ../view/error/404.phtml:56
-#: ../view/error/404.phtml:80
+#: ../view/error/404.phtml:58
+#: ../view/error/404.phtml:86
 #: ../view/error/index.phtml:11
-#: ../view/error/index.phtml:35
+#: ../view/error/index.phtml:39
 msgid "File"
 msgstr ""
 
-#: ../view/error/404.phtml:60
-#: ../view/error/404.phtml:84
-#: ../view/error/index.phtml:15
-#: ../view/error/index.phtml:39
+#: ../view/error/404.phtml:64
+#: ../view/error/404.phtml:92
+#: ../view/error/index.phtml:17
+#: ../view/error/index.phtml:45
 msgid "Message"
 msgstr ""
 
-#: ../view/error/404.phtml:64
-#: ../view/error/404.phtml:88
-#: ../view/error/index.phtml:19
-#: ../view/error/index.phtml:43
+#: ../view/error/404.phtml:69
+#: ../view/error/404.phtml:97
+#: ../view/error/index.phtml:22
+#: ../view/error/index.phtml:50
 msgid "Stack trace"
 msgstr ""
 
-#: ../view/error/404.phtml:74
-#: ../view/error/index.phtml:29
+#: ../view/error/404.phtml:80
+#: ../view/error/index.phtml:33
 msgid "Previous exceptions"
 msgstr ""
 
-#: ../view/error/404.phtml:103
-#: ../view/error/index.phtml:58
+#: ../view/error/404.phtml:114
+#: ../view/error/index.phtml:67
 msgid "No Exception available"
 msgstr ""
 
@@ -172,3 +89,8 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
+#~ msgid "Users"
+#~ msgstr "Utilizatori"
+
+#~ msgid "All rights reserved."
+#~ msgstr "Toate drepturile rezervate."
