@@ -11,11 +11,27 @@ namespace Dashboard\Form;
 
 class DevicesFrom extends AbstractForm
 {
-    public function prepareElements()
+    public function __construct()
     {
-        $this->setName('devices_form');
+        parent::__construct('devices_form');
 
-        $this->add(array(
-        ));
+        $this->add(
+            array(
+                'type' => 'Dashboard\Form\Fieldsets\Devices',
+                'options' => array(
+                    'use_as_base_fieldset' => true
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'name' => 'submit',
+                'attributes' => array(
+                    'type' => 'submit',
+                    'value' => 'Send'
+                )
+            )
+        );
     }
 }

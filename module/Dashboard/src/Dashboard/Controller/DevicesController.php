@@ -9,6 +9,8 @@
 
 namespace Dashboard\Controller;
 
+use Dashboard\Entity\Device;
+use Dashboard\Form\DevicesFrom;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 
@@ -16,7 +18,23 @@ class DevicesController extends AbstractActionController
 {
     public function indexAction()
     {
+        $form = new DevicesFrom();
+        $device = new Device();
+        $form->bind($device);
 
+        if($this->request->isPost())
+        {
+            $form->setData($this->request->getPost());
+
+            if($form->isValid())
+            {
+                var_dump($device);
+            }
+        }
+
+        return array(
+            'form' => $form
+        );
     }
 
     public function listAction()
