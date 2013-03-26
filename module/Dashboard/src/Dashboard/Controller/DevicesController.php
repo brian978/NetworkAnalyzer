@@ -19,6 +19,11 @@ class DevicesController extends AbstractActionController
 
     }
 
+    public function listAction()
+    {
+
+    }
+
     public function addAction()
     {
         return new JsonModel(array('test' => 'test'));

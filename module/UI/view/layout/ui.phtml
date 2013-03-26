@@ -101,6 +101,19 @@
                        onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
             </form>
             <hr/>
+            <h3><?php echo $this->translate('Devices') ?></h3>
+            <ul class="toggle">
+                <li class="icn_new_article">
+                    <a href="<?php echo $this->url('home/module', array('controller' => 'devices', 'action' => 'index'), true) ?>">
+                        <?php echo $this->translate('Add new device') ?>
+                    </a>
+                </li>
+                <li class="icn_categories">
+                    <a href="<?php echo $this->url('home/module', array('controller' => 'devices', 'action' => 'list'), true) ?>">
+                        <?php echo $this->translate('View devices') ?>
+                    </a>
+                </li>
+            </ul>
             <h3><?php echo $this->translate('Users') ?></h3>
             <ul class="toggle">
                 <li class="icn_add_user">

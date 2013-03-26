@@ -11,9 +11,21 @@ return array(
     'router' => array(
         'routes' => array(
             'home' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'Index',
+                        'action' => 'index',
+                        'lang' => 'en'
+                    )
+                )
+            ),
+            'index' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '[[/:lang]/home]',
+                    'route' => '[/:lang]/home',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'Index',
