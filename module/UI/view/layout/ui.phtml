@@ -84,12 +84,19 @@
             </div>
             <div class="breadcrumbs_container">
                 <article class="breadcrumbs">
-                    <a href="<?php echo $this->url('home', array(), true) ?>">
+                    <a href="<?php echo $this->url('index', array(), true) ?>">
                         <?php echo $this->translate('Network Analyzer') ?>
                     </a>
 
-                    <div class="breadcrumb_divider"></div>
-                    <a class="current"><?php echo $this->translate('Admin') ?></a>
+                    <?php
+
+                    echo $this->navigation('navigation')
+                    ->breadcrumbs()
+                    ->setMinDepth(0)
+                    ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator())
+                    ->setPartial('partials/breadcrumb.phtml');
+
+                    ?>
                 </article>
             </div>
         </section>
@@ -104,12 +111,12 @@
             <h3><?php echo $this->translate('Devices') ?></h3>
             <ul class="toggle">
                 <li class="icn_new_article">
-                    <a href="<?php echo $this->url('home/module', array('controller' => 'devices', 'action' => 'index'), true) ?>">
+                    <a href="<?php echo $this->url('index/module', array('controller' => 'devices', 'action' => 'addForm'), true) ?>">
                         <?php echo $this->translate('Add new device') ?>
                     </a>
                 </li>
                 <li class="icn_categories">
-                    <a href="<?php echo $this->url('home/module', array('controller' => 'devices', 'action' => 'list'), true) ?>">
+                    <a href="<?php echo $this->url('index/module', array('controller' => 'devices', 'action' => 'list'), true) ?>">
                         <?php echo $this->translate('View devices') ?>
                     </a>
                 </li>

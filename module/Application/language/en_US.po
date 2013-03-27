@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-25 14:15+0200\n"
-"PO-Revision-Date: 2013-03-25 14:15+0200\n"
+"POT-Creation-Date: 2013-03-27 23:40+0200\n"
+"PO-Revision-Date: 2013-03-27 23:40+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
@@ -15,53 +15,6 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../..\n"
-
-#: ../../UI/view/layout/ui.phtml:5
-#: ../../UI/view/layout/ui.phtml:68
-#: ../../UI/view/layout/ui.phtml:88
-msgid "Network Analyzer"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:72
-msgid "Dashboard"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:92
-#: ../../UI/view/layout/ui.phtml:122
-msgid "Admin"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:104
-msgid "Users"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:108
-msgid "Add new user"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:113
-msgid "View users"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:118
-msgid "Profile"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:126
-msgid "Options"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:131
-msgid "Security"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:136
-msgid "Logout"
-msgstr ""
-
-#: ../../UI/view/layout/ui.phtml:144
-msgid "All rights reserved."
-msgstr ""
 
 #: ../../Application/view/error/404.phtml:1
 msgid "A 404 error occurred"
@@ -134,5 +87,64 @@ msgstr ""
 
 #: ../../Application/view/error/index.phtml:1
 msgid "An error occurred"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:5
+#: ../../UI/view/layout/ui.phtml:68
+#: ../../UI/view/layout/ui.phtml:88
+msgid "Network Analyzer"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:72
+msgid "Dashboard"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:100
+#: ../../UI/view/layout/ui.phtml:143
+msgid "Admin"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:112
+msgid "Devices"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:116
+msgid "Add new device"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:121
+msgid "View devices"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:125
+msgid "Users"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:129
+msgid "Add new user"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:134
+msgid "View users"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:139
+msgid "Profile"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:147
+msgid "Options"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:152
+msgid "Security"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:157
+msgid "Logout"
+msgstr ""
+
+#: ../../UI/view/layout/ui.phtml:165
+msgid "All rights reserved."
 msgstr ""
 

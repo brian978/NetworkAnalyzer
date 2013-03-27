@@ -16,7 +16,7 @@ use Zend\View\Model\JsonModel;
 
 class DevicesController extends AbstractUiController
 {
-    public function indexAction()
+    public function addFormAction()
     {
         $form = new DevicesFrom();
         $device = new Device();

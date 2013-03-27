@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-25 14:15+0200\n"
-"PO-Revision-Date: 2013-03-25 14:15+0200\n"
+"POT-Creation-Date: 2013-03-27 23:41+0200\n"
+"PO-Revision-Date: 2013-03-27 23:43+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
@@ -14,83 +14,137 @@ msgstr ""
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-0: ../..\n"
 
-#: ../view/error/404.phtml:1
+#: ../../Application/view/error/404.phtml:1
 msgid "A 404 error occurred"
 msgstr ""
 
-#: ../view/error/404.phtml:11
+#: ../../Application/view/error/404.phtml:11
 msgid "The requested controller was unable to dispatch the request."
 msgstr ""
 
-#: ../view/error/404.phtml:14
+#: ../../Application/view/error/404.phtml:14
 msgid "The requested controller could not be mapped to an existing controller class."
 msgstr ""
 
-#: ../view/error/404.phtml:17
+#: ../../Application/view/error/404.phtml:17
 msgid "The requested controller was not dispatchable."
 msgstr ""
 
-#: ../view/error/404.phtml:20
+#: ../../Application/view/error/404.phtml:20
 msgid "The requested URL could not be matched by routing."
 msgstr ""
 
-#: ../view/error/404.phtml:23
+#: ../../Application/view/error/404.phtml:23
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr ""
 
-#: ../view/error/404.phtml:35
+#: ../../Application/view/error/404.phtml:35
 msgid "Controller"
 msgstr ""
 
-#: ../view/error/404.phtml:43
+#: ../../Application/view/error/404.phtml:43
 #, php-format
 msgid "resolves to %s"
 msgstr ""
 
-#: ../view/error/404.phtml:55
-#: ../view/error/index.phtml:8
+#: ../../Application/view/error/404.phtml:55
+#: ../../Application/view/error/index.phtml:8
 msgid "Additional information"
 msgstr ""
 
-#: ../view/error/404.phtml:58
-#: ../view/error/404.phtml:86
-#: ../view/error/index.phtml:11
-#: ../view/error/index.phtml:39
+#: ../../Application/view/error/404.phtml:58
+#: ../../Application/view/error/404.phtml:86
+#: ../../Application/view/error/index.phtml:11
+#: ../../Application/view/error/index.phtml:39
 msgid "File"
 msgstr ""
 
-#: ../view/error/404.phtml:64
-#: ../view/error/404.phtml:92
-#: ../view/error/index.phtml:17
-#: ../view/error/index.phtml:45
+#: ../../Application/view/error/404.phtml:64
+#: ../../Application/view/error/404.phtml:92
+#: ../../Application/view/error/index.phtml:17
+#: ../../Application/view/error/index.phtml:45
 msgid "Message"
 msgstr ""
 
-#: ../view/error/404.phtml:69
-#: ../view/error/404.phtml:97
-#: ../view/error/index.phtml:22
-#: ../view/error/index.phtml:50
+#: ../../Application/view/error/404.phtml:69
+#: ../../Application/view/error/404.phtml:97
+#: ../../Application/view/error/index.phtml:22
+#: ../../Application/view/error/index.phtml:50
 msgid "Stack trace"
 msgstr ""
 
-#: ../view/error/404.phtml:80
-#: ../view/error/index.phtml:33
+#: ../../Application/view/error/404.phtml:80
+#: ../../Application/view/error/index.phtml:33
 msgid "Previous exceptions"
 msgstr ""
 
-#: ../view/error/404.phtml:114
-#: ../view/error/index.phtml:67
+#: ../../Application/view/error/404.phtml:114
+#: ../../Application/view/error/index.phtml:67
 msgid "No Exception available"
 msgstr ""
 
-#: ../view/error/index.phtml:1
+#: ../../Application/view/error/index.phtml:1
 msgid "An error occurred"
-msgstr ""
+msgstr "O erroare a fost intalnita"
 
-#~ msgid "Users"
-#~ msgstr "Utilizatori"
+#: ../../UI/view/layout/ui.phtml:5
+#: ../../UI/view/layout/ui.phtml:68
+#: ../../UI/view/layout/ui.phtml:88
+msgid "Network Analyzer"
+msgstr "Analizator retea"
 
-#~ msgid "All rights reserved."
-#~ msgstr "Toate drepturile rezervate."
+#: ../../UI/view/layout/ui.phtml:72
+msgid "Dashboard"
+msgstr "Panou de control"
+
+#: ../../UI/view/layout/ui.phtml:100
+#: ../../UI/view/layout/ui.phtml:143
+msgid "Admin"
+msgstr "Admin"
+
+#: ../../UI/view/layout/ui.phtml:112
+msgid "Devices"
+msgstr "Dispozitive"
+
+#: ../../UI/view/layout/ui.phtml:116
+msgid "Add new device"
+msgstr "Adauga un dispozitiv nou"
+
+#: ../../UI/view/layout/ui.phtml:121
+msgid "View devices"
+msgstr "Vizualizeaza dispozitivele"
+
+#: ../../UI/view/layout/ui.phtml:125
+msgid "Users"
+msgstr "Utilizatori"
+
+#: ../../UI/view/layout/ui.phtml:129
+msgid "Add new user"
+msgstr "Adauga un utilizator nou"
+
+#: ../../UI/view/layout/ui.phtml:134
+msgid "View users"
+msgstr "Vizualizeaza utilizatorii"
+
+#: ../../UI/view/layout/ui.phtml:139
+msgid "Profile"
+msgstr "Profil"
+
+#: ../../UI/view/layout/ui.phtml:147
+msgid "Options"
+msgstr "Optiuni"
+
+#: ../../UI/view/layout/ui.phtml:152
+msgid "Security"
+msgstr "Securitate"
+
+#: ../../UI/view/layout/ui.phtml:157
+msgid "Logout"
+msgstr "Iesire"
+
+#: ../../UI/view/layout/ui.phtml:165
+msgid "All rights reserved."
+msgstr "Toate drepturile rezervate."
+

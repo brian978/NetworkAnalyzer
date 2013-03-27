@@ -39,7 +39,7 @@ abstract class AbstractUiController extends AbstractActionController
         $this->buildAdminMenu();
     }
 
-    protected function buildAdminMeniu()
+    protected function buildAdminMenu()
     {
 
     }

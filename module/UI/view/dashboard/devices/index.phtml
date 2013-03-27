@@ -1,13 +1,2 @@
 <?php
 
-/** @var $form \Dashboard\Form\DevicesFrom */
-$form->setAttribute('action', $this->url(null, array(), true))->prepare();
-
-echo $this->form()->openTag($form);
-
-$device = $form->get('device');
-
-echo $this->formRow($device->get('name'));
-echo $this->formElement($form->get('submit'));
-
-echo $this->form()->closeTag();

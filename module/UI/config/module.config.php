@@ -20,5 +20,35 @@ return array(
         'invokables' => array(
             'routeName' => 'UI\Library\View\Helpers\RouteName'
         )
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+        )
+    ),
+
+    // Navigation pages
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Devices',
+                'route' => 'index/module',
+                'controller' => 'devices',
+                'pages' => array(
+                    array(
+                        'label' => 'Add new device',
+                        'route' => 'index/module',
+                        'controller' => 'devices',
+                        'action' => 'addForm'
+                    ),
+                    array(
+                        'label' => 'View devices',
+                        'route' => 'index/module',
+                        'controller' => 'devices',
+                        'action' => 'list'
+                    )
+                )
+            )
+        )
     )
 );

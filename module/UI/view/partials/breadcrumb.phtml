@@ -1,0 +1,23 @@
+<?php
+
+foreach ($this->pages as $page)
+{
+    $css_class = '';
+    $params    = array(
+        'controller' => $page->getController(),
+        'action' => $page->getAction()
+    );
+
+    if ($page->isActive())
+    {
+        $css_class = 'current';
+    }
+
+    echo    <<<HEREDOC
+<div class="breadcrumb_divider"></div>
+<a class="$css_class" href="{$this->url($page->getRoute(), $params, true)}">
+    {$page->getLabel()}
+</a>
+
+HEREDOC;
+}
