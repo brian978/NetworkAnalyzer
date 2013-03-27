@@ -9,8 +9,8 @@
 
 namespace Settings\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use UI\Controller\AbstractUiController;
 
-class OptionsController extends AbstractActionController
+class OptionsController extends AbstractUiController
 {
 }

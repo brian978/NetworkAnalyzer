@@ -9,8 +9,8 @@
 
 namespace Dashboard\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use UI\Controller\AbstractUiController;
 
-class IndexController extends AbstractActionController
+class IndexController extends AbstractUiController
 {
 }

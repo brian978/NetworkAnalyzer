@@ -7,10 +7,8 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Settings\Controller;
+namespace UI\Model;
 
-use UI\Controller\AbstractUiController;
-
-class IndexController extends AbstractUiController
+class AdminMenu
 {
 }

@@ -11,10 +11,10 @@ namespace Dashboard\Controller;
 
 use Dashboard\Entity\Device;
 use Dashboard\Form\DevicesFrom;
-use Zend\Mvc\Controller\AbstractActionController;
+use UI\Controller\AbstractUiController;
 use Zend\View\Model\JsonModel;
 
-class DevicesController extends AbstractActionController
+class DevicesController extends AbstractUiController
 {
     public function indexAction()
     {

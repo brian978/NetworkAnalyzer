@@ -9,9 +9,9 @@
 
 namespace Settings\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use UI\Controller\AbstractUiController;
 
-class UsersController extends AbstractActionController
+class UsersController extends AbstractUiController
 {
     public function indexAction()
     {
