@@ -3,10 +3,6 @@
 foreach ($this->pages as $page)
 {
     $css_class = '';
-    $params    = array(
-        'controller' => $page->getController(),
-        'action' => $page->getAction()
-    );
 
     if ($page->isActive())
     {
@@ -15,8 +11,8 @@ foreach ($this->pages as $page)
 
     echo    <<<HEREDOC
 <div class="breadcrumb_divider"></div>
-<a class="$css_class" href="{$this->url($page->getRoute(), $params, true)}">
-    {$page->getLabel()}
+<a class="$css_class" href="{$page->getHref()}">
+    {$this->translate($page->getLabel())}
 </a>
 
 HEREDOC;

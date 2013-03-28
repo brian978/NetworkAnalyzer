@@ -1,224 +1,221 @@
+<?php
+
+/** @var $nav Zend\View\Helper\Navigation */
+$nav = $this->navigation('navigation')
+    ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator())
+    ->setContainer('ui_nav');
+?>
 <?php echo $this->doctype(); ?>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle($this->translate('Network Analyzer'))->setSeparator(' - ')->setAutoEscape(false) ?>
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle($this->translate('Network Analyzer'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <!-- Le meta -->
-        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+    <!-- Le meta -->
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
-        <!-- Le styles -->
-        <?php echo $this->headLink(
-            array(
-                'rel' => 'shortcut icon',
-                'type' => 'image/vnd.microsoft.icon',
-                'href' => $this->basePath() . '/img/favicon.ico'
-            )
-        )->prependStylesheet($this->basePath() . '/css/ie.css', 'screen', 'lt IE 9')
-            ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css')
-            ->prependStylesheet($this->basePath() . '/css/layout.css')
-        ?>
+    <!-- Le styles -->
+    <?php echo $this->headLink(
+        array(
+            'rel' => 'shortcut icon',
+            'type' => 'image/vnd.microsoft.icon',
+            'href' => $this->basePath() . '/img/favicon.ico'
+        )
+    )->prependStylesheet($this->basePath() . '/css/ie.css', 'screen', 'lt IE 9')
+        ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css')
+        ->prependStylesheet($this->basePath() . '/css/layout.css')
+    ?>
 
-        <!-- Le scripts -->
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/js/hideshow.js')
-            ->prependFile($this->basePath() . '/js/jquery.tablesorter.min.js')
-            ->prependFile($this->basePath() . '/js/jquery.equalHeight.js')
-            ->prependFile($this->basePath() . '/js/jquery-ui-1.10.2.custom.min.js')
-            ->prependFile($this->basePath() . '/js/jquery-1.9.1.min.js')
-        ?>
+    <!-- Le scripts -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/hideshow.js')
+        ->prependFile($this->basePath() . '/js/jquery.tablesorter.min.js')
+        ->prependFile($this->basePath() . '/js/jquery.equalHeight.js')
+        ->prependFile($this->basePath() . '/js/jquery-ui-1.10.2.custom.min.js')
+        ->prependFile($this->basePath() . '/js/jquery-1.9.1.min.js')
+    ?>
 
-        <script type="text/javascript">
-            $(document).ready(function ()
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $(".tablesorter").tablesorter();
+
+            //When page loads...
+            $(".tab_content").hide(); //Hide all content
+            $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+            $(".tab_content:first").show(); //Show first tab content
+
+            //On Click Event
+            $("ul.tabs li").click(function ()
             {
-                $(".tablesorter").tablesorter();
 
-                //When page loads...
-                $(".tab_content").hide(); //Hide all content
-                $("ul.tabs li:first").addClass("active").show(); //Activate first tab
-                $(".tab_content:first").show(); //Show first tab content
+                $("ul.tabs li").removeClass("active"); //Remove any "active" class
+                $(this).addClass("active"); //Add "active" class to selected tab
+                $(".tab_content").hide(); //Hide all tab content
 
-                //On Click Event
-                $("ul.tabs li").click(function ()
-                {
+                //Find the href attribute value to identify the active tab + content
+                var activeTab = $(this).find("a").attr("href");
 
-                    $("ul.tabs li").removeClass("active"); //Remove any "active" class
-                    $(this).addClass("active"); //Add "active" class to selected tab
-                    $(".tab_content").hide(); //Hide all tab content
+                //Fade in the active ID content
+                $(activeTab).fadeIn();
 
-                    //Find the href attribute value to identify the active tab + content
-                    var activeTab = $(this).find("a").attr("href");
-
-                    //Fade in the active ID content
-                    $(activeTab).fadeIn();
-
-                    return false;
-                });
-
-                $('.column').equalHeight();
-
+                return false;
             });
-        </script>
-    </head>
-    <body>
-        <header id="header">
-            <hgroup>
-                <h1 class="site_title">
-                    <a href="<?php echo $this->url('home', array(), true) ?>">
-                        <?php echo $this->translate('Network Analyzer') ?>
-                    </a>
-                </h1>
 
-                <h2 class="section_title"><?php echo $this->translate('Dashboard') ?></h2>
+            $('.column').equalHeight();
+
+        });
+    </script>
+</head>
+<body>
+    <header id="header">
+        <hgroup>
+            <h1 class="site_title">
+                <a href="<?php echo $this->url('home', array(), true) ?>">
+                    <?php echo $this->translate('Network Analyzer') ?>
+                </a>
+            </h1>
+
+            <h2 class="section_title"><?php echo $this->translate('Dashboard') ?></h2>
                 <span id="lang_bar">
                     <a href="<?php echo $this->url($this->routeName(), array('lang' => 'ro'), true) ?>">RO</a>
                     <a href="<?php echo $this->url($this->routeName(), array('lang' => 'en'), true) ?>">EN</a>
                 </span>
-            </hgroup>
-        </header>
-        <!-- end of header bar -->
+        </hgroup>
+    </header>
+    <!-- end of header bar -->
 
-        <section id="secondary_bar">
-            <div class="user">
-                <!--            <p>John Doe (<a href="#">3 Messages</a>)</p>-->
-            </div>
-            <div class="breadcrumbs_container">
-                <article class="breadcrumbs">
-                    <a href="<?php echo $this->url('index', array(), true) ?>">
-                        <?php echo $this->translate('Network Analyzer') ?>
-                    </a>
+    <section id="secondary_bar">
+        <div class="user">
+            <!--            <p>John Doe (<a href="#">3 Messages</a>)</p>-->
+        </div>
+        <div class="breadcrumbs_container">
+            <article class="breadcrumbs">
+                <a href="<?php echo $this->url('index', array(), true) ?>">
+                    <?php echo $this->translate('Network Analyzer') ?>
+                </a>
 
-                    <?php
+                <?php
 
-                    echo $this->navigation('navigation')
-                    ->breadcrumbs()
+                echo $nav->breadcrumbs()
                     ->setMinDepth(0)
-                    ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator())
                     ->setPartial('partials/breadcrumb.phtml');
 
-                    ?>
-                </article>
-            </div>
-        </section>
-        <!-- end of secondary bar -->
-
-        <aside id="sidebar" class="column">
-            <form class="quick_search">
-                <input type="text" value="Quick Search"
-                       onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
-            </form>
-            <hr/>
-            <h3><?php echo $this->translate('Devices') ?></h3>
-            <ul class="toggle">
-                <li class="icn_new_article">
-                    <a href="<?php echo $this->url('index/module', array('controller' => 'devices', 'action' => 'addForm'), true) ?>">
-                        <?php echo $this->translate('Add new device') ?>
-                    </a>
-                </li>
-                <li class="icn_categories">
-                    <a href="<?php echo $this->url('index/module', array('controller' => 'devices', 'action' => 'list'), true) ?>">
-                        <?php echo $this->translate('View devices') ?>
-                    </a>
-                </li>
-            </ul>
-            <h3><?php echo $this->translate('Users') ?></h3>
-            <ul class="toggle">
-                <li class="icn_add_user">
-                    <a href="<?php echo $this->url('settings/module', array('controller' => 'users', 'action' => 'add'), true) ?>">
-                        <?php echo $this->translate('Add new user') ?>
-                    </a>
-                </li>
-                <li class="icn_view_users">
-                    <a href="<?php echo $this->url('settings/module', array('controller' => 'users', 'action' => 'list'), true) ?>">
-                        <?php echo $this->translate('View users') ?>
-                    </a>
-                </li>
-                <li class="icn_profile">
-                    <a href="<?php echo $this->url('settings/module', array('controller' => 'users', 'action' => 'profile'), true) ?>">
-                        <?php echo $this->translate('Profile') ?>
-                    </a>
-                </li>
-            </ul>
-            <h3><?php echo $this->translate('Admin') ?></h3>
-            <ul class="toggle">
-                <li class="icn_settings">
-                    <a href="<?php echo $this->url('settings', array(), true) ?>">
-                        <?php echo $this->translate('Options') ?>
-                    </a>
-                </li>
-                <li class="icn_security">
-                    <a href="<?php echo $this->url('settings/module', array('controller' => 'security'), true) ?>">
-                        <?php echo $this->translate('Security') ?>
-                    </a>
-                </li>
-                <li class="icn_jump_back">
-                    <a href="<?php echo $this->url('auth', array('action' => 'logout'), true) ?>">
-                        <?php echo $this->translate('Logout') ?>
-                    </a>
-                </li>
-            </ul>
-
-            <footer>
-                <hr/>
-                <p><strong>&copy; 2013 Andrei
-                        Dincescu. <?php echo $this->translate('All rights reserved.') ?></strong>
-                </p>
-
-                <p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
-            </footer>
-        </aside>
-        <!-- end of sidebar -->
-
-        <section id="main" class="column">
-
-            <h4 class="alert_info">
-                Welcome to the free MediaLoot admin panel template, this could
-                be an informative
-                message.
-            </h4>
-
-            <article class="module width_full">
-                <header><h3>Stats</h3></header>
-                <div class="module_content">
-                    <article class="stats_graph">
-                        <img
-                            src="http://chart.apis.google.com/chart?chxr=0,0,3000&chxt=y&chs=520x140&cht=lc&chco=76A4FB,80C65A&chd=s:Tdjpsvyvttmiihgmnrst,OTbdcfhhggcTUTTUadfk&chls=2|2&chma=40,20,20,30"
-                            width="520" height="140" alt=""/>
-                    </article>
-
-                    <article class="stats_overview">
-                        <div class="overview_today">
-                            <p class="overview_day">Today</p>
-
-                            <p class="overview_count">1,876</p>
-
-                            <p class="overview_type">Hits</p>
-
-                            <p class="overview_count">2,103</p>
-
-                            <p class="overview_type">Views</p>
-                        </div>
-                        <div class="overview_previous">
-                            <p class="overview_day">Yesterday</p>
-
-                            <p class="overview_count">1,646</p>
-
-                            <p class="overview_type">Hits</p>
-
-                            <p class="overview_count">2,054</p>
-
-                            <p class="overview_type">Views</p>
-                        </div>
-                    </article>
-                    <div class="clear"></div>
-                </div>
+                ?>
             </article>
-            <!-- end of stats article -->
+        </div>
+    </section>
+    <!-- end of secondary bar -->
 
-            <?php echo $this->content ?>
+    <aside id="sidebar" class="column">
+        <form class="quick_search">
+            <input type="text" value="Quick Search"
+                   onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+        </form>
+        <hr/>
+        <h3><?php echo $this->translate('Devices') ?></h3>
+        <ul class="toggle">
+            <li class="icn_new_article">
+                <?php echo $nav->htmlify($nav->findByLabel('Add new device')); ?>
+            </li>
+            <li class="icn_categories">
+                <?php echo $nav->htmlify($nav->findByLabel('View devices')); ?>
+            </li>
+        </ul>
+        <h3><?php echo $this->translate('Users') ?></h3>
+        <ul class="toggle">
+            <li class="icn_add_user">
+                <?php echo $nav->htmlify($nav->findByLabel('Add new user')); ?>
+            </li>
+            <li class="icn_view_users">
+                <?php echo $nav->htmlify($nav->findByLabel('View users')); ?>
+            </li>
+            <li class="icn_profile">
+                <a href="<?php echo $this->url('settings/module', array('controller' => 'users', 'action' => 'profile'), true) ?>">
+                    <?php echo $this->translate('Profile') ?>
+                </a>
+            </li>
+        </ul>
+        <h3><?php echo $this->translate('Admin') ?></h3>
+        <ul class="toggle">
+            <li class="icn_settings">
+                <a href="<?php echo $this->url('settings', array(), true) ?>">
+                    <?php echo $this->translate('Options') ?>
+                </a>
+            </li>
+            <li class="icn_security">
+                <a href="<?php echo $this->url('settings/module', array('controller' => 'security'), true) ?>">
+                    <?php echo $this->translate('Security') ?>
+                </a>
+            </li>
+            <li class="icn_jump_back">
+                <a href="<?php echo $this->url('auth', array('action' => 'logout'), true) ?>">
+                    <?php echo $this->translate('Logout') ?>
+                </a>
+            </li>
+        </ul>
 
-            <div class="spacer"></div>
-        </section>
+        <footer>
+            <hr/>
+            <p><strong>&copy; 2013 Andrei
+                    Dincescu. <?php echo $this->translate('All rights reserved.') ?></strong>
+            </p>
 
-    </body>
+            <p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
+        </footer>
+    </aside>
+    <!-- end of sidebar -->
+
+    <section id="main" class="column">
+
+        <h4 class="alert_info">
+            Welcome to the free MediaLoot admin panel template, this could
+            be an informative
+            message.
+        </h4>
+
+        <article class="module width_full">
+            <header><h3>Stats</h3></header>
+            <div class="module_content">
+                <article class="stats_graph">
+                    <img
+                        src="http://chart.apis.google.com/chart?chxr=0,0,3000&chxt=y&chs=520x140&cht=lc&chco=76A4FB,80C65A&chd=s:Tdjpsvyvttmiihgmnrst,OTbdcfhhggcTUTTUadfk&chls=2|2&chma=40,20,20,30"
+                        width="520" height="140" alt=""/>
+                </article>
+
+                <article class="stats_overview">
+                    <div class="overview_today">
+                        <p class="overview_day">Today</p>
+
+                        <p class="overview_count">1,876</p>
+
+                        <p class="overview_type">Hits</p>
+
+                        <p class="overview_count">2,103</p>
+
+                        <p class="overview_type">Views</p>
+                    </div>
+                    <div class="overview_previous">
+                        <p class="overview_day">Yesterday</p>
+
+                        <p class="overview_count">1,646</p>
+
+                        <p class="overview_type">Hits</p>
+
+                        <p class="overview_count">2,054</p>
+
+                        <p class="overview_type">Views</p>
+                    </div>
+                </article>
+                <div class="clear"></div>
+            </div>
+        </article>
+        <!-- end of stats article -->
+
+        <?php echo $this->content ?>
+
+        <div class="spacer"></div>
+    </section>
+
+</body>
 </html>

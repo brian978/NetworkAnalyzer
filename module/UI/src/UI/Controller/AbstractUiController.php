@@ -35,12 +35,5 @@ abstract class AbstractUiController extends AbstractActionController
 
         $this->design = new Components();
         $this->getEvent()->getViewModel()->design = $this->design;
-
-        $this->buildAdminMenu();
-    }
-
-    protected function buildAdminMenu()
-    {
-
     }
 }

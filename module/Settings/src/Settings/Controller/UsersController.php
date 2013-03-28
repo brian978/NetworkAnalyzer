@@ -17,7 +17,7 @@ class UsersController extends AbstractUiController
     {
     }
 
-    public function addAction()
+    public function addFormAction()
     {
         echo __METHOD__;
 
