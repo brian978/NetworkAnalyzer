@@ -23,14 +23,15 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-            'ui_nav' => 'UI\Library\Navigation\Service\UINavigation'
+            'navigation' => 'UI\Library\Navigation\Service\UINavigation'
         )
     ),
 
     // Navigation pages
     'navigation' => array(
-        'default' => array(
+        'uinav' => array(
+
+            // Devices pages
             array(
                 'type' => 'UI\Library\Navigation\Page\Mvc',
                 'label' => 'Devices',
@@ -53,6 +54,8 @@ return array(
                     )
                 )
             ),
+
+            // Users pages
             array(
                 'type' => 'UI\Library\Navigation\Page\Mvc',
                 'label' => 'Users',
@@ -72,6 +75,13 @@ return array(
                         'route' => 'settings/module',
                         'controller' => 'users',
                         'action' => 'list'
+                    ),
+                    array(
+                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'label' => 'Profile',
+                        'route' => 'settings/module',
+                        'controller' => 'users',
+                        'action' => 'profile'
                     )
                 )
             ),

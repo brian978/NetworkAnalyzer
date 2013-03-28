@@ -2,8 +2,7 @@
 
 /** @var $nav Zend\View\Helper\Navigation */
 $nav = $this->navigation('navigation')
-    ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator())
-    ->setContainer('ui_nav');
+    ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator());
 ?>
 <?php echo $this->doctype(); ?>
 <html>
@@ -131,9 +130,7 @@ $nav = $this->navigation('navigation')
                 <?php echo $nav->htmlify($nav->findByLabel('View users')); ?>
             </li>
             <li class="icn_profile">
-                <a href="<?php echo $this->url('settings/module', array('controller' => 'users', 'action' => 'profile'), true) ?>">
-                    <?php echo $this->translate('Profile') ?>
-                </a>
+                <?php echo $nav->htmlify($nav->findByLabel('Profile')); ?>
             </li>
         </ul>
         <h3><?php echo $this->translate('Admin') ?></h3>

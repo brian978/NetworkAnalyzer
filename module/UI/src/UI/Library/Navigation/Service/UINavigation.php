@@ -30,6 +30,6 @@ class UINavigation extends AbstractNavigationFactory
      */
     protected function getName()
     {
-        return 'default';
+        return 'uinav';
     }
 }

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-28 13:27+0200\n"
-"PO-Revision-Date: 2013-03-28 13:27+0200\n"
-"Last-Translator: Andrei Dincescu <andrei.dincescu@gameloft.com>\n"
+"POT-Creation-Date: 2013-03-28 15:27+0200\n"
+"PO-Revision-Date: 2013-03-28 15:27+0200\n"
+"Last-Translator: \n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -16,61 +16,61 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../..\n"
 
-#: ../../UI/view/layout/ui.phtml:12
-#: ../../UI/view/layout/ui.phtml:75
-#: ../../UI/view/layout/ui.phtml:95
+#: ../../UI/view/layout/ui.phtml:11
+#: ../../UI/view/layout/ui.phtml:74
+#: ../../UI/view/layout/ui.phtml:94
 msgid "Network Analyzer"
 msgstr "Analizator retea"
 
-#: ../../UI/view/layout/ui.phtml:79
+#: ../../UI/view/layout/ui.phtml:78
 msgid "Dashboard"
 msgstr "Panou de control"
 
-#: ../../UI/view/layout/ui.phtml:116
+#: ../../UI/view/layout/ui.phtml:115
 msgid "Devices"
 msgstr "Dispozitive"
 
-#: ../../UI/view/layout/ui.phtml:119
+#: ../../UI/view/layout/ui.phtml:118
 msgid "Add new device"
 msgstr "Adauga un dispozitiv nou"
 
-#: ../../UI/view/layout/ui.phtml:122
+#: ../../UI/view/layout/ui.phtml:121
 msgid "View devices"
 msgstr "Vizualizeaza dispozitivele"
 
-#: ../../UI/view/layout/ui.phtml:125
+#: ../../UI/view/layout/ui.phtml:124
 msgid "Users"
 msgstr "Utilizatori"
 
-#: ../../UI/view/layout/ui.phtml:128
+#: ../../UI/view/layout/ui.phtml:127
 msgid "Add new user"
 msgstr "Adauga un utilizator nou"
 
-#: ../../UI/view/layout/ui.phtml:131
+#: ../../UI/view/layout/ui.phtml:130
 msgid "View users"
 msgstr "Vizualizeaza utilizatorii"
 
-#: ../../UI/view/layout/ui.phtml:135
+#: ../../UI/view/layout/ui.phtml:133
 msgid "Profile"
 msgstr "Profil"
 
-#: ../../UI/view/layout/ui.phtml:139
+#: ../../UI/view/layout/ui.phtml:136
 msgid "Admin"
 msgstr "Admin"
 
-#: ../../UI/view/layout/ui.phtml:143
+#: ../../UI/view/layout/ui.phtml:140
 msgid "Options"
 msgstr "Optiuni"
 
-#: ../../UI/view/layout/ui.phtml:148
+#: ../../UI/view/layout/ui.phtml:145
 msgid "Security"
 msgstr "Securitate"
 
-#: ../../UI/view/layout/ui.phtml:153
+#: ../../UI/view/layout/ui.phtml:150
 msgid "Logout"
 msgstr "Iesire"
 
-#: ../../UI/view/layout/ui.phtml:161
+#: ../../UI/view/layout/ui.phtml:158
 msgid "All rights reserved."
 msgstr "Toate drepturile rezervate."
 
