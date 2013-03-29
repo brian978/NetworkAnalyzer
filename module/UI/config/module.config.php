@@ -23,13 +23,13 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'navigation' => 'UI\Library\Navigation\Service\UINavigation'
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
         )
     ),
 
     // Navigation pages
     'navigation' => array(
-        'uinav' => array(
+        'default' => array(
 
             // Devices pages
             array(
@@ -43,14 +43,20 @@ return array(
                         'label' => 'Add new device',
                         'route' => 'index/module',
                         'controller' => 'devices',
-                        'action' => 'addForm'
+                        'action' => 'addForm',
+                        'class' => 'icn_new_article',
+                        'resource' => 'devices',
+                        'privilege' => 'add_devices'
                     ),
                     array(
                         'type' => 'UI\Library\Navigation\Page\Mvc',
                         'label' => 'View devices',
                         'route' => 'index/module',
                         'controller' => 'devices',
-                        'action' => 'list'
+                        'action' => 'list',
+                        'class' => 'icn_categories',
+                        'resource' => 'devices',
+                        'privilege' => 'view_devices'
                     )
                 )
             ),
@@ -67,24 +73,67 @@ return array(
                         'label' => 'Add new user',
                         'route' => 'settings/module',
                         'controller' => 'users',
-                        'action' => 'addForm'
+                        'action' => 'addForm',
+                        'class' => 'icn_add_user',
+                        'resource' => 'users',
+                        'privilege' => 'add_users',
                     ),
                     array(
                         'type' => 'UI\Library\Navigation\Page\Mvc',
                         'label' => 'View users',
                         'route' => 'settings/module',
                         'controller' => 'users',
-                        'action' => 'list'
+                        'action' => 'list',
+                        'class' => 'icn_view_users',
+                        'resource' => 'users',
+                        'privilege' => 'view_users',
                     ),
                     array(
                         'type' => 'UI\Library\Navigation\Page\Mvc',
                         'label' => 'Profile',
                         'route' => 'settings/module',
                         'controller' => 'users',
-                        'action' => 'profile'
+                        'action' => 'profile',
+                        'class' => 'icn_profile',
+                        'resource' => 'users',
+                    )
+                )
+            ),
+
+            // Admin pages
+            array(
+                'type' => 'UI\Library\Navigation\Page\Mvc',
+                'label' => 'Admin',
+                'route' => 'settings/module',
+                'controller' => 'admin',
+                'pages' => array(
+                    array(
+                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'label' => 'Options',
+                        'route' => 'settings/module',
+                        'controller' => 'options',
+                        'class' => 'icn_settings',
+                        'resource' => 'admin',
+                        'privilege' => 'view_options',
+                    ),
+                    array(
+                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'label' => 'Security',
+                        'route' => 'settings/module',
+                        'controller' => 'security',
+                        'class' => 'icn_security',
+                        'resource' => 'admin',
+                        'privilege' => 'view_security',
+                    ),
+                    array(
+                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'label' => 'Logout',
+                        'route' => 'auth',
+                        'action' => 'logout',
+                        'class' => 'icn_profile',
                     )
                 )
             ),
         )
-    )
+    ),
 );

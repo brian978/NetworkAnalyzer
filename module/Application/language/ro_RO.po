@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-28 15:27+0200\n"
-"PO-Revision-Date: 2013-03-28 15:27+0200\n"
+"POT-Creation-Date: 2013-03-29 14:09+0200\n"
+"PO-Revision-Date: 2013-03-29 14:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: translate;findByLabel\n"
+"X-Poedit-KeywordsList: translate;findOneByLabel\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-Basepath: .\n"
@@ -30,47 +30,47 @@ msgstr "Panou de control"
 msgid "Devices"
 msgstr "Dispozitive"
 
-#: ../../UI/view/layout/ui.phtml:118
+#: ../../UI/view/layout/ui.phtml:123
 msgid "Add new device"
 msgstr "Adauga un dispozitiv nou"
 
-#: ../../UI/view/layout/ui.phtml:121
+#: ../../UI/view/layout/ui.phtml:126
 msgid "View devices"
 msgstr "Vizualizeaza dispozitivele"
 
-#: ../../UI/view/layout/ui.phtml:124
+#: ../../UI/view/layout/ui.phtml:129
 msgid "Users"
 msgstr "Utilizatori"
 
-#: ../../UI/view/layout/ui.phtml:127
+#: ../../UI/view/layout/ui.phtml:132
 msgid "Add new user"
 msgstr "Adauga un utilizator nou"
 
-#: ../../UI/view/layout/ui.phtml:130
+#: ../../UI/view/layout/ui.phtml:135
 msgid "View users"
 msgstr "Vizualizeaza utilizatorii"
 
-#: ../../UI/view/layout/ui.phtml:133
+#: ../../UI/view/layout/ui.phtml:138
 msgid "Profile"
 msgstr "Profil"
 
-#: ../../UI/view/layout/ui.phtml:136
+#: ../../UI/view/layout/ui.phtml:141
 msgid "Admin"
 msgstr "Admin"
 
-#: ../../UI/view/layout/ui.phtml:140
+#: ../../UI/view/layout/ui.phtml:145
 msgid "Options"
 msgstr "Optiuni"
 
-#: ../../UI/view/layout/ui.phtml:145
+#: ../../UI/view/layout/ui.phtml:150
 msgid "Security"
 msgstr "Securitate"
 
-#: ../../UI/view/layout/ui.phtml:150
+#: ../../UI/view/layout/ui.phtml:155
 msgid "Logout"
 msgstr "Iesire"
 
-#: ../../UI/view/layout/ui.phtml:158
+#: ../../UI/view/layout/ui.phtml:164
 msgid "All rights reserved."
 msgstr "Toate drepturile rezervate."
 
@@ -108,38 +108,29 @@ msgid "resolves to %s"
 msgstr ""
 
 #: ../../Application/view/error/404.phtml:55
-#: ../../Application/view/error/index.phtml:8
 msgid "Additional information"
 msgstr ""
 
 #: ../../Application/view/error/404.phtml:58
 #: ../../Application/view/error/404.phtml:86
-#: ../../Application/view/error/index.phtml:11
-#: ../../Application/view/error/index.phtml:39
 msgid "File"
 msgstr ""
 
 #: ../../Application/view/error/404.phtml:64
 #: ../../Application/view/error/404.phtml:92
-#: ../../Application/view/error/index.phtml:17
-#: ../../Application/view/error/index.phtml:45
 msgid "Message"
 msgstr ""
 
 #: ../../Application/view/error/404.phtml:69
 #: ../../Application/view/error/404.phtml:97
-#: ../../Application/view/error/index.phtml:22
-#: ../../Application/view/error/index.phtml:50
 msgid "Stack trace"
 msgstr ""
 
 #: ../../Application/view/error/404.phtml:80
-#: ../../Application/view/error/index.phtml:33
 msgid "Previous exceptions"
 msgstr ""
 
 #: ../../Application/view/error/404.phtml:114
-#: ../../Application/view/error/index.phtml:67
 msgid "No Exception available"
 msgstr ""
 

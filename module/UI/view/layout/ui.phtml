@@ -1,8 +1,20 @@
 <?php
 
+$role = 'technical';
+
 /** @var $nav Zend\View\Helper\Navigation */
 $nav = $this->navigation('navigation')
     ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator());
+
+/** @var $acl \Zend\Permissions\Acl\Acl */
+$acl = $nav->getServiceLocator()->getServiceLocator()->get('acl');
+
+/** @var $menu \Zend\View\Helper\Navigation\Menu */
+$menu = $nav->menu()->setAcl($acl)->setRole($role);
+
+$menuOptions = array(
+    'ulClass' => 'toggle'
+);
 ?>
 <?php echo $this->doctype(); ?>
 <html>
@@ -112,46 +124,12 @@ $nav = $this->navigation('navigation')
                    onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
         </form>
         <hr/>
-        <h3><?php echo $this->translate('Devices') ?></h3>
-        <ul class="toggle">
-            <li class="icn_new_article">
-                <?php echo $nav->htmlify($nav->findByLabel('Add new device')); ?>
-            </li>
-            <li class="icn_categories">
-                <?php echo $nav->htmlify($nav->findByLabel('View devices')); ?>
-            </li>
-        </ul>
-        <h3><?php echo $this->translate('Users') ?></h3>
-        <ul class="toggle">
-            <li class="icn_add_user">
-                <?php echo $nav->htmlify($nav->findByLabel('Add new user')); ?>
-            </li>
-            <li class="icn_view_users">
-                <?php echo $nav->htmlify($nav->findByLabel('View users')); ?>
-            </li>
-            <li class="icn_profile">
-                <?php echo $nav->htmlify($nav->findByLabel('Profile')); ?>
-            </li>
-        </ul>
-        <h3><?php echo $this->translate('Admin') ?></h3>
-        <ul class="toggle">
-            <li class="icn_settings">
-                <a href="<?php echo $this->url('settings', array(), true) ?>">
-                    <?php echo $this->translate('Options') ?>
-                </a>
-            </li>
-            <li class="icn_security">
-                <a href="<?php echo $this->url('settings/module', array('controller' => 'security'), true) ?>">
-                    <?php echo $this->translate('Security') ?>
-                </a>
-            </li>
-            <li class="icn_jump_back">
-                <a href="<?php echo $this->url('auth', array('action' => 'logout'), true) ?>">
-                    <?php echo $this->translate('Logout') ?>
-                </a>
-            </li>
-        </ul>
-
+        <?php if($acl->isAllowed($role, 'devices')): ?><h3><?php echo $this->translate('Devices') ?></h3><?php endif; ?>
+        <?php echo $menu->renderMenu($nav->findOneByLabel('Devices'), $menuOptions); ?>
+        <?php if($acl->isAllowed($role, 'users')): ?><h3><?php echo $this->translate('Users') ?></h3><?php endif; ?>
+        <?php echo $menu->renderMenu($nav->findOneByLabel('Users'), $menuOptions); ?>
+        <?php if($acl->isAllowed($role, 'admin')): ?><h3><?php echo $this->translate('Admin') ?></h3><?php endif; ?>
+        <?php echo $menu->renderMenu($nav->findOneByLabel('Admin'), $menuOptions); ?>
         <footer>
             <hr/>
             <p>

@@ -32,6 +32,11 @@ class RouteName extends AbstractHelper
             ->getMvcEvent()
             ->getRouteMatch()
             ->getMatchedRouteName();
+
+        if ($this->routeName == 'home')
+        {
+            $this->routeName = 'index/module';
+        }
     }
 
     public function __invoke()

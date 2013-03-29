@@ -10,10 +10,10 @@
 namespace UI\Library\Navigation\Service;
 
 use UI\Library\Navigation\Navigation;
-use Zend\Navigation\Service\AbstractNavigationFactory;
+use Zend\Navigation\Service\DefaultNavigationFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UINavigation extends AbstractNavigationFactory
+class DefaultNavFactory extends DefaultNavigationFactory
 {
     /**
      * @param ServiceLocatorInterface $serviceLocator
@@ -23,13 +23,5 @@ class UINavigation extends AbstractNavigationFactory
     {
         $pages = $this->getPages($serviceLocator);
         return new Navigation($pages);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getName()
-    {
-        return 'uinav';
     }
 }

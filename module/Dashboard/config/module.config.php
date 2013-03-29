@@ -11,12 +11,12 @@ return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
                     'route' => '/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
-                        'controller' => 'Index',
+                        'controller' => 'index',
                         'action' => 'index',
                         'lang' => 'en'
                     )
@@ -42,6 +42,8 @@ return array(
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
                             )
                         )
                     )
