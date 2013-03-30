@@ -10,6 +10,7 @@
 namespace UI;
 
 use Zend\Mvc\MvcEvent;
+use Zend\Navigation\Page\Mvc;
 
 class Module
 {
@@ -36,7 +37,7 @@ class Module
         $this->serviceManager = $this->application->getServiceManager();
 
         // Events
-        $this->eventManager->attach('dispatch', array($this, 'setLocale'));
+        $this->eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'setLocale'));
     }
 
     public function setLocale(MvcEvent $e)

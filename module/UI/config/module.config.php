@@ -96,6 +96,7 @@ return array(
                         'action' => 'profile',
                         'class' => 'icn_profile',
                         'resource' => 'users',
+                        'privilege' => 'profile'
                     )
                 )
             ),
@@ -130,7 +131,9 @@ return array(
                         'label' => 'Logout',
                         'route' => 'auth',
                         'action' => 'logout',
-                        'class' => 'icn_profile',
+                        'class' => 'icn_jump_back',
+                        'resource' => 'admin',
+                        'privilege' => 'logout'
                     )
                 )
             ),

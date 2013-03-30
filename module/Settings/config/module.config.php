@@ -41,7 +41,8 @@ return array(
         'invokables' => array(
             'Settings\Controller\Index' => 'Settings\Controller\IndexController',
             'Settings\Controller\Users' => 'Settings\Controller\UsersController',
-            'Settings\Controller\Options' => 'Settings\Controller\OptionsController'
+            'Settings\Controller\Options' => 'Settings\Controller\OptionsController',
+            'Settings\Controller\Security' => 'Settings\Controller\SecurityController'
         )
     )
 );

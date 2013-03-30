@@ -17,6 +17,7 @@ return array(
 
     'permissions' => array(
         'resources' => array(
+            'dashboard',
             'devices',
             'users',
             'admin'
@@ -33,6 +34,11 @@ return array(
             'guest' => array(
                 'inherits' => null,
                 'resources' => array(
+                    'dashboard' => array(
+                        'allow' => array(
+                            'access'
+                        )
+                    )
                 )
             ),
             'user' => array(
@@ -40,6 +46,7 @@ return array(
                 'resources' => array(
                     'users' => array(
                         'allow' => array(
+                            'access',
                             'profile'
                         )
                     ),
@@ -59,6 +66,7 @@ return array(
                     ),
                     'users' => array(
                         'allow' => array(
+                            'access',
                             'view_users'
                         )
                     )

@@ -11,7 +11,7 @@ namespace Settings\Controller;
 
 use UI\Controller\AbstractUiController;
 
-class IndexController extends AbstractUiController
+class SecurityController extends AbstractUiController
 {
     protected function checkAcl()
     {

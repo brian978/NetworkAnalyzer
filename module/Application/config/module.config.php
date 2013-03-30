@@ -36,6 +36,7 @@ return array(
         'template_map' => array(
             'error/404' => __DIR__ . '/../view/error/404.phtml',
             'error/index' => __DIR__ . '/../view/error/index.phtml',
+            'error/denied' => __DIR__ . '/../view/error/denied.phtml'
         ),
     ),
 );

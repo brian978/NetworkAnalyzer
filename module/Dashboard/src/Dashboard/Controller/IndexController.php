@@ -13,4 +13,8 @@ use UI\Controller\AbstractUiController;
 
 class IndexController extends AbstractUiController
 {
+    protected function checkAcl()
+    {
+        return $this->acl->isAllowed('guest', 'dashboard', 'access');
+    }
 }

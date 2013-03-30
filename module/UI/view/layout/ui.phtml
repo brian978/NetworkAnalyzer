@@ -1,7 +1,5 @@
 <?php
 
-$role = 'technical';
-
 /** @var $nav Zend\View\Helper\Navigation */
 $nav = $this->navigation('navigation')
     ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator());
@@ -10,11 +8,18 @@ $nav = $this->navigation('navigation')
 $acl = $nav->getServiceLocator()->getServiceLocator()->get('acl');
 
 /** @var $menu \Zend\View\Helper\Navigation\Menu */
-$menu = $nav->menu()->setAcl($acl)->setRole($role);
+$menu = $nav->menu()->setAcl($acl)->setRole('admin');
 
 $menuOptions = array(
     'ulClass' => 'toggle'
 );
+
+// Rendering the menus
+$menus = array(
+    'devices' => $menu->renderMenu($nav->findOneByLabel('Devices'), $menuOptions),
+    'users' => $menu->renderMenu($nav->findOneByLabel('Users'), $menuOptions),
+    'admin' => $menu->renderMenu($nav->findOneByLabel('Admin'), $menuOptions)
+)
 ?>
 <?php echo $this->doctype(); ?>
 <html>
@@ -124,12 +129,12 @@ $menuOptions = array(
                    onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
         </form>
         <hr/>
-        <?php if($acl->isAllowed($role, 'devices')): ?><h3><?php echo $this->translate('Devices') ?></h3><?php endif; ?>
-        <?php echo $menu->renderMenu($nav->findOneByLabel('Devices'), $menuOptions); ?>
-        <?php if($acl->isAllowed($role, 'users')): ?><h3><?php echo $this->translate('Users') ?></h3><?php endif; ?>
-        <?php echo $menu->renderMenu($nav->findOneByLabel('Users'), $menuOptions); ?>
-        <?php if($acl->isAllowed($role, 'admin')): ?><h3><?php echo $this->translate('Admin') ?></h3><?php endif; ?>
-        <?php echo $menu->renderMenu($nav->findOneByLabel('Admin'), $menuOptions); ?>
+        <?php if(!empty($menus['devices'])): ?><h3><?php echo $this->translate('Devices') ?></h3><?php endif; ?>
+        <?php echo $menus['devices']; ?>
+        <?php if(!empty($menus['users'])): ?><h3><?php echo $this->translate('Users') ?></h3><?php endif; ?>
+        <?php echo $menus['users']; ?>
+        <?php if(!empty($menus['admin'])): ?><h3><?php echo $this->translate('Admin') ?></h3><?php endif; ?>
+        <?php echo $menus['admin']; ?>
         <footer>
             <hr/>
             <p>

@@ -27,17 +27,20 @@ class Authentication extends AuthenticationService
      */
     public function __construct(ServiceLocatorInterface $serviceLocator)
     {
-        $this->dbAdapter = $serviceLocator->get('Zend\Db\Adapter\Adapter');
+        /** @var $dbAdapter \Zend\Db\Adapter\Adapter */
+        $dbAdapter = $serviceLocator->get('Zend\Db\Adapter\Adapter');
 
         parent::__construct(
             null,
             new DbTable(
-                $this->dbAdapter,
+                $dbAdapter,
                 'users',
                 'username',
                 'password'
             )
         );
+
+        $this->dbAdapter = $dbAdapter;
     }
 
     /**

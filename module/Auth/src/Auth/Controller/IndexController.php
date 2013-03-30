@@ -16,14 +16,24 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $auth = new Authentication($this->serviceLocator);
-        var_dump($auth->setCredentials(array())->authenticate());
+
+    }
+
+    public function loginAction()
+    {
+        if($this->request->isPost())
+        {
+            $auth = new Authentication($this->serviceLocator);
+            var_dump($auth->setCredentials(array())->authenticate());
+        }
+        else
+        {
+            $this->redirect()->toRoute('auth', array('action' => 'index'), true);
+        }
     }
 
     public function logoutAction()
     {
         $this->redirect()->toRoute('auth', array('action' => 'index'), true);
-
-        return;
     }
 }

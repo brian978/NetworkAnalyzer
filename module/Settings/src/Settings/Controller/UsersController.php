@@ -13,8 +13,14 @@ use UI\Controller\AbstractUiController;
 
 class UsersController extends AbstractUiController
 {
+    protected function checkAcl()
+    {
+        return $this->acl->isAllowed('guest', 'users', 'access');
+    }
+
     public function indexAction()
     {
+
     }
 
     public function addFormAction()
