@@ -4,7 +4,7 @@ return array(
     'modules' => array(
         'Permissions',
         'Application',
-        'Auth',
+        'AAA',
         'Design',
         'UI',
         'Dashboard',

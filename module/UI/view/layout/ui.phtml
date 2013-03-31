@@ -4,11 +4,8 @@
 $nav = $this->navigation('navigation')
     ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator());
 
-/** @var $acl \Zend\Permissions\Acl\Acl */
-$acl = $nav->getServiceLocator()->getServiceLocator()->get('acl');
-
 /** @var $menu \Zend\View\Helper\Navigation\Menu */
-$menu = $nav->menu()->setAcl($acl)->setRole('admin');
+$menu = $nav->menu()->setAcl($this->acl)->setRole($this->userAuth->getRole());
 
 $menuOptions = array(
     'ulClass' => 'toggle'

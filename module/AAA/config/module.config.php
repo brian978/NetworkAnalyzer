@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route' => '[/:lang]/auth[/:action]',
                     'defaults' => array(
-                        'controller' => 'Auth\Controller\Index',
+                        'controller' => 'AAA\Controller\Index',
                         'action' => 'index',
                         'lang' => 'en'
                     )
@@ -25,7 +25,12 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Auth\Controller\Index' => 'Auth\Controller\IndexController'
+            'AAA\Controller\Index' => 'AAA\Controller\IndexController'
+        )
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'authorization' => 'AAA\Services\AuthorizationFactory'
         )
     ),
     'view_manager' => array(

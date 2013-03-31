@@ -23,6 +23,12 @@ abstract class AbstractUiController extends AbstractActionController
     protected $acl;
 
     /**
+     *
+     * @var \AAA\Model\Authorization
+     */
+    protected $userAuth;
+
+    /**
      * Dispatch a request
      *
      * @events dispatch.pre, dispatch.post
@@ -32,7 +38,8 @@ abstract class AbstractUiController extends AbstractActionController
      */
     public function dispatch(Request $request, Response $response = null)
     {
-        $this->acl = $this->serviceLocator->get('acl');
+        $this->userAuth = $this->serviceLocator->get('authorization');
+        $this->acl      = $this->serviceLocator->get('acl');
 
         parent::dispatch($request, $response);
     }
@@ -56,13 +63,13 @@ abstract class AbstractUiController extends AbstractActionController
     }
 
     /**
-     * Action used when the user tries to access a denied page. It also prevents processing the requested action
+     * Action used when the user tries to access a denied page
      *
      * @return ViewModel
      */
     public function deniedAction()
     {
-        $viewModel     = new ViewModel();
+        $viewModel = new ViewModel();
         $viewModel->setTemplate('error/denied');
 
         return $viewModel;
@@ -75,6 +82,19 @@ abstract class AbstractUiController extends AbstractActionController
      */
     protected function checkAcl()
     {
-        return true;
+        $response    = false;
+        $config      = $this->serviceLocator->get('config');
+        $permissions = $config['permissions']['controllers'];
+        $controller  = $this->params('controller');
+        $action      = $this->params('action');
+
+        if (isset($permissions[$controller]['privileges'][$action]))
+        {
+            $resource  = $permissions[$controller]['resource'];
+            $privilege = $permissions[$controller]['privileges'][$action];
+            $response  = $this->acl->isAllowed($this->userAuth->getRole(), $resource, $privilege);
+        }
+
+        return $response;
     }
 }

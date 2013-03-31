@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Auth\Controller;
+namespace AAA\Controller;
 
 use Auth\Model\Authentication;
 use Zend\Mvc\Controller\AbstractActionController;

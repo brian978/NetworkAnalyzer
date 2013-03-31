@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Auth\Model;
+namespace AAA\Model;
 
 use Zend\Authentication\Adapter\DbTable;
 use Zend\Authentication\AuthenticationService;

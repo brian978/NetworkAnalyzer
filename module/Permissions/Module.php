@@ -9,8 +9,27 @@
 
 namespace Permissions;
 
+use Zend\Mvc\MvcEvent;
+
 class Module
 {
+    public function onBootstrap(MvcEvent $e)
+    {
+        $eventManager = $e->getApplication()->getEventManager();
+
+        // Events
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectLayoutVariables'));
+    }
+
+    public function injectLayoutVariables(MvcEvent $e)
+    {
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $layoutModel    = $e->getViewModel();
+
+        $layoutModel->setVariable('acl', $serviceManager->get('acl'));
+        $layoutModel->setVariable('userAuth', $serviceManager->get('authorization'));
+    }
+
     public function getAutoloaderConfig()
     {
         return array(
@@ -26,5 +45,4 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
-
 }

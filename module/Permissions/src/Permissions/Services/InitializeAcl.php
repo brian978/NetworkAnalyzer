@@ -39,7 +39,7 @@ class InitializeAcl implements FactoryInterface
         $this->permissions = $config['permissions'];
         $this->acl         = new Acl();
 
-        // Initializing the required elements for the ACL
+        // Now that we have the ACL object we initialize the resources and roles
         $this->createResources();
         $this->createRoles();
 

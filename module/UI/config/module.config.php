@@ -32,6 +32,79 @@ return array(
         )
     ),
 
+    // Permissions for each controller in the user interface
+    'permissions' => array(
+        'resources' => array(
+            'dashboard',
+            'devices',
+            'users',
+            'admin'
+        ),
+        'roles' => array(
+            'admin' => array(
+                'inherits' => null,
+                'resources' => array(
+                    'all' => array(
+                        'allow' => null
+                    )
+                ),
+            ),
+            'guest' => array(
+                'inherits' => null,
+                'resources' => array(
+                    'dashboard' => array(
+                        'allow' => array(
+                            'access'
+                        )
+                    )
+                )
+            ),
+            'user' => array(
+                'inherits' => 'guest',
+                'resources' => array(
+                    'users' => array(
+                        'allow' => array(
+                            'access',
+                            'profile'
+                        )
+                    ),
+                    'admin' => array(
+                        'allow' => array(
+                            'logout'
+                        )
+                    )
+                )
+            ),
+            'technical' => array(
+                'inherits' => 'user',
+                'resources' => array(
+                    'devices' => array(
+                        'allow' => array(
+                        )
+                    ),
+                    'users' => array(
+                        'allow' => array(
+                            'access',
+                            'view_users'
+                        )
+                    )
+                )
+            )
+        ),
+        'controllers' => array(
+            'Settings\Controller\Users' => array(
+                'resource' => 'users',
+                'privileges' => array(
+                    'profile' => 'profile',
+                    'addForm' => 'admin_users',
+                    'editForm' => 'admin_users',
+                    'processForm' => 'admin_users',
+                    'list' => 'view_users'
+                )
+            )
+        )
+    ),
+
     // Navigation pages
     'navigation' => array(
         'default' => array(

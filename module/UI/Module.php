@@ -61,11 +61,6 @@ class Module
         }
     }
 
-    public function getViewHelperConfig()
-    {
-
-    }
-
     public function getAutoloaderConfig()
     {
         return array(

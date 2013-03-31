@@ -16,11 +16,6 @@ use Zend\View\Model\JsonModel;
 
 class DevicesController extends AbstractUiController
 {
-    protected function checkAcl()
-    {
-        return $this->acl->isAllowed('guest', 'devices', 'access');
-    }
-
     public function addFormAction()
     {
         $form = new DevicesFrom();

@@ -13,8 +13,4 @@ use UI\Controller\AbstractUiController;
 
 class OptionsController extends AbstractUiController
 {
-    protected function checkAcl()
-    {
-        return $this->acl->isAllowed('guest', 'admin', 'access');
-    }
 }

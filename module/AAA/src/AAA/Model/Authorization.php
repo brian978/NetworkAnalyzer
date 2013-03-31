@@ -7,10 +7,12 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Settings\Controller;
+namespace AAA\Model;
 
-use UI\Controller\AbstractUiController;
-
-class IndexController extends AbstractUiController
+class Authorization
 {
+    public function getRole()
+    {
+        return 'user';
+    }
 }

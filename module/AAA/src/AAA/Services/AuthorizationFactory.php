@@ -7,21 +7,22 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace UI\Library\Navigation\Service;
+namespace AAA\Services;
 
-use UI\Library\Navigation\Navigation;
-use Zend\Navigation\Service\DefaultNavigationFactory;
+use AAA\Model\Authorization;
+use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class DefaultNavFactory extends DefaultNavigationFactory
+class AuthorizationFactory implements FactoryInterface
 {
     /**
+     * Create service
+     *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return \Zend\Navigation\Navigation
+     * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $pages = $this->getPages($serviceLocator);
-        return new Navigation($pages);
+        return new Authorization();
     }
 }
