@@ -10,7 +10,6 @@
 namespace UI;
 
 use Zend\Mvc\MvcEvent;
-use Zend\Navigation\Page\Mvc;
 
 class Module
 {
