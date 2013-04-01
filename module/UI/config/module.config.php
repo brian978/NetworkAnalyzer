@@ -92,16 +92,47 @@ return array(
             )
         ),
         'controllers' => array(
+
+            'Dashboard\Controller\Devices' => array(
+                'resource' => 'devices',
+                'privileges' => array(
+                    'addForm' => 'admin_devices',
+                    'editForm' => 'editForm',
+                    'list' => 'view_devices'
+                )
+            ),
+
+            'Settings\Controller\Index' => array(
+                'resource' => 'admin',
+                'privileges' => array(
+                    'all' => 'access'
+                )
+            ),
+
+            'Settings\Controller\Options' => array(
+                'resource' => 'admin',
+                'privileges' => array(
+                    'all' => 'access'
+                )
+            ),
+
+            'Settings\Controller\Security' => array(
+                'resource' => 'admin',
+                'privileges' => array(
+                    'all' => 'access'
+                )
+            ),
+
             'Settings\Controller\Users' => array(
                 'resource' => 'users',
                 'privileges' => array(
                     'profile' => 'profile',
                     'addForm' => 'admin_users',
-                    'editForm' => 'admin_users',
-                    'processForm' => 'admin_users',
+                    'editForm' => 'addForm', // Inherit from addForm
+                    'processForm' => 'addForm',
                     'list' => 'view_users'
                 )
-            )
+            ),
         )
     ),
 

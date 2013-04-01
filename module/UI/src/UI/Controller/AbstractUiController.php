@@ -32,7 +32,7 @@ abstract class AbstractUiController extends AbstractActionController
      * Dispatch a request
      *
      * @events dispatch.pre, dispatch.post
-     * @param  Request       $request
+     * @param  Request $request
      * @param  null|Response $response
      * @return Response|mixed
      */
@@ -87,12 +87,41 @@ abstract class AbstractUiController extends AbstractActionController
         $permissions = $config['permissions']['controllers'];
         $controller  = $this->params('controller');
         $action      = $this->params('action');
+        $resource    = null;
+        $privilege   = null;
 
-        if (isset($permissions[$controller]['privileges'][$action]))
+        if (!isset($permissions[$controller]))
         {
-            $resource  = $permissions[$controller]['resource'];
-            $privilege = $permissions[$controller]['privileges'][$action];
-            $response  = $this->acl->isAllowed($this->userAuth->getRole(), $resource, $privilege);
+            $response = true;
+        }
+        else
+        {
+            if (!isset($permissions[$controller]['resource']) || !isset($permissions[$controller]['privileges']))
+            {
+                throw new \RuntimeException('Configuration invalid, missing "resource" or "privileges" entry');
+            }
+
+            $resource = $permissions[$controller]['resource'];
+
+            if (isset($permissions[$controller]['privileges'][$action]))
+            {
+                $privilege = $permissions[$controller]['privileges'][$action];
+            }
+            else if (isset($permissions[$controller]['privileges']['all']))
+            {
+                $privilege = $permissions[$controller]['privileges']['all'];
+            }
+        }
+
+        if (!is_null($resource) && !is_null($privilege))
+        {
+            // Checking if the privilege is actually a pointer to an inheritance
+            if (isset($permissions[$controller]['privileges'][$privilege]))
+            {
+                $privilege = $permissions[$controller]['privileges'][$privilege];
+            }
+
+            $response = $this->acl->isAllowed($this->userAuth->getRole(), $resource, $privilege);
         }
 
         return $response;

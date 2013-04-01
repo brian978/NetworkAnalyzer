@@ -13,6 +13,6 @@ class Authorization
 {
     public function getRole()
     {
-        return 'user';
+        return 'admin';
     }
 }
