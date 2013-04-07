@@ -9,32 +9,28 @@
 
 namespace Dashboard\Form\Fieldsets;
 
-use Dashboard\Entity\Device;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Dashboard\Entity\Device as DeviceEntity;
 
-class Devices extends Fieldset implements InputFilterProviderInterface
+class Device extends AbstractFieldset
 {
 
     public function __construct()
     {
         parent::__construct('device');
 
-        $this->setHydrator(new ClassMethods(false));
-//        $this->setObject(new Device());
+        $this->setObject(new DeviceEntity());
 
-        $this->add(
-            array(
-                'name' => 'name',
-                'options' => array(
-                    'label' => 'Name'
-                ),
-                'attributes' => array(
-                    'required' => 'required'
-                )
+        $this->add(array(
+            'name' => 'name',
+            'options' => array(
+                'label' => 'Name'
+            ),
+            'attributes' => array(
+                'required' => 'required'
             )
-        );
+        ));
+
+        $this->add(new Location());
     }
 
     /**

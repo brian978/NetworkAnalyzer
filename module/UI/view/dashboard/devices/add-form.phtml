@@ -1,3 +1,6 @@
+<article class="module width_full">
+    <header><h3><?php echo $this->translate('Add new device') ?></h3></header>
+    <div class="module_content">
 <?php
 
 /** @var $form \Dashboard\Form\DevicesFrom */
@@ -6,8 +9,16 @@ $form->setAttribute('action', $this->url(null, array(), true))->prepare();
 echo $this->form()->openTag($form);
 
 $device = $form->get('device');
+$location = $device->get('location');
 
 echo $this->formRow($device->get('name'));
+echo $this->formCollection($location);
+
+echo $this->formHidden($form->get('csrf'));
 echo $this->formElement($form->get('submit'));
 
 echo $this->form()->closeTag();
+?>
+    <div class="clear"></div>
+    </div>
+</article>

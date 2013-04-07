@@ -9,12 +9,10 @@
 
 namespace Dashboard\Entity;
 
-class Device
+class Location
 {
     protected $id;
     protected $name;
-    protected $location;
-    protected $type;
 
     public function setId($id)
     {
@@ -26,16 +24,6 @@ class Device
         return $this->id;
     }
 
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-    }
-
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
     public function setName($name)
     {
         $this->name = $name;
@@ -44,15 +32,5 @@ class Device
     public function getName()
     {
         return $this->name;
-    }
-
-    public function setType(Type $type)
-    {
-        $this->type = $type;
-    }
-
-    public function getType()
-    {
-        return $this->type;
     }
 }

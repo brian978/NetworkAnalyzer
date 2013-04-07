@@ -92,10 +92,10 @@ return array(
             )
         ),
         'controllers' => array(
-
             'Dashboard\Controller\Devices' => array(
                 'resource' => 'devices',
                 'privileges' => array(
+                    'index' => 'view_devices',
                     'addForm' => 'admin_devices',
                     'editForm' => 'editForm',
                     'list' => 'view_devices'
