@@ -9,6 +9,8 @@ return array(
         'Design',
         'UI',
         'Dashboard',
+        'Devices',
+        'Users',
         'Settings',
         'Snmp'
     ),

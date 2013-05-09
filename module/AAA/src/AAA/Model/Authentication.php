@@ -9,11 +9,11 @@
 
 namespace AAA\Model;
 
+use Users\Model\Users;
 use Zend\Authentication\Adapter\DbTable;
 use Zend\Authentication\AuthenticationService;
 use Zend\Db\Adapter\Adapter;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Settings\Model\Users;
 
 class Authentication extends AuthenticationService
 {

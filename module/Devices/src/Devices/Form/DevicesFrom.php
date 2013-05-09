@@ -7,8 +7,9 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Form;
+namespace Devices\Form;
 
+use Library\Form\AbstractForm;
 use Zend\InputFilter\InputFilter;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
@@ -30,7 +31,7 @@ class DevicesFrom extends AbstractForm
 
         $this->add(
             array(
-                'type' => 'Dashboard\Form\Fieldsets\Device',
+                'type' => 'Devices\Form\Fieldsets\Device',
                 'options' => array(
                     'use_as_base_fieldset' => true
                 )

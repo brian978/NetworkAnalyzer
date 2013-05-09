@@ -7,35 +7,36 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Form\Fieldsets;
+namespace Devices\Form\Fieldsets;
 
-use Dashboard\Entity\Type as TypeEntity;
+use Devices\Entity\Location as LocationEntity;
 
-class DeviceType extends AbstractFieldset
+class Location extends AbstractFieldset
 {
     public function __construct()
     {
-        parent::__construct('device_type');
+        parent::__construct('location');
 
-        $this->setObject(new TypeEntity());
+        $this->setObject(new LocationEntity());
+        $this->setLabel('Location');
 
         $this->add(
             array(
                 'type' => 'Zend\Form\Element\Select',
-                'name' => 'type',
+                'name' => 'id',
                 'options' => array(
-                    'label' => 'Type',
+                    'label' => 'Location',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
                     'value_options' => array(
                         0 => '...',
-                        1 => 'Switch',
-                        2 => 'Router',
+                        1 => 'Etaj 1',
+                        2 => 'Etaj 2',
                     )
                 ),
                 'attributes' => array(
-                    'required' => 'true'
+                    'required' => true
                 )
             )
         );
@@ -50,8 +51,7 @@ class DeviceType extends AbstractFieldset
     public function getInputFilterSpecification()
     {
         return array(
-            'type' => array(
-                'required' => true,
+            'id' => array(
                 'validators' => array(
                     array(
                         'name' => 'greater_than',

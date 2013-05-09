@@ -7,11 +7,11 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Settings\Controller;
+namespace Users\Controller;
 
 use UI\Controller\AbstractUiController;
 
-class UsersController extends AbstractUiController
+class IndexController extends AbstractUiController
 {
     public function indexAction()
     {
@@ -20,8 +20,6 @@ class UsersController extends AbstractUiController
     public function addFormAction()
     {
         echo __METHOD__;
-
-        return '';
     }
 
     public function listAction()

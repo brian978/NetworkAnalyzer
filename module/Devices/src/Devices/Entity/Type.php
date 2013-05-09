@@ -7,12 +7,12 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Entity;
+namespace Devices\Entity;
 
-class Location
+class Type
 {
     protected $id;
-    protected $name;
+    protected $type;
 
     public function setId($id)
     {
@@ -24,13 +24,13 @@ class Location
         return $this->id;
     }
 
-    public function setName($name)
+    public function setType($type)
     {
-        $this->name = $name;
+        $this->type = $type;
     }
 
-    public function getName()
+    public function getType()
     {
-        return $this->name;
+        return $this->type;
     }
 }

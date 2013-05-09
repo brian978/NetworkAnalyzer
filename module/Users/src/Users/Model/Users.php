@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Settings\Model;
+namespace Users\Model;
 
 class Users
 {

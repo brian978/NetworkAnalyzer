@@ -7,9 +7,9 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Form\Fieldsets;
+namespace Devices\Form\Fieldsets;
 
-use Dashboard\Entity\Device as DeviceEntity;
+use Devices\Entity\Device as DeviceEntity;
 
 class Device extends AbstractFieldset
 {
@@ -34,6 +34,16 @@ class Device extends AbstractFieldset
             )
         );
 
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Hidden',
+                'name' => 'id',
+                'options' => array(
+                    'value' => 0
+                )
+            )
+        );
+
         $this->add(new Location());
         $this->add(new DeviceType());
     }
@@ -53,7 +63,7 @@ class Device extends AbstractFieldset
                     array(
                         'name' => 'StringLength',
                         'options' => array(
-                            'min' => 10
+                            'min' => 3
                         )
                     )
                 )

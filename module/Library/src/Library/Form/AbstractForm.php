@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Form;
+namespace Library\Form;
 
 use Zend\Form\Form;
 use Zend\I18n\Translator\Translator;

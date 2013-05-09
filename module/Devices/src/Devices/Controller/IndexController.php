@@ -7,14 +7,15 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Dashboard\Controller;
+namespace Devices\Controller;
 
-use Dashboard\Entity\Device;
-use Dashboard\Form\DevicesFrom;
+use Devices\Entity\Device;
+use Devices\Form\DevicesFrom;
+use Devices\Model\DevicesModel;
 use UI\Controller\AbstractUiController;
 use Zend\View\Model\JsonModel;
 
-class DevicesController extends AbstractUiController
+class IndexController extends AbstractUiController
 {
     public function addFormAction()
     {
@@ -28,7 +29,8 @@ class DevicesController extends AbstractUiController
 
             if ($form->isValid())
             {
-                var_dump($device);
+                $model = new DevicesModel();
+                $model->save($device);
             }
         }
 

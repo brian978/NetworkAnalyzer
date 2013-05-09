@@ -149,14 +149,14 @@ return array(
             array(
                 'type' => 'Library\Navigation\Page\Mvc',
                 'label' => 'Devices',
-                'route' => 'index/module',
-                'controller' => 'devices',
+                'route' => 'devices/module',
+                'controller' => 'index',
                 'pages' => array(
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Add new device',
-                        'route' => 'index/module',
-                        'controller' => 'devices',
+                        'route' => 'devices/module',
+                        'controller' => 'index',
                         'action' => 'addForm',
                         'class' => 'icn_new_article',
                         'resource' => 'devices',
@@ -165,8 +165,8 @@ return array(
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'View devices',
-                        'route' => 'index/module',
-                        'controller' => 'devices',
+                        'route' => 'devices/module',
+                        'controller' => 'index',
                         'action' => 'list',
                         'class' => 'icn_categories',
                         'resource' => 'devices',
@@ -179,14 +179,14 @@ return array(
             array(
                 'type' => 'Library\Navigation\Page\Mvc',
                 'label' => 'Users',
-                'route' => 'settings/module',
+                'route' => 'users/module',
                 'controller' => 'users',
                 'pages' => array(
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Add new user',
-                        'route' => 'settings/module',
-                        'controller' => 'users',
+                        'route' => 'users/module',
+                        'controller' => 'index',
                         'action' => 'addForm',
                         'class' => 'icn_add_user',
                         'resource' => 'users',
@@ -195,8 +195,8 @@ return array(
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'View users',
-                        'route' => 'settings/module',
-                        'controller' => 'users',
+                        'route' => 'users/module',
+                        'controller' => 'index',
                         'action' => 'list',
                         'class' => 'icn_view_users',
                         'resource' => 'users',
@@ -205,8 +205,8 @@ return array(
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Profile',
-                        'route' => 'settings/module',
-                        'controller' => 'users',
+                        'route' => 'users/module',
+                        'controller' => 'index',
                         'action' => 'profile',
                         'class' => 'icn_profile',
                         'resource' => 'users',
