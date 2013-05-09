@@ -21,12 +21,7 @@ return array(
             __DIR__ . '/../view'
         ),
     ),
-    'view_helpers' => array(
-        'invokables' => array(
-            'routeName' => 'UI\Library\View\Helpers\RouteName',
-            'showInputError' => 'UI\Library\View\Helpers\RenderInputError'
-        )
-    ),
+
     'service_manager' => array(
         'factories' => array(
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
@@ -35,12 +30,16 @@ return array(
 
     // Permissions for each controller in the user interface
     'permissions' => array(
+
+        // These are basically the sections of the site
         'resources' => array(
             'dashboard',
             'devices',
             'users',
             'admin'
         ),
+
+        // These are the types of users
         'roles' => array(
             'admin' => array(
                 'inherits' => null,
@@ -80,8 +79,9 @@ return array(
                 'inherits' => 'user',
                 'resources' => array(
                     'devices' => array(
-                        'allow' => array(
-                        )
+
+                        // Empty array to allow all the permission
+                        'allow' => array()
                     ),
                     'users' => array(
                         'allow' => array(
@@ -92,6 +92,8 @@ return array(
                 )
             )
         ),
+
+        // This section is used by the main controller to determine if the request should be allowed
         'controllers' => array(
             'Dashboard\Controller\Devices' => array(
                 'resource' => 'devices',
@@ -129,8 +131,10 @@ return array(
                 'privileges' => array(
                     'profile' => 'profile',
                     'addForm' => 'admin_users',
-                    'editForm' => 'addForm', // Inherit from addForm
+                    'editForm' => 'addForm',
+                    // Inherit from addForm
                     'processForm' => 'addForm',
+                    // Inherit from addForm
                     'list' => 'view_users'
                 )
             ),
@@ -143,13 +147,13 @@ return array(
 
             // Devices pages
             array(
-                'type' => 'UI\Library\Navigation\Page\Mvc',
+                'type' => 'Library\Navigation\Page\Mvc',
                 'label' => 'Devices',
                 'route' => 'index/module',
                 'controller' => 'devices',
                 'pages' => array(
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Add new device',
                         'route' => 'index/module',
                         'controller' => 'devices',
@@ -159,7 +163,7 @@ return array(
                         'privilege' => 'add_devices'
                     ),
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'View devices',
                         'route' => 'index/module',
                         'controller' => 'devices',
@@ -173,13 +177,13 @@ return array(
 
             // Users pages
             array(
-                'type' => 'UI\Library\Navigation\Page\Mvc',
+                'type' => 'Library\Navigation\Page\Mvc',
                 'label' => 'Users',
                 'route' => 'settings/module',
                 'controller' => 'users',
                 'pages' => array(
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Add new user',
                         'route' => 'settings/module',
                         'controller' => 'users',
@@ -189,7 +193,7 @@ return array(
                         'privilege' => 'add_users',
                     ),
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'View users',
                         'route' => 'settings/module',
                         'controller' => 'users',
@@ -199,7 +203,7 @@ return array(
                         'privilege' => 'view_users',
                     ),
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Profile',
                         'route' => 'settings/module',
                         'controller' => 'users',
@@ -213,13 +217,13 @@ return array(
 
             // Admin pages
             array(
-                'type' => 'UI\Library\Navigation\Page\Mvc',
+                'type' => 'Library\Navigation\Page\Mvc',
                 'label' => 'Admin',
                 'route' => 'settings/module',
                 'controller' => 'admin',
                 'pages' => array(
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Options',
                         'route' => 'settings/module',
                         'controller' => 'options',
@@ -228,7 +232,7 @@ return array(
                         'privilege' => 'view_options',
                     ),
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Security',
                         'route' => 'settings/module',
                         'controller' => 'security',
@@ -237,7 +241,7 @@ return array(
                         'privilege' => 'view_security',
                     ),
                     array(
-                        'type' => 'UI\Library\Navigation\Page\Mvc',
+                        'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Logout',
                         'route' => 'auth',
                         'action' => 'logout',

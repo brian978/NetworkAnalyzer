@@ -18,15 +18,15 @@ class DevicesController extends AbstractUiController
 {
     public function addFormAction()
     {
-        $form = new DevicesFrom();
+        $form   = new DevicesFrom();
         $device = new Device();
         $form->bind($device);
 
-        if($this->request->isPost())
+        if ($this->request->isPost())
         {
             $form->setData($this->request->getPost());
 
-            if($form->isValid())
+            if ($form->isValid())
             {
                 var_dump($device);
             }
@@ -39,7 +39,6 @@ class DevicesController extends AbstractUiController
 
     public function listAction()
     {
-
     }
 
     public function addAction()
@@ -49,11 +48,9 @@ class DevicesController extends AbstractUiController
 
     public function updateAction()
     {
-
     }
 
     public function removeAction()
     {
-
     }
 }

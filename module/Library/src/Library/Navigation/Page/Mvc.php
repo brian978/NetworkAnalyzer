@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace UI\Library\Navigation\Page;
+namespace Library\Navigation\Page;
 
 use Zend\Navigation\Page\Mvc as ZendMvcPage;
 

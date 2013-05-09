@@ -18,7 +18,13 @@ class Module
         $eventManager = $e->getApplication()->getEventManager();
 
         // Events
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectLayoutVariables'));
+        $eventManager->attach(
+            MvcEvent::EVENT_DISPATCH,
+            array(
+                $this,
+                'injectLayoutVariables'
+            )
+        );
     }
 
     public function injectLayoutVariables(MvcEvent $e)

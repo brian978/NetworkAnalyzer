@@ -74,9 +74,9 @@ class Components
 
     /**
      * @param \Zend\View\Model\ViewModel $viewModel
-     * @param string $id
-     * @param $priority
-     * @param $position
+     * @param string                     $id
+     * @param                            $priority
+     * @param                            $position
      * @return Element
      */
     public function createElement(
@@ -94,8 +94,8 @@ class Components
 
     /**
      * @param \Design\Library\Element $element The position can be either numeric or a string
-     * @param int $priority
-     * @param string $position
+     * @param int                     $priority
+     * @param string                  $position
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      * @return \Design\Library\Components
@@ -160,8 +160,8 @@ class Components
     /**
      * @param mixed $elementId
      * @param mixed $position
-     * @param $elementId
-     * @param $position
+     * @param       $elementId
+     * @param       $position
      * @throws \InvalidArgumentException
      * @return Components
      */

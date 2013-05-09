@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace UI\Library\View\Helpers;
+namespace Library\View\Helpers;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\Renderer\RendererInterface as Renderer;

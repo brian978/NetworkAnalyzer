@@ -17,7 +17,9 @@ return array(
     'translator' => array(
         'locale' => array(
             'en_US',
-            'en_US' // Fallback locale
+
+            // Fallback locale
+            'en_US'
         ),
         'translation_file_patterns' => array(
             array(
@@ -31,7 +33,6 @@ return array(
         'display_not_found_reason' => true,
         'display_exceptions' => true,
         'doctype' => 'HTML5',
-        'template_map' => array(
-        ),
+        'template_map' => array(),
     ),
 );

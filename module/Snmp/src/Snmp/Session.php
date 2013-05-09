@@ -91,7 +91,7 @@ class Session implements ServiceManagerAwareInterface
     {
         $output = $this->session->get($object_id);
 
-        if($output == false)
+        if ($output == false)
         {
             throw new \RuntimeException($this->session->getError());
         }

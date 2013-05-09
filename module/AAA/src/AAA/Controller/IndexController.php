@@ -9,19 +9,18 @@
 
 namespace AAA\Controller;
 
-use Auth\Model\Authentication;
+use AAA\Model\Authentication;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-
     }
 
     public function loginAction()
     {
-        if($this->request->isPost())
+        if ($this->request->isPost())
         {
             $auth = new Authentication($this->serviceLocator);
             var_dump($auth->setCredentials(array())->authenticate());

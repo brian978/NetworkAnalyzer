@@ -15,10 +15,12 @@ class Element extends \ArrayIterator
 {
     public function __construct(ViewModel $viewModel, $id = '')
     {
-        parent::__construct(array(
-            'viewModel' => $viewModel,
-            'id' => $id
-        ));
+        parent::__construct(
+            array(
+                'viewModel' => $viewModel,
+                'id' => $id
+            )
+        );
     }
 
     /**

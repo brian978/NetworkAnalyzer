@@ -32,7 +32,7 @@ abstract class AbstractUiController extends AbstractActionController
      * Dispatch a request
      *
      * @events dispatch.pre, dispatch.post
-     * @param  Request $request
+     * @param  Request       $request
      * @param  null|Response $response
      * @return Response|mixed
      */
@@ -78,11 +78,12 @@ abstract class AbstractUiController extends AbstractActionController
     /**
      * Empty method that can be used to implement an ACL check without modifying the dispatch method
      *
+     * @throws \RuntimeException
      * @return boolean
      */
     protected function checkAcl()
     {
-        $response    = false;
+        $allow       = false;
         $config      = $this->serviceLocator->get('config');
         $permissions = $config['permissions']['controllers'];
         $controller  = $this->params('controller');
@@ -90,9 +91,10 @@ abstract class AbstractUiController extends AbstractActionController
         $resource    = null;
         $privilege   = null;
 
+        // If there is not permission set for a given controller we allow the response
         if (!isset($permissions[$controller]))
         {
-            $response = true;
+            $allow = true;
         }
         else
         {
@@ -121,9 +123,9 @@ abstract class AbstractUiController extends AbstractActionController
                 $privilege = $permissions[$controller]['privileges'][$privilege];
             }
 
-            $response = $this->acl->isAllowed($this->userAuth->getRole(), $resource, $privilege);
+            $allow = $this->acl->isAllowed($this->userAuth->getRole(), $resource, $privilege);
         }
 
-        return $response;
+        return $allow;
     }
 }

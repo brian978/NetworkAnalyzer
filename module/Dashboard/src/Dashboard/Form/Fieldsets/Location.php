@@ -20,24 +20,26 @@ class Location extends AbstractFieldset
         $this->setObject(new LocationEntity());
         $this->setLabel('Location');
 
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'name',
-            'options' => array(
-                'label' => 'Name',
-                'label_attributes' => array(
-                    'class' => 'form_row'
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Select',
+                'name' => 'name',
+                'options' => array(
+                    'label' => 'Name',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                    'value_options' => array(
+                        0 => '...',
+                        1 => 'Etaj 1',
+                        2 => 'Etaj 2',
+                    )
                 ),
-                'value_options' => array(
-                    0 => '...',
-                    1 => 'Etaj 1',
-                    2 => 'Etaj 2',
+                'attributes' => array(
+                    'required' => true
                 )
-            ),
-            'attributes' => array(
-                'required' => true
             )
-        ));
+        );
     }
 
     /**
