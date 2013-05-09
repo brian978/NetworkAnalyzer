@@ -14,20 +14,17 @@ use Zend\Mvc\MvcEvent;
 
 class Module
 {
-//    public function init(ModuleManager $moduleManager)
-//    {
-//        // Not used => unset (also avoid code inspection errors)
-//        unset($moduleManager);
-//
-//        // Setting up the environment
-//        $this->setEnv();
-//    }
+    public function init()
+    {
+        // Setting up the environment
+        $this->setEnv();
+    }
 
     protected function setEnv()
     {
         $env = getenv('APPLICATION_ENV');
 
-        if ($env !== false && ($env === 'development' || $env === 'staging'))
+//        if ($env !== false && ($env === 'development' || $env === 'staging'))
         {
             error_reporting(E_ALL);
             ini_set('display_errors', 1);

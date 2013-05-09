@@ -19,18 +19,20 @@ class Device extends AbstractFieldset
 
         $this->setObject(new DeviceEntity());
 
-        $this->add(array(
-            'name' => 'name',
-            'options' => array(
-                'label' => 'Name',
-                'label_attributes' => array(
-                    'class' => 'form_row'
+        $this->add(
+            array(
+                'name' => 'name',
+                'options' => array(
+                    'label' => 'Name',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
                 ),
-            ),
-            'attributes' => array(
-                'required' => 'true'
+                'attributes' => array(
+                    'required' => 'true'
+                )
             )
-        ));
+        );
 
         $this->add(new Location());
         $this->add(new DeviceType());

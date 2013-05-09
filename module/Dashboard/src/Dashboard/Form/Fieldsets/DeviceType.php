@@ -19,24 +19,26 @@ class DeviceType extends AbstractFieldset
 
         $this->setObject(new TypeEntity());
 
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'type',
-            'options' => array(
-                'label' => 'Type',
-                'label_attributes' => array(
-                    'class' => 'form_row'
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Select',
+                'name' => 'type',
+                'options' => array(
+                    'label' => 'Type',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                    'value_options' => array(
+                        0 => '...',
+                        1 => 'Switch',
+                        2 => 'Router',
+                    )
                 ),
-                'value_options' => array(
-                    0 => '...',
-                    1 => 'Switch',
-                    2 => 'Router',
+                'attributes' => array(
+                    'required' => 'true'
                 )
-            ),
-            'attributes' => array(
-                'required' => 'true'
             )
-        ));
+        );
     }
 
     /**

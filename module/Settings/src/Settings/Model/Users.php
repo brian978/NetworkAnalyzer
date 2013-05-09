@@ -19,8 +19,8 @@ class Users
      */
     public static function processPasswordHash($hash)
     {
-        $salt       = '';
-        $hashCut    = 0;
+        $salt    = '';
+        $hashCut = 0;
 
         if (is_string($salt) && strlen($hash) > 3)
         {

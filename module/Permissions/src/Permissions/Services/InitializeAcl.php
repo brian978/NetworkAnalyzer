@@ -48,7 +48,7 @@ class InitializeAcl implements FactoryInterface
 
     protected function createResources()
     {
-        if(!isset($this->permissions['resources']))
+        if (!isset($this->permissions['resources']))
         {
             throw new \RuntimeException('The permissions array must contain a resources entry');
         }
@@ -68,7 +68,7 @@ class InitializeAcl implements FactoryInterface
 
     protected function createRoles()
     {
-        if(!isset($this->permissions['roles']))
+        if (!isset($this->permissions['roles']))
         {
             throw new \RuntimeException('The permissions array must contain a roles entry');
         }
@@ -83,7 +83,7 @@ class InitializeAcl implements FactoryInterface
             foreach ($specs['resources'] as $resourceId => $permissions)
             {
                 // For the resource ID called all we actually mean NULL
-                if($resourceId == 'all')
+                if ($resourceId == 'all')
                 {
                     $resourceId = null;
                 }

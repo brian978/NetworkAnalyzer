@@ -15,7 +15,6 @@ class UsersController extends AbstractUiController
 {
     public function indexAction()
     {
-
     }
 
     public function addFormAction()

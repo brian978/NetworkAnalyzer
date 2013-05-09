@@ -16,11 +16,8 @@ return array(
 
     // Permissions for each controller in the user interface
     'permissions' => array(
-        'resources' => array(
-        ),
-        'roles' => array(
-        ),
-        'controllers' => array(
-        )
+        'resources' => array(),
+        'roles' => array(),
+        'controllers' => array()
     ),
 );
