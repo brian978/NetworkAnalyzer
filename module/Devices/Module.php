@@ -9,8 +9,23 @@
 
 namespace Devices;
 
+use Devices\Model\DevicesModel;
+
 class Module
 {
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Devices\Model\DevicesModel' => function ($serviceManager)
+                {
+                    $model = new DevicesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
+                    return $model;
+                }
+            )
+        );
+    }
+
     public function getAutoloaderConfig()
     {
         return array(

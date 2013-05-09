@@ -11,7 +11,6 @@ namespace Devices\Controller;
 
 use Devices\Entity\Device;
 use Devices\Form\DevicesFrom;
-use Devices\Model\DevicesModel;
 use UI\Controller\AbstractUiController;
 use Zend\View\Model\JsonModel;
 
@@ -29,7 +28,8 @@ class IndexController extends AbstractUiController
 
             if ($form->isValid())
             {
-                $model = new DevicesModel();
+                /** @var $model \Devices\Model\DevicesModel */
+                $model = $this->serviceLocator->get('Devices\Model\DevicesModel');
                 $model->save($device);
             }
         }

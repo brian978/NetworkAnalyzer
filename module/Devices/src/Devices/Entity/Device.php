@@ -13,12 +13,20 @@ class Device
 {
     protected $id = 0;
     protected $name;
+
+    /**
+     * @var Location
+     */
     protected $location;
+
+    /**
+     * @var Type
+     */
     protected $type;
 
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int)$id;
     }
 
     public function getId()
