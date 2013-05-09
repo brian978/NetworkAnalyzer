@@ -37,6 +37,7 @@ $menus = array(
     )->prependStylesheet($this->basePath() . '/css/ie.css', 'screen', 'lt IE 9')
         ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css')
         ->prependStylesheet($this->basePath() . '/css/layout.css')
+        ->prependStylesheet($this->basePath() . '/css/styles.css')
     ?>
 
     <!-- Le scripts -->
@@ -99,9 +100,7 @@ $menus = array(
     <!-- end of header bar -->
 
     <section id="secondary_bar">
-        <div class="user">
-            <!--            <p>John Doe (<a href="#">3 Messages</a>)</p>-->
-        </div>
+        <div class="user"></div>
         <div class="breadcrumbs_container">
             <article class="breadcrumbs">
                 <a href="<?php echo $this->url('index', array(), true) ?>">

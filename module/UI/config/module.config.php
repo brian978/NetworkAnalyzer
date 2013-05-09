@@ -23,7 +23,8 @@ return array(
     ),
     'view_helpers' => array(
         'invokables' => array(
-            'routeName' => 'UI\Library\View\Helpers\RouteName'
+            'routeName' => 'UI\Library\View\Helpers\RouteName',
+            'showInputError' => 'UI\Library\View\Helpers\RenderInputError'
         )
     ),
     'service_manager' => array(

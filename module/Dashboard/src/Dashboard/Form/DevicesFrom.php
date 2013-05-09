@@ -21,6 +21,11 @@ class DevicesFrom extends AbstractForm
         $this->setHydrator(new ClassMethods(false))
             ->setInputFilter(new InputFilter());
 
+        $this->setAttributes(array(
+            'id' => 'devices_form',
+            'class' => 'input_form'
+        ));
+
         $this->add(
             array(
                 'type' => 'Dashboard\Form\Fieldsets\Device',

@@ -1,24 +1,40 @@
 <article class="module width_full">
     <header><h3><?php echo $this->translate('Add new device') ?></h3></header>
     <div class="module_content">
-<?php
+        <?php
 
-/** @var $form \Dashboard\Form\DevicesFrom */
-$form->setAttribute('action', $this->url(null, array(), true))->prepare();
+        // Retrieving all the messages so we have what to show
+        $messages = $form->getMessages();
+        var_dump($messages);
 
-echo $this->form()->openTag($form);
+        // We want to render the errors manually
+        $this->formRow()->setRenderErrors(false);
 
-$device = $form->get('device');
-$location = $device->get('location');
+        // Retrieving the forms/fieldsets
+        $device = $form->get('device');
+        $location = $device->get('location');
+        $device_type = $device->get('device_type');
 
-echo $this->formRow($device->get('name'));
-echo $this->formCollection($location);
+        // Retrieving the form elements
+        $deviceName = $device->get('name');
+        $deviceLocation = $location->get('name');
+        $deviceType = $device_type->get('type');
 
-echo $this->formHidden($form->get('csrf'));
-echo $this->formElement($form->get('submit'));
+        /** @var $form \Dashboard\Form\DevicesFrom */
+        $form->setAttribute('action', $this->url(null, array(), true))->prepare();
 
-echo $this->form()->closeTag();
-?>
-    <div class="clear"></div>
+        // Rendering the form
+        echo $this->form()->openTag($form);
+
+        echo $this->showInputError($deviceName) . $this->formRow($deviceName);
+        echo $this->showInputError($deviceLocation) . $this->formRow($deviceLocation);
+        echo $this->showInputError($deviceType) . $this->formRow($deviceType);
+
+        echo $this->formHidden($form->get('csrf'));
+        echo $this->formElement($form->get('submit'));
+
+        echo $this->form()->closeTag();
+        ?>
+        <div class="clear"></div>
     </div>
 </article>

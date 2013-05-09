@@ -13,7 +13,6 @@ use Dashboard\Entity\Device as DeviceEntity;
 
 class Device extends AbstractFieldset
 {
-
     public function __construct()
     {
         parent::__construct('device');
@@ -23,14 +22,18 @@ class Device extends AbstractFieldset
         $this->add(array(
             'name' => 'name',
             'options' => array(
-                'label' => 'Name'
+                'label' => 'Name',
+                'label_attributes' => array(
+                    'class' => 'form_row'
+                ),
             ),
             'attributes' => array(
-                'required' => 'required'
+                'required' => 'true'
             )
         ));
 
         $this->add(new Location());
+        $this->add(new DeviceType());
     }
 
     /**
@@ -43,7 +46,15 @@ class Device extends AbstractFieldset
     {
         return array(
             'name' => array(
-                'required' => true
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'min' => 10
+                        )
+                    )
+                )
             )
         );
     }

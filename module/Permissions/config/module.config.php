@@ -13,4 +13,14 @@ return array(
             'acl' => '\Permissions\Services\InitializeAcl'
         )
     ),
+
+    // Permissions for each controller in the user interface
+    'permissions' => array(
+        'resources' => array(
+        ),
+        'roles' => array(
+        ),
+        'controllers' => array(
+        )
+    ),
 );

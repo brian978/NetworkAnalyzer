@@ -88,7 +88,7 @@ class InitializeAcl implements FactoryInterface
                     $resourceId = null;
                 }
 
-                // Setting the permissions
+                // $type is allow/deny
                 foreach ($permissions as $type => $privileges)
                 {
                     $this->acl->$type($role, $resourceId, $privileges);
