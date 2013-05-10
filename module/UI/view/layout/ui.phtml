@@ -1,22 +1,9 @@
 <?php
 
 /** @var $nav Zend\View\Helper\Navigation */
-$nav = $this->navigation('navigation')
-    ->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator());
+$this->nav = $this->navigation('navigation');
+$this->nav->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator());
 
-/** @var $menu \Zend\View\Helper\Navigation\Menu */
-$menu = $nav->menu()->setAcl($this->acl)->setRole($this->userAuth->getRole());
-
-$menuOptions = array(
-    'ulClass' => 'toggle'
-);
-
-// Rendering the menus
-$menus = array(
-    'devices' => $menu->renderMenu($nav->findOneByLabel('Devices'), $menuOptions),
-    'users' => $menu->renderMenu($nav->findOneByLabel('Users'), $menuOptions),
-    'admin' => $menu->renderMenu($nav->findOneByLabel('Admin'), $menuOptions)
-)
 ?>
 <?php echo $this->doctype(); ?>
 <html>
@@ -91,10 +78,7 @@ $menus = array(
                 </h1>
 
                 <h2 class="section_title"><?php echo $this->translate('Dashboard') ?></h2>
-                <span id="lang_bar">
-                    <a href="<?php echo $this->url($this->routeName(), array('lang' => 'ro'), true) ?>">RO</a>
-                    <a href="<?php echo $this->url($this->routeName(), array('lang' => 'en'), true) ?>">EN</a>
-                </span>
+                <?php echo $this->partial('partials/language.phtml', $this->vars()) ?>
             </hgroup>
         </header>
         <!-- end of header bar -->
@@ -107,42 +91,14 @@ $menus = array(
                         <?php echo $this->translate('Network Analyzer') ?>
                     </a>
 
-                    <?php
+                    <?php echo $this->nav->breadcrumbs()->setMinDepth(0)->setPartial('partials/breadcrumb.phtml'); ?>
 
-                    echo $nav->breadcrumbs()
-                        ->setMinDepth(0)
-                        ->setPartial('partials/breadcrumb.phtml');
-
-                    ?>
                 </article>
             </div>
         </section>
         <!-- end of secondary bar -->
 
-        <aside id="sidebar" class="column">
-            <form class="quick_search">
-                <input type="text" value="Quick Search"
-                       onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
-            </form>
-            <hr/>
-            <?php if (!empty($menus['devices'])): ?><h3><?php echo $this->translate('Devices') ?></h3><?php endif; ?>
-            <?php echo $menus['devices']; ?>
-            <?php if (!empty($menus['users'])): ?><h3><?php echo $this->translate('Users') ?></h3><?php endif; ?>
-            <?php echo $menus['users']; ?>
-            <?php if (!empty($menus['admin'])): ?><h3><?php echo $this->translate('Admin') ?></h3><?php endif; ?>
-            <?php echo $menus['admin']; ?>
-            <footer>
-                <hr/>
-                <p>
-                    <strong>
-                        &copy; 2013 Andrei Dincescu. <?php echo $this->translate('All rights reserved.') ?>
-                    </strong>
-                </p>
-
-                <p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
-            </footer>
-        </aside>
-        <!-- end of sidebar -->
+        <?php echo $this->partial('partials/side_menu.phtml', $this->vars()) ?>
 
         <section id="main" class="column">
 

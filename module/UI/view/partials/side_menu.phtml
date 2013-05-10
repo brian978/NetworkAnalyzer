@@ -1,0 +1,49 @@
+<?php
+
+// We must not show the menu without a user role
+if(!isset($this->userAuth)) {
+    return;
+}
+
+$menuOptions = array(
+    'ulClass' => 'toggle'
+);
+
+/** @var $menu \Zend\View\Helper\Navigation\Menu */
+$menu = $this->nav->menu();
+$menu->setAcl($this->acl)
+    ->setRole($this->userAuth->getRole());
+
+// Rendering the menus
+$menus = array(
+    'devices' => $menu->renderMenu($nav->findOneByLabel('Devices'), $menuOptions),
+    'users' => $menu->renderMenu($nav->findOneByLabel('Users'), $menuOptions),
+    'admin' => $menu->renderMenu($nav->findOneByLabel('Admin'), $menuOptions)
+)
+
+?>
+
+<aside id="sidebar" class="column">
+    <form class="quick_search">
+        <input type="text" value="Quick Search"
+               onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+    </form>
+    <hr/>
+    <?php if (!empty($menus['devices'])): ?><h3><?php echo $this->translate('Devices') ?></h3><?php endif; ?>
+    <?php echo $menus['devices']; ?>
+    <?php if (!empty($menus['users'])): ?><h3><?php echo $this->translate('Users') ?></h3><?php endif; ?>
+    <?php echo $menus['users']; ?>
+    <?php if (!empty($menus['admin'])): ?><h3><?php echo $this->translate('Admin') ?></h3><?php endif; ?>
+    <?php echo $menus['admin']; ?>
+    <footer>
+        <hr/>
+        <p>
+            <strong>
+                &copy; 2013 Andrei Dincescu. <?php echo $this->translate('All rights reserved.') ?>
+            </strong>
+        </p>
+
+        <p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
+    </footer>
+</aside>
+<!-- end of sidebar -->
