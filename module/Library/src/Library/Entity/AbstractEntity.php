@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Entity;
+namespace Library\Entity;
 
 abstract class AbstractEntity
 {

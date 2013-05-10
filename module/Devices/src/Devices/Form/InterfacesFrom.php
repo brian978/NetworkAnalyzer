@@ -9,14 +9,14 @@
 
 namespace Devices\Form;
 
-use Devices\Form\Fieldsets\Location;
+use Devices\Form\Fieldsets\Iface;
 use Library\Form\AbstractForm;
 
-class LocationsFrom extends AbstractForm
+class InterfacesFrom extends AbstractForm
 {
     public function __construct()
     {
-        parent::__construct('locations_form');
+        parent::__construct('interfaces_form');
 
         $this->setAttributes(
             array(
@@ -30,14 +30,14 @@ class LocationsFrom extends AbstractForm
      */
     public function loadElements()
     {
-        $location = new Location();
-        $location->setUseAsBaseFieldset(true);
-        $location->setServiceLocator($this->serviceLocator);
-        $location->setDenyFilters(array('id'));
-        $location->loadElements();
+        $interface = new Iface();
+        $interface->setUseAsBaseFieldset(true);
+        $interface->setServiceLocator($this->serviceLocator);
+        $interface->setDenyFilters(array('id'));
+        $interface->loadElements();
 
         // Adding the elements
-        $this->add($location);
+        $this->add($interface);
 
         $this->add(
             array(

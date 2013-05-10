@@ -9,40 +9,27 @@
 
 namespace Devices\Form\Fieldsets;
 
-use Devices\Entity\Type as TypeEntity;
-use Devices\Model\AbstractModel;
+use Devices\Entity\Iface as IfaceEntity;
 use Library\Form\Fieldsets\AbstractFieldset;
 
-class DeviceType extends AbstractFieldset
+class Iface extends AbstractFieldset
 {
-    /**
-     * @var AbstractModel
-     */
-    protected $model;
-
     public function __construct()
     {
-        parent::__construct('type');
+        parent::__construct('interface');
 
-        $this->setObject(new TypeEntity());
+        $this->setObject(new IfaceEntity());
     }
 
     public function loadElements()
     {
-        $this->setModel();
-
+        // Adding the elements to the fieldset
         $this->add(
             array(
-                'type' => 'Zend\Form\Element\Select',
+                'type' => 'Zend\Form\Element\Hidden',
                 'name' => 'id',
                 'options' => array(
-                    'label' => 'Type',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => 'true'
+                    'value' => 0
                 )
             )
         );
@@ -57,19 +44,54 @@ class DeviceType extends AbstractFieldset
                     ),
                 ),
                 'attributes' => array(
-                    'required' => true
+                    'required' => 'true'
                 )
             )
         );
-    }
 
-    /**
-     * Initialized the model required for the database
-     *
-     */
-    public function setModel()
-    {
-        $this->model = $this->serviceLocator->get('Devices\Model\TypesModel');
+        $this->add(
+            array(
+                'name' => 'mac',
+                'options' => array(
+                    'label' => 'MAC',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => 'true'
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'name' => 'ip',
+                'options' => array(
+                    'label' => 'IP',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => 'true'
+                )
+            )
+        );
+
+        $device       = new Device();
+        $device->mode = Device::MODE_SELECT;
+        $device->setServiceLocator($this->serviceLocator);
+        $device->setDenyFilters(array('name'));
+        $device->loadElements();
+
+        $type = new Type();
+        $type->setServiceLocator($this->serviceLocator);
+        $type->setDenyFilters(array('name'));
+        $type->loadElements();
+
+        $this->add($type);
+        $this->add($device);
     }
 
     /**
@@ -106,13 +128,7 @@ class DeviceType extends AbstractFieldset
         );
 
         // Removing the un-required filters (this is useful when you don't show all the fields)
-        foreach($this->denyFilters as $input)
-        {
-            if(isset($filters[$input]))
-            {
-                unset($filters[$input]);
-            }
-        }
+        $this->processDenyFilters($filters);
 
         return $filters;
     }

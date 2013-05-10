@@ -9,6 +9,7 @@
 
 namespace Devices\Form;
 
+use Devices\Form\Fieldsets\Type;
 use Library\Form\AbstractForm;
 
 class TypesFrom extends AbstractForm
@@ -29,14 +30,14 @@ class TypesFrom extends AbstractForm
      */
     public function loadElements()
     {
-        $this->add(
-            array(
-                'type' => 'Devices\Form\Fieldsets\DeviceType',
-                'options' => array(
-                    'use_as_base_fieldset' => true
-                )
-            )
-        );
+        $type = new Type();
+        $type->setUseAsBaseFieldset(true);
+        $type->setServiceLocator($this->serviceLocator);
+        $type->setDenyFilters(array('id'));
+        $type->loadElements();
+
+        // Adding the elements
+        $this->add($type);
 
         $this->add(
             array(

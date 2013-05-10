@@ -23,7 +23,7 @@
         $form->setAttribute('action', $this->url('devices/module', array('action' => 'add'), true))->prepare();
 
         // Showing the success message
-        if($this->success)
+        if ($this->success)
         {
             echo '<h4>' . $this->translate('The device was added') . '</h4>';
         }

@@ -9,32 +9,38 @@
 
 namespace Devices\Form\Fieldsets;
 
-use Devices\Entity\Device as DeviceEntity;
+use Devices\Entity\Type as TypeEntity;
 use Library\Form\Fieldsets\AbstractFieldset;
 
-class Device extends AbstractFieldset
+class Type extends AbstractFieldset
 {
-    const MODE_SELECT = 1;
-    const MODE_ADMIN  = 2;
-
-    /**
-     * Depending on this mode the object will add the ID element differently
-     *
-     * @var int
-     */
-    public $mode = self::MODE_ADMIN;
-
     public function __construct()
     {
-        parent::__construct('device');
+        parent::__construct('type');
 
-        $this->setObject(new DeviceEntity());
+        $this->setObject(new TypeEntity());
     }
 
     public function loadElements()
     {
-        // Adding the elements to the fieldset
-        $this->add($this->getIdElement());
+        $this->setModel('Devices\Model\TypesModel');
+
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Select',
+                'name' => 'id',
+                'options' => array(
+                    'label' => 'Type',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                    'value_options' => $this->getValueOptions()
+                ),
+                'attributes' => array(
+                    'required' => 'true'
+                )
+            )
+        );
 
         $this->add(
             array(
@@ -46,62 +52,10 @@ class Device extends AbstractFieldset
                     ),
                 ),
                 'attributes' => array(
-                    'required' => 'true'
+                    'required' => true
                 )
             )
         );
-
-        if ($this->mode == self::MODE_ADMIN)
-        {
-            // Creating the required fields set and injecting the dependencies
-            $location = new Location();
-            $location->setServiceLocator($this->serviceLocator);
-            $location->setDenyFilters(array('name'));
-            $location->loadElements();
-
-            $type = new Type();
-            $type->setServiceLocator($this->serviceLocator);
-            $type->setDenyFilters(array('name'));
-            $type->loadElements();
-
-            $this->add($location);
-            $this->add($type);
-        }
-    }
-
-    protected function getIdElement()
-    {
-        if ($this->mode == self::MODE_SELECT)
-        {
-            $this->setModel('Devices\Model\DevicesModel');
-
-            $element = array(
-                'type' => 'Zend\Form\Element\Select',
-                'name' => 'id',
-                'options' => array(
-                    'label' => 'Device',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                    'value_options' => $this->getValueOptions()
-                ),
-                'attributes' => array(
-                    'required' => true
-                )
-            );
-        }
-        else
-        {
-            $element = array(
-                'type' => 'Zend\Form\Element\Hidden',
-                'name' => 'id',
-                'options' => array(
-                    'value' => 0
-                )
-            );
-        }
-
-        return $element;
     }
 
     /**

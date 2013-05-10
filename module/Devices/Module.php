@@ -10,9 +10,9 @@
 namespace Devices;
 
 use Devices\Model\DevicesModel;
+use Devices\Model\InterfacesModel;
 use Devices\Model\LocationsModel;
-use Library\Form\Factory;
-use Zend\Form\FormElementManager;
+use Devices\Model\TypesModel;
 
 class Module
 {
@@ -28,16 +28,14 @@ class Module
                 {
                     return new LocationsModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
-                'TranslatableFormFactory' => function ($serviceManager)
+                'Devices\Model\TypesModel' => function ($serviceManager)
                 {
-                    $formElementManager = new FormElementManager();
-                    $factory            = new Factory($formElementManager);
-
-                    // Injecting the serviceLocator into the formElementManager
-                    $formElementManager->setServiceLocator($serviceManager);
-
-                    return $factory;
-                }
+                    return new TypesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
+                },
+                'Devices\Model\InterfacesModel' => function ($serviceManager)
+                {
+                    return new InterfacesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
+                },
             )
         );
     }

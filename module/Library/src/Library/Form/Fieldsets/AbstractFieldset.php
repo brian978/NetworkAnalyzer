@@ -18,6 +18,11 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 abstract class AbstractFieldset extends Fieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface
 {
     /**
+     * @var AbstractModel
+     */
+    protected $model;
+
+    /**
      * @var \Zend\ServiceManager\ServiceLocatorInterface
      */
     protected $serviceLocator;
@@ -57,5 +62,52 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     public function getServiceLocator()
     {
         return $this->serviceLocator;
+    }
+
+    /**
+     * Initialized the model required for the database
+     *
+     */
+    protected function setModel($serviceName)
+    {
+        $this->model = $this->serviceLocator->get($serviceName);
+    }
+
+    /**
+     * Builds an array of options for the select box
+     *
+     * @return array
+     */
+    protected function getValueOptions()
+    {
+        $options = $this->model->fetch();
+
+        foreach ($options as $value => $row)
+        {
+            $options[$value] = $row['name'];
+        }
+
+        $options = array_merge(array(
+            0 => '...'
+        ), $options);
+
+        return $options;
+    }
+
+    /**
+     * Eliminates the filters that are in the deny list
+     *
+     * @param array $filters
+     */
+    protected function processDenyFilters(array &$filters)
+    {
+        // Removing the un-required filters (this is useful when you don't show all the fields)
+        foreach($this->denyFilters as $input)
+        {
+            if(isset($filters[$input]))
+            {
+                unset($filters[$input]);
+            }
+        }
     }
 }

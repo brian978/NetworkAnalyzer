@@ -7,9 +7,9 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Model;
+namespace Library\Model;
 
-use Devices\Entity\AbstractEntity;
+use Library\Entity\AbstractEntity;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\TableGateway\AbstractTableGateway;
 

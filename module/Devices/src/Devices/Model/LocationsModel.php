@@ -9,6 +9,8 @@
 
 namespace Devices\Model;
 
+use Library\Model\AbstractModel;
+
 class LocationsModel extends AbstractModel
 {
     protected $table = 'locations';

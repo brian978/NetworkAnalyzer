@@ -48,6 +48,7 @@ class AbstractController extends AbstractUiController
     {
         $viewParams = array();
         $post       = array();
+        $success    = filter_var($this->getEvent()->getRouteMatch()->getParam('success'), FILTER_VALIDATE_BOOLEAN);
 
         // Loading the POST data
         if (is_array($tmpPost = $this->PostRedirectGet()))
@@ -64,8 +65,7 @@ class AbstractController extends AbstractUiController
         }
 
         // Adding view params
-        $viewParams['success'] = filter_var($this->getEvent()->getRouteMatch()->getParam('success'),
-            FILTER_VALIDATE_BOOLEAN);
+        $viewParams['success'] = $success;
         $viewParams['form']    = $form;
 
         return $viewParams;
@@ -78,6 +78,8 @@ class AbstractController extends AbstractUiController
      */
     public function addAction()
     {
+        $hasFailed = true;
+
         if ($this->request->isPost())
         {
             $form = $this->getForm($this->request->getPost()->toArray());
@@ -85,18 +87,26 @@ class AbstractController extends AbstractUiController
             // Redirect regarding if valid or not but with different params
             if ($form->isValid())
             {
-                $model = $this->serviceLocator->get($this->formParams['model']);
-                $model->save($form->getObject());
+                $model  = $this->serviceLocator->get($this->formParams['model']);
+                $result = $model->save($form->getObject());
 
-                $this->redirect()->toRoute('devices/status', array('action' => 'addForm', 'success' => 'true'), true);
+                if ($result > 0)
+                {
+                    $hasFailed = false;
+
+                    $this->redirect()
+                        ->toRoute('devices/status', array('action' => 'addForm', 'success' => 'true'), true);
+                }
             }
-            else
-            {
-                $this->PostRedirectGet(
-                    $this->url()->fromRoute('devices/status', array('action' => 'addForm', 'success' => 'false'), true),
-                    true
-                );
-            }
+
+        }
+
+        if ($hasFailed === true)
+        {
+            $this->PostRedirectGet(
+                $this->url()->fromRoute('devices/status', array('action' => 'addForm', 'success' => 'false'), true),
+                true
+            );
         }
 
         return '';

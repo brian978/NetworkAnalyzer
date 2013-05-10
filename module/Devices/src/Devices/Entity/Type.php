@@ -9,6 +9,8 @@
 
 namespace Devices\Entity;
 
+use Library\Entity\AbstractEntity;
+
 class Type extends AbstractEntity
 {
     protected $id = 0;

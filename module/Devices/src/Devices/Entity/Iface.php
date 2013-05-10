@@ -11,20 +11,22 @@ namespace Devices\Entity;
 
 use Library\Entity\AbstractEntity;
 
-class Device extends AbstractEntity
+class Iface extends AbstractEntity
 {
     protected $id = 0;
     protected $name;
-
-    /**
-     * @var Location
-     */
-    protected $location;
+    protected $mac;
+    protected $ip;
 
     /**
      * @var Type
      */
     protected $type;
+
+    /**
+     * @var Device
+     */
+    protected $device;
 
     public function setId($id)
     {
@@ -36,14 +38,24 @@ class Device extends AbstractEntity
         return $this->id;
     }
 
-    public function setLocation(Location $location)
+    public function setIp($ip)
     {
-        $this->location = $location;
+        $this->ip = $ip;
     }
 
-    public function getLocation()
+    public function getIp()
     {
-        return $this->location;
+        return $this->ip;
+    }
+
+    public function setMac($mac)
+    {
+        $this->mac = $mac;
+    }
+
+    public function getMac()
+    {
+        return $this->mac;
     }
 
     public function setName($name)
@@ -56,13 +68,35 @@ class Device extends AbstractEntity
         return $this->name;
     }
 
+    /**
+     * @param \Devices\Entity\Type $type
+     */
     public function setType(Type $type)
     {
         $this->type = $type;
     }
 
+    /**
+     * @return \Devices\Entity\Type
+     */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @param \Devices\Entity\Device $device
+     */
+    public function setDevice(Device $device)
+    {
+        $this->device = $device;
+    }
+
+    /**
+     * @return \Devices\Entity\Device
+     */
+    public function getDevice()
+    {
+        return $this->device;
     }
 }

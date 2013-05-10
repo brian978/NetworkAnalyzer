@@ -51,7 +51,9 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Devices\Controller\Index' => 'Devices\Controller\IndexController',
-            'Devices\Controller\Locations' => 'Devices\Controller\LocationsController'
+            'Devices\Controller\Locations' => 'Devices\Controller\LocationsController',
+            'Devices\Controller\Types' => 'Devices\Controller\TypesController',
+            'Devices\Controller\Interfaces' => 'Devices\Controller\InterfacesController',
         )
     ),
 

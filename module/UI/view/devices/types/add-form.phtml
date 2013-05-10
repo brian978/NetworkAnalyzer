@@ -1,5 +1,5 @@
 <article class="module width_full">
-    <header><h3><?php echo $this->translate('Add new location') ?></h3></header>
+    <header><h3><?php echo $this->translate('Add new type') ?></h3></header>
     <div class="module_content">
         <?php
 
@@ -10,16 +10,16 @@
         $this->formRow()->setRenderErrors(false);
 
         // Retrieving the forms/fieldsets
-        $location = $form->get('location');
+        $type = $form->get('type');
 
         // Retrieving the form elements
-        $locationName = $location->get('name');
+        $typeName = $type->get('name');
 
         /** @var $form \Devices\Form\DevicesFrom */
         $form->setAttribute('action',
             $this->url('devices/module',
                 array(
-                    'controller' => 'locations',
+                    'controller' => 'types',
                     'action' => 'add'
                 ),
                 true))->prepare();
@@ -27,15 +27,15 @@
         // Showing the success message
         if ($this->success)
         {
-            echo '<h4>' . $this->translate('The location was added') . '</h4>';
+            echo '<h4>' . $this->translate('The type was added') . '</h4>';
         }
 
         // Rendering the form
         echo $this->form()->openTag($form);
 
-        echo $this->showInputError($locationName) . $this->formRow($locationName);
+        echo $this->showInputError($typeName) . $this->formRow($typeName);
 
-        echo $this->formHidden($location->get('id'));
+        echo $this->formHidden($type->get('id'));
         echo $this->formHidden($form->get('csrf'));
         echo $this->formElement($form->get('submit'));
 

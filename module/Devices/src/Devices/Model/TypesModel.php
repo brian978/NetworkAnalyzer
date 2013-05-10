@@ -11,33 +11,30 @@ namespace Devices\Model;
 
 use Library\Model\AbstractModel;
 
-class DevicesModel extends AbstractModel
+class TypesModel extends AbstractModel
 {
-    protected $table = 'devices';
+    protected $table = 'device_types';
 
     /**
      * This returns the number of affected rows
      *
-     * @param \Devices\Entity\Device $object
+     * @param \Devices\Entity\Type $object
      * @return int
      */
     protected function doInsert($object)
     {
         $result = 0;
 
-        $data                = array();
-        $data['name']        = $object->getName();
-        $data['location_id'] = $object->getLocation()->getId();
-        $data['dtype_id']    = $object->getType()->getId();
+        $data         = array();
+        $data['name'] = $object->getName();
 
         try
         {
             // If successful will return the number of rows
             $result = $this->insert($data);
         }
-        catch(\Exception $e)
+        catch (\Exception $e)
         {
-
         }
 
         return $result;
@@ -46,11 +43,10 @@ class DevicesModel extends AbstractModel
     /**
      * This returns the number of affected rows
      *
-     * @param \Devices\Entity\Device $object
+     * @param \Devices\Entity\Type $object
      * @return int
      */
     protected function doUpdate($object)
     {
-
     }
 }

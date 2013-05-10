@@ -10,27 +10,20 @@
 namespace Devices\Form\Fieldsets;
 
 use Devices\Entity\Location as LocationEntity;
-use Devices\Model\AbstractModel;
 use Library\Form\Fieldsets\AbstractFieldset;
 
 class Location extends AbstractFieldset
 {
-    /**
-     * @var AbstractModel
-     */
-    protected $model;
-
     public function __construct()
     {
         parent::__construct('location');
 
         $this->setObject(new LocationEntity());
-        $this->setLabel('Location');
     }
 
     public function loadElements()
     {
-        $this->setModel();
+        $this->setModel('Devices\Model\LocationsModel');
 
         $this->add(
             array(
@@ -63,32 +56,6 @@ class Location extends AbstractFieldset
                 )
             )
         );
-    }
-
-    /**
-     * Initialized the model required for the database
-     *
-     */
-    public function setModel()
-    {
-        $this->model = $this->serviceLocator->get('Devices\Model\LocationsModel');
-    }
-
-    /**
-     * Builds an array of options for the select box
-     *
-     * @return array
-     */
-    protected function getValueOptions()
-    {
-        $options = $this->model->fetch();
-
-        foreach ($options as $value => $row)
-        {
-            $options[$value] = $row['name'];
-        }
-
-        return $options;
     }
 
     /**
@@ -125,13 +92,7 @@ class Location extends AbstractFieldset
         );
 
         // Removing the un-required filters (this is useful when you don't show all the fields)
-        foreach ($this->denyFilters as $input)
-        {
-            if (isset($filters[$input]))
-            {
-                unset($filters[$input]);
-            }
-        }
+        $this->processDenyFilters($filters);
 
         return $filters;
     }
