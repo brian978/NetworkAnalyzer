@@ -23,6 +23,16 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'status' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action[/:success]]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            )
+                        )
+                    ),
                     'module' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(

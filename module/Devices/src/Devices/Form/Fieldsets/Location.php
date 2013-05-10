@@ -10,6 +10,7 @@
 namespace Devices\Form\Fieldsets;
 
 use Devices\Entity\Location as LocationEntity;
+use Library\Form\Fieldsets\AbstractFieldset;
 
 class Location extends AbstractFieldset
 {

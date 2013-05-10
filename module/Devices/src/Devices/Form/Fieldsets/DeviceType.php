@@ -10,6 +10,7 @@
 namespace Devices\Form\Fieldsets;
 
 use Devices\Entity\Type as TypeEntity;
+use Library\Form\Fieldsets\AbstractFieldset;
 
 class DeviceType extends AbstractFieldset
 {

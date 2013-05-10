@@ -20,7 +20,13 @@
         $deviceType = $device_type->get('id');
 
         /** @var $form \Devices\Form\DevicesFrom */
-        $form->setAttribute('action', $this->url(null, array(), true))->prepare();
+        $form->setAttribute('action', $this->url('devices/module', array('action' => 'add'), true))->prepare();
+
+        // Showing the success message
+        if($this->success)
+        {
+            echo '<h4>' . $this->success . '</h4>';
+        }
 
         // Rendering the form
         echo $this->form()->openTag($form);
