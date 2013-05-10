@@ -30,11 +30,21 @@ class Location extends AbstractFieldset
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
-                    'value_options' => array(
-                        0 => '...',
-                        1 => 'Etaj 1',
-                        2 => 'Etaj 2',
-                    )
+                ),
+                'attributes' => array(
+                    'required' => true
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'name' => 'name',
+                'options' => array(
+                    'label' => 'Name',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
                 ),
                 'attributes' => array(
                     'required' => true
@@ -51,7 +61,7 @@ class Location extends AbstractFieldset
      */
     public function getInputFilterSpecification()
     {
-        return array(
+        $filters = array(
             'id' => array(
                 'validators' => array(
                     array(
@@ -62,7 +72,29 @@ class Location extends AbstractFieldset
                         )
                     )
                 )
+            ),
+            'name' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'min' => 3
+                        )
+                    )
+                )
             )
         );
+
+        // Removing the un-required filters (this is useful when you don't show all the fields)
+        foreach($this->denyFilters as $input)
+        {
+            if(isset($filters[$input]))
+            {
+                unset($filters[$input]);
+            }
+        }
+
+        return $filters;
     }
 }

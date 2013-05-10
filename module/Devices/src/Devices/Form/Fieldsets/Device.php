@@ -20,6 +20,14 @@ class Device extends AbstractFieldset
 
         $this->setObject(new DeviceEntity());
 
+        $location   = new Location();
+        $deviceType = new DeviceType();
+
+        // We need to deny the filters we don't need
+        $location->setDenyFilters(array('name'));
+        $deviceType->setDenyFilters(array('name'));
+
+        // Adding the elements to the fieldset
         $this->add(
             array(
                 'name' => 'name',
@@ -45,8 +53,8 @@ class Device extends AbstractFieldset
             )
         );
 
-        $this->add(new Location());
-        $this->add(new DeviceType());
+        $this->add($location);
+        $this->add($deviceType);
     }
 
     /**

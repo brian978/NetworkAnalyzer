@@ -9,11 +9,11 @@
 
 namespace Devices\Controller;
 
-class IndexController extends AbstractController
+class LocationsController extends AbstractController
 {
     protected $formParams = array(
-        'type' => '\Devices\Form\DevicesFrom',
-        'object' => '\Devices\Entity\Device',
-        'model' => 'Devices\Model\DevicesModel',
+        'type' => '\Devices\Form\LocationsFrom',
+        'object' => '\Devices\Entity\Location',
+        'model' => 'Devices\Model\LocationsModel',
     );
 }

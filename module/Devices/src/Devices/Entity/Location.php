@@ -9,9 +9,9 @@
 
 namespace Devices\Entity;
 
-class Location
+class Location extends AbstractEntity
 {
-    protected $id;
+    protected $id = 0;
     protected $name;
 
     public function setId($id)

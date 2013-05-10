@@ -29,14 +29,24 @@ class DeviceType extends AbstractFieldset
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
-                    'value_options' => array(
-                        0 => '...',
-                        1 => 'Switch',
-                        2 => 'Router',
-                    )
                 ),
                 'attributes' => array(
                     'required' => 'true'
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'name' => 'name',
+                'options' => array(
+                    'label' => 'Name',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => true
                 )
             )
         );
@@ -50,9 +60,8 @@ class DeviceType extends AbstractFieldset
      */
     public function getInputFilterSpecification()
     {
-        return array(
+        $filters = array(
             'id' => array(
-                'required' => true,
                 'validators' => array(
                     array(
                         'name' => 'greater_than',
@@ -62,7 +71,29 @@ class DeviceType extends AbstractFieldset
                         )
                     )
                 )
+            ),
+            'name' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'min' => 3
+                        )
+                    )
+                )
             )
         );
+
+        // Removing the un-required filters (this is useful when you don't show all the fields)
+        foreach($this->denyFilters as $input)
+        {
+            if(isset($filters[$input]))
+            {
+                unset($filters[$input]);
+            }
+        }
+
+        return $filters;
     }
 }

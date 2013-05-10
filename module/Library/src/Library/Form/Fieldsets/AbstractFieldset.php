@@ -15,10 +15,17 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 abstract class AbstractFieldset extends Fieldset implements InputFilterProviderInterface
 {
+    protected $denyFilters = array();
+
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
 
         $this->setHydrator(new ClassMethods(false));
+    }
+
+    public function setDenyFilters(array $filters)
+    {
+        $this->denyFilters = $filters;
     }
 }

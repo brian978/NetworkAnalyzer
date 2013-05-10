@@ -9,7 +9,7 @@
 
 namespace Devices\Entity;
 
-class Device
+class Device extends AbstractEntity
 {
     protected $id = 0;
     protected $name;

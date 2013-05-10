@@ -50,7 +50,8 @@ return array(
 
     'controllers' => array(
         'invokables' => array(
-            'Devices\Controller\Index' => 'Devices\Controller\IndexController'
+            'Devices\Controller\Index' => 'Devices\Controller\IndexController',
+            'Devices\Controller\Locations' => 'Devices\Controller\LocationsController'
         )
     ),
 

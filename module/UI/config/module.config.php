@@ -152,6 +152,8 @@ return array(
                 'route' => 'devices/module',
                 'controller' => 'index',
                 'pages' => array(
+
+                    // Devices
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
                         'label' => 'Add new device',
@@ -171,7 +173,51 @@ return array(
                         'class' => 'icn_categories',
                         'resource' => 'devices',
                         'privilege' => 'view_devices'
-                    )
+                    ),
+
+                    // Locations
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'Add new location',
+                        'route' => 'devices/module',
+                        'controller' => 'locations',
+                        'action' => 'addForm',
+                        'class' => 'icn_new_article',
+                        'resource' => 'devices',
+                        'privilege' => 'add_locations'
+                    ),
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'View locations',
+                        'route' => 'devices/module',
+                        'controller' => 'locations',
+                        'action' => 'list',
+                        'class' => 'icn_categories',
+                        'resource' => 'devices',
+                        'privilege' => 'view_locations'
+                    ),
+
+                    // Types
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'Add new type',
+                        'route' => 'devices/module',
+                        'controller' => 'types',
+                        'action' => 'addForm',
+                        'class' => 'icn_new_article',
+                        'resource' => 'devices',
+                        'privilege' => 'add_types'
+                    ),
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'View types',
+                        'route' => 'devices/module',
+                        'controller' => 'types',
+                        'action' => 'list',
+                        'class' => 'icn_categories',
+                        'resource' => 'devices',
+                        'privilege' => 'view_types'
+                    ),
                 )
             ),
 

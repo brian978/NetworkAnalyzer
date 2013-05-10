@@ -9,13 +9,14 @@
 
 namespace Devices\Form;
 
+use Devices\Form\Fieldsets\Location;
 use Library\Form\AbstractForm;
 
-class DevicesFrom extends AbstractForm
+class LocationsFrom extends AbstractForm
 {
     public function __construct()
     {
-        parent::__construct('devices_form');
+        parent::__construct('locations_form');
 
         $this->setAttributes(
             array(
@@ -29,14 +30,14 @@ class DevicesFrom extends AbstractForm
      */
     public function loadElements()
     {
-        $this->add(
-            array(
-                'type' => 'Devices\Form\Fieldsets\Device',
-                'options' => array(
-                    'use_as_base_fieldset' => true
-                )
-            )
-        );
+        $locationFieldset = new Location();
+        $locationFieldset->setUseAsBaseFieldset(true);
+
+        // Removing some filters from the fieldset
+        $locationFieldset->setDenyFilters(array('id'));
+
+        // Adding the elements
+        $this->add($locationFieldset);
 
         $this->add(
             array(
@@ -50,7 +51,7 @@ class DevicesFrom extends AbstractForm
                 'name' => 'submit',
                 'attributes' => array(
                     'type' => 'submit',
-                    'value' => $this->translator->translate('Send')
+                    'value' => 'Send'
                 )
             )
         );

@@ -9,10 +9,10 @@
 
 namespace Devices\Entity;
 
-class Type
+class Type extends AbstractEntity
 {
-    protected $id;
-    protected $type;
+    protected $id = 0;
+    protected $name;
 
     public function setId($id)
     {
@@ -24,13 +24,13 @@ class Type
         return $this->id;
     }
 
-    public function setType($type)
+    public function setName($name)
     {
-        $this->type = $type;
+        $this->name = $name;
     }
 
-    public function getType()
+    public function getName()
     {
-        return $this->type;
+        return $this->name;
     }
 }
