@@ -19,11 +19,21 @@ class Device extends AbstractFieldset
         parent::__construct('device');
 
         $this->setObject(new DeviceEntity());
+    }
 
+    public function loadElements()
+    {
+        // Creating the required fields set and injecting the dependencies
         $location   = new Location();
         $deviceType = new DeviceType();
 
-        // We need to deny the filters we don't need
+        $location->setServiceLocator($this->serviceLocator);
+        $deviceType->setServiceLocator($this->serviceLocator);
+
+        $location->loadElements();
+        $deviceType->loadElements();
+
+        // We need to deny the filters we don't use
         $location->setDenyFilters(array('name'));
         $deviceType->setDenyFilters(array('name'));
 

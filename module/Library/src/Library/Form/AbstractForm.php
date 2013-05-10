@@ -13,14 +13,21 @@ use Zend\Form\Form;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\InputFilter\InputFilter;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-abstract class AbstractForm extends Form implements TranslatorAwareInterface
+abstract class AbstractForm extends Form implements TranslatorAwareInterface, ServiceLocatorAwareInterface
 {
     /**
      * @var \Zend\I18n\Translator\Translator
      */
     protected $translator;
+
+    /**
+     * @var \Zend\ServiceManager\ServiceLocatorInterface
+     */
+    protected $serviceLocator;
 
     /**
      * @param  null|int|string  $name    Optional name for the element
@@ -113,5 +120,25 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface
     public function getTranslatorTextDomain()
     {
         // TODO: Implement getTranslatorTextDomain() method.
+    }
+
+    /**
+     * Set service locator
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    /**
+     * Get service locator
+     *
+     * @return ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
     }
 }

@@ -30,14 +30,16 @@ class LocationsFrom extends AbstractForm
      */
     public function loadElements()
     {
-        $locationFieldset = new Location();
-        $locationFieldset->setUseAsBaseFieldset(true);
+        $location = new Location();
+        $location->setUseAsBaseFieldset(true);
+        $location->setServiceLocator($this->serviceLocator);
+        $location->loadElements();
 
         // Removing some filters from the fieldset
-        $locationFieldset->setDenyFilters(array('id'));
+        $location->setDenyFilters(array('id'));
 
         // Adding the elements
-        $this->add($locationFieldset);
+        $this->add($location);
 
         $this->add(
             array(

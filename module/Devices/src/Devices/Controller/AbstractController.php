@@ -57,21 +57,15 @@ class AbstractController extends AbstractUiController
 
         $form = $this->getForm($post);
 
-        // We need to populate the form with values
-        $form->populateValues(array(
-            'device' => array(
-                'location' => $this->serviceLocator->get('Devices\Model\LocationsModel')->fetch()
-            )
-        ));
-
         // We need to call the isValid method or else we won't have any error messages
-        if(!empty($post))
+        if (!empty($post))
         {
             $form->isValid();
         }
 
         // Adding view params
-        $viewParams['success'] = filter_var($this->getEvent()->getRouteMatch()->getParam('success'), FILTER_VALIDATE_BOOLEAN);
+        $viewParams['success'] = filter_var($this->getEvent()->getRouteMatch()->getParam('success'),
+            FILTER_VALIDATE_BOOLEAN);
         $viewParams['form']    = $form;
 
         return $viewParams;

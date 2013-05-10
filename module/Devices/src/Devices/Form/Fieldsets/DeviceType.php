@@ -10,15 +10,26 @@
 namespace Devices\Form\Fieldsets;
 
 use Devices\Entity\Type as TypeEntity;
+use Devices\Model\AbstractModel;
 use Library\Form\Fieldsets\AbstractFieldset;
 
 class DeviceType extends AbstractFieldset
 {
+    /**
+     * @var AbstractModel
+     */
+    protected $model;
+
     public function __construct()
     {
         parent::__construct('type');
 
         $this->setObject(new TypeEntity());
+    }
+
+    public function loadElements()
+    {
+        $this->setModel();
 
         $this->add(
             array(
@@ -50,6 +61,15 @@ class DeviceType extends AbstractFieldset
                 )
             )
         );
+    }
+
+    /**
+     * Initialized the model required for the database
+     *
+     */
+    public function setModel()
+    {
+        $this->model = $this->serviceLocator->get('Devices\Model\TypesModel');
     }
 
     /**

@@ -11,6 +11,7 @@ namespace Library\Form;
 
 use Zend\Form\Factory as ZendFormFactory;
 use Zend\I18n\Translator\TranslatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 class Factory extends ZendFormFactory
 {
@@ -46,6 +47,11 @@ class Factory extends ZendFormFactory
         if($form instanceof TranslatorAwareInterface)
         {
             $form->setTranslator($this->getTranslator());
+        }
+
+        if($form instanceof ServiceLocatorAwareInterface)
+        {
+            $form->setServiceLocator($this->getFormElementManager()->getServiceLocator());
         }
 
         return $form;
