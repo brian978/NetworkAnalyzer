@@ -240,6 +240,28 @@ return array(
                         'resource' => 'devices',
                         'privilege' => 'view_interfaces'
                     ),
+
+                    // Interface types
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'Add new interface type',
+                        'route' => 'devices/module',
+                        'controller' => 'interfaceTypes',
+                        'action' => 'addForm',
+                        'class' => 'icn_new_article',
+                        'resource' => 'devices',
+                        'privilege' => 'add_interface_types'
+                    ),
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'View the interface types',
+                        'route' => 'devices/module',
+                        'controller' => 'interfaceTypes',
+                        'action' => 'list',
+                        'class' => 'icn_categories',
+                        'resource' => 'devices',
+                        'privilege' => 'view_interface_types'
+                    ),
                 )
             ),
 

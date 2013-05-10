@@ -26,36 +26,16 @@ class LocationsFrom extends AbstractForm
     }
 
     /**
-     * @return $this
+     * @return \Library\Form\Fieldsets\AbstractFieldset
      */
-    public function loadElements()
+    protected function getBaseFieldsetObject()
     {
-        $location = new Location();
-        $location->setUseAsBaseFieldset(true);
-        $location->setServiceLocator($this->serviceLocator);
-        $location->setDenyFilters(array('id'));
-        $location->loadElements();
+        $object = new Location();
+        $object->setUseAsBaseFieldset(true)
+            ->setServiceLocator($this->serviceLocator)
+            ->setDenyFilters(array('id'))
+            ->loadElements();
 
-        // Adding the elements
-        $this->add($location);
-
-        $this->add(
-            array(
-                'type' => 'Zend\Form\Element\Csrf',
-                'name' => 'csrf'
-            )
-        );
-
-        $this->add(
-            array(
-                'name' => 'submit',
-                'attributes' => array(
-                    'type' => 'submit',
-                    'value' => 'Send'
-                )
-            )
-        );
-
-        return $this;
+        return $object;
     }
 }

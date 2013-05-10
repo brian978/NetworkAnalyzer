@@ -18,6 +18,11 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 abstract class AbstractFieldset extends Fieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface
 {
     /**
+     * @var boolean
+     */
+    protected $lockModel = false;
+
+    /**
      * @var AbstractModel
      */
     protected $model;
@@ -39,19 +44,28 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
         $this->setHydrator(new ClassMethods(false));
     }
 
+    /**
+     * @param array $filters
+     * @return $this
+     */
     public function setDenyFilters(array $filters)
     {
         $this->denyFilters = $filters;
+
+        return $this;
     }
 
     /**
      * Set service locator
      *
      * @param ServiceLocatorInterface $serviceLocator
+     * @return $this
      */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
+
+        return $this;
     }
 
     /**
@@ -67,10 +81,24 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     /**
      * Initialized the model required for the database
      *
+     * @param      $serviceName
+     * @param bool $lockModel
+     * @return $this
      */
-    protected function setModel($serviceName)
+    protected function setModel($serviceName, $lockModel = false)
     {
-        $this->model = $this->serviceLocator->get($serviceName);
+        // By default it can be changed any time so we only need to set it when it's true
+        if($lockModel === true)
+        {
+            $this->lockModel = $lockModel;
+        }
+
+        if(!is_object($this->model) || $this->lockModel === false)
+        {
+            $this->model = $this->serviceLocator->get($serviceName);
+        }
+
+        return $this;
     }
 
     /**
@@ -98,6 +126,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
      * Eliminates the filters that are in the deny list
      *
      * @param array $filters
+     * @return $this
      */
     protected function processDenyFilters(array &$filters)
     {
@@ -109,5 +138,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
                 unset($filters[$input]);
             }
         }
+
+        return $this;
     }
 }

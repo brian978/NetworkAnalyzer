@@ -54,6 +54,7 @@ return array(
             'Devices\Controller\Locations' => 'Devices\Controller\LocationsController',
             'Devices\Controller\Types' => 'Devices\Controller\TypesController',
             'Devices\Controller\Interfaces' => 'Devices\Controller\InterfacesController',
+            'Devices\Controller\InterfaceTypes' => 'Devices\Controller\InterfaceTypesController',
         )
     ),
 

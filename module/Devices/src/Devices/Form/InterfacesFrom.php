@@ -26,36 +26,16 @@ class InterfacesFrom extends AbstractForm
     }
 
     /**
-     * @return $this
+     * @return \Library\Form\Fieldsets\AbstractFieldset
      */
-    public function loadElements()
+    protected function getBaseFieldsetObject()
     {
-        $interface = new Iface();
-        $interface->setUseAsBaseFieldset(true);
-        $interface->setServiceLocator($this->serviceLocator);
-        $interface->setDenyFilters(array('id'));
-        $interface->loadElements();
+        $object = new Iface();
+        $object->setUseAsBaseFieldset(true)
+            ->setServiceLocator($this->serviceLocator)
+            ->setDenyFilters(array('id'))
+            ->loadElements();
 
-        // Adding the elements
-        $this->add($interface);
-
-        $this->add(
-            array(
-                'type' => 'Zend\Form\Element\Csrf',
-                'name' => 'csrf'
-            )
-        );
-
-        $this->add(
-            array(
-                'name' => 'submit',
-                'attributes' => array(
-                    'type' => 'submit',
-                    'value' => 'Send'
-                )
-            )
-        );
-
-        return $this;
+        return $object;
     }
 }

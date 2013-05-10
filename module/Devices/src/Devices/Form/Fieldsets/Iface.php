@@ -85,7 +85,7 @@ class Iface extends AbstractFieldset
         $device->setDenyFilters(array('name'));
         $device->loadElements();
 
-        $type = new Type();
+        $type = new IfaceType();
         $type->setServiceLocator($this->serviceLocator);
         $type->setDenyFilters(array('name'));
         $type->loadElements();

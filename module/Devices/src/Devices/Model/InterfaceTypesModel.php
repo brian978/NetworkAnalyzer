@@ -11,9 +11,9 @@ namespace Devices\Model;
 
 use Library\Model\AbstractModel;
 
-class InterfacesModel extends AbstractModel
+class InterfaceTypesModel extends AbstractModel
 {
-    protected $table = 'interfaces';
+    protected $table = 'interface_types';
 
     /**
      * This returns the number of affected rows
@@ -25,12 +25,8 @@ class InterfacesModel extends AbstractModel
     {
         $result = 0;
 
-        $data              = array();
-        $data['name']      = $object->getName();
-        $data['mac']       = $object->getMac();
-        $data['ip']        = $object->getIp();
-        $data['type_id']   = $object->getType()->getId();
-        $data['device_id'] = $object->getDevice()->getId();
+        $data         = array();
+        $data['name'] = $object->getName();
 
         try
         {

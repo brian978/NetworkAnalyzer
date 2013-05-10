@@ -87,6 +87,7 @@ class AbstractController extends AbstractUiController
             // Redirect regarding if valid or not but with different params
             if ($form->isValid())
             {
+                /** @var $model \Library\Model\AbstractModel */
                 $model  = $this->serviceLocator->get($this->formParams['model']);
                 $result = $model->save($form->getObject());
 

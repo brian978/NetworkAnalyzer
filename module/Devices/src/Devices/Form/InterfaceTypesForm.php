@@ -9,28 +9,16 @@
 
 namespace Devices\Form;
 
-use Devices\Form\Fieldsets\Type;
-use Library\Form\AbstractForm;
+use Devices\Form\Fieldsets\IfaceType;
 
-class TypesFrom extends AbstractForm
+class InterfaceTypesForm extends InterfacesFrom
 {
-    public function __construct()
-    {
-        parent::__construct('types_form');
-
-        $this->setAttributes(
-            array(
-                'class' => 'input_form'
-            )
-        );
-    }
-
     /**
      * @return \Library\Form\Fieldsets\AbstractFieldset
      */
     protected function getBaseFieldsetObject()
     {
-        $object = new Type();
+        $object = new IfaceType();
         $object->setUseAsBaseFieldset(true)
             ->setServiceLocator($this->serviceLocator)
             ->setDenyFilters(array('id'))

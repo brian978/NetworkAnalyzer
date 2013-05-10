@@ -10,6 +10,7 @@
 namespace Devices;
 
 use Devices\Model\DevicesModel;
+use Devices\Model\InterfaceTypesModel;
 use Devices\Model\InterfacesModel;
 use Devices\Model\LocationsModel;
 use Devices\Model\TypesModel;
@@ -35,6 +36,10 @@ class Module
                 'Devices\Model\InterfacesModel' => function ($serviceManager)
                 {
                     return new InterfacesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
+                },
+                'Devices\Model\InterfaceTypesModel' => function ($serviceManager)
+                {
+                    return new InterfaceTypesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
             )
         );

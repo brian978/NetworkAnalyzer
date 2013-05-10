@@ -41,7 +41,35 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
             ->setInputFilter(new InputFilter());
     }
 
-    abstract public function loadElements();
+    abstract protected function getBaseFieldsetObject();
+
+    /**
+     * @return $this
+     */
+    public function loadElements()
+    {
+        // Adding the elements
+        $this->add($this->getBaseFieldsetObject());
+
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Csrf',
+                'name' => 'csrf'
+            )
+        );
+
+        $this->add(
+            array(
+                'name' => 'submit',
+                'attributes' => array(
+                    'type' => 'submit',
+                    'value' => 'Send'
+                )
+            )
+        );
+
+        return $this;
+    }
 
     /**
      * Sets translator to use in helper

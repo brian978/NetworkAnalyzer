@@ -26,35 +26,15 @@ class DevicesFrom extends AbstractForm
     }
 
     /**
-     * @return $this
+     * @return \Library\Form\Fieldsets\AbstractFieldset
      */
-    public function loadElements()
+    protected function getBaseFieldsetObject()
     {
-        $device = new Device();
-        $device->setUseAsBaseFieldset(true);
-        $device->setServiceLocator($this->serviceLocator);
-        $device->loadElements();
+        $object = new Device();
+        $object->setUseAsBaseFieldset(true)
+            ->setServiceLocator($this->serviceLocator)
+            ->loadElements();
 
-        // Adding the elements
-        $this->add($device);
-
-        $this->add(
-            array(
-                'type' => 'Zend\Form\Element\Csrf',
-                'name' => 'csrf'
-            )
-        );
-
-        $this->add(
-            array(
-                'name' => 'submit',
-                'attributes' => array(
-                    'type' => 'submit',
-                    'value' => $this->translator->translate('Send')
-                )
-            )
-        );
-
-        return $this;
+        return $object;
     }
 }
