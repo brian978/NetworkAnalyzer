@@ -21,7 +21,7 @@ class IndexController extends AbstractController
 
     /**
      *
-     * @param AbstractForm $form
+     * @param \Library\Form\AbstractForm $form
      */
     protected function populateEditData(AbstractForm $form)
     {

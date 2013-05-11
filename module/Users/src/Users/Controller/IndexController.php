@@ -9,30 +9,35 @@
 
 namespace Users\Controller;
 
-use UI\Controller\AbstractUiController;
+use Library\Form\AbstractForm;
+use Library\Mvc\Controller\AbstractFormController;
 
-class IndexController extends AbstractUiController
+class IndexController extends AbstractFormController
 {
-    public function indexAction()
+    /**
+     * @param AbstractForm $form
+     * @return void
+     */
+    protected function populateEditData(AbstractForm $form)
     {
+        // TODO: Implement populateEditData() method.
     }
 
-    public function addFormAction()
+    /**
+     * @param array $data
+     * @return void
+     */
+    protected function redirectOnSuccess(array $data)
     {
-        echo __METHOD__;
+        // TODO: Implement redirectOnSuccess() method.
     }
 
-    public function listAction()
+    /**
+     * @param array $data
+     * @return void
+     */
+    protected function redirectOnFail(array $data)
     {
-        echo __METHOD__;
-
-        return '';
-    }
-
-    public function profileAction()
-    {
-        echo __METHOD__;
-
-        return '';
+        // TODO: Implement redirectOnFail() method.
     }
 }
