@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-29 14:09+0200\n"
-"PO-Revision-Date: 2013-04-07 13:13+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2013-05-11 19:41+0200\n"
+"PO-Revision-Date: 2013-05-11 19:42+0200\n"
+"Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -16,125 +16,259 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../..\n"
 
-#: ../../UI/view/layout/ui.phtml:11
-#: ../../UI/view/layout/ui.phtml:74
-#: ../../UI/view/layout/ui.phtml:94
-msgid "Network Analyzer"
-msgstr "Analizator retea"
-
-#: ../../UI/view/layout/ui.phtml:78
-msgid "Dashboard"
-msgstr "Panou de control"
-
-#: ../../UI/view/layout/ui.phtml:115
+#: ../../UI/view/partials/side_menu.phtml:19
+#: ../../UI/view/partials/side_menu.phtml:32
 msgid "Devices"
 msgstr "Dispozitive"
 
-#: ../../UI/view/layout/ui.phtml:123
-msgid "Add new device"
-msgstr "Adauga un dispozitiv nou"
-
-#: ../../UI/view/layout/ui.phtml:126
-msgid "View devices"
-msgstr "Vizualizeaza dispozitivele"
-
-#: ../../UI/view/layout/ui.phtml:129
+#: ../../UI/view/partials/side_menu.phtml:20
+#: ../../UI/view/partials/side_menu.phtml:34
 msgid "Users"
 msgstr "Utilizatori"
 
-#: ../../UI/view/layout/ui.phtml:132
-msgid "Add new user"
-msgstr "Adauga un utilizator nou"
-
-#: ../../UI/view/layout/ui.phtml:135
-msgid "View users"
-msgstr "Vizualizeaza utilizatorii"
-
-#: ../../UI/view/layout/ui.phtml:138
-msgid "Profile"
-msgstr "Profil"
-
-#: ../../UI/view/layout/ui.phtml:141
+#: ../../UI/view/partials/side_menu.phtml:21
+#: ../../UI/view/partials/side_menu.phtml:36
 msgid "Admin"
 msgstr "Admin"
 
-#: ../../UI/view/layout/ui.phtml:145
-msgid "Options"
-msgstr "Optiuni"
-
-#: ../../UI/view/layout/ui.phtml:150
-msgid "Security"
-msgstr "Securitate"
-
-#: ../../UI/view/layout/ui.phtml:155
-msgid "Logout"
-msgstr "Iesire"
-
-#: ../../UI/view/layout/ui.phtml:164
+#: ../../UI/view/partials/side_menu.phtml:42
 msgid "All rights reserved."
 msgstr "Toate drepturile rezervate."
 
-#: ../../Application/view/error/404.phtml:1
+#: ../../UI/view/layout/ui.phtml:12
+#: ../../UI/view/layout/ui.phtml:76
+#: ../../UI/view/layout/ui.phtml:91
+msgid "Network Analyzer"
+msgstr "Analizator retea"
+
+#: ../../UI/view/layout/ui.phtml:80
+msgid "Dashboard"
+msgstr "Panou de control"
+
+#: ../../UI/view/devices/interface-types/list.phtml:2
+#: ../../UI/view/devices/index/list.phtml:2
+msgid "View devices"
+msgstr "Vizualizeaza dispozitivele"
+
+#: ../../UI/view/devices/interface-types/list.phtml:9
+#: ../../UI/view/devices/types/list.phtml:9
+msgid "Type name"
+msgstr ""
+
+#: ../../UI/view/devices/interface-types/list.phtml:10
+#: ../../UI/view/devices/index/list.phtml:12
+#: ../../UI/view/devices/types/list.phtml:10
+msgid "Options"
+msgstr "Optiuni"
+
+#: ../../UI/view/devices/interface-types/edit-form.phtml:2
+msgid "Edit the interface type"
+msgstr ""
+
+#: ../../UI/view/devices/interface-types/edit-form.phtml:24
+msgid "The interface info was changed"
+msgstr ""
+
+#: ../../UI/view/devices/interface-types/add-form.phtml:2
+#, fuzzy
+msgid "Add new interface type"
+msgstr "Adauga un dispozitiv nou"
+
+#: ../../UI/view/devices/interface-types/add-form.phtml:24
+msgid "The interface type was added"
+msgstr ""
+
+#: ../../UI/view/devices/interface-types/partials/list.phtml:14
+#: ../../UI/view/devices/index/partials/list.phtml:16
+msgid "Edit"
+msgstr ""
+
+#: ../../UI/view/devices/interface-types/partials/list.phtml:18
+#: ../../UI/view/devices/index/partials/list.phtml:20
+msgid "Trash"
+msgstr ""
+
+#: ../../UI/view/devices/index/list.phtml:9
+#, fuzzy
+msgid "Device name"
+msgstr "Dispozitive"
+
+#: ../../UI/view/devices/index/list.phtml:10
+#, fuzzy
+msgid "Device type"
+msgstr "Dispozitive"
+
+#: ../../UI/view/devices/index/list.phtml:11
+msgid "Location name"
+msgstr ""
+
+#: ../../UI/view/devices/index/edit-form.phtml:2
+#, fuzzy
+msgid "Edit device"
+msgstr "Vizualizeaza dispozitivele"
+
+#: ../../UI/view/devices/index/edit-form.phtml:28
+msgid "The device info was changed"
+msgstr ""
+
+#: ../../UI/view/devices/index/add-form.phtml:2
+msgid "Add new device"
+msgstr "Adauga un dispozitiv nou"
+
+#: ../../UI/view/devices/index/add-form.phtml:28
+msgid "The device was added"
+msgstr ""
+
+#: ../../UI/view/devices/types/list.phtml:2
+#, fuzzy
+msgid "View types"
+msgstr "Vizualizeaza utilizatorii"
+
+#: ../../UI/view/devices/types/edit-form.phtml:2
+msgid "Edit type"
+msgstr ""
+
+#: ../../UI/view/devices/types/edit-form.phtml:24
+msgid "The type info was changed"
+msgstr ""
+
+#: ../../UI/view/devices/types/add-form.phtml:2
+#, fuzzy
+msgid "Add new type"
+msgstr "Adauga un utilizator nou"
+
+#: ../../UI/view/devices/types/add-form.phtml:24
+msgid "The type was added"
+msgstr ""
+
+#: ../../UI/view/devices/interfaces/list.phtml:2
+#, fuzzy
+msgid "View interfaces"
+msgstr "Vizualizeaza dispozitivele"
+
+#: ../../UI/view/devices/interfaces/list.phtml:10
+msgid "Interface name"
+msgstr ""
+
+#: ../../UI/view/devices/interfaces/list.phtml:11
+msgid "MAC"
+msgstr ""
+
+#: ../../UI/view/devices/interfaces/list.phtml:12
+msgid "IP"
+msgstr ""
+
+#: ../../UI/view/devices/interfaces/list.phtml:13
+msgid "Type"
+msgstr ""
+
+#: ../../UI/view/devices/interfaces/edit-form.phtml:2
+msgid "Edit interface"
+msgstr ""
+
+#: ../../UI/view/devices/interfaces/add-form.phtml:2
+#, fuzzy
+msgid "Add new interface"
+msgstr "Adauga un dispozitiv nou"
+
+#: ../../UI/view/devices/interfaces/add-form.phtml:28
+msgid "The interface was added"
+msgstr ""
+
+#: ../../UI/view/devices/locations/list.phtml:2
+msgid "View locations"
+msgstr ""
+
+#: ../../UI/view/devices/locations/edit-form.phtml:2
+msgid "Edit location"
+msgstr ""
+
+#: ../../UI/view/devices/locations/edit-form.phtml:24
+msgid "The location info was changed"
+msgstr ""
+
+#: ../../UI/view/devices/locations/add-form.phtml:2
+#, fuzzy
+msgid "Add new location"
+msgstr "Adauga un dispozitiv nou"
+
+#: ../../UI/view/devices/locations/add-form.phtml:24
+msgid "The location was added"
+msgstr ""
+
+#: ../../UI/view/users/index/add-form.phtml:2
+msgid "Add new user"
+msgstr "Adauga un utilizator nou"
+
+#: ../../UI/view/error/404.phtml:1
 msgid "A 404 error occurred"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:11
+#: ../../UI/view/error/404.phtml:11
 msgid "The requested controller was unable to dispatch the request."
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:14
+#: ../../UI/view/error/404.phtml:15
 msgid "The requested controller could not be mapped to an existing controller class."
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:17
+#: ../../UI/view/error/404.phtml:19
 msgid "The requested controller was not dispatchable."
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:20
+#: ../../UI/view/error/404.phtml:22
 msgid "The requested URL could not be matched by routing."
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:23
+#: ../../UI/view/error/404.phtml:25
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:35
+#: ../../UI/view/error/404.phtml:37
 msgid "Controller"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:43
+#: ../../UI/view/error/404.phtml:46
 #, php-format
 msgid "resolves to %s"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:55
+#: ../../UI/view/error/404.phtml:60
 msgid "Additional information"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:58
-#: ../../Application/view/error/404.phtml:86
+#: ../../UI/view/error/404.phtml:63
+#: ../../UI/view/error/404.phtml:91
 msgid "File"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:64
-#: ../../Application/view/error/404.phtml:92
+#: ../../UI/view/error/404.phtml:69
+#: ../../UI/view/error/404.phtml:97
 msgid "Message"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:69
-#: ../../Application/view/error/404.phtml:97
+#: ../../UI/view/error/404.phtml:74
+#: ../../UI/view/error/404.phtml:102
 msgid "Stack trace"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:80
+#: ../../UI/view/error/404.phtml:85
 msgid "Previous exceptions"
 msgstr ""
 
-#: ../../Application/view/error/404.phtml:114
+#: ../../UI/view/error/404.phtml:119
 msgid "No Exception available"
 msgstr ""
 
-#: ../../Application/view/error/index.phtml:1
+#: ../../UI/view/error/index.phtml:1
 msgid "An error occurred"
 msgstr "O erroare a fost intalnita"
 
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Security"
+#~ msgstr "Securitate"
+
+#~ msgid "Logout"
+#~ msgstr "Iesire"
