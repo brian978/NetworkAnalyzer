@@ -84,7 +84,7 @@ class Type extends AbstractFieldset
                     array(
                         'name' => 'StringLength',
                         'options' => array(
-                            'min' => 3
+                            'min' => 2
                         )
                     )
                 )

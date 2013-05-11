@@ -11,7 +11,8 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'routeName' => 'Library\View\Helpers\RouteName',
-            'showInputError' => 'Library\View\Helpers\RenderInputError'
+            'showInputError' => 'Library\View\Helpers\RenderInputError',
+            'mediaSource' => 'Library\View\Helpers\MediaSource',
         )
     ),
 );

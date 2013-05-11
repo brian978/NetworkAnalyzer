@@ -9,44 +9,7 @@
 
 namespace Devices\Model;
 
-use Library\Model\AbstractModel;
-
 class LocationsModel extends AbstractModel
 {
     protected $table = 'locations';
-
-    /**
-     * This returns the number of affected rows
-     *
-     * @param \Devices\Entity\Location $object
-     * @return int
-     */
-    protected function doInsert($object)
-    {
-        $result = 0;
-
-        $data         = array();
-        $data['name'] = $object->getName();
-
-        try
-        {
-            // If successful will return the number of rows
-            $result = $this->insert($data);
-        }
-        catch (\Exception $e)
-        {
-        }
-
-        return $result;
-    }
-
-    /**
-     * This returns the number of affected rows
-     *
-     * @param \Devices\Entity\Location $object
-     * @return int
-     */
-    protected function doUpdate($object)
-    {
-    }
 }

@@ -11,32 +11,20 @@ namespace Devices\Model;
 
 use Library\Model\AbstractDbModel;
 
-class DevicesModel extends AbstractDbModel
+class AbstractModel extends AbstractDbModel
 {
-    protected $table = 'devices';
-
-    public function fetch()
-    {
-        $this->addJoin('locations', 'locations.id = devices.location_id', array('locationName' => 'name'));
-        $this->addJoin('device_types', 'device_types.id = devices.type_id', array('typeName' => 'name'));
-
-        return parent::fetch();
-    }
-
     /**
      * This returns the number of affected rows
      *
-     * @param \Devices\Entity\Device $object
+     * @param \Devices\Entity\Location $object
      * @return int
      */
     protected function doInsert($object)
     {
         $result = 0;
 
-        $data                = array();
-        $data['name']        = $object->getName();
-        $data['location_id'] = $object->getLocation()->getId();
-        $data['type_id']     = $object->getType()->getId();
+        $data         = array();
+        $data['name'] = $object->getName();
 
         try
         {
@@ -53,17 +41,15 @@ class DevicesModel extends AbstractDbModel
     /**
      * This returns the number of affected rows
      *
-     * @param \Devices\Entity\Device $object
+     * @param \Devices\Entity\Location $object
      * @return int
      */
     protected function doUpdate($object)
     {
         $result = 0;
 
-        $data                = array();
-        $data['name']        = $object->getName();
-        $data['location_id'] = $object->getLocation()->getId();
-        $data['type_id']     = $object->getType()->getId();
+        $data         = array();
+        $data['name'] = $object->getName();
 
         try
         {

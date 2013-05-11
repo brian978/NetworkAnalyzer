@@ -16,13 +16,7 @@
         $locationName = $location->get('name');
 
         /** @var $form \Devices\Form\DevicesFrom */
-        $form->setAttribute('action',
-            $this->url('devices/module',
-                array(
-                    'controller' => 'locations',
-                    'action' => 'add'
-                ),
-                true))->prepare();
+        $form->setAttribute('action', $this->url('devices/module', array('action' => 'process'), true))->prepare();
 
         // Showing the success message
         if ($this->success)

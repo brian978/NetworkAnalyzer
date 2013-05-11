@@ -9,11 +9,19 @@
 
 namespace Devices\Model;
 
-use Library\Model\AbstractModel;
+use Library\Model\AbstractDbModel;
 
-class InterfacesModel extends AbstractModel
+class InterfacesModel extends AbstractDbModel
 {
     protected $table = 'interfaces';
+
+    public function fetch()
+    {
+        $this->addJoin('devices', 'devices.id = interfaces.device_id', array('deviceName' => 'name'));
+        $this->addJoin('interface_types', 'interface_types.id = interfaces.type_id', array('typeName' => 'name'));
+
+        return parent::fetch();
+    }
 
     /**
      * This returns the number of affected rows
@@ -52,5 +60,24 @@ class InterfacesModel extends AbstractModel
      */
     protected function doUpdate($object)
     {
+        $result = 0;
+
+        $data              = array();
+        $data['name']      = $object->getName();
+        $data['mac']       = $object->getMac();
+        $data['ip']        = $object->getIp();
+        $data['type_id']   = $object->getType()->getId();
+        $data['device_id'] = $object->getDevice()->getId();
+
+        try
+        {
+            // If successful will return the number of rows
+            $result = $this->update($data, $this->getWhere('id', $object->getId()));
+        }
+        catch (\Exception $e)
+        {
+        }
+
+        return $result;
     }
 }

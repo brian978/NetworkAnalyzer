@@ -1,1 +1,19 @@
-This is the list action of the devices controller.
+<article class="module width_full">
+    <header><h3><?php echo $this->translate('View devices') ?></h3></header>
+    <div class="module_content tableholder">
+        <div id="tab1" class="tab_content">
+            <table class="tablesorter" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><?php echo $this->translate('Type name') ?></th>
+                        <th><?php echo $this->translate('Options') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php echo $this->partialLoop('devices/interface-types/partials/list.phtml', $this->items); ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</article>

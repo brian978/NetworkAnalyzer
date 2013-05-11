@@ -15,3 +15,8 @@
 .input_form input[type="submit"] {
     margin-top: 10px;
 }
+
+.tableholder {
+    margin: 0px !important;
+    padding: 0px !important;
+}

@@ -26,20 +26,29 @@ return array(
                     'status' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action[/:success]]]',
+                            'route' => '/[:controller[/:action[/:id]]][/:success]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id' => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                                'id' => '0',
+                                'success' => 'invalid'
                             )
                         )
                     ),
                     'module' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action]]',
+                            'route' => '/[:controller[/:action[/:id]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id' => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                                'id' => '0',
                             )
                         )
                     )
