@@ -29,6 +29,12 @@ class Mvc extends ZendMvcPage
         // Removing the controller and action params to allow the page config to set them
         unset($this->params['controller']);
         unset($this->params['action']);
+        unset($this->params['id']);
+
+        // Sync route match
+        $this->routeMatch->setParam('controller', null);
+        $this->routeMatch->setParam('action', null);
+        $this->routeMatch->setParam('id', null);
 
         return parent::getHref();
     }
