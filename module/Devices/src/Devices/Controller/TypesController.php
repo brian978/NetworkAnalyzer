@@ -13,6 +13,11 @@ use Library\Form\AbstractForm;
 
 class TypesController extends AbstractController
 {
+    /**
+     * These parameters are used to create the required form
+     *
+     * @var array
+     */
     protected $formParams = array(
         'type' => '\Devices\Form\TypesFrom',
         'object' => '\Devices\Entity\Type',

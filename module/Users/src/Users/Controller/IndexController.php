@@ -10,10 +10,20 @@
 namespace Users\Controller;
 
 use Library\Form\AbstractForm;
-use Library\Mvc\Controller\AbstractFormController;
 
-class IndexController extends AbstractFormController
+class IndexController extends AbstractController
 {
+    /**
+     * These parameters are used to create the required form
+     *
+     * @var array
+     */
+    protected $formParams = array(
+        'type' => '\Users\Form\UsersForm',
+        'object' => '\Users\Entity\User',
+        'model' => 'Users\Model\Users',
+    );
+
     /**
      * @param AbstractForm $form
      * @return void
