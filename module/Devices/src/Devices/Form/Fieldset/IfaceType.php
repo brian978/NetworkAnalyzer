@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Form\Fieldsets;
+namespace Devices\Form\Fieldset;
 
 class IfaceType extends Type
 {

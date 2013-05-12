@@ -19,6 +19,17 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 abstract class AbstractForm extends Form implements TranslatorAwareInterface, ServiceLocatorAwareInterface
 {
+    const MODE_DEFAULT = 0;
+    const MODE_ADD     = 1;
+    const MODE_EDIT    = 2;
+
+    /**
+     * Determines the mode of the form to be able to activate or deactivate certain fields
+     *
+     * @var int
+     */
+    public $mode = self::MODE_DEFAULT;
+
     /**
      * @var \Zend\I18n\Translator\Translator
      */
@@ -94,7 +105,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function getTranslator()
     {
-        // TODO: Implement getTranslator() method.
+        return $this->translator;
     }
 
     /**
@@ -104,7 +115,6 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function hasTranslator()
     {
-        // TODO: Implement hasTranslator() method.
     }
 
     /**
@@ -116,7 +126,6 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function setTranslatorEnabled($enabled = true)
     {
-        // TODO: Implement setTranslatorEnabled() method.
     }
 
     /**
@@ -126,7 +135,6 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function isTranslatorEnabled()
     {
-        // TODO: Implement isTranslatorEnabled() method.
     }
 
     /**
@@ -137,7 +145,6 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function setTranslatorTextDomain($textDomain = 'default')
     {
-        // TODO: Implement setTranslatorTextDomain() method.
     }
 
     /**
@@ -147,7 +154,6 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function getTranslatorTextDomain()
     {
-        // TODO: Implement getTranslatorTextDomain() method.
     }
 
     /**

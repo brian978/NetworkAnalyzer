@@ -43,7 +43,7 @@ abstract class AbstractFormController extends AbstractUiController
      */
     abstract protected function redirectOnFail(array $data);
 
-    protected function getForm(array $data = array())
+    protected function getForm(array $data = array(), $params = array())
     {
         /** @var $factory \Library\Form\Factory */
         $factory = $this->serviceLocator->get('TranslatableFormFactory');
@@ -51,6 +51,13 @@ abstract class AbstractFormController extends AbstractUiController
         /** @var $form \Devices\Form\DevicesFrom */
         $form   = $factory->createForm(array('type' => $this->formParams['type']));
         $object = new $this->formParams['object']();
+
+        // The form mode must be set before the loadElements because it's used when retrieving the baseFieldset
+        if (isset($params['form_mode']))
+        {
+            $form->mode = $params['form_mode'];
+        }
+
         $form->loadElements()
             ->bind($object)
             ->setData($data);
@@ -107,7 +114,7 @@ abstract class AbstractFormController extends AbstractUiController
             $post = $tmpPost;
         }
 
-        $form = $this->getForm($post);
+        $form = $this->getForm($post, array('form_mode' => AbstractForm::MODE_EDIT));
 
         // We need to call the isValid method or else we won't have any error messages
         if (!empty($post))
@@ -138,21 +145,24 @@ abstract class AbstractFormController extends AbstractUiController
 
         if ($this->request->isPost())
         {
-            $form = $this->getForm($this->request->getPost()->toArray());
+            $form    = $this->getForm($this->request->getPost()->toArray());
+            $isValid = $form->isValid();
 
-            // Redirect regarding if valid or not but with different params
-            if ($form->isValid())
+            if ($form->getObject()->getId() !== 0)
+            {
+                $action = 'editForm';
+            }
+            else
             {
                 $action = 'addForm';
+            }
 
+            // Redirect regarding if valid or not but with different params
+            if ($isValid === true)
+            {
                 /** @var $model \Library\Model\AbstractDbModel */
                 $model  = $this->serviceLocator->get($this->formParams['model']);
                 $result = $model->save($form->getObject());
-
-                if($form->getObject()->getId() !== 0)
-                {
-                    $action = 'editForm';
-                }
 
                 if ($result > 0)
                 {

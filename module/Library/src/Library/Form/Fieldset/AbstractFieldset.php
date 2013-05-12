@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Library\Form\Fieldsets;
+namespace Library\Form\Fieldset;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;

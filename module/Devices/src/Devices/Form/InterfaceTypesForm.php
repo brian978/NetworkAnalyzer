@@ -9,20 +9,24 @@
 
 namespace Devices\Form;
 
-use Devices\Form\Fieldsets\IfaceType;
+use Devices\Form\Fieldset\IfaceType;
 
 class InterfaceTypesForm extends InterfacesFrom
 {
     /**
-     * @return \Library\Form\Fieldsets\AbstractFieldset
+     * @return \Library\Form\Fieldset\AbstractFieldset
      */
     protected function getBaseFieldsetObject()
     {
         $object = new IfaceType();
-        $object->setUseAsBaseFieldset(true)
-            ->setServiceLocator($this->serviceLocator)
-            ->setDenyFilters(array('id'))
-            ->loadElements();
+        $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
+
+        if($this->mode == self::MODE_EDIT)
+        {
+            $object->setDenyFilters(array('id'));
+        }
+
+        $object->loadElements();
 
         return $object;
     }

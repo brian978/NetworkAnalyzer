@@ -7,37 +7,37 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Form\Fieldsets;
+namespace Devices\Form\Fieldset;
 
-use Devices\Entity\Location as LocationEntity;
-use Library\Form\Fieldsets\AbstractFieldset;
+use Devices\Entity\Type as TypeEntity;
+use Library\Form\Fieldset\AbstractFieldset;
 
-class Location extends AbstractFieldset
+class Type extends AbstractFieldset
 {
     public function __construct()
     {
-        parent::__construct('location');
+        parent::__construct('type');
 
-        $this->setObject(new LocationEntity());
+        $this->setObject(new TypeEntity());
     }
 
     public function loadElements()
     {
-        $this->setModel('Devices\Model\LocationsModel');
+        $this->setModel('Devices\Model\TypesModel');
 
         $this->add(
             array(
                 'type' => 'Zend\Form\Element\Select',
                 'name' => 'id',
                 'options' => array(
-                    'label' => 'Location',
+                    'label' => 'Type',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
                     'value_options' => $this->getValueOptions()
                 ),
                 'attributes' => array(
-                    'required' => true
+                    'required' => 'true'
                 )
             )
         );
@@ -84,7 +84,7 @@ class Location extends AbstractFieldset
                     array(
                         'name' => 'StringLength',
                         'options' => array(
-                            'min' => 3
+                            'min' => 2
                         )
                     )
                 )

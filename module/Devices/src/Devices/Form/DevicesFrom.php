@@ -9,7 +9,7 @@
 
 namespace Devices\Form;
 
-use Devices\Form\Fieldsets\Device;
+use Devices\Form\Fieldset\Device;
 use Library\Form\AbstractForm;
 
 class DevicesFrom extends AbstractForm
@@ -26,7 +26,7 @@ class DevicesFrom extends AbstractForm
     }
 
     /**
-     * @return \Library\Form\Fieldsets\AbstractFieldset
+     * @return \Library\Form\Fieldset\AbstractFieldset
      */
     protected function getBaseFieldsetObject()
     {

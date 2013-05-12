@@ -13,18 +13,7 @@ use Library\Entity\AbstractEntity;
 
 class Type extends AbstractEntity
 {
-    protected $id = 0;
     protected $name;
-
-    public function setId($id)
-    {
-        $this->id = (int)$id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function setName($name)
     {

@@ -13,7 +13,6 @@ use Library\Entity\AbstractEntity;
 
 class Device extends AbstractEntity
 {
-    protected $id = 0;
     protected $name;
 
     /**
@@ -25,16 +24,6 @@ class Device extends AbstractEntity
      * @var Type
      */
     protected $type;
-
-    public function setId($id)
-    {
-        $this->id = (int)$id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function setLocation(Location $location)
     {

@@ -13,7 +13,6 @@ use Library\Entity\AbstractEntity;
 
 class Iface extends AbstractEntity
 {
-    protected $id = 0;
     protected $name;
     protected $mac;
     protected $ip;
@@ -27,16 +26,6 @@ class Iface extends AbstractEntity
      * @var Device
      */
     protected $device;
-
-    public function setId($id)
-    {
-        $this->id = (int)$id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function setIp($ip)
     {

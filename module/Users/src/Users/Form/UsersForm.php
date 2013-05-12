@@ -7,30 +7,19 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Form;
+namespace Users\Form;
 
-use Devices\Form\Fieldset\Type;
 use Library\Form\AbstractForm;
+use Users\Form\Fieldset\User as UserFieldset;
 
-class TypesFrom extends AbstractForm
+class UsersForm extends AbstractForm
 {
-    public function __construct()
-    {
-        parent::__construct('types_form');
-
-        $this->setAttributes(
-            array(
-                'class' => 'input_form'
-            )
-        );
-    }
-
     /**
      * @return \Library\Form\Fieldset\AbstractFieldset
      */
     protected function getBaseFieldsetObject()
     {
-        $object = new Type();
+        $object = new UserFieldset();
         $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
 
         if($this->mode == self::MODE_EDIT)

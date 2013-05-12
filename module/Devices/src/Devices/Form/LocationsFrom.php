@@ -9,7 +9,7 @@
 
 namespace Devices\Form;
 
-use Devices\Form\Fieldsets\Location;
+use Devices\Form\Fieldset\Location;
 use Library\Form\AbstractForm;
 
 class LocationsFrom extends AbstractForm
@@ -26,15 +26,19 @@ class LocationsFrom extends AbstractForm
     }
 
     /**
-     * @return \Library\Form\Fieldsets\AbstractFieldset
+     * @return \Library\Form\Fieldset\AbstractFieldset
      */
     protected function getBaseFieldsetObject()
     {
         $object = new Location();
-        $object->setUseAsBaseFieldset(true)
-            ->setServiceLocator($this->serviceLocator)
-            ->setDenyFilters(array('id'))
-            ->loadElements();
+        $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
+
+        if($this->mode == self::MODE_EDIT)
+        {
+            $object->setDenyFilters(array('id'));
+        }
+
+        $object->loadElements();
 
         return $object;
     }

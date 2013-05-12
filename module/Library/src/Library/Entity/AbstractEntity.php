@@ -11,5 +11,21 @@ namespace Library\Entity;
 
 abstract class AbstractEntity
 {
-    abstract public function getId();
+    protected $id = 0;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = (int)$id;
+
+        return $this;
+    }
 }
