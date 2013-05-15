@@ -45,13 +45,6 @@ abstract class AbstractDbModel extends AbstractTableGateway
     protected $join = array();
 
     /**
-     * An array columns used by the fetch method
-     *
-     * @var array
-     */
-//    protected $columns = array();
-
-    /**
      * This is used to determine when to reset the where condition
      *
      * @var boolean
@@ -174,9 +167,7 @@ abstract class AbstractDbModel extends AbstractTableGateway
         // Resetting the where if the fetch method has already run
         if ($this->fetchRun === true)
         {
-            $this->where    = array();
-            $this->join     = array();
-            $this->fetchRun = false;
+            $this->resetSelectJoinWhere();
         }
 
         $this->join[] = array(
