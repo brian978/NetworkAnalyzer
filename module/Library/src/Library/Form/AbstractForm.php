@@ -9,6 +9,7 @@
 
 namespace Library\Form;
 
+use Library\Form\Fieldset\AbstractFieldset;
 use Zend\Form\Form;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
@@ -55,6 +56,27 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
     abstract protected function getBaseFieldsetObject();
 
     /**
+     * This function is used to set up the base fieldset object in a primitive way
+     * If something more complex is to be done DO NOT EXTEND this, use only the getBaseFieldsetObject() method
+     *
+     * @param AbstractFieldset $object
+     * @return AbstractFieldset
+     */
+    protected function setupBaseFieldsetObject(AbstractFieldset $object)
+    {
+        $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
+
+        if($this->mode == self::MODE_EDIT)
+        {
+            $object->setDenyFilters(array('id'));
+        }
+
+        $object->loadElements();
+
+        return $object;
+    }
+
+    /**
      * @return $this
      */
     public function loadElements()
@@ -95,6 +117,9 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
     {
         $this->translator = $translator;
 
+        // not used to unset
+        unset($textDomain);
+
         return $this;
     }
 
@@ -126,6 +151,8 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function setTranslatorEnabled($enabled = true)
     {
+        // nothing to set
+        unset($enabled);
     }
 
     /**
@@ -145,6 +172,8 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     public function setTranslatorTextDomain($textDomain = 'default')
     {
+        // nothing to set
+        unset($textDomain);
     }
 
     /**

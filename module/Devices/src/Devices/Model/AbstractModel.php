@@ -9,6 +9,7 @@
 
 namespace Devices\Model;
 
+use Library\Entity\AbstractEntity;
 use Library\Model\AbstractDbModel;
 
 class AbstractModel extends AbstractDbModel
@@ -39,18 +40,12 @@ class AbstractModel extends AbstractDbModel
     }
 
     /**
-     * This returns the number of affected rows
-     *
-     * @param \Devices\Entity\Location $object
+     * @param array          $data
+     * @param AbstractEntity $object
      * @return int
      */
-    protected function doUpdate($object)
+    protected function executeUpdateById(array $data, AbstractEntity $object)
     {
-        $result = 0;
-
-        $data         = array();
-        $data['name'] = $object->getName();
-
         try
         {
             // If successful will return the number of rows
@@ -61,5 +56,19 @@ class AbstractModel extends AbstractDbModel
         }
 
         return $result;
+    }
+
+    /**
+     * This returns the number of affected rows
+     *
+     * @param \Devices\Entity\Location $object
+     * @return int
+     */
+    protected function doUpdate($object)
+    {
+        $data         = array();
+        $data['name'] = $object->getName();
+
+        return $this->executeUpdateById($data, $object);;
     }
 }

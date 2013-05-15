@@ -19,16 +19,6 @@ class UsersForm extends AbstractForm
      */
     protected function getBaseFieldsetObject()
     {
-        $object = new UserFieldset();
-        $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
-
-        if($this->mode == self::MODE_EDIT)
-        {
-            $object->setDenyFilters(array('id'));
-        }
-
-        $object->loadElements();
-
-        return $object;
+        return $this->setupBaseFieldsetObject(new UserFieldset());
     }
 }

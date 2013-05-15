@@ -23,6 +23,6 @@ class AuthorizationFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new Authorization();
+        return new Authorization($serviceLocator);
     }
 }

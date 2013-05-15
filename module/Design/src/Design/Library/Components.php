@@ -273,6 +273,27 @@ class Components
     }
 
     /**
+     * @param \SplPriorityQueue $queue
+     * @return string
+     */
+    protected function renderQueue(\SplPriorityQueue $queue)
+    {
+        $rendered = '';
+
+        while ($queue->valid())
+        {
+            $rendered .= $this->renderer->render($queue->current()->viewModel);
+
+            $queue->next();
+        }
+
+        // Resetting the queue pointer in case it needs to be rendered again
+        $queue->rewind();
+
+        return $rendered;
+    }
+
+    /**
      * @param mixed $position
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
@@ -285,12 +306,9 @@ class Components
             throw new \RuntimeException('The renderer has not been set');
         }
 
-        if ($position !== null)
+        if ($position !== null && !is_string($position) && !is_numeric($position))
         {
-            if (!is_string($position) && !is_numeric($position))
-            {
-                throw new \InvalidArgumentException('The position must be a string or a number');
-            }
+            throw new \InvalidArgumentException('The position must be a string or a number');
         }
 
         $rendered = '';
@@ -300,15 +318,7 @@ class Components
             /** @var $queue \SplPriorityQueue */
             foreach ($this->queues as $queue)
             {
-                while ($queue->valid())
-                {
-                    $rendered .= $this->renderer->render($queue->current()->viewModel);
-
-                    $queue->next();
-                }
-
-                // Resetting the queue pointer in case it needs to be rendered again
-                $queue->rewind();
+                $rendered .= $this->renderQueue($queue);
             }
         }
         else if (isset($this->queues[$position]))
@@ -316,15 +326,7 @@ class Components
             /** @var $queue \SplPriorityQueue */
             $queue = $this->queues[$position];
 
-            while ($queue->valid())
-            {
-                $rendered .= $this->renderer->render($queue->current()->viewModel);
-
-                $queue->next();
-            }
-
-            // Resetting the queue pointer in case it needs to be rendered again
-            $queue->rewind();
+            $rendered .= $this->renderQueue($queue);
         }
 
         return $rendered;

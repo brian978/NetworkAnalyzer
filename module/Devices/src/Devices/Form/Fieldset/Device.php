@@ -112,34 +112,7 @@ class Device extends AbstractFieldset
      */
     public function getInputFilterSpecification()
     {
-        $filters = array(
-            'id' => array(
-                'validators' => array(
-                    array(
-                        'name' => 'greater_than',
-                        'options' => array(
-                            'min' => 0,
-                            'message' => 'You must select a value'
-                        )
-                    )
-                )
-            ),
-            'name' => array(
-                'required' => true,
-                'validators' => array(
-                    array(
-                        'name' => 'StringLength',
-                        'options' => array(
-                            'min' => 3
-                        )
-                    )
-                )
-            )
-        );
-
         // Removing the un-required filters (this is useful when you don't show all the fields)
-        $this->processDenyFilters($filters);
-
-        return $filters;
+        return $this->processDenyFilters($this->getGenericInputFilterSpecs());
     }
 }

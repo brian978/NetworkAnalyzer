@@ -9,11 +9,8 @@
 
 namespace Devices\Entity;
 
-use Library\Entity\AbstractEntity;
-
 class Iface extends AbstractEntity
 {
-    protected $name;
     protected $mac;
     protected $ip;
 
@@ -45,16 +42,6 @@ class Iface extends AbstractEntity
     public function getMac()
     {
         return $this->mac;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

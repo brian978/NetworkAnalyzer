@@ -11,8 +11,20 @@ namespace UI;
 
 use Zend\Mvc\MvcEvent;
 
-class Module
+use Library\Module as MainModule;
+
+class Module extends MainModule
 {
+    /**
+     * @var string
+     */
+    protected $moduleDir = __DIR__;
+
+    /**
+     * @var string
+     */
+    protected $moduleNamespace = __NAMESPACE__;
+
     /**
      *
      * @var \Zend\Mvc\ApplicationInterface
@@ -64,21 +76,5 @@ class Module
                 $translator->setLocale($locale);
             }
         }
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
-    }
-
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
     }
 }

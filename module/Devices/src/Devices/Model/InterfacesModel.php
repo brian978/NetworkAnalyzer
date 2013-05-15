@@ -72,7 +72,7 @@ class InterfacesModel extends AbstractDbModel
         try
         {
             // If successful will return the number of rows
-            $result = $this->update($data, $this->getWhere('id', $object->getId()));
+            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
         }
         catch (\Exception $e)
         {

@@ -58,22 +58,11 @@ class DevicesModel extends AbstractDbModel
      */
     protected function doUpdate($object)
     {
-        $result = 0;
-
         $data                = array();
         $data['name']        = $object->getName();
         $data['location_id'] = $object->getLocation()->getId();
         $data['type_id']     = $object->getType()->getId();
 
-        try
-        {
-            // If successful will return the number of rows
-            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
-        }
-        catch (\Exception $e)
-        {
-        }
-
-        return $result;
+        return $this->executeUpdateById($data, $object);
     }
 }

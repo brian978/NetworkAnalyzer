@@ -92,7 +92,7 @@ class Type extends AbstractFieldset
         );
 
         // Removing the un-required filters (this is useful when you don't show all the fields)
-        $this->processDenyFilters($filters);
+        $filters = $this->processDenyFilters($filters);
 
         return $filters;
     }

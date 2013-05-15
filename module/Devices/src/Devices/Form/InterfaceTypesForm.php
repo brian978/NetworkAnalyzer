@@ -18,16 +18,6 @@ class InterfaceTypesForm extends InterfacesFrom
      */
     protected function getBaseFieldsetObject()
     {
-        $object = new IfaceType();
-        $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
-
-        if($this->mode == self::MODE_EDIT)
-        {
-            $object->setDenyFilters(array('id'));
-        }
-
-        $object->loadElements();
-
-        return $object;
+        return $this->setupBaseFieldsetObject(new IfaceType());
     }
 }

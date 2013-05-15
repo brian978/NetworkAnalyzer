@@ -18,6 +18,8 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 abstract class AbstractFieldset extends Fieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface
 {
     /**
+     * This is used when the setModel() method is called twice (like when extending a form)
+     *
      * @var boolean
      */
     protected $lockModel = false;
@@ -123,10 +125,43 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     }
 
     /**
+     * @return array
+     */
+    protected function getGenericInputFilterSpecs()
+    {
+        $filters = array(
+            'id' => array(
+                'validators' => array(
+                    array(
+                        'name' => 'greater_than',
+                        'options' => array(
+                            'min' => 0,
+                            'message' => 'You must select a value'
+                        )
+                    )
+                )
+            ),
+            'name' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'min' => 3
+                        )
+                    )
+                )
+            )
+        );
+
+        return $filters;
+    }
+
+    /**
      * Eliminates the filters that are in the deny list
      *
      * @param array $filters
-     * @return $this
+     * @return array
      */
     protected function processDenyFilters(array &$filters)
     {
@@ -139,6 +174,6 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
             }
         }
 
-        return $this;
+        return $filters;
     }
 }

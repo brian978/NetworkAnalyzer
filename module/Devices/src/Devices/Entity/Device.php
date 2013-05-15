@@ -9,12 +9,8 @@
 
 namespace Devices\Entity;
 
-use Library\Entity\AbstractEntity;
-
 class Device extends AbstractEntity
 {
-    protected $name;
-
     /**
      * @var Location
      */
@@ -33,16 +29,6 @@ class Device extends AbstractEntity
     public function getLocation()
     {
         return $this->location;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
     }
 
     public function setType(Type $type)

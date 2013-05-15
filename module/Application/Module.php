@@ -12,8 +12,20 @@ namespace Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module
+use Library\Module as MainModule;
+
+class Module extends MainModule
 {
+    /**
+     * @var string
+     */
+    protected $moduleDir = __DIR__;
+
+    /**
+     * @var string
+     */
+    protected $moduleNamespace = __NAMESPACE__;
+
     public function init()
     {
         // Setting up the environment
@@ -24,7 +36,7 @@ class Module
     {
         $env = getenv('APPLICATION_ENV');
 
-//        if ($env !== false && ($env === 'development' || $env === 'staging'))
+        if ($env !== false && ($env === 'development' || $env === 'staging'))
         {
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
@@ -36,21 +48,5 @@ class Module
         // Used for child routes
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($e->getApplication()->getEventManager());
-    }
-
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
     }
 }
