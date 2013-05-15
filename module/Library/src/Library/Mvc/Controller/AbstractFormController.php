@@ -9,6 +9,7 @@
 
 namespace Library\Mvc\Controller;
 
+use Library\Entity\AbstractEntity;
 use Library\Form\AbstractForm;
 use UI\Controller\AbstractUiController;
 
@@ -23,13 +24,24 @@ abstract class AbstractFormController extends AbstractUiController
         'type' => '',
         'object' => '',
         'model' => '',
+        'dataKey' => '',
     );
 
     /**
      * @param AbstractForm $form
+     * @param \ArrayAccess $object
      * @return void
      */
-    abstract protected function populateEditData(AbstractForm $form);
+    protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
+    {
+        // Arranging the data properly so that the form would be auto-populated
+        $form->setData(array(
+            $this->formParams['dataKey'] => array(
+                'id' => $object->id,
+                'name' => $object->name,
+            )
+        ));
+    }
 
     /**
      * @param array $data
@@ -123,7 +135,14 @@ abstract class AbstractFormController extends AbstractUiController
         }
         else
         {
-            $this->populateEditData($form);
+            /** @var $model \Library\Model\AbstractDbModel */
+            $model  = $this->serviceLocator->get($this->formParams['model']);
+            $object = $model->getInfo($this->params('id'));
+
+            if (is_object($object) && $object instanceof \ArrayAccess)
+            {
+                $this->populateEditData($form, $object);
+            }
         }
 
         // Adding view params

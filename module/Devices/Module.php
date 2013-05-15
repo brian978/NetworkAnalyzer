@@ -9,14 +9,26 @@
 
 namespace Devices;
 
+use Library\Module as MainModule;
+
 use Devices\Model\DevicesModel;
 use Devices\Model\InterfaceTypesModel;
 use Devices\Model\InterfacesModel;
 use Devices\Model\LocationsModel;
 use Devices\Model\TypesModel;
 
-class Module
+class Module extends MainModule
 {
+    /**
+     * @var string
+     */
+    protected $moduleDir = __DIR__;
+
+    /**
+     * @var string
+     */
+    protected $moduleNamespace = __NAMESPACE__;
+
     public function getServiceConfig()
     {
         return array(
@@ -43,21 +55,5 @@ class Module
                 },
             )
         );
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
-    }
-
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
     }
 }

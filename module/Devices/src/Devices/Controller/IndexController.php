@@ -27,30 +27,22 @@ class IndexController extends AbstractController
     /**
      *
      * @param \Library\Form\AbstractForm $form
+     * @param \ArrayAccess $object
      */
-    protected function populateEditData(AbstractForm $form)
+    protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
     {
-        /** @var $model \Library\Model\AbstractDbModel */
-        $model  = $this->serviceLocator->get($this->formParams['model']);
-        $object = $model->getInfo($this->params('id'));
-
-        if(is_object($object) && $object instanceof \ArrayAccess)
-        {
-            // Arranging the data properly so that the form would be auto-populated
-            $data = array(
-                'device' => array(
-                    'id' => $object->id,
-                    'name' => $object->name,
-                    'location' => array(
-                        'id' => $object->location_id
-                    ),
-                    'type' => array(
-                        'id' => $object->type_id
-                    )
+        // Arranging the data properly so that the form would be auto-populated
+        $form->setData(array(
+            'device' => array(
+                'id' => $object->id,
+                'name' => $object->name,
+                'location' => array(
+                    'id' => $object->location_id
+                ),
+                'type' => array(
+                    'id' => $object->type_id
                 )
-            );
-
-            $form->setData($data);
-        }
+            )
+        ));
     }
 }
