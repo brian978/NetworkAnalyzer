@@ -30,16 +30,6 @@ class LocationsFrom extends AbstractForm
      */
     protected function getBaseFieldsetObject()
     {
-        $object = new Location();
-        $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
-
-        if($this->mode == self::MODE_EDIT)
-        {
-            $object->setDenyFilters(array('id'));
-        }
-
-        $object->loadElements();
-
-        return $object;
+        return $this->setupBaseFieldsetObject(new Location());
     }
 }

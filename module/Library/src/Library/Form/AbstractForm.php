@@ -57,12 +57,12 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
 
     /**
      * This function is used to set up the base fieldset object in a primitive way
-     * If something more complex is to be done DO NOT EXTEND this, use only the getBaseFieldsetObject() method
+     * If something more complex use only the getBaseFieldsetObject() method
      *
      * @param AbstractFieldset $object
      * @return AbstractFieldset
      */
-    protected function setupBaseFieldsetObject(AbstractFieldset $object)
+    final protected function setupBaseFieldsetObject(AbstractFieldset $object)
     {
         $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
 
