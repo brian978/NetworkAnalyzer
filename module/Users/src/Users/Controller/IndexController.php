@@ -18,7 +18,7 @@ class IndexController extends AbstractController
      *
      * @var array
      */
-    protected $formParams = array(
+    protected $formSpecs = array(
         'type' => '\Users\Form\UsersForm',
         'object' => '\Users\Entity\User',
         'model' => 'Users\Model\Users',

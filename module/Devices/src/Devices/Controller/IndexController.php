@@ -18,7 +18,7 @@ class IndexController extends AbstractController
      *
      * @var array
      */
-    protected $formParams = array(
+    protected $formSpecs = array(
         'type' => '\Devices\Form\DevicesFrom',
         'object' => '\Devices\Entity\Device',
         'model' => 'Devices\Model\DevicesModel',

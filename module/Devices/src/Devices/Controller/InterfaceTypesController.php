@@ -18,7 +18,7 @@ class InterfaceTypesController extends AbstractController
      *
      * @var array
      */
-    protected $formParams = array(
+    protected $formSpecs = array(
         'type' => '\Devices\Form\InterfaceTypesForm',
         'object' => '\Devices\Entity\Type',
         'model' => 'Devices\Model\InterfaceTypesModel',

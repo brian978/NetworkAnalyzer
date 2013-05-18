@@ -18,7 +18,7 @@ class TypesController extends AbstractController
      *
      * @var array
      */
-    protected $formParams = array(
+    protected $formSpecs = array(
         'type' => '\Devices\Form\TypesFrom',
         'object' => '\Devices\Entity\Type',
         'model' => 'Devices\Model\TypesModel',

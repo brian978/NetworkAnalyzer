@@ -19,7 +19,7 @@ abstract class AbstractFormController extends AbstractUiController
      *
      * @var array
      */
-    protected $formParams = array(
+    protected $formSpecs = array(
         'type' => '',
         'object' => '',
         'model' => '',
@@ -35,7 +35,7 @@ abstract class AbstractFormController extends AbstractUiController
     {
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(array(
-            $this->formParams['dataKey'] => array(
+            $this->formSpecs['dataKey'] => array(
                 'id' => $object->id,
                 'name' => $object->name,
             )
@@ -54,14 +54,21 @@ abstract class AbstractFormController extends AbstractUiController
      */
     abstract protected function redirectOnFail(array $data);
 
+    /**
+     * Returns a form instance built with the given $data and $params
+     *
+     * @param array $data
+     * @param array $params
+     * @return \Library\Form\AbstractForm
+     */
     protected function getForm(array $data = array(), $params = array())
     {
         /** @var $factory \Library\Form\Factory */
         $factory = $this->serviceLocator->get('TranslatableFormFactory');
 
-        /** @var $form \Devices\Form\DevicesFrom */
-        $form   = $factory->createForm(array('type' => $this->formParams['type']));
-        $object = new $this->formParams['object']();
+        /** @var $form \Library\Form\AbstractForm */
+        $form   = $factory->createForm(array('type' => $this->formSpecs['type']));
+        $object = new $this->formSpecs['object']();
 
         // The form mode must be set before the loadElements because it's used when retrieving the baseFieldset
         if (isset($params['form_mode']))
@@ -135,7 +142,7 @@ abstract class AbstractFormController extends AbstractUiController
         else
         {
             /** @var $model \Library\Model\AbstractDbModel */
-            $model  = $this->serviceLocator->get($this->formParams['model']);
+            $model  = $this->serviceLocator->get($this->formSpecs['model']);
             $object = $model->getInfo($this->params('id'));
 
             if (is_object($object) && $object instanceof \ArrayAccess)
@@ -179,7 +186,7 @@ abstract class AbstractFormController extends AbstractUiController
             if ($isValid === true)
             {
                 /** @var $model \Library\Model\AbstractDbModel */
-                $model  = $this->serviceLocator->get($this->formParams['model']);
+                $model  = $this->serviceLocator->get($this->formSpecs['model']);
                 $result = $model->save($form->getObject());
 
                 if ($result > 0)
@@ -202,7 +209,7 @@ abstract class AbstractFormController extends AbstractUiController
     public function listAction()
     {
         /** @var $model \Library\Model\AbstractDbModel */
-        $model = $this->serviceLocator->get($this->formParams['model']);
+        $model = $this->serviceLocator->get($this->formSpecs['model']);
 
         return array(
             'items' => $model->fetch()
