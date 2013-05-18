@@ -20,16 +20,15 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 abstract class AbstractForm extends Form implements TranslatorAwareInterface, ServiceLocatorAwareInterface
 {
-    const MODE_DEFAULT = 0;
-    const MODE_ADD     = 1;
-    const MODE_EDIT    = 2;
+    const MODE_ADD  = 1;
+    const MODE_EDIT = 2;
 
     /**
      * Determines the mode of the form to be able to activate or deactivate certain fields
      *
      * @var int
      */
-    public $mode = self::MODE_DEFAULT;
+    public $mode = self::MODE_ADD;
 
     /**
      * @var \Zend\I18n\Translator\Translator
@@ -42,8 +41,8 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
     protected $serviceLocator;
 
     /**
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param  null|int|string $name    Optional name for the element
+     * @param  array           $options Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -66,7 +65,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
     {
         $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
 
-        if($this->mode == self::MODE_EDIT)
+        if ($this->mode == self::MODE_EDIT)
         {
             $object->setDenyFilters(array('id'));
         }
