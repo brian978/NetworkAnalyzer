@@ -57,7 +57,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
 
     /**
      * This function is used to set up the base fieldset object in a primitive way
-     * If something more complex use only the getBaseFieldsetObject() method
+     * For something more complex use only the getBaseFieldsetObject() method
      *
      * @param AbstractFieldset $object
      * @return AbstractFieldset
