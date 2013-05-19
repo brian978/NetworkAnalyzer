@@ -45,6 +45,29 @@ class User extends AbstractFieldset
                 )
             )
         );
+
+        $this->add(
+            array(
+                'name' => 'email',
+                'options' => array(
+                    'label' => 'Email',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => 'true'
+                )
+            )
+        );
+
+        $role = new Role();
+        $role->setServiceLocator($this->getServiceLocator());
+        $role->setDenyFilters(array('name'));
+        $role->mode = Role::MODE_SELECT;
+        $role->loadElements();
+
+        $this->add($role);
     }
 
     /**
@@ -55,7 +78,17 @@ class User extends AbstractFieldset
      */
     public function getInputFilterSpecification()
     {
+        $filters          = $this->getGenericInputFilterSpecs();
+        $filters['email'] = array(
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'EmailAddress'
+                )
+            )
+        );
+
         // Removing the un-required filters (this is useful when you don't show all the fields)
-        return $this->processDenyFilters($this->getGenericInputFilterSpecs());
+        return $this->processDenyFilters($filters);
     }
 }

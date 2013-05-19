@@ -44,7 +44,7 @@ class Module
 
     public function getConfig()
     {
-        return include $this->configDir . '/config/module.config.php';
+        return include $this->moduleDir . '/config/module.config.php';
     }
 
     public function getAutoloaderConfig()

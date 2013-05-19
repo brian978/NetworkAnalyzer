@@ -9,8 +9,19 @@
 
 namespace Users\Model;
 
-class Users
+use Library\Model\AbstractDbModel;
+
+class Users extends AbstractDbModel
 {
+    protected $table = 'users';
+
+    public function fetch()
+    {
+        $this->addJoin('user_roles', 'user_roles.id = users.role_id', array('roleName' => 'name_ro_RO'));
+
+        return parent::fetch();
+    }
+
     /**
      * Processes the password has so it returns the salt from it
      *
@@ -63,5 +74,47 @@ class Users
         $hash       = substr($hash, 0, $hashCut) . $salt . substr($hash, $hashCut) . $saltLen . $hashCut . $hashCutLen;
 
         return $hash;
+    }
+
+    protected function doInsert($object)
+    {
+        $result = 0;
+
+        $data            = array();
+        $data['name']    = $object->getName();
+        $data['email']   = $object->getEmail();
+        $data['role_id'] = $object->getRole()->getId();
+
+        try
+        {
+            // If successful will return the number of rows
+            $result = $this->insert($data);
+        }
+        catch (\Exception $e)
+        {
+        }
+
+        return $result;
+    }
+
+    protected function doUpdate($object)
+    {
+        $result = 0;
+
+        $data            = array();
+        $data['name']    = $object->getName();
+        $data['email']   = $object->getEmail();
+        $data['role_id'] = $object->getRole()->getId();
+
+        try
+        {
+            // If successful will return the number of rows
+            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
+        }
+        catch (\Exception $e)
+        {
+        }
+
+        return $result;
     }
 }

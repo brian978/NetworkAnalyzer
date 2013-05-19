@@ -163,7 +163,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
      * @param array $filters
      * @return array
      */
-    protected function processDenyFilters(array &$filters)
+    protected function processDenyFilters(array $filters)
     {
         // Removing the un-required filters (this is useful when you don't show all the fields)
         foreach($this->denyFilters as $input)

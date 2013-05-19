@@ -30,11 +30,6 @@ class DevicesFrom extends AbstractForm
      */
     protected function getBaseFieldsetObject()
     {
-        $object = new Device();
-        $object->setUseAsBaseFieldset(true)
-            ->setServiceLocator($this->serviceLocator)
-            ->loadElements();
-
-        return $object;
+        return $this->setupBaseFieldsetObject(new Device());
     }
 }

@@ -10,15 +10,26 @@
 namespace Users\Form;
 
 use Library\Form\AbstractForm;
-use Users\Form\Fieldset\User as UserFieldset;
+use Users\Form\Fieldset\User;
 
 class UsersForm extends AbstractForm
 {
+    public function __construct()
+    {
+        parent::__construct('user_form');
+
+        $this->setAttributes(
+            array(
+                'class' => 'input_form'
+            )
+        );
+    }
+
     /**
      * @return \Library\Form\Fieldset\AbstractFieldset
      */
     protected function getBaseFieldsetObject()
     {
-        return $this->setupBaseFieldsetObject(new UserFieldset());
+        return $this->setupBaseFieldsetObject(new User());
     }
 }

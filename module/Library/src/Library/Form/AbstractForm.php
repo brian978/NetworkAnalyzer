@@ -65,7 +65,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
     {
         $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
 
-        if ($this->mode == self::MODE_EDIT)
+        if ($this->mode == self::MODE_ADD)
         {
             $object->setDenyFilters(array('id'));
         }

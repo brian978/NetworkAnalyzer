@@ -105,7 +105,7 @@ abstract class AbstractFormController extends AbstractUiController
         // We need to call the isValid method or else we won't have any error messages
         if (!empty($post))
         {
-            $form->isValid();
+            $form->isValid();var_dump($form->getMessages());die();
         }
 
         // Adding view params

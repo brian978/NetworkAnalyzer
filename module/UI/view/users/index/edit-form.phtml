@@ -24,7 +24,7 @@
         // Showing the success message
         if ($this->success)
         {
-            echo '<h4>' . $this->translate('The user was added') . '</h4>';
+            echo '<h4>' . $this->translate('The user info was updated') . '</h4>';
         }
 
         // Rendering the form
@@ -34,6 +34,7 @@
         echo $this->showInputError($userEmail) . $this->formRow($userEmail);
         echo $this->showInputError($userRole) . $this->formRow($userRole);
 
+        echo $this->formHidden($user->get('id'));
         echo $this->formHidden($form->get('csrf'));
         echo $this->formElement($form->get('submit'));
 

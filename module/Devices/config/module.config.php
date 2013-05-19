@@ -26,7 +26,7 @@ return array(
                     'status' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action[/:id]]][/:success]',
+                            'route' => '/[:controller[/:action[/:id[/:success]]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',

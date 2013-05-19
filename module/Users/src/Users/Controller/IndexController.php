@@ -21,33 +21,27 @@ class IndexController extends AbstractController
     protected $formSpecs = array(
         'type' => '\Users\Form\UsersForm',
         'object' => '\Users\Entity\User',
-        'model' => 'Users\Model\Users',
+        'model' => 'Users\Model\UsersModel',
+        'dataKey' => 'user',
     );
 
     /**
      * @param AbstractForm $form
+     * @param \ArrayAccess $object
      * @return void
      */
-    protected function populateEditData(AbstractForm $form)
+    protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
     {
-        // TODO: Implement populateEditData() method.
-    }
-
-    /**
-     * @param array $data
-     * @return void
-     */
-    protected function redirectOnSuccess(array $data)
-    {
-        // TODO: Implement redirectOnSuccess() method.
-    }
-
-    /**
-     * @param array $data
-     * @return void
-     */
-    protected function redirectOnFail(array $data)
-    {
-        // TODO: Implement redirectOnFail() method.
+        // Arranging the data properly so that the form would be auto-populated
+        $form->setData(array(
+            $this->formSpecs['dataKey'] => array(
+                'id' => $object->id,
+                'name' => $object->name,
+                'email' => $object->email,
+                'role' => array(
+                    'id' => $object->role_id,
+                )
+            )
+        ));
     }
 }
