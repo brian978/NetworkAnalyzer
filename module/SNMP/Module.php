@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Snmp;
+namespace SNMP;
 
 use Library\Module as MainModule;
 

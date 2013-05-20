@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Snmp;
+namespace SNMP;
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
@@ -51,7 +51,7 @@ class Session implements ServiceManagerAwareInterface
     /**
      * Creates the SNMP session
      *
-     * @return \Snmp\Session
+     * @return \SNMP\Session
      * @throws \RuntimeException
      */
     public function open()
@@ -83,13 +83,13 @@ class Session implements ServiceManagerAwareInterface
     }
 
     /**
-     * @param string $object_id
+     * @param string $objectId
      * @throws \RuntimeException
      * @return mixed
      */
-    public function get($object_id)
+    public function get($objectId)
     {
-        $output = $this->session->get($object_id);
+        $output = $this->session->get($objectId);
 
         if ($output == false)
         {

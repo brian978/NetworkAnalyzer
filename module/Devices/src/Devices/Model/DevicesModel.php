@@ -11,7 +11,7 @@ namespace Devices\Model;
 
 use Library\Model\AbstractDbModel;
 
-class DevicesModel extends AbstractDbModel
+class DevicesModel extends AbstractModel
 {
     protected $table = 'devices';
 

@@ -17,6 +17,16 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 abstract class AbstractFieldset extends Fieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface
 {
+    const MODE_SELECT = 1;
+    const MODE_ADMIN  = 2;
+
+    /**
+     * Depending on this mode the object will add the ID element differently
+     *
+     * @var int
+     */
+    public $mode = self::MODE_ADMIN;
+
     /**
      * This is used when the setModel() method is called twice (like when extending a form)
      *
@@ -25,9 +35,14 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected $lockModel = false;
 
     /**
-     * @var AbstractModel
+     * @var \Library\Model\AbstractDbModel
      */
     protected $model;
+
+    /**
+     * @var string
+     */
+    protected $modelName = '';
 
     /**
      * @var \Zend\ServiceManager\ServiceLocatorInterface
@@ -39,6 +54,10 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
      */
     protected $denyFilters = array();
 
+    /**
+     * @param string  $name
+     * @param array   $options
+     */
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
@@ -81,6 +100,19 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     }
 
     /**
+     * @return \Devices\Model\AbstractModel
+     */
+    protected function getModel()
+    {
+        if (!is_object($this->model))
+        {
+            $this->setModel($this->modelName);
+        }
+
+        return $this->model;
+    }
+
+    /**
      * Initialized the model required for the database
      *
      * @param      $serviceName
@@ -90,12 +122,12 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected function setModel($serviceName, $lockModel = false)
     {
         // By default it can be changed any time so we only need to set it when it's true
-        if($lockModel === true)
+        if ($lockModel === true)
         {
             $this->lockModel = $lockModel;
         }
 
-        if(!is_object($this->model) || $this->lockModel === false)
+        if (!is_object($this->model) || $this->lockModel === false)
         {
             $this->model = $this->serviceLocator->get($serviceName);
         }
@@ -118,13 +150,74 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
         }
 
         $options = array_merge(array(
-            0 => '...'
-        ), $options);
+                0 => '...'
+            ),
+            $options);
 
         return $options;
     }
 
     /**
+     *
+     * @param string $label
+     * @return array
+     */
+    protected function getIdElement($label)
+    {
+        if ($this->mode == self::MODE_SELECT)
+        {
+            $this->getModel();
+
+            $element = $this->getSelectId($label);
+        }
+        else
+        {
+            $element = $this->getHiddenId();
+        }
+
+        return $element;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    protected function getHiddenId()
+    {
+        return array(
+            'type' => 'Zend\Form\Element\Hidden',
+            'name' => 'id',
+            'options' => array(
+                'value' => 0
+            )
+        );
+    }
+
+    /**
+     * @param $label
+     * @return array
+     */
+    protected function getSelectId($label)
+    {
+        return array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'id',
+            'options' => array(
+                'label' => $label,
+                'label_attributes' => array(
+                    'class' => 'form_row'
+                ),
+                'value_options' => $this->getValueOptions()
+            ),
+            'attributes' => array(
+                'required' => true
+            )
+        );
+    }
+
+
+    /**
+     *
      * @return array
      */
     protected function getGenericInputFilterSpecs()
@@ -166,14 +259,25 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected function processDenyFilters(array $filters)
     {
         // Removing the un-required filters (this is useful when you don't show all the fields)
-        foreach($this->denyFilters as $input)
+        foreach ($this->denyFilters as $input)
         {
-            if(isset($filters[$input]))
+            if (isset($filters[$input]))
             {
                 unset($filters[$input]);
             }
         }
 
         return $filters;
+    }
+
+    /**
+     * Should return an array specification compatible with
+     * {@link Zend\InputFilter\Factory::createInputFilter()}.
+     *
+     * @return array
+     */
+    public function getInputFilterSpecification()
+    {
+        return $this->processDenyFilters($this->getGenericInputFilterSpecs());
     }
 }

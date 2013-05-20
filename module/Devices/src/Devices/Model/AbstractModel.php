@@ -40,25 +40,6 @@ class AbstractModel extends AbstractDbModel
     }
 
     /**
-     * @param array          $data
-     * @param AbstractEntity $object
-     * @return int
-     */
-    protected function executeUpdateById(array $data, AbstractEntity $object)
-    {
-        try
-        {
-            // If successful will return the number of rows
-            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
-        }
-        catch (\Exception $e)
-        {
-        }
-
-        return $result;
-    }
-
-    /**
      * This returns the number of affected rows
      *
      * @param \Devices\Entity\Location $object
@@ -69,6 +50,6 @@ class AbstractModel extends AbstractDbModel
         $data         = array();
         $data['name'] = $object->getName();
 
-        return $this->executeUpdateById($data, $object);;
+        return $this->executeUpdateById($data, $object);
     }
 }

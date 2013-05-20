@@ -11,7 +11,7 @@ namespace Devices\Model;
 
 use Library\Model\AbstractDbModel;
 
-class InterfacesModel extends AbstractDbModel
+class InterfacesModel extends AbstractModel
 {
     protected $table = 'interfaces';
 
@@ -60,8 +60,6 @@ class InterfacesModel extends AbstractDbModel
      */
     protected function doUpdate($object)
     {
-        $result = 0;
-
         $data              = array();
         $data['name']      = $object->getName();
         $data['mac']       = $object->getMac();
@@ -69,15 +67,6 @@ class InterfacesModel extends AbstractDbModel
         $data['type_id']   = $object->getType()->getId();
         $data['device_id'] = $object->getDevice()->getId();
 
-        try
-        {
-            // If successful will return the number of rows
-            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
-        }
-        catch (\Exception $e)
-        {
-        }
-
-        return $result;
+        return $this->executeUpdateById($data, $object);
     }
 }

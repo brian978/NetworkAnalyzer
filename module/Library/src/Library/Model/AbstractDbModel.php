@@ -206,6 +206,27 @@ abstract class AbstractDbModel extends AbstractTableGateway
     }
 
     /**
+     * @param array          $data
+     * @param AbstractEntity $object
+     * @return int
+     */
+    protected function executeUpdateById(array $data, AbstractEntity $object)
+    {
+        $result = 0;
+
+        try
+        {
+            // If successful will return the number of rows
+            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
+        }
+        catch (\Exception $e)
+        {
+        }
+
+        return $result;
+    }
+
+    /**
      * Retrieves all the data from the database
      *
      * @return array

@@ -9,6 +9,7 @@
 
 namespace Users\Model;
 
+use Library\Entity\AbstractEntity;
 use Library\Model\AbstractDbModel;
 
 class Users extends AbstractDbModel
@@ -76,6 +77,10 @@ class Users extends AbstractDbModel
         return $hash;
     }
 
+    /**
+     * @param \Users\Entity\User $object
+     * @return int
+     */
     protected function doInsert($object)
     {
         $result = 0;
@@ -97,24 +102,17 @@ class Users extends AbstractDbModel
         return $result;
     }
 
+    /**
+     * @param \Users\Entity\User $object
+     * @return int
+     */
     protected function doUpdate($object)
     {
-        $result = 0;
-
         $data            = array();
         $data['name']    = $object->getName();
         $data['email']   = $object->getEmail();
         $data['role_id'] = $object->getRole()->getId();
 
-        try
-        {
-            // If successful will return the number of rows
-            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
-        }
-        catch (\Exception $e)
-        {
-        }
-
-        return $result;
+        return $this->executeUpdateById($data, $object);
     }
 }

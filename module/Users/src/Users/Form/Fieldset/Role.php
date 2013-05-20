@@ -14,15 +14,7 @@ use Users\Entity\Role as RoleEntity;
 
 class Role extends AbstractFieldset
 {
-    const MODE_SELECT = 1;
-    const MODE_ADMIN  = 2;
-
-    /**
-     * Depending on this mode the object will add the ID element differently
-     *
-     * @var int
-     */
-    public $mode = self::MODE_ADMIN;
+    protected $modelName = 'Users\Model\RolesModel';
 
     public function __construct()
     {
@@ -33,7 +25,7 @@ class Role extends AbstractFieldset
 
     public function loadElements()
     {
-        $this->add($this->getIdElement());
+        $this->add($this->getIdElement('Role'));
 
         $this->add(
             array(
@@ -60,7 +52,7 @@ class Role extends AbstractFieldset
     {
         $options = array();
 
-        if(is_object($this->model))
+        if (is_object($this->model))
         {
             $locale = $this->getServiceLocator()->get('translator')->getLocale();
 
@@ -73,55 +65,10 @@ class Role extends AbstractFieldset
         }
 
         $options = array_merge(array(
-            0 => '...'
-        ), $options);
+                0 => '...'
+            ),
+            $options);
 
         return $options;
-    }
-
-    protected function getIdElement()
-    {
-        if ($this->mode == self::MODE_SELECT)
-        {
-            $this->setModel('Users\Model\RolesModel');
-
-            $element = array(
-                'type' => 'Zend\Form\Element\Select',
-                'name' => 'id',
-                'options' => array(
-                    'label' => 'Role',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                    'value_options' => $this->getValueOptions()
-                ),
-                'attributes' => array(
-                    'required' => true
-                )
-            );
-        }
-        else
-        {
-            $element = array(
-                'type' => 'Zend\Form\Element\Hidden',
-                'name' => 'id',
-                'options' => array(
-                    'value' => 0
-                )
-            );
-        }
-
-        return $element;
-    }
-
-    /**
-     * Should return an array specification compatible with
-     * {@link Zend\InputFilter\Factory::createInputFilter()}.
-     *
-     * @return array
-     */
-    public function getInputFilterSpecification()
-    {
-        return $this->processDenyFilters($this->getGenericInputFilterSpecs());
     }
 }

@@ -12,9 +12,8 @@ return array(
         'Devices',
         'Users',
         'Settings',
-        'Snmp'
+        'SNMP'
     ),
-
     // These are various options for the listeners attached to the ModuleManager
     'module_listener_options' => array(
         // This should be an array of paths in which modules reside.
@@ -25,7 +24,6 @@ return array(
             './module',
             './vendor',
         ),
-
         // An array of paths from which to glob configuration files after
         // modules are loaded. These effectively overide configuration
         // provided by modules themselves. Paths may use GLOB_BRACE notation.
@@ -68,7 +66,7 @@ return array(
     //     ),
     // )
 
-   // Initial configuration with which to seed the ServiceManager.
-   // Should be compatible with Zend\ServiceManager\Config.
-   // 'service_manager' => array(),
+    // Initial configuration with which to seed the ServiceManager.
+    // Should be compatible with Zend\ServiceManager\Config.
+    // 'service_manager' => array(),
 );

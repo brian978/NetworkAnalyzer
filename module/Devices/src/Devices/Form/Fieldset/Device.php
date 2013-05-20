@@ -14,15 +14,7 @@ use Library\Form\Fieldset\AbstractFieldset;
 
 class Device extends AbstractFieldset
 {
-    const MODE_SELECT = 1;
-    const MODE_ADMIN  = 2;
-
-    /**
-     * Depending on this mode the object will add the ID element differently
-     *
-     * @var int
-     */
-    public $mode = self::MODE_ADMIN;
+    protected $modelName = 'Devices\Model\DevicesModel';
 
     public function __construct()
     {
@@ -34,7 +26,7 @@ class Device extends AbstractFieldset
     public function loadElements()
     {
         // Adding the elements to the fieldset
-        $this->add($this->getIdElement());
+        $this->add($this->getIdElement('Device'));
 
         $this->add(
             array(
@@ -67,52 +59,5 @@ class Device extends AbstractFieldset
             $this->add($location);
             $this->add($type);
         }
-    }
-
-    protected function getIdElement()
-    {
-        if ($this->mode == self::MODE_SELECT)
-        {
-            $this->setModel('Devices\Model\DevicesModel');
-
-            $element = array(
-                'type' => 'Zend\Form\Element\Select',
-                'name' => 'id',
-                'options' => array(
-                    'label' => 'Device',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                    'value_options' => $this->getValueOptions()
-                ),
-                'attributes' => array(
-                    'required' => true
-                )
-            );
-        }
-        else
-        {
-            $element = array(
-                'type' => 'Zend\Form\Element\Hidden',
-                'name' => 'id',
-                'options' => array(
-                    'value' => 0
-                )
-            );
-        }
-
-        return $element;
-    }
-
-    /**
-     * Should return an array specification compatible with
-     * {@link Zend\InputFilter\Factory::createInputFilter()}.
-     *
-     * @return array
-     */
-    public function getInputFilterSpecification()
-    {
-        // Removing the un-required filters (this is useful when you don't show all the fields)
-        return $this->processDenyFilters($this->getGenericInputFilterSpecs());
     }
 }

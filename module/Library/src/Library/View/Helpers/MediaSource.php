@@ -13,13 +13,20 @@ use Zend\View\Helper\AbstractHelper;
 
 class MediaSource extends AbstractHelper
 {
-    public function __invoke($media_type, $media_name)
+    /**
+     * @param string $mediaType
+     * @param string $mediaName
+     */
+    public function __invoke($mediaType, $mediaName)
     {
-        $serverUrl = $this->getView()->getHelperPluginManager()->get('ServerUrl');
+        /** @var $view \Zend\View\Renderer\PhpRenderer */
+        $view = $this->getView();
 
-        $url = str_replace('index.php', '', $serverUrl() . $_SERVER['PHP_SELF']);
+        /** @var $basePath \Zend\View\Helper\BasePath */
+        $basePath = $view->getHelperPluginManager()->get('BasePath');
+        $url      = $basePath() . '/';
 
-        switch($media_type)
+        switch ($mediaType)
         {
             case 'images':
                 $url .= 'images/';
@@ -29,7 +36,7 @@ class MediaSource extends AbstractHelper
                 break;
         }
 
-        $url .= $media_name;
+        $url .= $mediaName;
 
         echo $url;
     }

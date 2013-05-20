@@ -12,6 +12,7 @@ namespace Library\Entity;
 abstract class AbstractEntity
 {
     protected $id = 0;
+    protected $name;
 
     public function getId()
     {
@@ -27,5 +28,15 @@ abstract class AbstractEntity
         $this->id = (int)$id;
 
         return $this;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
