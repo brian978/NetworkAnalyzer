@@ -95,5 +95,7 @@ class Session implements ServiceManagerAwareInterface
         {
             throw new \RuntimeException($this->session->getError());
         }
+
+        return $output;
     }
 }
