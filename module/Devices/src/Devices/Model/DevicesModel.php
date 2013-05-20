@@ -19,6 +19,10 @@ class DevicesModel extends AbstractModel
     {
         $this->addJoin('locations', 'locations.id = devices.location_id', array('locationName' => 'name'));
         $this->addJoin('device_types', 'device_types.id = devices.type_id', array('typeName' => 'name'));
+        $this->addJoin('interfaces',
+            'interfaces.device_id = devices.id',
+            array('interfaceName' => 'name', 'mac', 'ip'));
+        $this->addJoin('interface_types', 'interface_types.id = interfaces.type_id', array('interfaceType' => 'name'));
 
         return parent::fetch();
     }
@@ -33,10 +37,12 @@ class DevicesModel extends AbstractModel
     {
         $result = 0;
 
-        $data                = array();
-        $data['name']        = $object->getName();
-        $data['location_id'] = $object->getLocation()->getId();
-        $data['type_id']     = $object->getType()->getId();
+        $data                   = array();
+        $data['name']           = $object->getName();
+        $data['snmp_version']   = $object->getSnmpVersion();
+        $data['snmp_community'] = $object->getSnmpCommunity();
+        $data['location_id']    = $object->getLocation()->getId();
+        $data['type_id']        = $object->getType()->getId();
 
         try
         {
@@ -58,10 +64,12 @@ class DevicesModel extends AbstractModel
      */
     protected function doUpdate($object)
     {
-        $data                = array();
-        $data['name']        = $object->getName();
-        $data['location_id'] = $object->getLocation()->getId();
-        $data['type_id']     = $object->getType()->getId();
+        $data                   = array();
+        $data['name']           = $object->getName();
+        $data['snmp_version']   = $object->getSnmpVersion();
+        $data['snmp_community'] = $object->getSnmpCommunity();
+        $data['location_id']    = $object->getLocation()->getId();
+        $data['type_id']        = $object->getType()->getId();
 
         return $this->executeUpdateById($data, $object);
     }

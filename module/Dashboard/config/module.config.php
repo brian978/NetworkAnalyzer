@@ -13,7 +13,6 @@ return array(
             'Dashboard\Controller\Index' => 'Dashboard\Controller\IndexController',
         )
     ),
-
     'view_manager' => array(
         'strategies' => array(
             'ViewJsonStrategy'

@@ -10,6 +10,7 @@
 namespace Devices\Controller;
 
 use Library\Form\AbstractForm;
+use SNMP\Session;
 
 class IndexController extends AbstractController
 {
@@ -27,7 +28,7 @@ class IndexController extends AbstractController
     /**
      *
      * @param \Library\Form\AbstractForm $form
-     * @param \ArrayAccess $object
+     * @param \ArrayAccess               $object
      */
     protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
     {
@@ -36,6 +37,8 @@ class IndexController extends AbstractController
             'device' => array(
                 'id' => $object->id,
                 'name' => $object->name,
+                'snmp_version' => $object->snmp_version,
+                'snmp_community' => $object->snmp_community,
                 'location' => array(
                     'id' => $object->location_id
                 ),
@@ -44,5 +47,25 @@ class IndexController extends AbstractController
                 )
             )
         ));
+    }
+
+    public function monitorAction()
+    {
+        /** @var $model \Library\Model\AbstractDbModel */
+        $model      = $this->getModel();
+        $deviceInfo = $model->getInfo($this->getEvent()->getRouteMatch()->getParam('id'));
+
+        $config = array(
+            'version' => $deviceInfo->snmp_version,
+            'hostname' => $deviceInfo->ip,
+            'community' => $deviceInfo->snmp_community,
+        );
+
+        $snmpSession = new Session($this->serviceLocator, $config);
+        $output      = $snmpSession->walk('.');
+
+        return array(
+            'sessionOutput' => $output
+        );
     }
 }

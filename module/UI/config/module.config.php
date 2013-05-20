@@ -21,13 +21,11 @@ return array(
             __DIR__ . '/../view'
         ),
     ),
-
     'service_manager' => array(
         'factories' => array(
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
         )
     ),
-
     // Permissions for each controller in the user interface
     'permissions' => array(
 
@@ -38,7 +36,6 @@ return array(
             'users',
             'admin'
         ),
-
         // These are the types of users
         'roles' => array(
             'admin' => array(
@@ -92,7 +89,6 @@ return array(
                 )
             )
         ),
-
         // This section is used by the main controller to determine if the request should be allowed
         'controllers' => array(
             'Dashboard\Controller\Devices' => array(
@@ -104,28 +100,24 @@ return array(
                     'list' => 'view_devices'
                 )
             ),
-
             'Settings\Controller\Index' => array(
                 'resource' => 'admin',
                 'privileges' => array(
                     'all' => 'access'
                 )
             ),
-
             'Settings\Controller\Options' => array(
                 'resource' => 'admin',
                 'privileges' => array(
                     'all' => 'access'
                 )
             ),
-
             'Settings\Controller\Security' => array(
                 'resource' => 'admin',
                 'privileges' => array(
                     'all' => 'access'
                 )
             ),
-
             'Settings\Controller\Users' => array(
                 'resource' => 'users',
                 'privileges' => array(
@@ -140,7 +132,6 @@ return array(
             ),
         )
     ),
-
     // Navigation pages
     'navigation' => array(
         'default' => array(
@@ -174,7 +165,6 @@ return array(
                         'resource' => 'devices',
                         'privilege' => 'view_devices'
                     ),
-
                     // Locations
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
@@ -196,7 +186,6 @@ return array(
                         'resource' => 'devices',
                         'privilege' => 'view_locations'
                     ),
-
                     // Types
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
@@ -218,7 +207,6 @@ return array(
                         'resource' => 'devices',
                         'privilege' => 'view_types'
                     ),
-
                     // Interfaces
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
@@ -240,7 +228,6 @@ return array(
                         'resource' => 'devices',
                         'privilege' => 'view_interfaces'
                     ),
-
                     // Interface types
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
@@ -264,7 +251,6 @@ return array(
                     ),
                 )
             ),
-
             // Users pages
             array(
                 'type' => 'Library\Navigation\Page\Mvc',
@@ -304,7 +290,6 @@ return array(
                     )
                 )
             ),
-
             // Admin pages
             array(
                 'type' => 'Library\Navigation\Page\Mvc',

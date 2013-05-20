@@ -50,7 +50,6 @@ return array(
             ),
         )
     ),
-
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
@@ -60,7 +59,6 @@ return array(
     'translator' => array(
         'locale' => array(
             'en_US',
-
             // Fallback locale
             'en_US'
         ),

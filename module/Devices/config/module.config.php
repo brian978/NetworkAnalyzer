@@ -56,7 +56,6 @@ return array(
             )
         )
     ),
-
     'controllers' => array(
         'invokables' => array(
             'Devices\Controller\Index' => 'Devices\Controller\IndexController',
@@ -66,7 +65,6 @@ return array(
             'Devices\Controller\InterfaceTypes' => 'Devices\Controller\InterfaceTypesController',
         )
     ),
-
     'view_manager' => array(
         'strategies' => array(
             'ViewJsonStrategy'

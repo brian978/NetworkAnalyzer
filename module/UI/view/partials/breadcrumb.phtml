@@ -9,7 +9,7 @@ foreach ($this->pages as $page)
         $css_class = 'current';
     }
 
-    echo    <<<HEREDOC
+    echo <<<HEREDOC
 <div class="breadcrumb_divider"></div>
 <a class="$css_class" href="{$page->getHref()}">
     {$this->translate($page->getLabel())}

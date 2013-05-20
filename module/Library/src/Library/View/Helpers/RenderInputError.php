@@ -31,11 +31,11 @@ class RenderInputError extends AbstractHelper
 
     protected function getMessageString($messages)
     {
-        if(is_array($messages))
+        if (is_array($messages))
         {
             $messages = array_shift($messages);
 
-            if(is_array($messages))
+            if (is_array($messages))
             {
                 return $this->getMessageString($messages);
             }

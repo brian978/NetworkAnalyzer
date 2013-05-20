@@ -57,6 +57,5 @@ class IndexController extends AbstractController
 
     protected function profileAction()
     {
-
     }
 }

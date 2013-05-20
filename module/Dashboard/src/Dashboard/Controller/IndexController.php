@@ -9,6 +9,7 @@
 
 namespace Dashboard\Controller;
 
+use SNMP\Session;
 use UI\Controller\AbstractUiController;
 
 class IndexController extends AbstractUiController

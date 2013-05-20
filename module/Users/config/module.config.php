@@ -56,13 +56,11 @@ return array(
             )
         )
     ),
-
     'controllers' => array(
         'invokables' => array(
             'Users\Controller\Index' => 'Users\Controller\IndexController'
         )
     ),
-
     'view_manager' => array(
         'strategies' => array(
             'ViewJsonStrategy'

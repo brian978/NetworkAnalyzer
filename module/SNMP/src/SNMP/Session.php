@@ -25,10 +25,18 @@ class Session implements ServiceManagerAwareInterface
     protected $session;
 
     /**
-     * @param ServiceManager $serviceManager
+     * @var array
      */
-    public function __construct(ServiceManager $serviceManager)
+    protected $config = array();
+
+    /**
+     * @param ServiceManager $serviceManager
+     * @param                $config
+     */
+    public function __construct(ServiceManager $serviceManager, $config)
     {
+        $this->config = $config;
+
         $this->setServiceManager($serviceManager);
         $this->open();
     }
@@ -41,6 +49,18 @@ class Session implements ServiceManagerAwareInterface
     public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
+    }
+
+    public function __call($name, $arguments = array())
+    {
+        $result = null;
+
+        if (is_callable(array($this->session, $name)))
+        {
+            $result = call_user_func_array(array($this->session, $name), $arguments);
+        }
+
+        return $result;
     }
 
     public function __invoke()
@@ -63,14 +83,10 @@ class Session implements ServiceManagerAwareInterface
                 throw new \RuntimeException('The service manager has not been set');
             }
 
-            /** @var $config \Zend\Config\Config */
-            $config = $this->serviceManager->get('Config');
-            $config = $config['modules']['snmp'];
-
             $this->session = new \SNMP(
-                $config['version'],
-                $config['hostname'],
-                $config['community']
+                $this->config['version'],
+                $this->config['hostname'],
+                $this->config['community']
             );
         }
 
@@ -95,7 +111,5 @@ class Session implements ServiceManagerAwareInterface
         {
             throw new \RuntimeException($this->session->getError());
         }
-
-        return $output;
     }
 }

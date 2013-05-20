@@ -218,10 +218,19 @@ abstract class AbstractFormController extends AbstractUiController
         return '';
     }
 
+    /**
+     * @return array|object
+     */
+    protected function getModel()
+    {
+        /** @var $model \Library\Model\AbstractDbModel */
+        return $this->serviceLocator->get($this->formSpecs['model']);
+    }
+
     public function listAction()
     {
         /** @var $model \Library\Model\AbstractDbModel */
-        $model = $this->serviceLocator->get($this->formSpecs['model']);
+        $model = $this->getModel();
 
         return array(
             'items' => $model->fetch()

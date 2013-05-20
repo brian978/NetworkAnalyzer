@@ -82,7 +82,7 @@ class Iface extends AbstractFieldset
         $device       = new Device();
         $device->mode = Device::MODE_SELECT;
         $device->setServiceLocator($this->serviceLocator);
-        $device->setDenyFilters(array('name'));
+        $device->setDenyFilters(array('name', 'snmp_version', 'snmp_community'));
         $device->loadElements();
 
         $type = new IfaceType();
@@ -92,17 +92,5 @@ class Iface extends AbstractFieldset
 
         $this->add($type);
         $this->add($device);
-    }
-
-    /**
-     * Should return an array specification compatible with
-     * {@link Zend\InputFilter\Factory::createInputFilter()}.
-     *
-     * @return array
-     */
-    public function getInputFilterSpecification()
-    {
-        // Removing the un-required filters (this is useful when you don't show all the fields)
-        return $this->processDenyFilters($this->getGenericInputFilterSpecs());
     }
 }

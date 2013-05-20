@@ -16,6 +16,8 @@
 
         // Retrieving the form elements
         $deviceName = $device->get('name');
+        $deviceSnmpVersion = $device->get('snmp_version');
+        $deviceSnmpCommunity = $device->get('snmp_community');
         $deviceLocation = $location->get('id');
         $deviceType = $device_type->get('id');
 
@@ -23,16 +25,19 @@
         $form->setAttribute('action', $this->url('devices/module', array('action' => 'process'), true))->prepare();
 
         // Messages
-        echo $this->partial('partials/form_generic_message.phtml', array(
-            'success' => $this->success,
-            'messages' => $messages,
-            'successMessage' => $this->translate('The device was added'),
-        ));
+        echo $this->partial('partials/form_generic_message.phtml',
+            array(
+                'success' => $this->success,
+                'messages' => $messages,
+                'successMessage' => $this->translate('The device was added'),
+            ));
 
         // Rendering the form
         echo $this->form()->openTag($form);
 
         echo $this->showInputError($deviceName) . $this->formRow($deviceName);
+        echo $this->showInputError($deviceSnmpVersion) . $this->formRow($deviceSnmpVersion);
+        echo $this->showInputError($deviceSnmpCommunity) . $this->formRow($deviceSnmpCommunity);
         echo $this->showInputError($deviceLocation) . $this->formRow($deviceLocation);
         echo $this->showInputError($deviceType) . $this->formRow($deviceType);
 
