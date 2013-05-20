@@ -15,9 +15,9 @@ class Users extends AbstractDbModel
 {
     protected $table = 'users';
 
-    public function fetch()
+    public function fetch($locale, $params = array())
     {
-        $this->addJoin('user_roles', 'user_roles.id = users.role_id', array('roleName' => 'name_ro_RO'));
+        $this->addJoin('user_roles', 'user_roles.id = users.role_id', array('roleName' => 'name_' . $locale));
 
         return parent::fetch();
     }

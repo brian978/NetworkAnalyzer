@@ -44,4 +44,19 @@ class IndexController extends AbstractController
             )
         ));
     }
+
+    public function listAction()
+    {
+        /** @var $model \Library\Model\AbstractDbModel */
+        $model = $this->serviceLocator->get($this->formSpecs['model']);
+
+        return array(
+            'items' => $model->fetch($this->getServiceLocator()->get('translator')->getLocale())
+        );
+    }
+
+    protected function profileAction()
+    {
+
+    }
 }

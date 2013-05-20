@@ -54,7 +54,7 @@ class Module extends MainModule
                 $this,
                 'setLocale'
             )
-        );
+        , 100);
     }
 
     public function setLocale(MvcEvent $e)

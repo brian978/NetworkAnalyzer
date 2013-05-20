@@ -90,9 +90,15 @@ abstract class AbstractFormController extends AbstractUiController
      */
     public function addFormAction()
     {
-        $viewParams = array();
-        $post       = array();
-        $success    = filter_var($this->getEvent()->getRouteMatch()->getParam('success'), FILTER_VALIDATE_BOOLEAN);
+        $viewParams   = array();
+        $post         = array();
+        $successParam = $this->getEvent()->getRouteMatch()->getParam('success');
+        $success      = null;
+
+        if ($successParam !== null)
+        {
+            $success = filter_var($successParam, FILTER_VALIDATE_BOOLEAN);
+        }
 
         // Loading the POST data
         if (is_array($tmpPost = $this->PostRedirectGet()))
@@ -105,7 +111,7 @@ abstract class AbstractFormController extends AbstractUiController
         // We need to call the isValid method or else we won't have any error messages
         if (!empty($post))
         {
-            $form->isValid();var_dump($form->getMessages());die();
+            $form->isValid();
         }
 
         // Adding view params
@@ -122,9 +128,15 @@ abstract class AbstractFormController extends AbstractUiController
      */
     public function editFormAction()
     {
-        $viewParams = array();
-        $post       = array();
-        $success    = filter_var($this->getEvent()->getRouteMatch()->getParam('success'), FILTER_VALIDATE_BOOLEAN);
+        $viewParams   = array();
+        $post         = array();
+        $successParam = $this->getEvent()->getRouteMatch()->getParam('success');
+        $success      = null;
+
+        if ($successParam !== null)
+        {
+            $success = filter_var($successParam, FILTER_VALIDATE_BOOLEAN);
+        }
 
         // Loading the POST data
         if (is_array($tmpPost = $this->PostRedirectGet()))
