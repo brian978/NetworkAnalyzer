@@ -13,7 +13,14 @@ use Library\Entity\AbstractEntity;
 
 class User extends AbstractEntity
 {
+    /**
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @var string
+     */
     protected $email;
 
     /**
@@ -21,6 +28,9 @@ class User extends AbstractEntity
      */
     protected $role;
 
+    /**
+     * @param string $email
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -31,6 +41,9 @@ class User extends AbstractEntity
         return $this->email;
     }
 
+    /**
+     * @param $name
+     */
     public function setName($name)
     {
         $this->name = $name;
