@@ -18,6 +18,7 @@ class AbstractModel extends AbstractDbModel
      * This returns the number of affected rows
      *
      * @param \Devices\Entity\Location $object
+     *
      * @return int
      */
     protected function doInsert($object)
@@ -27,13 +28,10 @@ class AbstractModel extends AbstractDbModel
         $data         = array();
         $data['name'] = $object->getName();
 
-        try
-        {
+        try {
             // If successful will return the number of rows
             $result = $this->insert($data);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
         }
 
         return $result;
@@ -43,6 +41,7 @@ class AbstractModel extends AbstractDbModel
      * This returns the number of affected rows
      *
      * @param \Devices\Entity\Location $object
+     *
      * @return int
      */
     protected function doUpdate($object)

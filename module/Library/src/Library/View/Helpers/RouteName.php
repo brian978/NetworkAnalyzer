@@ -20,6 +20,7 @@ class RouteName extends AbstractHelper
      * Set the View object
      *
      * @param  Renderer $view
+     *
      * @return AbstractHelper
      */
     public function setView(Renderer $view)
@@ -33,8 +34,7 @@ class RouteName extends AbstractHelper
             ->getRouteMatch()
             ->getMatchedRouteName();
 
-        if ($this->routeName == 'home')
-        {
+        if ($this->routeName == 'home') {
             $this->routeName = 'index/module';
         }
     }

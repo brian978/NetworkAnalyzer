@@ -19,8 +19,7 @@ class RenderInputError extends AbstractHelper
         $message  = '';
         $messages = $element->getMessages();
 
-        if (!empty($messages))
-        {
+        if (!empty($messages)) {
             $message = $this->view
                 ->plugin('partial')
                 ->__invoke('partials/form_errors.phtml', array('message' => $this->getMessageString($messages)));
@@ -31,12 +30,10 @@ class RenderInputError extends AbstractHelper
 
     protected function getMessageString($messages)
     {
-        if (is_array($messages))
-        {
+        if (is_array($messages)) {
             $messages = array_shift($messages);
 
-            if (is_array($messages))
-            {
+            if (is_array($messages)) {
                 return $this->getMessageString($messages);
             }
         }

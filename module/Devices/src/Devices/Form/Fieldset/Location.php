@@ -27,14 +27,14 @@ class Location extends AbstractFieldset
 
         $this->add(
             array(
-                'type' => 'Zend\Form\Element\Select',
-                'name' => 'id',
-                'options' => array(
-                    'label' => 'Location',
+                'type'       => 'Zend\Form\Element\Select',
+                'name'       => 'id',
+                'options'    => array(
+                    'label'            => 'Location',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
-                    'value_options' => $this->getValueOptions()
+                    'value_options'    => $this->getValueOptions()
                 ),
                 'attributes' => array(
                     'required' => true
@@ -44,9 +44,9 @@ class Location extends AbstractFieldset
 
         $this->add(
             array(
-                'name' => 'name',
-                'options' => array(
-                    'label' => 'Name',
+                'name'       => 'name',
+                'options'    => array(
+                    'label'            => 'Name',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),

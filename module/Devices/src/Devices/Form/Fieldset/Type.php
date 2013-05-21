@@ -27,14 +27,14 @@ class Type extends AbstractFieldset
 
         $this->add(
             array(
-                'type' => 'Zend\Form\Element\Select',
-                'name' => 'id',
-                'options' => array(
-                    'label' => 'Type',
+                'type'       => 'Zend\Form\Element\Select',
+                'name'       => 'id',
+                'options'    => array(
+                    'label'            => 'Type',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
-                    'value_options' => $this->getValueOptions()
+                    'value_options'    => $this->getValueOptions()
                 ),
                 'attributes' => array(
                     'required' => 'true'
@@ -44,9 +44,9 @@ class Type extends AbstractFieldset
 
         $this->add(
             array(
-                'name' => 'name',
-                'options' => array(
-                    'label' => 'Name',
+                'name'       => 'name',
+                'options'    => array(
+                    'label'            => 'Name',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -67,22 +67,22 @@ class Type extends AbstractFieldset
     public function getInputFilterSpecification()
     {
         $filters = array(
-            'id' => array(
+            'id'   => array(
                 'validators' => array(
                     array(
-                        'name' => 'greater_than',
+                        'name'    => 'greater_than',
                         'options' => array(
-                            'min' => 0,
+                            'min'     => 0,
                             'message' => 'You must select a value'
                         )
                     )
                 )
             ),
             'name' => array(
-                'required' => true,
+                'required'   => true,
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'min' => 2
                         )

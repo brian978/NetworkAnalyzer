@@ -19,37 +19,43 @@ abstract class AbstractFormController extends AbstractUiController
      *
      * @var array
      */
-    protected $formSpecs = array(
-        'type' => '',
-        'object' => '',
-        'model' => '',
-        'dataKey' => '',
-    );
+    protected $formSpecs
+        = array(
+            'type'    => '',
+            'object'  => '',
+            'model'   => '',
+            'dataKey' => '',
+        );
 
     /**
      * @param AbstractForm $form
      * @param \ArrayAccess $object
+     *
      * @return void
      */
     protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
     {
         // Arranging the data properly so that the form would be auto-populated
-        $form->setData(array(
-            $this->formSpecs['dataKey'] => array(
-                'id' => $object->id,
-                'name' => $object->name,
+        $form->setData(
+            array(
+                $this->formSpecs['dataKey'] => array(
+                    'id'   => $object->id,
+                    'name' => $object->name,
+                )
             )
-        ));
+        );
     }
 
     /**
      * @param array $data
+     *
      * @return void
      */
     abstract protected function redirectOnSuccess(array $data);
 
     /**
      * @param array $data
+     *
      * @return void
      */
     abstract protected function redirectOnFail(array $data);
@@ -59,6 +65,7 @@ abstract class AbstractFormController extends AbstractUiController
      *
      * @param array $data
      * @param array $params
+     *
      * @return \Library\Form\AbstractForm
      */
     protected function getForm(array $data = array(), $params = array())
@@ -71,8 +78,7 @@ abstract class AbstractFormController extends AbstractUiController
         $object = new $this->formSpecs['object']();
 
         // The form mode must be set before the loadElements because it's used when retrieving the baseFieldset
-        if (isset($params['form_mode']))
-        {
+        if (isset($params['form_mode'])) {
             $form->mode = $params['form_mode'];
         }
 
@@ -95,22 +101,19 @@ abstract class AbstractFormController extends AbstractUiController
         $successParam = $this->getEvent()->getRouteMatch()->getParam('success');
         $success      = null;
 
-        if ($successParam !== null)
-        {
+        if ($successParam !== null) {
             $success = filter_var($successParam, FILTER_VALIDATE_BOOLEAN);
         }
 
         // Loading the POST data
-        if (is_array($tmpPost = $this->PostRedirectGet()))
-        {
+        if (is_array($tmpPost = $this->PostRedirectGet())) {
             $post = $tmpPost;
         }
 
         $form = $this->getForm($post);
 
         // We need to call the isValid method or else we won't have any error messages
-        if (!empty($post))
-        {
+        if (!empty($post)) {
             $form->isValid();
         }
 
@@ -133,32 +136,26 @@ abstract class AbstractFormController extends AbstractUiController
         $successParam = $this->getEvent()->getRouteMatch()->getParam('success');
         $success      = null;
 
-        if ($successParam !== null)
-        {
+        if ($successParam !== null) {
             $success = filter_var($successParam, FILTER_VALIDATE_BOOLEAN);
         }
 
         // Loading the POST data
-        if (is_array($tmpPost = $this->PostRedirectGet()))
-        {
+        if (is_array($tmpPost = $this->PostRedirectGet())) {
             $post = $tmpPost;
         }
 
         $form = $this->getForm($post, array('form_mode' => AbstractForm::MODE_EDIT));
 
         // We need to call the isValid method or else we won't have any error messages
-        if (!empty($post))
-        {
+        if (!empty($post)) {
             $form->isValid();
-        }
-        else
-        {
+        } else {
             /** @var $model \Library\Model\AbstractDbModel */
             $model  = $this->serviceLocator->get($this->formSpecs['model']);
             $object = $model->getInfo($this->params('id'));
 
-            if (is_object($object) && $object instanceof \ArrayAccess)
-            {
+            if (is_object($object) && $object instanceof \ArrayAccess) {
                 $this->populateEditData($form, $object);
             }
         }
@@ -180,29 +177,23 @@ abstract class AbstractFormController extends AbstractUiController
         $action    = 'list';
         $hasFailed = true;
 
-        if ($this->request->isPost())
-        {
+        if ($this->request->isPost()) {
             $form    = $this->getForm($this->request->getPost()->toArray());
             $isValid = $form->isValid();
 
-            if ($form->getObject()->getId() !== 0)
-            {
+            if ($form->getObject()->getId() !== 0) {
                 $action = 'editForm';
-            }
-            else
-            {
+            } else {
                 $action = 'addForm';
             }
 
             // Redirect regarding if valid or not but with different params
-            if ($isValid === true)
-            {
+            if ($isValid === true) {
                 /** @var $model \Library\Model\AbstractDbModel */
                 $model  = $this->serviceLocator->get($this->formSpecs['model']);
                 $result = $model->save($form->getObject());
 
-                if ($result > 0)
-                {
+                if ($result > 0) {
                     $hasFailed = false;
 
                     $this->redirectOnSuccess(array('action' => $action));
@@ -210,8 +201,7 @@ abstract class AbstractFormController extends AbstractUiController
             }
         }
 
-        if ($hasFailed === true)
-        {
+        if ($hasFailed === true) {
             $this->redirectOnFail(array('action' => $action));
         }
 

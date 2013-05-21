@@ -27,6 +27,7 @@ class InterfacesModel extends AbstractModel
      * This returns the number of affected rows
      *
      * @param \Devices\Entity\Iface $object
+     *
      * @return int
      */
     protected function doInsert($object)
@@ -40,13 +41,10 @@ class InterfacesModel extends AbstractModel
         $data['type_id']   = $object->getType()->getId();
         $data['device_id'] = $object->getDevice()->getId();
 
-        try
-        {
+        try {
             // If successful will return the number of rows
             $result = $this->insert($data);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
         }
 
         return $result;
@@ -56,6 +54,7 @@ class InterfacesModel extends AbstractModel
      * This returns the number of affected rows
      *
      * @param \Devices\Entity\Iface $object
+     *
      * @return int
      */
     protected function doUpdate($object)

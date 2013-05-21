@@ -33,24 +33,19 @@ class Module extends MainModule
     {
         return array(
             'factories' => array(
-                'Devices\Model\DevicesModel' => function ($serviceManager)
-                {
+                'Devices\Model\DevicesModel'        => function ($serviceManager) {
                     return new DevicesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
-                'Devices\Model\LocationsModel' => function ($serviceManager)
-                {
+                'Devices\Model\LocationsModel'      => function ($serviceManager) {
                     return new LocationsModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
-                'Devices\Model\TypesModel' => function ($serviceManager)
-                {
+                'Devices\Model\TypesModel'          => function ($serviceManager) {
                     return new TypesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
-                'Devices\Model\InterfacesModel' => function ($serviceManager)
-                {
+                'Devices\Model\InterfacesModel'     => function ($serviceManager) {
                     return new InterfacesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
-                'Devices\Model\InterfaceTypesModel' => function ($serviceManager)
-                {
+                'Devices\Model\InterfaceTypesModel' => function ($serviceManager) {
                     return new InterfaceTypesModel($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
             )

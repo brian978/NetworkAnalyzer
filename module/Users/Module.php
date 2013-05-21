@@ -29,12 +29,10 @@ class Module extends MainModule
     {
         return array(
             'factories' => array(
-                'Users\Model\UsersModel' => function ($serviceManager)
-                {
+                'Users\Model\UsersModel' => function ($serviceManager) {
                     return new Users($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
-                'Users\Model\RolesModel' => function ($serviceManager)
-                {
+                'Users\Model\RolesModel' => function ($serviceManager) {
                     return new Roles($serviceManager->get('Zend\Db\Adapter\Adapter'));
                 },
             )

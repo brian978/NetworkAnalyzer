@@ -36,8 +36,7 @@ class Module extends MainModule
     {
         $env = getenv('APPLICATION_ENV');
 
-        if ($env !== false && ($env === 'development' || $env === 'staging'))
-        {
+        if ($env !== false && ($env === 'development' || $env === 'staging')) {
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
         }

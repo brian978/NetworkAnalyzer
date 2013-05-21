@@ -69,6 +69,7 @@ abstract class AbstractDbModel extends AbstractTableGateway
 
     /**
      * @param $id
+     *
      * @return array
      */
     public function getInfo($id)
@@ -81,16 +82,14 @@ abstract class AbstractDbModel extends AbstractTableGateway
     /**
      *
      * @param AbstractEntity $object
+     *
      * @return int
      */
     public function save(AbstractEntity $object)
     {
-        if ($object->getId() === 0)
-        {
+        if ($object->getId() === 0) {
             $result = $this->doInsert($object);
-        }
-        else
-        {
+        } else {
             $result = $this->doUpdate($object);
         }
 
@@ -103,12 +102,12 @@ abstract class AbstractDbModel extends AbstractTableGateway
      * @param string     $field
      * @param string|int $value
      * @param string     $table
+     *
      * @return string
      */
     protected function getWhere($field, $value, $table = null)
     {
-        if ($table === null)
-        {
+        if ($table === null) {
             $table = $this->table;
         }
 
@@ -138,13 +137,13 @@ abstract class AbstractDbModel extends AbstractTableGateway
      * @param string     $field
      * @param string|int $value
      * @param string     $table
+     *
      * @return $this
      */
     public function addWhere($field, $value, $table = null)
     {
         // Resetting the where if the fetch method has already run
-        if ($this->fetchRun === true)
-        {
+        if ($this->fetchRun === true) {
             $this->resetSelectJoinWhere();
         }
 
@@ -160,13 +159,13 @@ abstract class AbstractDbModel extends AbstractTableGateway
      * @param        $on
      * @param string $columns
      * @param string $type
+     *
      * @return $this
      */
     public function addJoin($name, $on, $columns = Select::SQL_STAR, $type = Select::JOIN_INNER)
     {
         // Resetting the where if the fetch method has already run
-        if ($this->fetchRun === true)
-        {
+        if ($this->fetchRun === true) {
             $this->resetSelectJoinWhere();
         }
 
@@ -185,6 +184,7 @@ abstract class AbstractDbModel extends AbstractTableGateway
      * Used to add a column for the select
      *
      * @param array $columns
+     *
      * @return $this
      */
     public function addColumns(array $columns)
@@ -198,6 +198,7 @@ abstract class AbstractDbModel extends AbstractTableGateway
      * This method is used to apply a custom row processing by the child models
      *
      * @param $row
+     *
      * @return mixed
      */
     protected function processRow($row)
@@ -208,19 +209,17 @@ abstract class AbstractDbModel extends AbstractTableGateway
     /**
      * @param array          $data
      * @param AbstractEntity $object
+     *
      * @return int
      */
     protected function executeUpdateById(array $data, AbstractEntity $object)
     {
         $result = 0;
 
-        try
-        {
+        try {
             // If successful will return the number of rows
             $result = $this->update($data, array($this->getWhere('id', $object->getId())));
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
         }
 
         return $result;
@@ -237,25 +236,18 @@ abstract class AbstractDbModel extends AbstractTableGateway
         $select = $this->getSql()->select()->where($this->where);
 
         // Adding the joins for the select
-        foreach ($this->join as $join)
-        {
+        foreach ($this->join as $join) {
             call_user_func_array(array($select, 'join'), $join);
         }
 
-        try
-        {
+        try {
             $resultSet = $this->selectWith($select);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
         }
 
-        if (isset($resultSet))
-        {
-            if ($resultSet->count() > 0)
-            {
-                foreach ($resultSet as $row)
-                {
+        if (isset($resultSet)) {
+            if ($resultSet->count() > 0) {
+                foreach ($resultSet as $row) {
                     $rows[$row['id']] = $this->processRow($row);
                 }
             }

@@ -55,8 +55,8 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected $denyFilters = array();
 
     /**
-     * @param string  $name
-     * @param array   $options
+     * @param string $name
+     * @param array  $options
      */
     public function __construct($name = null, $options = array())
     {
@@ -67,6 +67,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
 
     /**
      * @param array $filters
+     *
      * @return $this
      */
     public function setDenyFilters(array $filters)
@@ -80,6 +81,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
      * Set service locator
      *
      * @param ServiceLocatorInterface $serviceLocator
+     *
      * @return $this
      */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
@@ -104,8 +106,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
      */
     protected function getModel()
     {
-        if (!is_object($this->model))
-        {
+        if (!is_object($this->model)) {
             $this->setModel($this->modelName);
         }
 
@@ -117,18 +118,17 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
      *
      * @param      $serviceName
      * @param bool $lockModel
+     *
      * @return $this
      */
     protected function setModel($serviceName, $lockModel = false)
     {
         // By default it can be changed any time so we only need to set it when it's true
-        if ($lockModel === true)
-        {
+        if ($lockModel === true) {
             $this->lockModel = $lockModel;
         }
 
-        if (!is_object($this->model) || $this->lockModel === false)
-        {
+        if (!is_object($this->model) || $this->lockModel === false) {
             $this->model = $this->serviceLocator->get($serviceName);
         }
 
@@ -144,15 +144,16 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     {
         $options = $this->model->fetch();
 
-        foreach ($options as $value => $row)
-        {
+        foreach ($options as $value => $row) {
             $options[$value] = $row['name'];
         }
 
-        $options = array_merge(array(
+        $options = array_merge(
+            array(
                 0 => '...'
             ),
-            $options);
+            $options
+        );
 
         return $options;
     }
@@ -160,18 +161,16 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     /**
      *
      * @param string $label
+     *
      * @return array
      */
     protected function getIdElement($label)
     {
-        if ($this->mode == self::MODE_SELECT)
-        {
+        if ($this->mode == self::MODE_SELECT) {
             $this->getModel();
 
             $element = $this->getSelectId($label);
-        }
-        else
-        {
+        } else {
             $element = $this->getHiddenId();
         }
 
@@ -185,8 +184,8 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected function getHiddenId()
     {
         return array(
-            'type' => 'Zend\Form\Element\Hidden',
-            'name' => 'id',
+            'type'    => 'Zend\Form\Element\Hidden',
+            'name'    => 'id',
             'options' => array(
                 'value' => 0
             )
@@ -195,19 +194,20 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
 
     /**
      * @param $label
+     *
      * @return array
      */
     protected function getSelectId($label)
     {
         return array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'id',
-            'options' => array(
-                'label' => $label,
+            'type'       => 'Zend\Form\Element\Select',
+            'name'       => 'id',
+            'options'    => array(
+                'label'            => $label,
                 'label_attributes' => array(
                     'class' => 'form_row'
                 ),
-                'value_options' => $this->getValueOptions()
+                'value_options'    => $this->getValueOptions()
             ),
             'attributes' => array(
                 'required' => true
@@ -223,22 +223,22 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected function getGenericInputFilterSpecs()
     {
         $filters = array(
-            'id' => array(
+            'id'   => array(
                 'validators' => array(
                     array(
-                        'name' => 'greater_than',
+                        'name'    => 'greater_than',
                         'options' => array(
-                            'min' => 0,
+                            'min'     => 0,
                             'message' => 'You must select a value'
                         )
                     )
                 )
             ),
             'name' => array(
-                'required' => true,
+                'required'   => true,
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'min' => 3
                         )
@@ -254,15 +254,14 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
      * Eliminates the filters that are in the deny list
      *
      * @param array $filters
+     *
      * @return array
      */
     protected function processDenyFilters(array $filters)
     {
         // Removing the un-required filters (this is useful when you don't show all the fields)
-        foreach ($this->denyFilters as $input)
-        {
-            if (isset($filters[$input]))
-            {
+        foreach ($this->denyFilters as $input) {
+            if (isset($filters[$input])) {
                 unset($filters[$input]);
             }
         }

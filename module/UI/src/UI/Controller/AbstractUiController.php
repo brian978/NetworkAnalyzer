@@ -32,8 +32,10 @@ abstract class AbstractUiController extends AbstractActionController
      * Dispatch a request
      *
      * @events dispatch.pre, dispatch.post
+     *
      * @param  Request       $request
      * @param  null|Response $response
+     *
      * @return Response|mixed
      */
     public function dispatch(Request $request, Response $response = null)
@@ -48,12 +50,12 @@ abstract class AbstractUiController extends AbstractActionController
      * Execute the request
      *
      * @param \Zend\Mvc\MvcEvent $e
+     *
      * @return mixed
      */
     public function onDispatch(MvcEvent $e)
     {
-        if (!$this->checkAcl())
-        {
+        if (!$this->checkAcl()) {
             /** @var $routeMatch \Zend\Mvc\Router\RouteMatch */
             $routeMatch = $e->getRouteMatch();
             $routeMatch->setParam('action', 'denied');
@@ -92,34 +94,25 @@ abstract class AbstractUiController extends AbstractActionController
         $privilege   = null;
 
         // If there is not permission set for a given controller we allow the response
-        if (!isset($permissions[$controller]))
-        {
+        if (!isset($permissions[$controller])) {
             $allow = true;
-        }
-        else
-        {
-            if (!isset($permissions[$controller]['resource']) || !isset($permissions[$controller]['privileges']))
-            {
+        } else {
+            if (!isset($permissions[$controller]['resource']) || !isset($permissions[$controller]['privileges'])) {
                 throw new \RuntimeException('Configuration invalid, missing "resource" or "privileges" entry');
             }
 
             $resource = $permissions[$controller]['resource'];
 
-            if (isset($permissions[$controller]['privileges'][$action]))
-            {
+            if (isset($permissions[$controller]['privileges'][$action])) {
                 $privilege = $permissions[$controller]['privileges'][$action];
-            }
-            else if (isset($permissions[$controller]['privileges']['all']))
-            {
+            } else if (isset($permissions[$controller]['privileges']['all'])) {
                 $privilege = $permissions[$controller]['privileges']['all'];
             }
         }
 
-        if (!is_null($resource) && !is_null($privilege))
-        {
+        if (!is_null($resource) && !is_null($privilege)) {
             // Checking if the privilege is actually a pointer to an inheritance
-            if (isset($permissions[$controller]['privileges'][$privilege]))
-            {
+            if (isset($permissions[$controller]['privileges'][$privilege])) {
                 $privilege = $permissions[$controller]['privileges'][$privilege];
             }
 

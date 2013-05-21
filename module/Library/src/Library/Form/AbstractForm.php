@@ -59,14 +59,14 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      * For something more complex use only the getBaseFieldsetObject() method
      *
      * @param AbstractFieldset $object
+     *
      * @return AbstractFieldset
      */
     final protected function setupBaseFieldsetObject(AbstractFieldset $object)
     {
         $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
 
-        if ($this->mode == self::MODE_ADD)
-        {
+        if ($this->mode == self::MODE_ADD) {
             $object->setDenyFilters(array('id'));
         }
 
@@ -92,9 +92,9 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
 
         $this->add(
             array(
-                'name' => 'submit',
+                'name'       => 'submit',
                 'attributes' => array(
-                    'type' => 'submit',
+                    'type'  => 'submit',
                     'value' => 'Send'
                 )
             )
@@ -110,6 +110,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      *                                 Default is null, which sets no translator.
      * @param  string     $textDomain  [optional] text domain
      *                                 Default is null, which skips setTranslatorTextDomain
+     *
      * @return TranslatorAwareInterface
      */
     public function setTranslator(Translator $translator = null, $textDomain = null)
@@ -146,6 +147,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      *
      * @param  bool $enabled [optional] whether translator should be used.
      *                       Default is true.
+     *
      * @return TranslatorAwareInterface
      */
     public function setTranslatorEnabled($enabled = true)
@@ -167,6 +169,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      * Set translation text domain
      *
      * @param  string $textDomain
+     *
      * @return TranslatorAwareInterface
      */
     public function setTranslatorTextDomain($textDomain = 'default')

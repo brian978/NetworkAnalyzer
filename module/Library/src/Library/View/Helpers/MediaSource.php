@@ -26,14 +26,13 @@ class MediaSource extends AbstractHelper
         $basePath = $view->getHelperPluginManager()->get('BasePath');
         $url      = $basePath() . '/';
 
-        switch ($mediaType)
-        {
-            case 'images':
-                $url .= 'images/';
-                break;
+        switch ($mediaType) {
+        case 'images':
+            $url .= 'images/';
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         $url .= $mediaName;

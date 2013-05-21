@@ -18,19 +18,19 @@ class Element extends \ArrayIterator
         parent::__construct(
             array(
                 'viewModel' => $viewModel,
-                'id' => $id
+                'id'        => $id
             )
         );
     }
 
     /**
      * @param $id
+     *
      * @return \Design\Library\Element
      */
     public function setId($id)
     {
-        if (is_string($id) || is_numeric($id))
-        {
+        if (is_string($id) || is_numeric($id)) {
             $this->offsetSet('id', $id);
         }
 
@@ -39,14 +39,14 @@ class Element extends \ArrayIterator
 
     /**
      * @param $name
+     *
      * @return mixed|null
      */
     public function __get($name)
     {
         $val = null;
 
-        if ($this->offsetExists($name))
-        {
+        if ($this->offsetExists($name)) {
             $val = $this->offsetGet($name);
         }
 

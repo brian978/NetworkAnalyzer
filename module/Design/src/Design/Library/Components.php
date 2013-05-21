@@ -49,12 +49,12 @@ class Components
 
     /**
      * @param mixed $position
+     *
      * @return \Design\Library\Components
      */
     public function setDefaultPosition($position)
     {
-        if (is_string($position) || is_numeric($position))
-        {
+        if (is_string($position) || is_numeric($position)) {
             $this->defaultPosition = $position;
         }
 
@@ -63,6 +63,7 @@ class Components
 
     /**
      * @param \Zend\View\Renderer\RendererInterface $renderer
+     *
      * @return Components
      */
     public function setRenderer(RendererInterface $renderer)
@@ -77,6 +78,7 @@ class Components
      * @param string                     $id
      * @param                            $priority
      * @param                            $position
+     *
      * @return Element
      */
     public function createElement(
@@ -96,19 +98,18 @@ class Components
      * @param \Design\Library\Element $element The position can be either numeric or a string
      * @param int                     $priority
      * @param string                  $position
+     *
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      * @return \Design\Library\Components
      */
     public function add(Element $element, $priority = 0, $position = '')
     {
-        if (!is_string($position) && !is_numeric($position) && !is_numeric($priority))
-        {
+        if (!is_string($position) && !is_numeric($position) && !is_numeric($priority)) {
             throw new \InvalidArgumentException('The position must be a string or a number and the priority must be numeric');
         }
 
-        if (empty($position))
-        {
+        if (empty($position)) {
             $position = $this->defaultPosition;
         }
 
@@ -118,21 +119,18 @@ class Components
          * --------------------------------
          */
         // Initializing the components array entry
-        if (!isset($this->components[$position]))
-        {
+        if (!isset($this->components[$position])) {
             $this->components[$position] = array();
         }
 
         // Registering the element in the components array only if it has an ID
-        if (!empty($element['id']))
-        {
-            if (isset($this->components[$position][$element['id']]))
-            {
+        if (!empty($element['id'])) {
+            if (isset($this->components[$position][$element['id']])) {
                 throw new \RuntimeException('Element ID is already set');
             }
 
             $this->components[$position][$element['id']] = array(
-                'object' => $element,
+                'object'   => $element,
                 'priority' => $priority
             );
         }
@@ -143,8 +141,7 @@ class Components
          * --------------------------------
          */
         // Initializing the queues array entry
-        if (!isset($this->queues[$position]))
-        {
+        if (!isset($this->queues[$position])) {
             $this->queues[$position] = new $this->queueClass;
         }
 
@@ -162,25 +159,23 @@ class Components
      * @param mixed $position
      * @param       $elementId
      * @param       $position
+     *
      * @throws \InvalidArgumentException
      * @return Components
      */
     public function remove($elementId, $position)
     {
-        if (!is_string($position) && !is_numeric($position))
-        {
+        if (!is_string($position) && !is_numeric($position)) {
             throw new \InvalidArgumentException('The position must be a string or a number');
         }
 
-        if (!is_string($elementId) && !is_numeric($elementId))
-        {
+        if (!is_string($elementId) && !is_numeric($elementId)) {
             throw new \InvalidArgumentException('The element ID must be a string or a number');
         }
 
         // Need to remove the element from the components first so that
         // the queue can be rebuilt properly
-        if (isset($this->components[$position][$elementId]))
-        {
+        if (isset($this->components[$position][$elementId])) {
             unset($this->components[$position][$elementId]);
 
             $this->rebuildQueue($position);
@@ -193,13 +188,13 @@ class Components
      * The method is used when an element is deleted from the components array
      *
      * @param $position
+     *
      * @throws \InvalidArgumentException
      * @return Components
      */
     public function rebuildQueue($position)
     {
-        if (!is_string($position) && !is_numeric($position))
-        {
+        if (!is_string($position) && !is_numeric($position)) {
             throw new \InvalidArgumentException('The position must be a string or a number');
         }
 
@@ -208,8 +203,7 @@ class Components
         $this->queues[$position] = $queue = new $this->queueClass;
 
         // Rebuilding the entire queue with the priorities and all
-        foreach ($this->components[$position] as $data)
-        {
+        foreach ($this->components[$position] as $data) {
             $queue->insert($data['object'], $data['priority']);
         }
 
@@ -221,25 +215,23 @@ class Components
      *
      * @param mixed $elementId
      * @param mixed $position
+     *
      * @throws \InvalidArgumentException
      * @return bool
      */
     public function isIdTaken($elementId, $position)
     {
-        if (!is_string($position) && !is_numeric($position))
-        {
+        if (!is_string($position) && !is_numeric($position)) {
             throw new \InvalidArgumentException('The position must be a string or a number');
         }
 
-        if (!is_string($elementId) && !is_numeric($elementId))
-        {
+        if (!is_string($elementId) && !is_numeric($elementId)) {
             throw new \InvalidArgumentException('The element ID must be a string or a number');
         }
 
         $result = false;
 
-        if (isset($this->components[$position][$elementId]))
-        {
+        if (isset($this->components[$position][$elementId])) {
             $result = true;
         }
 
@@ -250,20 +242,19 @@ class Components
      * Returns the number of elements for a position
      *
      * @param $position
+     *
      * @return int
      * @throws \InvalidArgumentException
      */
     public function has($position)
     {
-        if (!is_string($position) && !is_numeric($position))
-        {
+        if (!is_string($position) && !is_numeric($position)) {
             throw new \InvalidArgumentException('The position must be a string or a number');
         }
 
         $count = 0;
 
-        if (isset($this->queues[$position]))
-        {
+        if (isset($this->queues[$position])) {
             /** @var $queue \SplPriorityQueue */
             $queue = $this->queues[$position];
             $count = $queue->count();
@@ -274,14 +265,14 @@ class Components
 
     /**
      * @param \SplPriorityQueue $queue
+     *
      * @return string
      */
     protected function renderQueue(\SplPriorityQueue $queue)
     {
         $rendered = '';
 
-        while ($queue->valid())
-        {
+        while ($queue->valid()) {
             $rendered .= $this->renderer->render($queue->current()->viewModel);
 
             $queue->next();
@@ -295,34 +286,29 @@ class Components
 
     /**
      * @param mixed $position
+     *
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      * @return string
      */
     public function render($position = null)
     {
-        if (!is_object($this->renderer))
-        {
+        if (!is_object($this->renderer)) {
             throw new \RuntimeException('The renderer has not been set');
         }
 
-        if ($position !== null && !is_string($position) && !is_numeric($position))
-        {
+        if ($position !== null && !is_string($position) && !is_numeric($position)) {
             throw new \InvalidArgumentException('The position must be a string or a number');
         }
 
         $rendered = '';
 
-        if ($position == null)
-        {
+        if ($position == null) {
             /** @var $queue \SplPriorityQueue */
-            foreach ($this->queues as $queue)
-            {
+            foreach ($this->queues as $queue) {
                 $rendered .= $this->renderQueue($queue);
             }
-        }
-        else if (isset($this->queues[$position]))
-        {
+        } else if (isset($this->queues[$position])) {
             /** @var $queue \SplPriorityQueue */
             $queue = $this->queues[$position];
 

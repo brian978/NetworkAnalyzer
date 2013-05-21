@@ -24,6 +24,7 @@ abstract class AbstractController extends AbstractFormController
 
     /**
      * @param array $data
+     *
      * @return void
      */
     protected function redirectOnFail(array $data)

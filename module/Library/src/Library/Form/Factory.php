@@ -22,8 +22,7 @@ class Factory extends ZendFormFactory
 
     protected function getTranslator()
     {
-        if (!is_object($this->translator))
-        {
+        if (!is_object($this->translator)) {
             $this->translator = $this->getFormElementManager()->getServiceLocator()->get('translator');
         }
 
@@ -38,19 +37,18 @@ class Factory extends ZendFormFactory
      * represents simply an element.
      *
      * @param  array|Traversable $spec
+     *
      * @return ElementInterface
      */
     public function create($spec)
     {
         $form = parent::create($spec);
 
-        if ($form instanceof TranslatorAwareInterface)
-        {
+        if ($form instanceof TranslatorAwareInterface) {
             $form->setTranslator($this->getTranslator());
         }
 
-        if ($form instanceof ServiceLocatorAwareInterface)
-        {
+        if ($form instanceof ServiceLocatorAwareInterface) {
             $form->setServiceLocator($this->getFormElementManager()->getServiceLocator());
         }
 

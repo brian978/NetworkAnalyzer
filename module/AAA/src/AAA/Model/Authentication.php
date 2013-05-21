@@ -45,6 +45,7 @@ class Authentication extends AuthenticationService
 
     /**
      * @param array $credentials
+     *
      * @return $this
      * @throws \InvalidArgumentException
      */
@@ -68,6 +69,7 @@ class Authentication extends AuthenticationService
      * Encodes and encrypts the password
      *
      * @param array $credentials
+     *
      * @return string
      */
     protected function createPassword($credentials)
@@ -81,22 +83,17 @@ class Authentication extends AuthenticationService
         $select->from('users')
             ->where('username = ' . $platform->quoteValue($credentials['username']));
 
-        try
-        {
+        try {
             /** @var $result \Zend\Db\ResultSet\ResultSet */
             $result = $this->dbAdapter->query(
                 $select->getSqlString(),
                 Adapter::QUERY_MODE_EXECUTE
             );
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
         }
 
-        if (isset($result))
-        {
-            if ($result->count() === 1)
-            {
+        if (isset($result)) {
+            if ($result->count() === 1) {
                 $row      = $result->current();
                 $data     = Users::processPasswordHash($row['password']);
                 $password = Users::generatePasswordHash($credentials['password'], $data);

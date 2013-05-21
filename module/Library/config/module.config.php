@@ -10,9 +10,9 @@
 return array(
     'view_helpers' => array(
         'invokables' => array(
-            'routeName' => 'Library\View\Helpers\RouteName',
+            'routeName'      => 'Library\View\Helpers\RouteName',
             'showInputError' => 'Library\View\Helpers\RenderInputError',
-            'mediaSource' => 'Library\View\Helpers\MediaSource',
+            'mediaSource'    => 'Library\View\Helpers\MediaSource',
         )
     ),
 );

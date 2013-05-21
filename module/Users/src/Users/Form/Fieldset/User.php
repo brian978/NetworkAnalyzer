@@ -23,19 +23,21 @@ class User extends AbstractFieldset
 
     public function loadElements()
     {
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Hidden',
-            'name' => 'id',
-            'options' => array(
-                'value' => 0
+        $this->add(
+            array(
+                'type'    => 'Zend\Form\Element\Hidden',
+                'name'    => 'id',
+                'options' => array(
+                    'value' => 0
+                )
             )
-        ));
+        );
 
         $this->add(
             array(
-                'name' => 'name',
-                'options' => array(
-                    'label' => 'Name',
+                'name'       => 'name',
+                'options'    => array(
+                    'label'            => 'Name',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -48,9 +50,9 @@ class User extends AbstractFieldset
 
         $this->add(
             array(
-                'name' => 'email',
-                'options' => array(
-                    'label' => 'Email',
+                'name'       => 'email',
+                'options'    => array(
+                    'label'            => 'Email',
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -80,7 +82,7 @@ class User extends AbstractFieldset
     {
         $filters          = $this->getGenericInputFilterSpecs();
         $filters['email'] = array(
-            'required' => true,
+            'required'   => true,
             'validators' => array(
                 array(
                     'name' => 'EmailAddress'

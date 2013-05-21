@@ -55,8 +55,7 @@ class Session implements ServiceManagerAwareInterface
     {
         $result = null;
 
-        if (is_callable(array($this->session, $name)))
-        {
+        if (is_callable(array($this->session, $name))) {
             $result = call_user_func_array(array($this->session, $name), $arguments);
         }
 
@@ -76,10 +75,8 @@ class Session implements ServiceManagerAwareInterface
      */
     public function open()
     {
-        if ($this->session instanceof \SNMP === false)
-        {
-            if ($this->serviceManager instanceof ServiceManager === false)
-            {
+        if ($this->session instanceof \SNMP === false) {
+            if ($this->serviceManager instanceof ServiceManager === false) {
                 throw new \RuntimeException('The service manager has not been set');
             }
 
@@ -100,6 +97,7 @@ class Session implements ServiceManagerAwareInterface
 
     /**
      * @param string $objectId
+     *
      * @throws \RuntimeException
      * @return mixed
      */
@@ -107,8 +105,7 @@ class Session implements ServiceManagerAwareInterface
     {
         $output = $this->session->get($objectId);
 
-        if ($output == false)
-        {
+        if ($output == false) {
             throw new \RuntimeException($this->session->getError());
         }
     }

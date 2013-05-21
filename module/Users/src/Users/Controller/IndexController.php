@@ -18,31 +18,35 @@ class IndexController extends AbstractController
      *
      * @var array
      */
-    protected $formSpecs = array(
-        'type' => '\Users\Form\UsersForm',
-        'object' => '\Users\Entity\User',
-        'model' => 'Users\Model\UsersModel',
-        'dataKey' => 'user',
-    );
+    protected $formSpecs
+        = array(
+            'type'    => '\Users\Form\UsersForm',
+            'object'  => '\Users\Entity\User',
+            'model'   => 'Users\Model\UsersModel',
+            'dataKey' => 'user',
+        );
 
     /**
      * @param AbstractForm $form
      * @param \ArrayAccess $object
+     *
      * @return void
      */
     protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
     {
         // Arranging the data properly so that the form would be auto-populated
-        $form->setData(array(
-            $this->formSpecs['dataKey'] => array(
-                'id' => $object->id,
-                'name' => $object->name,
-                'email' => $object->email,
-                'role' => array(
-                    'id' => $object->role_id,
+        $form->setData(
+            array(
+                $this->formSpecs['dataKey'] => array(
+                    'id'    => $object->id,
+                    'name'  => $object->name,
+                    'email' => $object->email,
+                    'role'  => array(
+                        'id' => $object->role_id,
+                    )
                 )
             )
-        ));
+        );
     }
 
     public function listAction()

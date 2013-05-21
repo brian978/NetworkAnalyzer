@@ -27,6 +27,7 @@ class Users extends AbstractDbModel
      * Processes the password has so it returns the salt from it
      *
      * @param string $hash
+     *
      * @return array
      */
     public static function processPasswordHash($hash)
@@ -34,8 +35,7 @@ class Users extends AbstractDbModel
         $salt    = '';
         $hashCut = 0;
 
-        if (is_string($salt) && strlen($hash) > 3)
-        {
+        if (is_string($salt) && strlen($hash) > 3) {
             $hashCutLen = substr($hash, -1, 1);
             $hashCut    = substr($hash, -$hashCutLen - 1, $hashCutLen);
             $saltLen    = substr($hash, -$hashCutLen - 3, 2);
@@ -43,7 +43,7 @@ class Users extends AbstractDbModel
         }
 
         return array(
-            'salt' => $salt,
+            'salt'    => $salt,
             'hashCut' => $hashCut
         );
     }
@@ -53,18 +53,16 @@ class Users extends AbstractDbModel
      *
      * @param string $password
      * @param array  $data
+     *
      * @return string
      */
     public static function generatePasswordHash($password, $data = array())
     {
-        if (empty($data))
-        {
+        if (empty($data)) {
             $salt    = substr(sha1(uniqid('', true) . time()), 0, rand(10, 20));
             $saltLen = strlen($salt);
             $hashCut = rand(4, $saltLen);
-        }
-        else
-        {
+        } else {
             $salt    = $data['salt'];
             $saltLen = strlen($salt);
             $hashCut = $data['hashCut'];
@@ -79,6 +77,7 @@ class Users extends AbstractDbModel
 
     /**
      * @param \Users\Entity\User $object
+     *
      * @return int
      */
     protected function doInsert($object)
@@ -90,13 +89,10 @@ class Users extends AbstractDbModel
         $data['email']   = $object->getEmail();
         $data['role_id'] = $object->getRole()->getId();
 
-        try
-        {
+        try {
             // If successful will return the number of rows
             $result = $this->insert($data);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
         }
 
         return $result;
@@ -104,6 +100,7 @@ class Users extends AbstractDbModel
 
     /**
      * @param \Users\Entity\User $object
+     *
      * @return int
      */
     protected function doUpdate($object)

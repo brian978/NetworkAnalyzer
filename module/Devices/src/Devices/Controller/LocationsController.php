@@ -18,10 +18,11 @@ class LocationsController extends AbstractController
      *
      * @var array
      */
-    protected $formSpecs = array(
-        'type' => '\Devices\Form\LocationsFrom',
-        'object' => '\Devices\Entity\Location',
-        'model' => 'Devices\Model\LocationsModel',
-        'dataKey' => 'location',
-    );
+    protected $formSpecs
+        = array(
+            'type'    => '\Devices\Form\LocationsFrom',
+            'object'  => '\Devices\Entity\Location',
+            'model'   => 'Devices\Model\LocationsModel',
+            'dataKey' => 'location',
+        );
 }

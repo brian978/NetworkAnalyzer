@@ -28,8 +28,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'TranslatableFormFactory' => function ($serviceManager)
-                {
+                'TranslatableFormFactory' => function ($serviceManager) {
                     $formElementManager = new FormElementManager();
                     $factory            = new Factory($formElementManager);
 

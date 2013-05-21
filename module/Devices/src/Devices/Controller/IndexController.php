@@ -19,11 +19,12 @@ class IndexController extends AbstractController
      *
      * @var array
      */
-    protected $formSpecs = array(
-        'type' => '\Devices\Form\DevicesFrom',
-        'object' => '\Devices\Entity\Device',
-        'model' => 'Devices\Model\DevicesModel',
-    );
+    protected $formSpecs
+        = array(
+            'type'   => '\Devices\Form\DevicesFrom',
+            'object' => '\Devices\Entity\Device',
+            'model'  => 'Devices\Model\DevicesModel',
+        );
 
     /**
      *
@@ -33,20 +34,22 @@ class IndexController extends AbstractController
     protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
     {
         // Arranging the data properly so that the form would be auto-populated
-        $form->setData(array(
-            'device' => array(
-                'id' => $object->id,
-                'name' => $object->name,
-                'snmp_version' => $object->snmp_version,
-                'snmp_community' => $object->snmp_community,
-                'location' => array(
-                    'id' => $object->location_id
-                ),
-                'type' => array(
-                    'id' => $object->type_id
+        $form->setData(
+            array(
+                'device' => array(
+                    'id'             => $object->id,
+                    'name'           => $object->name,
+                    'snmp_version'   => $object->snmp_version,
+                    'snmp_community' => $object->snmp_community,
+                    'location'       => array(
+                        'id' => $object->location_id
+                    ),
+                    'type'           => array(
+                        'id' => $object->type_id
+                    )
                 )
             )
-        ));
+        );
     }
 
     public function monitorAction()
@@ -56,8 +59,8 @@ class IndexController extends AbstractController
         $deviceInfo = $model->getInfo($this->getEvent()->getRouteMatch()->getParam('id'));
 
         $config = array(
-            'version' => $deviceInfo->snmp_version,
-            'hostname' => $deviceInfo->ip,
+            'version'   => $deviceInfo->snmp_version,
+            'hostname'  => $deviceInfo->ip,
             'community' => $deviceInfo->snmp_community,
         );
 

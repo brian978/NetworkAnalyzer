@@ -55,7 +55,8 @@ class Module extends MainModule
                 'setLocale'
             )
             ,
-            100);
+            100
+        );
     }
 
     public function setLocale(MvcEvent $e)
@@ -63,16 +64,14 @@ class Module extends MainModule
         $match = $e->getRouteMatch();
         $lang  = $match->getParam('lang');
 
-        if (is_string($lang))
-        {
+        if (is_string($lang)) {
             /** @var $config \Zend\Config\Config */
             $config = $this->serviceManager->get('Config');
 
             /** @var $translator \Zend\I18n\Translator\Translator */
             $translator = $this->serviceManager->get('translator');
 
-            if (isset($config['locales'][$lang]))
-            {
+            if (isset($config['locales'][$lang])) {
                 $locale = $config['locales'][$lang];
                 $translator->setLocale($locale);
             }

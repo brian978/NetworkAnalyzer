@@ -1,20 +1,14 @@
 <?php
 
 // Messages
-if ($this->success === true)
-{
+if ($this->success === true) {
     echo '<h4>' . $this->successMessage . '</h4>';
-}
-else if (empty($this->messages) && $this->success === false)
-{
+} else if (empty($this->messages) && $this->success === false) {
     $unkownMessage = '';
 
-    if (isset($this->unkownMessage))
-    {
+    if (isset($this->unkownMessage)) {
         $unkownMessage = $this->unkownMessage;
-    }
-    else
-    {
+    } else {
         $unkownMessage = $this->translate('An unkown error has occured');
     }
 

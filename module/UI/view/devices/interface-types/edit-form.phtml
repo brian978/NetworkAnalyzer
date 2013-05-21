@@ -19,12 +19,14 @@
         $form->setAttribute('action', $this->url('devices/module', array('action' => 'process'), true))->prepare();
 
         // Messages
-        echo $this->partial('partials/form_generic_message.phtml',
+        echo $this->partial(
+            'partials/form_generic_message.phtml',
             array(
-                'success' => $this->success,
-                'messages' => $messages,
+                'success'        => $this->success,
+                'messages'       => $messages,
                 'successMessage' => $this->translate('The interface info was changed'),
-            ));
+            )
+        );
 
         // Rendering the form
         echo $this->form()->openTag($form);

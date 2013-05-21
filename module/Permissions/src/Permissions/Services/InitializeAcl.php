@@ -31,6 +31,7 @@ class InitializeAcl implements FactoryInterface
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
+     *
      * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -48,19 +49,14 @@ class InitializeAcl implements FactoryInterface
 
     protected function createResources()
     {
-        if (!isset($this->permissions['resources']))
-        {
+        if (!isset($this->permissions['resources'])) {
             throw new \RuntimeException('The permissions array must contain a resources entry');
         }
 
-        foreach ($this->permissions['resources'] as $resource)
-        {
-            if (is_array($resource))
-            {
+        foreach ($this->permissions['resources'] as $resource) {
+            if (is_array($resource)) {
                 $this->acl->addResource(new GenericResource($resource['name']), $resource['parent']);
-            }
-            else
-            {
+            } else {
                 $this->acl->addResource(new GenericResource($resource));
             }
         }
@@ -68,29 +64,24 @@ class InitializeAcl implements FactoryInterface
 
     protected function createRoles()
     {
-        if (!isset($this->permissions['roles']))
-        {
+        if (!isset($this->permissions['roles'])) {
             throw new \RuntimeException('The permissions array must contain a roles entry');
         }
 
-        foreach ($this->permissions['roles'] as $roleId => $specs)
-        {
+        foreach ($this->permissions['roles'] as $roleId => $specs) {
             $role = new GenericRole($roleId);
 
             $this->acl->addRole($role, $specs['inherits']);
 
             // Setting the allow/deny rules for each role
-            foreach ($specs['resources'] as $resourceId => $permissions)
-            {
+            foreach ($specs['resources'] as $resourceId => $permissions) {
                 // For the resource ID called all we actually mean NULL
-                if ($resourceId == 'all')
-                {
+                if ($resourceId == 'all') {
                     $resourceId = null;
                 }
 
                 // $type is allow/deny
-                foreach ($permissions as $type => $privileges)
-                {
+                foreach ($permissions as $type => $privileges) {
                     $this->acl->$type($role, $resourceId, $privileges);
                 }
             }

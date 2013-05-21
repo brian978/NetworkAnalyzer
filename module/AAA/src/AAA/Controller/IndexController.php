@@ -20,13 +20,10 @@ class IndexController extends AbstractActionController
 
     public function loginAction()
     {
-        if ($this->request->isPost())
-        {
+        if ($this->request->isPost()) {
             $auth = new Authentication($this->serviceLocator);
             var_dump($auth->setCredentials(array())->authenticate());
-        }
-        else
-        {
+        } else {
             $this->redirect()->toRoute('auth', array('action' => 'index'), true);
         }
     }
