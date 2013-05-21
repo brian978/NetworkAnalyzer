@@ -51,8 +51,8 @@ class Module extends MainModule
         $this->eventManager->attach(
             MvcEvent::EVENT_DISPATCH,
             array(
-                $this,
-                'setLocale'
+                 $this,
+                 'setLocale'
             )
             ,
             100

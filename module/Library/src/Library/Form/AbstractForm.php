@@ -85,18 +85,18 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
 
         $this->add(
             array(
-                'type' => 'Zend\Form\Element\Csrf',
-                'name' => 'csrf'
+                 'type' => 'Zend\Form\Element\Csrf',
+                 'name' => 'csrf'
             )
         );
 
         $this->add(
             array(
-                'name'       => 'submit',
-                'attributes' => array(
-                    'type'  => 'submit',
-                    'value' => 'Send'
-                )
+                 'name'       => 'submit',
+                 'attributes' => array(
+                     'type'  => 'submit',
+                     'value' => 'Send'
+                 )
             )
         );
 

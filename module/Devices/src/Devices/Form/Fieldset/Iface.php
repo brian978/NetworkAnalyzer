@@ -26,56 +26,56 @@ class Iface extends AbstractFieldset
         // Adding the elements to the fieldset
         $this->add(
             array(
-                'type'    => 'Zend\Form\Element\Hidden',
-                'name'    => 'id',
-                'options' => array(
-                    'value' => 0
-                )
+                 'type'    => 'Zend\Form\Element\Hidden',
+                 'name'    => 'id',
+                 'options' => array(
+                     'value' => 0
+                 )
             )
         );
 
         $this->add(
             array(
-                'name'       => 'name',
-                'options'    => array(
-                    'label'            => 'Name',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => 'true'
-                )
+                 'name'       => 'name',
+                 'options'    => array(
+                     'label'            => 'Name',
+                     'label_attributes' => array(
+                         'class' => 'form_row'
+                     ),
+                 ),
+                 'attributes' => array(
+                     'required' => 'true'
+                 )
             )
         );
 
         $this->add(
             array(
-                'name'       => 'mac',
-                'options'    => array(
-                    'label'            => 'MAC',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => 'true'
-                )
+                 'name'       => 'mac',
+                 'options'    => array(
+                     'label'            => 'MAC',
+                     'label_attributes' => array(
+                         'class' => 'form_row'
+                     ),
+                 ),
+                 'attributes' => array(
+                     'required' => 'true'
+                 )
             )
         );
 
         $this->add(
             array(
-                'name'       => 'ip',
-                'options'    => array(
-                    'label'            => 'IP',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => 'true'
-                )
+                 'name'       => 'ip',
+                 'options'    => array(
+                     'label'            => 'IP',
+                     'label_attributes' => array(
+                         'class' => 'form_row'
+                     ),
+                 ),
+                 'attributes' => array(
+                     'required' => 'true'
+                 )
             )
         );
 

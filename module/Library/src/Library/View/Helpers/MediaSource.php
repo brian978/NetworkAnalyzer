@@ -27,12 +27,12 @@ class MediaSource extends AbstractHelper
         $url      = $basePath() . '/';
 
         switch ($mediaType) {
-        case 'images':
-            $url .= 'images/';
-            break;
+            case 'images':
+                $url .= 'images/';
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
 
         $url .= $mediaName;

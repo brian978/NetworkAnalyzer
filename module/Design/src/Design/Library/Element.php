@@ -17,8 +17,8 @@ class Element extends \ArrayIterator
     {
         parent::__construct(
             array(
-                'viewModel' => $viewModel,
-                'id'        => $id
+                 'viewModel' => $viewModel,
+                 'id'        => $id
             )
         );
     }

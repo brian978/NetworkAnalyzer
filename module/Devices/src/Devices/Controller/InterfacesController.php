@@ -35,18 +35,18 @@ class InterfacesController extends AbstractController
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                'interface' => array(
-                    'id'     => $object->id,
-                    'name'   => $object->name,
-                    'mac'    => $object->mac,
-                    'ip'     => $object->ip,
-                    'device' => array(
-                        'id' => $object->device_id
-                    ),
-                    'type'   => array(
-                        'id' => $object->type_id
-                    )
-                )
+                 'interface' => array(
+                     'id'     => $object->id,
+                     'name'   => $object->name,
+                     'mac'    => $object->mac,
+                     'ip'     => $object->ip,
+                     'device' => array(
+                         'id' => $object->device_id
+                     ),
+                     'type'   => array(
+                         'id' => $object->type_id
+                     )
+                 )
             )
         );
     }

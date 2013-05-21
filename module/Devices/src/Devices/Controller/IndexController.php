@@ -36,18 +36,18 @@ class IndexController extends AbstractController
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                'device' => array(
-                    'id'             => $object->id,
-                    'name'           => $object->name,
-                    'snmp_version'   => $object->snmp_version,
-                    'snmp_community' => $object->snmp_community,
-                    'location'       => array(
-                        'id' => $object->location_id
-                    ),
-                    'type'           => array(
-                        'id' => $object->type_id
-                    )
-                )
+                 'device' => array(
+                     'id'             => $object->id,
+                     'name'           => $object->name,
+                     'snmp_version'   => $object->snmp_version,
+                     'snmp_community' => $object->snmp_community,
+                     'location'       => array(
+                         'id' => $object->location_id
+                     ),
+                     'type'           => array(
+                         'id' => $object->type_id
+                     )
+                 )
             )
         );
     }

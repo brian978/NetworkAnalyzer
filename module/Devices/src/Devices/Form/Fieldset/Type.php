@@ -27,33 +27,33 @@ class Type extends AbstractFieldset
 
         $this->add(
             array(
-                'type'       => 'Zend\Form\Element\Select',
-                'name'       => 'id',
-                'options'    => array(
-                    'label'            => 'Type',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                    'value_options'    => $this->getValueOptions()
-                ),
-                'attributes' => array(
-                    'required' => 'true'
-                )
+                 'type'       => 'Zend\Form\Element\Select',
+                 'name'       => 'id',
+                 'options'    => array(
+                     'label'            => 'Type',
+                     'label_attributes' => array(
+                         'class' => 'form_row'
+                     ),
+                     'value_options'    => $this->getValueOptions()
+                 ),
+                 'attributes' => array(
+                     'required' => 'true'
+                 )
             )
         );
 
         $this->add(
             array(
-                'name'       => 'name',
-                'options'    => array(
-                    'label'            => 'Name',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => true
-                )
+                 'name'       => 'name',
+                 'options'    => array(
+                     'label'            => 'Name',
+                     'label_attributes' => array(
+                         'class' => 'form_row'
+                     ),
+                 ),
+                 'attributes' => array(
+                     'required' => true
+                 )
             )
         );
     }

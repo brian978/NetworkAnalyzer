@@ -31,52 +31,52 @@ class Device extends AbstractFieldset
         if ($this->mode == self::MODE_ADMIN) {
             $this->add(
                 array(
-                    'name'       => 'name',
-                    'options'    => array(
-                        'label'            => 'Name',
-                        'label_attributes' => array(
-                            'class' => 'form_row'
-                        ),
-                    ),
-                    'attributes' => array(
-                        'required' => 'true'
-                    )
+                     'name'       => 'name',
+                     'options'    => array(
+                         'label'            => 'Name',
+                         'label_attributes' => array(
+                             'class' => 'form_row'
+                         ),
+                     ),
+                     'attributes' => array(
+                         'required' => 'true'
+                     )
                 )
             );
 
             $this->add(
                 array(
-                    'name'       => 'snmp_version',
-                    'type'       => '\Zend\Form\Element\Select',
-                    'options'    => array(
-                        'label'            => 'SNMP Version',
-                        'label_attributes' => array(
-                            'class' => 'form_row'
-                        ),
-                        'value_options'    => array(
-                            \SNMP::VERSION_1  => 'VERSION_1',
-                            \SNMP::VERSION_2C => 'VERSION_2C',
-                            \SNMP::VERSION_3  => 'VERSION_3',
-                        )
-                    ),
-                    'attributes' => array(
-                        'required' => 'true'
-                    )
+                     'name'       => 'snmp_version',
+                     'type'       => '\Zend\Form\Element\Select',
+                     'options'    => array(
+                         'label'            => 'SNMP Version',
+                         'label_attributes' => array(
+                             'class' => 'form_row'
+                         ),
+                         'value_options'    => array(
+                             \SNMP::VERSION_1  => 'VERSION_1',
+                             \SNMP::VERSION_2C => 'VERSION_2C',
+                             \SNMP::VERSION_3  => 'VERSION_3',
+                         )
+                     ),
+                     'attributes' => array(
+                         'required' => 'true'
+                     )
                 )
             );
 
             $this->add(
                 array(
-                    'name'       => 'snmp_community',
-                    'options'    => array(
-                        'label'            => 'SNMP Community',
-                        'label_attributes' => array(
-                            'class' => 'form_row'
-                        ),
-                    ),
-                    'attributes' => array(
-                        'required' => 'true'
-                    )
+                     'name'       => 'snmp_community',
+                     'options'    => array(
+                         'label'            => 'SNMP Community',
+                         'label_attributes' => array(
+                             'class' => 'form_row'
+                         ),
+                     ),
+                     'attributes' => array(
+                         'required' => 'true'
+                     )
                 )
             );
 

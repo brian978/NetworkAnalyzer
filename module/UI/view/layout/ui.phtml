@@ -17,9 +17,9 @@ $this->nav->setTranslator($this->getHelperPluginManager()->get('translate')->get
         <!-- Le styles -->
         <?php echo $this->headLink(
             array(
-                'rel'  => 'shortcut icon',
-                'type' => 'image/vnd.microsoft.icon',
-                'href' => $this->basePath() . '/img/favicon.ico'
+                 'rel'  => 'shortcut icon',
+                 'type' => 'image/vnd.microsoft.icon',
+                 'href' => $this->basePath() . '/img/favicon.ico'
             )
         )->prependStylesheet($this->basePath() . '/css/ie.css', 'screen', 'lt IE 9')
             ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css')

@@ -37,14 +37,14 @@ class IndexController extends AbstractController
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                $this->formSpecs['dataKey'] => array(
-                    'id'    => $object->id,
-                    'name'  => $object->name,
-                    'email' => $object->email,
-                    'role'  => array(
-                        'id' => $object->role_id,
-                    )
-                )
+                 $this->formSpecs['dataKey'] => array(
+                     'id'    => $object->id,
+                     'name'  => $object->name,
+                     'email' => $object->email,
+                     'role'  => array(
+                         'id' => $object->role_id,
+                     )
+                 )
             )
         );
     }

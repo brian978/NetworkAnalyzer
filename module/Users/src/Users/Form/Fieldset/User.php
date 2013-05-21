@@ -25,41 +25,41 @@ class User extends AbstractFieldset
     {
         $this->add(
             array(
-                'type'    => 'Zend\Form\Element\Hidden',
-                'name'    => 'id',
-                'options' => array(
-                    'value' => 0
-                )
+                 'type'    => 'Zend\Form\Element\Hidden',
+                 'name'    => 'id',
+                 'options' => array(
+                     'value' => 0
+                 )
             )
         );
 
         $this->add(
             array(
-                'name'       => 'name',
-                'options'    => array(
-                    'label'            => 'Name',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => 'true'
-                )
+                 'name'       => 'name',
+                 'options'    => array(
+                     'label'            => 'Name',
+                     'label_attributes' => array(
+                         'class' => 'form_row'
+                     ),
+                 ),
+                 'attributes' => array(
+                     'required' => 'true'
+                 )
             )
         );
 
         $this->add(
             array(
-                'name'       => 'email',
-                'options'    => array(
-                    'label'            => 'Email',
-                    'label_attributes' => array(
-                        'class' => 'form_row'
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => 'true'
-                )
+                 'name'       => 'email',
+                 'options'    => array(
+                     'label'            => 'Email',
+                     'label_attributes' => array(
+                         'class' => 'form_row'
+                     ),
+                 ),
+                 'attributes' => array(
+                     'required' => 'true'
+                 )
             )
         );
 

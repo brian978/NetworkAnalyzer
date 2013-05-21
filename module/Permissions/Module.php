@@ -32,8 +32,8 @@ class Module extends MainModule
         $eventManager->attach(
             MvcEvent::EVENT_DISPATCH,
             array(
-                $this,
-                'injectLayoutVariables'
+                 $this,
+                 'injectLayoutVariables'
             )
         );
     }

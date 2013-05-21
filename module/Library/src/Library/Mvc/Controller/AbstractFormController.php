@@ -38,10 +38,10 @@ abstract class AbstractFormController extends AbstractUiController
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                $this->formSpecs['dataKey'] => array(
-                    'id'   => $object->id,
-                    'name' => $object->name,
-                )
+                 $this->formSpecs['dataKey'] => array(
+                     'id'   => $object->id,
+                     'name' => $object->name,
+                 )
             )
         );
     }

@@ -150,7 +150,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
 
         $options = array_merge(
             array(
-                0 => '...'
+                 0 => '...'
             ),
             $options
         );
