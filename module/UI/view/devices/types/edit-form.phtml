@@ -16,15 +16,20 @@
         $typeName = $type->get('name');
 
         /** @var $form \Devices\Form\DevicesFrom */
-        $form->setAttribute('action', $this->url('devices/module', array('action' => 'process'), true))->prepare();
+        $form->setAttribute(
+            'action',
+            $this->url('devices/module', array('action' => 'process'), true)
+        )->prepare();
 
         // Messages
         echo $this->partial(
             'partials/form_generic_message.phtml',
             array(
-                 'success'        => $this->success,
-                 'messages'       => $messages,
-                 'successMessage' => $this->translate('The type info was changed'),
+                'success' => $this->success,
+                'messages' => $messages,
+                'successMessage' => $this->translate(
+                    'The type info was changed'
+                ),
             )
         );
 

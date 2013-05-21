@@ -24,7 +24,11 @@ class IndexController extends AbstractActionController
             $auth = new Authentication($this->serviceLocator);
             var_dump($auth->setCredentials(array())->authenticate());
         } else {
-            $this->redirect()->toRoute('auth', array('action' => 'index'), true);
+            $this->redirect()->toRoute(
+                'auth',
+                array('action' => 'index'),
+                true
+            );
         }
     }
 

@@ -18,7 +18,11 @@ class Users extends AbstractDbModel
 
     public function fetch($locale, $params = array())
     {
-        $this->addJoin('user_roles', 'user_roles.id = users.role_id', array('roleName' => 'name_' . $locale));
+        $this->addJoin(
+            'user_roles',
+            'user_roles.id = users.role_id',
+            array('roleName' => 'name_' . $locale)
+        );
 
         return parent::fetch();
     }
@@ -43,7 +47,7 @@ class Users extends AbstractDbModel
         }
 
         return array(
-            'salt'    => $salt,
+            'salt' => $salt,
             'hashCut' => $hashCut
         );
     }
@@ -52,7 +56,7 @@ class Users extends AbstractDbModel
      * Hashes the password with a new salt or an existing one
      *
      * @param string $password
-     * @param array  $data
+     * @param array $data
      *
      * @return string
      */
@@ -70,7 +74,10 @@ class Users extends AbstractDbModel
 
         $hashCutLen = strlen((string)$hashCut);
         $hash       = hash('sha512', $password . $salt);
-        $hash       = substr($hash, 0, $hashCut) . $salt . substr($hash, $hashCut) . $saltLen . $hashCut . $hashCutLen;
+        $hash       = substr($hash, 0, $hashCut) . $salt . substr(
+            $hash,
+            $hashCut
+        ) . $saltLen . $hashCut . $hashCutLen;
 
         return $hash;
     }

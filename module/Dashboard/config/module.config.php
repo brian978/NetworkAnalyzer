@@ -8,7 +8,7 @@
  */
 
 return array(
-    'controllers'  => array(
+    'controllers' => array(
         'invokables' => array(
             'Dashboard\Controller\Index' => 'Dashboard\Controller\IndexController',
         )

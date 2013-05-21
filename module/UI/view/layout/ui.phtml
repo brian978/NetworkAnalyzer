@@ -2,27 +2,40 @@
 
 /** @var $nav Zend\View\Helper\Navigation */
 $this->nav = $this->navigation('navigation');
-$this->nav->setTranslator($this->getHelperPluginManager()->get('translate')->getTranslator());
+$this->nav->setTranslator(
+    $this->getHelperPluginManager()->get('translate')->getTranslator()
+);
 
 ?>
 <?php echo $this->doctype(); ?>
 <html>
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle($this->translate('Network Analyzer'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle(
+            $this->translate('Network Analyzer')
+        )->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <!-- Le meta -->
-        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+        <?php echo $this->headMeta()->appendName(
+            'viewport',
+            'width=device-width, initial-scale=1.0'
+        ) ?>
 
         <!-- Le styles -->
         <?php echo $this->headLink(
             array(
-                 'rel'  => 'shortcut icon',
-                 'type' => 'image/vnd.microsoft.icon',
-                 'href' => $this->basePath() . '/img/favicon.ico'
+                'rel' => 'shortcut icon',
+                'type' => 'image/vnd.microsoft.icon',
+                'href' => $this->basePath() . '/img/favicon.ico'
             )
-        )->prependStylesheet($this->basePath() . '/css/ie.css', 'screen', 'lt IE 9')
-            ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css')
+        )->prependStylesheet(
+                $this->basePath() . '/css/ie.css',
+                'screen',
+                'lt IE 9'
+            )
+            ->prependStylesheet(
+                $this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css'
+            )
             ->prependStylesheet($this->basePath() . '/css/layout.css')
             ->prependStylesheet($this->basePath() . '/css/styles.css')
         ?>
@@ -32,7 +45,9 @@ $this->nav->setTranslator($this->getHelperPluginManager()->get('translate')->get
             ->prependFile($this->basePath() . '/js/hideshow.js')
             ->prependFile($this->basePath() . '/js/jquery.tablesorter.min.js')
             ->prependFile($this->basePath() . '/js/jquery.equalHeight.js')
-            ->prependFile($this->basePath() . '/js/jquery-ui-1.10.2.custom.min.js')
+            ->prependFile(
+                $this->basePath() . '/js/jquery-ui-1.10.2.custom.min.js'
+            )
             ->prependFile($this->basePath() . '/js/jquery-1.9.1.min.js')
         ?>
 
@@ -77,8 +92,13 @@ $this->nav->setTranslator($this->getHelperPluginManager()->get('translate')->get
                     </a>
                 </h1>
 
-                <h2 class="section_title"><?php echo $this->translate('Dashboard') ?></h2>
-                <?php echo $this->partial('partials/language.phtml', $this->vars()) ?>
+                <h2 class="section_title"><?php echo $this->translate(
+                        'Dashboard'
+                    ) ?></h2>
+                <?php echo $this->partial(
+                    'partials/language.phtml',
+                    $this->vars()
+                ) ?>
             </hgroup>
         </header>
         <!-- end of header bar -->
@@ -91,7 +111,9 @@ $this->nav->setTranslator($this->getHelperPluginManager()->get('translate')->get
                         <?php echo $this->translate('Network Analyzer') ?>
                     </a>
 
-                    <?php echo $this->nav->breadcrumbs()->setMinDepth(0)->setPartial('partials/breadcrumb.phtml'); ?>
+                    <?php echo $this->nav->breadcrumbs()->setMinDepth(
+                        0
+                    )->setPartial('partials/breadcrumb.phtml'); ?>
 
                 </article>
             </div>

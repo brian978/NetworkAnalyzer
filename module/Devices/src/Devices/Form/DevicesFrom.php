@@ -20,7 +20,7 @@ class DevicesFrom extends AbstractForm
 
         $this->setAttributes(
             array(
-                 'class' => 'input_form'
+                'class' => 'input_form'
             )
         );
     }

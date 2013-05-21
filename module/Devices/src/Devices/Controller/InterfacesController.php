@@ -20,9 +20,9 @@ class InterfacesController extends AbstractController
      */
     protected $formSpecs
         = array(
-            'type'   => '\Devices\Form\InterfacesFrom',
+            'type' => '\Devices\Form\InterfacesFrom',
             'object' => '\Devices\Entity\Iface',
-            'model'  => 'Devices\Model\InterfacesModel',
+            'model' => 'Devices\Model\InterfacesModel',
         );
 
     /**
@@ -30,23 +30,25 @@ class InterfacesController extends AbstractController
      * @param AbstractForm $form
      * @param \ArrayAccess $object
      */
-    protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
-    {
+    protected function populateEditData(
+        AbstractForm $form,
+        \ArrayAccess $object
+    ) {
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                 'interface' => array(
-                     'id'     => $object->id,
-                     'name'   => $object->name,
-                     'mac'    => $object->mac,
-                     'ip'     => $object->ip,
-                     'device' => array(
-                         'id' => $object->device_id
-                     ),
-                     'type'   => array(
-                         'id' => $object->type_id
-                     )
-                 )
+                'interface' => array(
+                    'id' => $object->id,
+                    'name' => $object->name,
+                    'mac' => $object->mac,
+                    'ip' => $object->ip,
+                    'device' => array(
+                        'id' => $object->device_id
+                    ),
+                    'type' => array(
+                        'id' => $object->type_id
+                    )
+                )
             )
         );
     }

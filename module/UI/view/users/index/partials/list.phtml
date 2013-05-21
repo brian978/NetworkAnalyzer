@@ -1,7 +1,15 @@
 <?php
 
-$editUrl = $this->url('users/module', array('action' => 'editForm', 'id' => $this->id), true);
-$deleteUrl = $this->url('users/module', array('action' => 'delete', 'id' => $this->id), true);
+$editUrl = $this->url(
+    'users/module',
+    array('action' => 'editForm', 'id' => $this->id),
+    true
+);
+$deleteUrl = $this->url(
+    'users/module',
+    array('action' => 'delete', 'id' => $this->id),
+    true
+);
 
 ?>
 
@@ -12,11 +20,13 @@ $deleteUrl = $this->url('users/module', array('action' => 'delete', 'id' => $thi
     <td><?php echo $this->roleName ?></td>
     <td>
         <a href="<?php echo $editUrl ?>">
-            <input type="image" src="<?php $this->mediaSource('images', 'icn_edit.png') ?>"
+            <input type="image"
+                   src="<?php $this->mediaSource('images', 'icn_edit.png') ?>"
                    title="<?php echo $this->translate('Edit') ?>">
         </a>
         <a href="<?php echo $deleteUrl ?>">
-            <input type="image" src="<?php $this->mediaSource('images', 'icn_trash.png') ?>"
+            <input type="image"
+                   src="<?php $this->mediaSource('images', 'icn_trash.png') ?>"
                    title="<?php echo $this->translate('Trash') ?>">
         </a>
     </td>

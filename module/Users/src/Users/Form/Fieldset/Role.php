@@ -29,16 +29,16 @@ class Role extends AbstractFieldset
 
         $this->add(
             array(
-                 'name'       => 'name',
-                 'options'    => array(
-                     'label'            => 'Name',
-                     'label_attributes' => array(
-                         'class' => 'form_row'
-                     ),
-                 ),
-                 'attributes' => array(
-                     'required' => 'true'
-                 )
+                'name' => 'name',
+                'options' => array(
+                    'label' => 'Name',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => 'true'
+                )
             )
         );
     }
@@ -53,7 +53,8 @@ class Role extends AbstractFieldset
         $options = array();
 
         if (is_object($this->model)) {
-            $locale = $this->getServiceLocator()->get('translator')->getLocale();
+            $locale = $this->getServiceLocator()->get('translator')->getLocale(
+            );
 
             $options = $this->model->fetch();
 
@@ -64,7 +65,7 @@ class Role extends AbstractFieldset
 
         $options = array_merge(
             array(
-                 0 => '...'
+                0 => '...'
             ),
             $options
         );

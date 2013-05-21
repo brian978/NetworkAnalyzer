@@ -19,7 +19,11 @@ abstract class AbstractController extends AbstractFormController
     protected function redirectOnSuccess(array $data)
     {
         $this->redirect()
-            ->toRoute('devices/status', array('action' => $data['action'], 'success' => 'true'), true);
+            ->toRoute(
+                'devices/status',
+                array('action' => $data['action'], 'success' => 'true'),
+                true
+            );
     }
 
     /**
@@ -30,7 +34,11 @@ abstract class AbstractController extends AbstractFormController
     protected function redirectOnFail(array $data)
     {
         $this->PostRedirectGet(
-            $this->url()->fromRoute('devices/status', array('action' => $data['action'], 'success' => 'false'), true),
+            $this->url()->fromRoute(
+                'devices/status',
+                array('action' => $data['action'], 'success' => 'false'),
+                true
+            ),
             true
         );
     }

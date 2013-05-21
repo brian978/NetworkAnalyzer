@@ -33,7 +33,7 @@ abstract class AbstractUiController extends AbstractActionController
      *
      * @events dispatch.pre, dispatch.post
      *
-     * @param  Request       $request
+     * @param  Request $request
      * @param  null|Response $response
      *
      * @return Response|mixed
@@ -116,7 +116,11 @@ abstract class AbstractUiController extends AbstractActionController
                 $privilege = $permissions[$controller]['privileges'][$privilege];
             }
 
-            $allow = $this->acl->isAllowed($this->userAuth->getRole(), $resource, $privilege);
+            $allow = $this->acl->isAllowed(
+                $this->userAuth->getRole(),
+                $resource,
+                $privilege
+            );
         }
 
         return $allow;

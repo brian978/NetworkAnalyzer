@@ -17,8 +17,16 @@ class InterfacesModel extends AbstractModel
 
     public function fetch()
     {
-        $this->addJoin('devices', 'devices.id = interfaces.device_id', array('deviceName' => 'name'));
-        $this->addJoin('interface_types', 'interface_types.id = interfaces.type_id', array('typeName' => 'name'));
+        $this->addJoin(
+            'devices',
+            'devices.id = interfaces.device_id',
+            array('deviceName' => 'name')
+        );
+        $this->addJoin(
+            'interface_types',
+            'interface_types.id = interfaces.type_id',
+            array('typeName' => 'name')
+        );
 
         return parent::fetch();
     }

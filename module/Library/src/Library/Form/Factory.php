@@ -23,7 +23,8 @@ class Factory extends ZendFormFactory
     protected function getTranslator()
     {
         if (!is_object($this->translator)) {
-            $this->translator = $this->getFormElementManager()->getServiceLocator()->get('translator');
+            $this->translator = $this->getFormElementManager(
+            )->getServiceLocator()->get('translator');
         }
 
         return $this->translator;
@@ -49,7 +50,9 @@ class Factory extends ZendFormFactory
         }
 
         if ($form instanceof ServiceLocatorAwareInterface) {
-            $form->setServiceLocator($this->getFormElementManager()->getServiceLocator());
+            $form->setServiceLocator(
+                $this->getFormElementManager()->getServiceLocator()
+            );
         }
 
         return $form;

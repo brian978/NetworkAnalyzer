@@ -8,28 +8,28 @@
  */
 
 return array(
-    'router'      => array(
+    'router' => array(
         'routes' => array(
             'settings' => array(
-                'type'          => 'Zend\Mvc\Router\Http\Segment',
-                'options'       => array(
-                    'route'    => '[/:lang]/settings',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '[/:lang]/settings',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Settings\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                        'lang'          => 'en'
+                        'controller' => 'Index',
+                        'action' => 'index',
+                        'lang' => 'en'
                     )
                 ),
                 'may_terminate' => true,
-                'child_routes'  => array(
+                'child_routes' => array(
                     'module' => array(
-                        'type'    => 'Zend\Mvc\Router\Http\Segment',
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route'       => '/[:controller[/:action]]',
+                            'route' => '/[:controller[/:action]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             )
                         )
                     )
@@ -39,9 +39,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Settings\Controller\Index'    => 'Settings\Controller\IndexController',
-            'Settings\Controller\Users'    => 'Settings\Controller\UsersController',
-            'Settings\Controller\Options'  => 'Settings\Controller\OptionsController',
+            'Settings\Controller\Index' => 'Settings\Controller\IndexController',
+            'Settings\Controller\Users' => 'Settings\Controller\UsersController',
+            'Settings\Controller\Options' => 'Settings\Controller\OptionsController',
             'Settings\Controller\Security' => 'Settings\Controller\SecurityController'
         )
     )

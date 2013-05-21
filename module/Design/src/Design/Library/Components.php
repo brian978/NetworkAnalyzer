@@ -75,7 +75,7 @@ class Components
 
     /**
      * @param \Zend\View\Model\ViewModel $viewModel
-     * @param string                     $id
+     * @param string $id
      * @param                            $priority
      * @param                            $position
      *
@@ -96,8 +96,8 @@ class Components
 
     /**
      * @param \Design\Library\Element $element The position can be either numeric or a string
-     * @param int                     $priority
-     * @param string                  $position
+     * @param int $priority
+     * @param string $position
      *
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
@@ -105,7 +105,10 @@ class Components
      */
     public function add(Element $element, $priority = 0, $position = '')
     {
-        if (!is_string($position) && !is_numeric($position) && !is_numeric($priority)) {
+        if (!is_string($position) && !is_numeric($position) && !is_numeric(
+            $priority
+        )
+        ) {
             throw new \InvalidArgumentException('The position must be a string or a number and the priority must be numeric');
         }
 
@@ -130,7 +133,7 @@ class Components
             }
 
             $this->components[$position][$element['id']] = array(
-                'object'   => $element,
+                'object' => $element,
                 'priority' => $priority
             );
         }
@@ -297,7 +300,10 @@ class Components
             throw new \RuntimeException('The renderer has not been set');
         }
 
-        if ($position !== null && !is_string($position) && !is_numeric($position)) {
+        if ($position !== null && !is_string($position) && !is_numeric(
+            $position
+        )
+        ) {
             throw new \InvalidArgumentException('The position must be a string or a number');
         }
 

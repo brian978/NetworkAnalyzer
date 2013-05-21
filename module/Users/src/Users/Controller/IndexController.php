@@ -20,9 +20,9 @@ class IndexController extends AbstractController
      */
     protected $formSpecs
         = array(
-            'type'    => '\Users\Form\UsersForm',
-            'object'  => '\Users\Entity\User',
-            'model'   => 'Users\Model\UsersModel',
+            'type' => '\Users\Form\UsersForm',
+            'object' => '\Users\Entity\User',
+            'model' => 'Users\Model\UsersModel',
             'dataKey' => 'user',
         );
 
@@ -32,19 +32,21 @@ class IndexController extends AbstractController
      *
      * @return void
      */
-    protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
-    {
+    protected function populateEditData(
+        AbstractForm $form,
+        \ArrayAccess $object
+    ) {
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                 $this->formSpecs['dataKey'] => array(
-                     'id'    => $object->id,
-                     'name'  => $object->name,
-                     'email' => $object->email,
-                     'role'  => array(
-                         'id' => $object->role_id,
-                     )
-                 )
+                $this->formSpecs['dataKey'] => array(
+                    'id' => $object->id,
+                    'name' => $object->name,
+                    'email' => $object->email,
+                    'role' => array(
+                        'id' => $object->role_id,
+                    )
+                )
             )
         );
     }
@@ -55,7 +57,9 @@ class IndexController extends AbstractController
         $model = $this->serviceLocator->get($this->formSpecs['model']);
 
         return array(
-            'items' => $model->fetch($this->getServiceLocator()->get('translator')->getLocale())
+            'items' => $model->fetch(
+                $this->getServiceLocator()->get('translator')->getLocale()
+            )
         );
     }
 

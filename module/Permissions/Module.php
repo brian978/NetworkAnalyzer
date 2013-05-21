@@ -32,8 +32,8 @@ class Module extends MainModule
         $eventManager->attach(
             MvcEvent::EVENT_DISPATCH,
             array(
-                 $this,
-                 'injectLayoutVariables'
+                $this,
+                'injectLayoutVariables'
             )
         );
     }
@@ -44,6 +44,9 @@ class Module extends MainModule
         $layoutModel    = $e->getViewModel();
 
         $layoutModel->setVariable('acl', $serviceManager->get('acl'));
-        $layoutModel->setVariable('userAuth', $serviceManager->get('authorization'));
+        $layoutModel->setVariable(
+            'userAuth',
+            $serviceManager->get('authorization')
+        );
     }
 }

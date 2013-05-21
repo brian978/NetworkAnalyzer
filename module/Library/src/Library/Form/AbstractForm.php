@@ -18,7 +18,8 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-abstract class AbstractForm extends Form implements TranslatorAwareInterface, ServiceLocatorAwareInterface
+abstract class AbstractForm extends Form
+    implements TranslatorAwareInterface, ServiceLocatorAwareInterface
 {
     const MODE_ADD  = 1;
     const MODE_EDIT = 2;
@@ -42,7 +43,7 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
 
     /**
      * @param  null|int|string $name    Optional name for the element
-     * @param  array           $options Optional options for the element
+     * @param  array $options Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -64,7 +65,9 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      */
     final protected function setupBaseFieldsetObject(AbstractFieldset $object)
     {
-        $object->setUseAsBaseFieldset(true)->setServiceLocator($this->serviceLocator);
+        $object->setUseAsBaseFieldset(true)->setServiceLocator(
+            $this->serviceLocator
+        );
 
         if ($this->mode == self::MODE_ADD) {
             $object->setDenyFilters(array('id'));
@@ -85,18 +88,18 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
 
         $this->add(
             array(
-                 'type' => 'Zend\Form\Element\Csrf',
-                 'name' => 'csrf'
+                'type' => 'Zend\Form\Element\Csrf',
+                'name' => 'csrf'
             )
         );
 
         $this->add(
             array(
-                 'name'       => 'submit',
-                 'attributes' => array(
-                     'type'  => 'submit',
-                     'value' => 'Send'
-                 )
+                'name' => 'submit',
+                'attributes' => array(
+                    'type' => 'submit',
+                    'value' => 'Send'
+                )
             )
         );
 
@@ -108,13 +111,15 @@ abstract class AbstractForm extends Form implements TranslatorAwareInterface, Se
      *
      * @param  Translator $translator  [optional] translator.
      *                                 Default is null, which sets no translator.
-     * @param  string     $textDomain  [optional] text domain
+     * @param  string $textDomain  [optional] text domain
      *                                 Default is null, which skips setTranslatorTextDomain
      *
      * @return TranslatorAwareInterface
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
-    {
+    public function setTranslator(
+        Translator $translator = null,
+        $textDomain = null
+    ) {
         $this->translator = $translator;
 
         // not used to unset

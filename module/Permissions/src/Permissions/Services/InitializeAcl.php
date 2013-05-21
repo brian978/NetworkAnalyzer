@@ -55,7 +55,10 @@ class InitializeAcl implements FactoryInterface
 
         foreach ($this->permissions['resources'] as $resource) {
             if (is_array($resource)) {
-                $this->acl->addResource(new GenericResource($resource['name']), $resource['parent']);
+                $this->acl->addResource(
+                    new GenericResource($resource['name']),
+                    $resource['parent']
+                );
             } else {
                 $this->acl->addResource(new GenericResource($resource));
             }

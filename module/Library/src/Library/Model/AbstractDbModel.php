@@ -99,9 +99,9 @@ abstract class AbstractDbModel extends AbstractTableGateway
     /**
      * Used to generate a where condition
      *
-     * @param string     $field
+     * @param string $field
      * @param string|int $value
-     * @param string     $table
+     * @param string $table
      *
      * @return string
      */
@@ -116,7 +116,9 @@ abstract class AbstractDbModel extends AbstractTableGateway
             $field
         );
 
-        return $this->platform->quoteIdentifierChain($identifierChain) . '=' . $this->platform->quoteValue($value);
+        return $this->platform->quoteIdentifierChain(
+            $identifierChain
+        ) . '=' . $this->platform->quoteValue($value);
     }
 
     /**
@@ -134,9 +136,9 @@ abstract class AbstractDbModel extends AbstractTableGateway
     /**
      * Used to add a where condition
      *
-     * @param string     $field
+     * @param string $field
      * @param string|int $value
-     * @param string     $table
+     * @param string $table
      *
      * @return $this
      */
@@ -162,8 +164,12 @@ abstract class AbstractDbModel extends AbstractTableGateway
      *
      * @return $this
      */
-    public function addJoin($name, $on, $columns = Select::SQL_STAR, $type = Select::JOIN_INNER)
-    {
+    public function addJoin(
+        $name,
+        $on,
+        $columns = Select::SQL_STAR,
+        $type = Select::JOIN_INNER
+    ) {
         // Resetting the where if the fetch method has already run
         if ($this->fetchRun === true) {
             $this->resetSelectJoinWhere();
@@ -207,7 +213,7 @@ abstract class AbstractDbModel extends AbstractTableGateway
     }
 
     /**
-     * @param array          $data
+     * @param array $data
      * @param AbstractEntity $object
      *
      * @return int
@@ -218,7 +224,10 @@ abstract class AbstractDbModel extends AbstractTableGateway
 
         try {
             // If successful will return the number of rows
-            $result = $this->update($data, array($this->getWhere('id', $object->getId())));
+            $result = $this->update(
+                $data,
+                array($this->getWhere('id', $object->getId()))
+            );
         } catch (\Exception $e) {
         }
 

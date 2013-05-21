@@ -7,7 +7,9 @@
     $reasonMessage = '';
     switch ($this->reason) {
         case 'error-controller-cannot-dispatch':
-            $reasonMessage = $this->translate('The requested controller was unable to dispatch the request.');
+            $reasonMessage = $this->translate(
+                'The requested controller was unable to dispatch the request.'
+            );
             break;
         case 'error-controller-not-found':
             $reasonMessage = $this->translate(
@@ -15,13 +17,19 @@
             );
             break;
         case 'error-controller-invalid':
-            $reasonMessage = $this->translate('The requested controller was not dispatchable.');
+            $reasonMessage = $this->translate(
+                'The requested controller was not dispatchable.'
+            );
             break;
         case 'error-router-no-match':
-            $reasonMessage = $this->translate('The requested URL could not be matched by routing.');
+            $reasonMessage = $this->translate(
+                'The requested URL could not be matched by routing.'
+            );
             break;
         default:
-            $reasonMessage = $this->translate('We cannot determine at this time why a 404 was generated.');
+            $reasonMessage = $this->translate(
+                'We cannot determine at this time why a 404 was generated.'
+            );
             break;
     }
     ?>
@@ -61,18 +69,21 @@
             <dt><?php echo $this->translate('File') ?>:</dt>
             <dd>
                 <pre
-                    class="prettyprint linenums"><?php echo $this->exception->getFile() ?>
+                    class="prettyprint linenums"><?php echo $this->exception->getFile(
+                    ) ?>
                     :<?php echo $this->exception->getLine() ?></pre>
             </dd>
             <dt><?php echo $this->translate('Message') ?>:</dt>
             <dd>
                 <pre
-                    class="prettyprint linenums"><?php echo $this->exception->getMessage() ?></pre>
+                    class="prettyprint linenums"><?php echo $this->exception->getMessage(
+                    ) ?></pre>
             </dd>
             <dt><?php echo $this->translate('Stack trace') ?>:</dt>
             <dd>
                 <pre
-                    class="prettyprint linenums"><?php echo $this->exception->getTraceAsString() ?></pre>
+                    class="prettyprint linenums"><?php echo $this->exception->getTraceAsString(
+                    ) ?></pre>
             </dd>
         </dl>
         <?php
@@ -89,19 +100,22 @@
                             <dt><?php echo $this->translate('File') ?>:</dt>
                             <dd>
                                 <pre
-                                    class="prettyprint linenums"><?php echo $e->getFile() ?>
+                                    class="prettyprint linenums"><?php echo $e->getFile(
+                                    ) ?>
                                     :<?php echo $e->getLine() ?></pre>
                             </dd>
                             <dt><?php echo $this->translate('Message') ?>:</dt>
                             <dd>
                                 <pre
-                                    class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
+                                    class="prettyprint linenums"><?php echo $e->getMessage(
+                                    ) ?></pre>
                             </dd>
                             <dt><?php echo $this->translate('Stack trace') ?>:
                             </dt>
                             <dd>
                                 <pre
-                                    class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
+                                    class="prettyprint linenums"><?php echo $e->getTraceAsString(
+                                    ) ?></pre>
                             </dd>
                         </dl>
                     </li>

@@ -8,22 +8,22 @@
  */
 
 return array(
-    'router'          => array(
+    'router' => array(
         'routes' => array(
             'auth' => array(
-                'type'    => 'Zend\Mvc\Router\Http\Segment',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '[/:lang]/auth[/:action]',
+                    'route' => '[/:lang]/auth[/:action]',
                     'defaults' => array(
                         'controller' => 'AAA\Controller\Index',
-                        'action'     => 'index',
-                        'lang'       => 'en'
+                        'action' => 'index',
+                        'lang' => 'en'
                     )
                 )
             )
         )
     ),
-    'controllers'     => array(
+    'controllers' => array(
         'invokables' => array(
             'AAA\Controller\Index' => 'AAA\Controller\IndexController'
         )
@@ -33,7 +33,7 @@ return array(
             'authorization' => 'AAA\Services\AuthorizationFactory'
         )
     ),
-    'view_manager'    => array(
+    'view_manager' => array(
         'template_path_stack' => array(
             __DIR__ . '/../view'
         )

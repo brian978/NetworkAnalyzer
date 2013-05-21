@@ -15,7 +15,8 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-abstract class AbstractFieldset extends Fieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface
+abstract class AbstractFieldset extends Fieldset
+    implements InputFilterProviderInterface, ServiceLocatorAwareInterface
 {
     const MODE_SELECT = 1;
     const MODE_ADMIN  = 2;
@@ -56,7 +57,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
 
     /**
      * @param string $name
-     * @param array  $options
+     * @param array $options
      */
     public function __construct($name = null, $options = array())
     {
@@ -150,7 +151,7 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
 
         $options = array_merge(
             array(
-                 0 => '...'
+                0 => '...'
             ),
             $options
         );
@@ -184,8 +185,8 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected function getHiddenId()
     {
         return array(
-            'type'    => 'Zend\Form\Element\Hidden',
-            'name'    => 'id',
+            'type' => 'Zend\Form\Element\Hidden',
+            'name' => 'id',
             'options' => array(
                 'value' => 0
             )
@@ -200,14 +201,14 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected function getSelectId($label)
     {
         return array(
-            'type'       => 'Zend\Form\Element\Select',
-            'name'       => 'id',
-            'options'    => array(
-                'label'            => $label,
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'id',
+            'options' => array(
+                'label' => $label,
                 'label_attributes' => array(
                     'class' => 'form_row'
                 ),
-                'value_options'    => $this->getValueOptions()
+                'value_options' => $this->getValueOptions()
             ),
             'attributes' => array(
                 'required' => true
@@ -223,22 +224,22 @@ abstract class AbstractFieldset extends Fieldset implements InputFilterProviderI
     protected function getGenericInputFilterSpecs()
     {
         $filters = array(
-            'id'   => array(
+            'id' => array(
                 'validators' => array(
                     array(
-                        'name'    => 'greater_than',
+                        'name' => 'greater_than',
                         'options' => array(
-                            'min'     => 0,
+                            'min' => 0,
                             'message' => 'You must select a value'
                         )
                     )
                 )
             ),
             'name' => array(
-                'required'   => true,
+                'required' => true,
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
+                        'name' => 'StringLength',
                         'options' => array(
                             'min' => 3
                         )

@@ -56,7 +56,10 @@ class Session implements ServiceManagerAwareInterface
         $result = null;
 
         if (is_callable(array($this->session, $name))) {
-            $result = call_user_func_array(array($this->session, $name), $arguments);
+            $result = call_user_func_array(
+                array($this->session, $name),
+                $arguments
+            );
         }
 
         return $result;

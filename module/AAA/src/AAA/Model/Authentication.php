@@ -81,7 +81,9 @@ class Authentication extends AuthenticationService
         /** @var $select \Zend\Db\Sql\Select */
         $select = $this->adapter->getDbSelect();
         $select->from('users')
-            ->where('username = ' . $platform->quoteValue($credentials['username']));
+            ->where(
+                'username = ' . $platform->quoteValue($credentials['username'])
+            );
 
         try {
             /** @var $result \Zend\Db\ResultSet\ResultSet */
@@ -96,7 +98,10 @@ class Authentication extends AuthenticationService
             if ($result->count() === 1) {
                 $row      = $result->current();
                 $data     = Users::processPasswordHash($row['password']);
-                $password = Users::generatePasswordHash($credentials['password'], $data);
+                $password = Users::generatePasswordHash(
+                    $credentials['password'],
+                    $data
+                );
             }
         }
 

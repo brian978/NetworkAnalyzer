@@ -22,15 +22,20 @@
         $deviceType = $device_type->get('id');
 
         /** @var $form \Devices\Form\DevicesFrom */
-        $form->setAttribute('action', $this->url('devices/module', array('action' => 'process'), true))->prepare();
+        $form->setAttribute(
+            'action',
+            $this->url('devices/module', array('action' => 'process'), true)
+        )->prepare();
 
         // Messages
         echo $this->partial(
             'partials/form_generic_message.phtml',
             array(
-                 'success'        => $this->success,
-                 'messages'       => $messages,
-                 'successMessage' => $this->translate('The device info was changed'),
+                'success' => $this->success,
+                'messages' => $messages,
+                'successMessage' => $this->translate(
+                    'The device info was changed'
+                ),
             )
         );
 
@@ -38,9 +43,15 @@
         echo $this->form()->openTag($form);
 
         echo $this->showInputError($deviceName) . $this->formRow($deviceName);
-        echo $this->showInputError($deviceSnmpVersion) . $this->formRow($deviceSnmpVersion);
-        echo $this->showInputError($deviceSnmpCommunity) . $this->formRow($deviceSnmpCommunity);
-        echo $this->showInputError($deviceLocation) . $this->formRow($deviceLocation);
+        echo $this->showInputError($deviceSnmpVersion) . $this->formRow(
+            $deviceSnmpVersion
+        );
+        echo $this->showInputError($deviceSnmpCommunity) . $this->formRow(
+            $deviceSnmpCommunity
+        );
+        echo $this->showInputError($deviceLocation) . $this->formRow(
+            $deviceLocation
+        );
         echo $this->showInputError($deviceType) . $this->formRow($deviceType);
 
         echo $this->formHidden($device->get('id'));

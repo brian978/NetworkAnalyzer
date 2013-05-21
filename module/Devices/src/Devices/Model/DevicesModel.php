@@ -17,14 +17,26 @@ class DevicesModel extends AbstractModel
 
     public function fetch()
     {
-        $this->addJoin('locations', 'locations.id = devices.location_id', array('locationName' => 'name'));
-        $this->addJoin('device_types', 'device_types.id = devices.type_id', array('typeName' => 'name'));
+        $this->addJoin(
+            'locations',
+            'locations.id = devices.location_id',
+            array('locationName' => 'name')
+        );
+        $this->addJoin(
+            'device_types',
+            'device_types.id = devices.type_id',
+            array('typeName' => 'name')
+        );
         $this->addJoin(
             'interfaces',
             'interfaces.device_id = devices.id',
             array('interfaceName' => 'name', 'mac', 'ip')
         );
-        $this->addJoin('interface_types', 'interface_types.id = interfaces.type_id', array('interfaceType' => 'name'));
+        $this->addJoin(
+            'interface_types',
+            'interface_types.id = interfaces.type_id',
+            array('interfaceType' => 'name')
+        );
 
         return parent::fetch();
     }

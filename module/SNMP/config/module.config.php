@@ -9,7 +9,7 @@
  */
 
 return array(
-    'router'      => array(
+    'router' => array(
         'routes' => array()
     ),
     'controllers' => array(

@@ -21,9 +21,9 @@ abstract class AbstractFormController extends AbstractUiController
      */
     protected $formSpecs
         = array(
-            'type'    => '',
-            'object'  => '',
-            'model'   => '',
+            'type' => '',
+            'object' => '',
+            'model' => '',
             'dataKey' => '',
         );
 
@@ -33,15 +33,17 @@ abstract class AbstractFormController extends AbstractUiController
      *
      * @return void
      */
-    protected function populateEditData(AbstractForm $form, \ArrayAccess $object)
-    {
+    protected function populateEditData(
+        AbstractForm $form,
+        \ArrayAccess $object
+    ) {
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                 $this->formSpecs['dataKey'] => array(
-                     'id'   => $object->id,
-                     'name' => $object->name,
-                 )
+                $this->formSpecs['dataKey'] => array(
+                    'id' => $object->id,
+                    'name' => $object->name,
+                )
             )
         );
     }
@@ -74,7 +76,9 @@ abstract class AbstractFormController extends AbstractUiController
         $factory = $this->serviceLocator->get('TranslatableFormFactory');
 
         /** @var $form \Library\Form\AbstractForm */
-        $form   = $factory->createForm(array('type' => $this->formSpecs['type']));
+        $form   = $factory->createForm(
+            array('type' => $this->formSpecs['type'])
+        );
         $object = new $this->formSpecs['object']();
 
         // The form mode must be set before the loadElements because it's used when retrieving the baseFieldset
@@ -145,7 +149,10 @@ abstract class AbstractFormController extends AbstractUiController
             $post = $tmpPost;
         }
 
-        $form = $this->getForm($post, array('form_mode' => AbstractForm::MODE_EDIT));
+        $form = $this->getForm(
+            $post,
+            array('form_mode' => AbstractForm::MODE_EDIT)
+        );
 
         // We need to call the isValid method or else we won't have any error messages
         if (!empty($post)) {

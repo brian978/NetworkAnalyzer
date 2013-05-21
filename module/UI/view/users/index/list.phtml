@@ -13,7 +13,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php echo $this->partialLoop('users/index/partials/list.phtml', $this->items); ?>
+                    <?php echo $this->partialLoop(
+                        'users/index/partials/list.phtml',
+                        $this->items
+                    ); ?>
                 </tbody>
             </table>
         </div>
