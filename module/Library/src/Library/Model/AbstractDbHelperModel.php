@@ -78,9 +78,9 @@ class AbstractDbHelperModel extends AbstractTableGateway
     /**
      * Used to generate a where condition
      *
-     * @param string $field
+     * @param string     $field
      * @param string|int $value
-     * @param string $table
+     * @param string     $table
      *
      * @return string
      */
@@ -103,9 +103,9 @@ class AbstractDbHelperModel extends AbstractTableGateway
     /**
      * Used to add a where condition
      *
-     * @param string $field
+     * @param string     $field
      * @param string|int $value
-     * @param string $table
+     * @param string     $table
      *
      * @return $this
      */
