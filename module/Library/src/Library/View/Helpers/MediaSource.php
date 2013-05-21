@@ -30,9 +30,6 @@ class MediaSource extends AbstractHelper
             case 'images':
                 $url .= 'images/';
                 break;
-
-            default:
-                break;
         }
 
         $url .= $mediaName;

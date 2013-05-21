@@ -15,8 +15,9 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-abstract class AbstractFieldset extends Fieldset
-    implements InputFilterProviderInterface, ServiceLocatorAwareInterface
+abstract class AbstractFieldset extends Fieldset implements
+    InputFilterProviderInterface,
+    ServiceLocatorAwareInterface
 {
     const MODE_SELECT = 1;
     const MODE_ADMIN  = 2;

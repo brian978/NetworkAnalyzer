@@ -105,7 +105,7 @@ abstract class AbstractUiController extends AbstractActionController
 
             if (isset($permissions[$controller]['privileges'][$action])) {
                 $privilege = $permissions[$controller]['privileges'][$action];
-            } else if (isset($permissions[$controller]['privileges']['all'])) {
+            } elseif (isset($permissions[$controller]['privileges']['all'])) {
                 $privilege = $permissions[$controller]['privileges']['all'];
             }
         }

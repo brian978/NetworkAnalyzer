@@ -13,5 +13,4 @@ use Library\Entity\AbstractEntity;
 
 class Role extends AbstractEntity
 {
-
 }

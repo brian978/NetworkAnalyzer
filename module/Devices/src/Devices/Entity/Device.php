@@ -24,19 +24,19 @@ class Device extends AbstractEntity
     /**
      * @var string
      */
-    protected $snmp_version;
+    protected $snmpVersion;
 
     /**
      * @var string
      */
-    protected $snmp_community;
+    protected $snmpCommunity;
 
     /**
-     * @param string $snmp_community
+     * @param string $snmpCommunity
      */
-    public function setSnmp_Community($snmp_community)
+    public function setSnmpCommunity($snmpCommunity)
     {
-        $this->snmp_community = $snmp_community;
+        $this->snmpCommunity = $snmpCommunity;
     }
 
     /**
@@ -44,15 +44,15 @@ class Device extends AbstractEntity
      */
     public function getSnmpCommunity()
     {
-        return $this->snmp_community;
+        return $this->snmpCommunity;
     }
 
     /**
-     * @param string $snmp_version
+     * @param string $snmpVersion
      */
-    public function setSnmp_Version($snmp_version)
+    public function setSnmpVersion($snmpVersion)
     {
-        $this->snmp_version = $snmp_version;
+        $this->snmpVersion = $snmpVersion;
     }
 
     /**
@@ -60,7 +60,7 @@ class Device extends AbstractEntity
      */
     public function getSnmpVersion()
     {
-        return $this->snmp_version;
+        return $this->snmpVersion;
     }
 
     public function setLocation(Location $location)

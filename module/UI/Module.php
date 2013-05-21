@@ -53,8 +53,7 @@ class Module extends MainModule
             array(
                 $this,
                 'setLocale'
-            )
-            ,
+            ),
             100
         );
     }
