@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace SNMP;
+namespace SNMP\Model;
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
@@ -51,6 +51,13 @@ class Session implements ServiceManagerAwareInterface
         $this->serviceManager = $serviceManager;
     }
 
+    /**
+     * Proxies the calls to the SNMP object
+     *
+     * @param       $name
+     * @param array $arguments
+     * @return mixed|null
+     */
     public function __call($name, $arguments = array())
     {
         $result = null;
@@ -63,11 +70,6 @@ class Session implements ServiceManagerAwareInterface
         }
 
         return $result;
-    }
-
-    public function __invoke()
-    {
-        return $this->session;
     }
 
     /**
@@ -96,20 +98,5 @@ class Session implements ServiceManagerAwareInterface
     public function close()
     {
         $this->session->close();
-    }
-
-    /**
-     * @param string $objectId
-     *
-     * @throws \RuntimeException
-     * @return mixed
-     */
-    public function get($objectId)
-    {
-        $output = $this->session->get($objectId);
-
-        if ($output == false) {
-            throw new \RuntimeException($this->session->getError());
-        }
     }
 }
