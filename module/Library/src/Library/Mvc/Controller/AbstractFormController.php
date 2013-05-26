@@ -202,14 +202,14 @@ abstract class AbstractFormController extends AbstractUiController
 
                 if ($result > 0) {
                     $hasFailed = false;
-
-                    $this->redirectOnSuccess(array('action' => $action));
                 }
             }
         }
 
         if ($hasFailed === true) {
             $this->redirectOnFail(array('action' => $action));
+        } else {
+            $this->redirectOnSuccess(array('action' => $action));
         }
 
         return '';
@@ -224,6 +224,9 @@ abstract class AbstractFormController extends AbstractUiController
         return $this->serviceLocator->get($this->formSpecs['model']);
     }
 
+    /**
+     * @return array
+     */
     public function listAction()
     {
         /** @var $model \Library\Model\AbstractDbModel */
@@ -232,5 +235,21 @@ abstract class AbstractFormController extends AbstractUiController
         return array(
             'items' => $model->fetch()
         );
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+
+        /** @var $model \Library\Model\AbstractDbModel */
+        $model = $this->getModel();
+
+        $result = $model->doDelete($model->getInfo($id));
+
+        if ($result === 0) {
+            $this->redirectOnFail(array('action' => 'list'));
+        } else {
+            $this->redirectOnSuccess(array('action' => 'list'));
+        }
     }
 }

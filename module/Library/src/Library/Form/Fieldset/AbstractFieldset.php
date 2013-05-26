@@ -58,7 +58,7 @@ abstract class AbstractFieldset extends Fieldset implements
 
     /**
      * @param string $name
-     * @param array $options
+     * @param array  $options
      */
     public function __construct($name = null, $options = array())
     {
@@ -74,7 +74,7 @@ abstract class AbstractFieldset extends Fieldset implements
      */
     public function setDenyFilters(array $filters)
     {
-        $this->denyFilters = $filters;
+        $this->denyFilters = array_merge($this->denyFilters, $filters);
 
         return $this;
     }
@@ -144,7 +144,7 @@ abstract class AbstractFieldset extends Fieldset implements
      */
     protected function getValueOptions()
     {
-        $options = $this->model->fetch();
+        $options = $this->getModel()->fetch();
 
         foreach ($options as $value => $row) {
             $options[$value] = $row['name'];
@@ -169,8 +169,6 @@ abstract class AbstractFieldset extends Fieldset implements
     protected function getIdElement($label)
     {
         if ($this->mode == self::MODE_SELECT) {
-            $this->getModel();
-
             $element = $this->getSelectId($label);
         } else {
             $element = $this->getHiddenId();
@@ -242,7 +240,7 @@ abstract class AbstractFieldset extends Fieldset implements
                     array(
                         'name' => 'StringLength',
                         'options' => array(
-                            'min' => 3
+                            'min' => 2
                         )
                     )
                 )

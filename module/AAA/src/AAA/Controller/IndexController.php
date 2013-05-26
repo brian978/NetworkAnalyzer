@@ -22,7 +22,6 @@ class IndexController extends AbstractActionController
     {
         if ($this->request->isPost()) {
             $auth = new Authentication($this->serviceLocator);
-            var_dump($auth->setCredentials(array())->authenticate());
         } else {
             $this->redirect()->toRoute(
                 'auth',

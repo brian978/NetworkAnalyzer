@@ -12,11 +12,6 @@ namespace Devices\Entity;
 class Device extends AbstractEntity
 {
     /**
-     * @var Location
-     */
-    protected $location;
-
-    /**
      * @var Type
      */
     protected $type;
@@ -30,6 +25,32 @@ class Device extends AbstractEntity
      * @var string
      */
     protected $snmpCommunity;
+
+    /**
+     * @var \Devices\Entity\Iface
+     */
+    protected $interface;
+
+    /**
+     * @var string
+     */
+    protected $location;
+
+    /**
+     * @param string $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
 
     /**
      * @param string $snmpCommunity
@@ -63,23 +84,35 @@ class Device extends AbstractEntity
         return $this->snmpVersion;
     }
 
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-    }
-
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
+    /**
+     * @param Type $type
+     */
     public function setType(Type $type)
     {
         $this->type = $type;
     }
 
+    /**
+     * @return Type
+     */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @param \Devices\Entity\Iface $interface
+     */
+    public function setInterface(Iface $interface)
+    {
+        $this->interface = $interface;
+    }
+
+    /**
+     * @return \Devices\Entity\Iface
+     */
+    public function getInterface()
+    {
+        return $this->interface;
     }
 }

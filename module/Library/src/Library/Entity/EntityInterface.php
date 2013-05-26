@@ -7,8 +7,9 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Entity;
+namespace Library\Entity;
 
-class Location extends AbstractEntity
+interface EntityInterface
 {
+
 }

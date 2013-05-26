@@ -9,26 +9,26 @@
 
 namespace SNMP\Manager\Objects;
 
-abstract class AbstractObject extends \ArrayObject
+abstract class AbstractObject
 {
     /**
-     * The method is used to process a string of data provided by the ObjectManager
-     *
-     * @param mixed $data
-     * @return mixed
+     * @var AbstractObject
      */
-    abstract public function process($data);
+    protected $parentObject;
 
     /**
-     * Sets a set of information for the object
-     *
-     * @param $info
-     * @return $this
+     * @param AbstractObject $object
      */
-    protected function setInfo($info)
+    public function __construct(AbstractObject $object)
     {
-        parent::offsetSet('info', $info);
+        $this->parentObject = $object;
+    }
 
-        return $this;
+    /**
+     * @return AbstractObject
+     */
+    public function getParentObject()
+    {
+        return $this->parentObject;
     }
 }

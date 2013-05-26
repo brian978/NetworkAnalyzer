@@ -17,6 +17,8 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
 
     abstract protected function doUpdate($object);
 
+    abstract public function doDelete($object);
+
     /**
      * @param $id
      *
@@ -50,16 +52,15 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
      * This method is used to apply a custom row processing by the child models
      *
      * @param $row
-     *
-     * @return mixed
+     * @return object
      */
-    protected function processRow($row)
+    protected function processRow(\ArrayObject $row)
     {
         return $row;
     }
 
     /**
-     * @param array $data
+     * @param array          $data
      * @param AbstractEntity $object
      *
      * @return int

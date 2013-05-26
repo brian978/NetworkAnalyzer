@@ -11,15 +11,18 @@
 
         // Retrieving the forms/fieldsets
         $device = $form->get('device');
-        $location = $device->get('location');
         $device_type = $device->get('type');
+        $interface = $device->get('interface');
 
         // Retrieving the form elements
         $deviceName = $device->get('name');
-        $deviceSnmpVersion = $device->get('snmp_version');
-        $deviceSnmpCommunity = $device->get('snmp_community');
-        $deviceLocation = $location->get('id');
+        $deviceSnmpVersion = $device->get('snmpVersion');
+        $deviceSnmpCommunity = $device->get('snmpCommunity');
         $deviceType = $device_type->get('id');
+
+        // Retrieving the form elements
+        $interfaceIp = $interface->get('ip');
+        $interfaceType = $interface->get('type')->get('id');
 
         /** @var $form \Devices\Form\DevicesFrom */
         $form->setAttribute(
@@ -43,16 +46,14 @@
         echo $this->form()->openTag($form);
 
         echo $this->showInputError($deviceName) . $this->formRow($deviceName);
-        echo $this->showInputError($deviceSnmpVersion) . $this->formRow(
-            $deviceSnmpVersion
-        );
-        echo $this->showInputError($deviceSnmpCommunity) . $this->formRow(
-            $deviceSnmpCommunity
-        );
-        echo $this->showInputError($deviceLocation) . $this->formRow(
-            $deviceLocation
-        );
+        echo $this->showInputError($deviceSnmpVersion) . $this->formRow($deviceSnmpVersion);
+        echo $this->showInputError($deviceSnmpCommunity) . $this->formRow($deviceSnmpCommunity);
         echo $this->showInputError($deviceType) . $this->formRow($deviceType);
+
+        echo '<fieldset><legend>' . $this->translate('Interface') . '</legend>';
+        echo $this->showInputError($interfaceIp) . $this->formRow($interfaceIp);
+        echo $this->showInputError($interfaceType) . $this->formRow($interfaceType);
+        echo '<br/><br/><br/><br/></fieldset>';
 
         echo $this->formHidden($device->get('id'));
         echo $this->formHidden($form->get('csrf'));

@@ -7,9 +7,9 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Model;
+namespace SNMP\Manager\Objects;
 
-class LocationsModel extends AbstractModel
+interface ObjectProcessorInterface
 {
-    protected $table = 'locations';
+    public function process(array $data);
 }

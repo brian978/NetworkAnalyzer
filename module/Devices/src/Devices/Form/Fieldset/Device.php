@@ -26,73 +26,69 @@ class Device extends AbstractFieldset
     public function loadElements()
     {
         // Adding the elements to the fieldset
-        $this->add($this->getIdElement('Device'));
+        $this->add($this->getHiddenId());
 
-        if ($this->mode == self::MODE_ADMIN) {
-            $this->add(
-                array(
-                    'name' => 'name',
-                    'options' => array(
-                        'label' => 'Name',
-                        'label_attributes' => array(
-                            'class' => 'form_row'
-                        ),
+        $this->add(
+            array(
+                'name' => 'name',
+                'options' => array(
+                    'label' => 'Name',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
                     ),
-                    'attributes' => array(
-                        'required' => 'true'
-                    )
+                ),
+                'attributes' => array(
+                    'required' => 'true'
                 )
-            );
+            )
+        );
 
-            $this->add(
-                array(
-                    'name' => 'snmp_version',
-                    'type' => '\Zend\Form\Element\Select',
-                    'options' => array(
-                        'label' => 'SNMP Version',
-                        'label_attributes' => array(
-                            'class' => 'form_row'
-                        ),
-                        'value_options' => array(
-                            \SNMP::VERSION_1 => 'VERSION_1',
-                            \SNMP::VERSION_2C => 'VERSION_2C',
-                            \SNMP::VERSION_3 => 'VERSION_3',
-                        )
+        $this->add(
+            array(
+                'name' => 'snmpVersion',
+                'type' => '\Zend\Form\Element\Select',
+                'options' => array(
+                    'label' => 'SNMP Version',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
                     ),
-                    'attributes' => array(
-                        'required' => 'true'
+                    'value_options' => array(
+                        \SNMP::VERSION_1 => 'VERSION_1',
+                        \SNMP::VERSION_2C => 'VERSION_2C',
+                        \SNMP::VERSION_3 => 'VERSION_3',
                     )
+                ),
+                'attributes' => array(
+                    'required' => 'true'
                 )
-            );
+            )
+        );
 
-            $this->add(
-                array(
-                    'name' => 'snmp_community',
-                    'options' => array(
-                        'label' => 'SNMP Community',
-                        'label_attributes' => array(
-                            'class' => 'form_row'
-                        ),
+        $this->add(
+            array(
+                'name' => 'snmpCommunity',
+                'options' => array(
+                    'label' => 'SNMP Community',
+                    'label_attributes' => array(
+                        'class' => 'form_row'
                     ),
-                    'attributes' => array(
-                        'required' => 'true'
-                    )
+                ),
+                'attributes' => array(
+                    'required' => 'true'
                 )
-            );
+            )
+        );
 
-            // Creating the required fields set and injecting the dependencies
-            $location = new Location();
-            $location->setServiceLocator($this->serviceLocator);
-            $location->setDenyFilters(array('name'));
-            $location->loadElements();
+        $type = new Type();
+        $type->setServiceLocator($this->serviceLocator);
+        $type->setDenyFilters(array('name'));
+        $type->loadElements();
+        $this->add($type);
 
-            $type = new Type();
-            $type->setServiceLocator($this->serviceLocator);
-            $type->setDenyFilters(array('name'));
-            $type->loadElements();
-
-            $this->add($location);
-            $this->add($type);
-        }
+        $interface = new Iface();
+        $interface->setServiceLocator($this->serviceLocator);
+        $interface->setDenyFilters(array('id'));
+        $interface->loadElements();
+        $this->add($interface);
     }
 }

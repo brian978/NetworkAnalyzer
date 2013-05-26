@@ -43,13 +43,16 @@ class IndexController extends AbstractController
                 'device' => array(
                     'id' => $object->id,
                     'name' => $object->name,
-                    'snmp_version' => $object->snmp_version,
-                    'snmp_community' => $object->snmp_community,
-                    'location' => array(
-                        'id' => $object->location_id
-                    ),
+                    'snmpVersion' => $object->snmp_version,
+                    'snmpCommunity' => $object->snmp_community,
                     'type' => array(
                         'id' => $object->type_id
+                    ),
+                    'interface' => array(
+                        'ip' => $object->ip,
+                        'type' => array(
+                            'id' => $object->interface_type_id
+                        )
                     )
                 )
             )
@@ -73,13 +76,7 @@ class IndexController extends AbstractController
         );
 
         // Manager objects
-        $snmpManager    = new SessionManager(new Session($this->serviceLocator, $config));
-        $objectsManager = new ObjectManager();
-
-        // Dependency Injecting
-        $objectsManager->setSessionManager($snmpManager);
-
-        $output = $objectsManager->interface_mac;
+        $objectManager = new ObjectManager(new SessionManager(new Session($this->serviceLocator, $config)));
 
 //        $output = $snmpManager->walk();
 

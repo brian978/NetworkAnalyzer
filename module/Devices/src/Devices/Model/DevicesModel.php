@@ -9,7 +9,11 @@
 
 namespace Devices\Model;
 
-use Library\Model\AbstractDbModel;
+use Devices\Entity\Device;
+use Devices\Entity\Iface;
+use Devices\Entity\Type;
+use Devices\Form\Fieldset\IfaceType;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class DevicesModel extends AbstractModel
 {
@@ -18,28 +22,70 @@ class DevicesModel extends AbstractModel
     public function fetch()
     {
         $this->addJoin(
-            'locations',
-            'locations.id = devices.location_id',
-            array('locationName' => 'name')
-        );
-        $this->addJoin(
             'device_types',
             'device_types.id = devices.type_id',
             array('typeName' => 'name')
         );
         $this->addJoin(
-            'interfaces',
-            'interfaces.device_id = devices.id',
-            array('interfaceName' => 'name', 'mac', 'ip')
-        );
-        $this->addJoin(
             'interface_types',
-            'interface_types.id = interfaces.type_id',
+            'interface_types.id = devices.interface_type_id',
             array('interfaceType' => 'name')
         );
 
         return parent::fetch();
     }
+
+    /**
+     * @param \ArrayObject $row
+     * @return object
+     */
+//    protected function processRow(\ArrayObject $row)
+//    {
+//        $hydrator = new ClassMethods();
+//        $data     = $row->getArrayCopy();
+//
+//        // Device type
+//        $data['type'] = array();
+//
+//        // Interface data
+//        $data['interface'] = array();
+//
+//        // Interface type data
+//        $data['interface']['type'] = array();
+//
+//        foreach ($data as $id => $value) {
+//            switch ($id) {
+//                case 'typeName':
+//                    $data['type']['name'] = $value;
+//                    break;
+//
+//                case 'type_id':
+//                    $data['type']['id'] = $value;
+//                    break;
+//
+//                case 'interface_type_id':
+//                    $data['interface']['type']['id'] = $value;
+//                    break;
+//
+//                case 'interfaceType':
+//                    $data['interface']['type']['name'] = $value;
+//                    break;
+//
+//                case 'ip':
+//                    $data['interface']['ip'] = $value;
+//                    break;
+//            }
+//        }
+//
+//        // Building the required objects for the device object
+//        $data['type']              = $hydrator->hydrate($data['type'], new Type());
+//        $data['interface']['type'] = $hydrator->hydrate($data['interface']['type'], new Type());
+//        $data['interface']         = $hydrator->hydrate($data['interface'], new Iface());
+//
+//        $device = $hydrator->hydrate($data, new Device());
+//
+//        return $device;
+//    }
 
     /**
      * This returns the number of affected rows
@@ -52,12 +98,13 @@ class DevicesModel extends AbstractModel
     {
         $result = 0;
 
-        $data                   = array();
-        $data['name']           = $object->getName();
-        $data['snmp_version']   = $object->getSnmpVersion();
-        $data['snmp_community'] = $object->getSnmpCommunity();
-        $data['location_id']    = $object->getLocation()->getId();
-        $data['type_id']        = $object->getType()->getId();
+        $data                      = array();
+        $data['name']              = $object->getName();
+        $data['snmp_version']      = $object->getSnmpVersion();
+        $data['snmp_community']    = $object->getSnmpCommunity();
+        $data['type_id']           = $object->getType()->getId();
+        $data['ip']                = $object->getInterface()->getIp();
+        $data['interface_type_id'] = $object->getInterface()->getType()->getId();
 
         try {
             // If successful will return the number of rows
@@ -77,12 +124,13 @@ class DevicesModel extends AbstractModel
      */
     protected function doUpdate($object)
     {
-        $data                   = array();
-        $data['name']           = $object->getName();
-        $data['snmp_version']   = $object->getSnmpVersion();
-        $data['snmp_community'] = $object->getSnmpCommunity();
-        $data['location_id']    = $object->getLocation()->getId();
-        $data['type_id']        = $object->getType()->getId();
+        $data                      = array();
+        $data['name']              = $object->getName();
+        $data['snmp_version']      = $object->getSnmpVersion();
+        $data['snmp_community']    = $object->getSnmpCommunity();
+        $data['type_id']           = $object->getType()->getId();
+        $data['ip']                = $object->getInterface()->getIp();
+        $data['interface_type_id'] = $object->getInterface()->getType()->getId();
 
         return $this->executeUpdateById($data, $object);
     }

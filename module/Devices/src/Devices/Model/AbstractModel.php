@@ -9,7 +9,6 @@
 
 namespace Devices\Model;
 
-use Library\Entity\AbstractEntity;
 use Library\Model\AbstractDbModel;
 
 class AbstractModel extends AbstractDbModel
@@ -50,5 +49,21 @@ class AbstractModel extends AbstractDbModel
         $data['name'] = $object->getName();
 
         return $this->executeUpdateById($data, $object);
+    }
+
+    /**
+     * @param \ArrayObject $object
+     * @return int
+     */
+    public function doDelete($object)
+    {
+        $result = 0;
+
+        try {
+            $result = $this->delete($this->getWhere('id', $object->id));
+        } catch (\Exception $e) {
+        }
+
+        return $result;
     }
 }

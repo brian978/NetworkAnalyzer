@@ -34,16 +34,6 @@ class Iface extends AbstractEntity
         return $this->ip;
     }
 
-    public function setMac($mac)
-    {
-        $this->mac = $mac;
-    }
-
-    public function getMac()
-    {
-        return $this->mac;
-    }
-
     /**
      * @param \Devices\Entity\Type $type
      */
@@ -58,21 +48,5 @@ class Iface extends AbstractEntity
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * @param \Devices\Entity\Device $device
-     */
-    public function setDevice(Device $device)
-    {
-        $this->device = $device;
-    }
-
-    /**
-     * @return \Devices\Entity\Device
-     */
-    public function getDevice()
-    {
-        return $this->device;
     }
 }
