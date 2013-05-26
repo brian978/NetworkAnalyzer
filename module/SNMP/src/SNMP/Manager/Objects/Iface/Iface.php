@@ -11,7 +11,6 @@ namespace SNMP\Manager\Objects\Iface;
 
 use SNMP\Manager\Objects\AbstractObject;
 use SNMP\Manager\Objects\AbstractProcessorObject;
-use SNMP\Manager\Objects\Device\Device;
 
 /**
  * Class Iface
@@ -36,90 +35,69 @@ class Iface extends AbstractObject
     protected $mac;
 
     /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $in;
+
+    /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $out;
+
+    /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $adminStatus;
+
+    /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $status;
+
+    /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $queueLength;
+
+    /**
      * @var int
      */
     protected $oidIndex;
 
     /**
-     * @param Device $object
+     * Made to avoid multiple setters and getters
+     *
+     * @param       $name
+     * @param array $arguments
+     * @return $this
      */
-    public function __construct(Device $object)
+    public function __call($name, $arguments = array())
     {
-        parent::__construct($object);
+        if (strpos($name, 'get') !== false) {
+            $name = str_replace('get', '', $name);
+            $name = lcfirst($name);
 
-        $object->attachInterface($this);
+            if (property_exists($this, $name)) {
+                return $this->$name;
+            }
+        } elseif (strpos($name, 'set') !== false) {
+            $name = str_replace('set', '', $name);
+            $name = lcfirst($name);
+
+            if (property_exists($this, $name)) {
+                $this->$name = $arguments[0];
+            }
+        }
+
+        return $this;
     }
 
     /**
-     * @param int $oidIndex
-     */
-    public function setOidIndex($oidIndex)
-    {
-        $this->oidIndex = $oidIndex;
-    }
-
-    /**
+     * @param string $oidValue
      * @return int
      */
-    public function getOidIndex()
+    public static function extractOidIndex($oidValue)
     {
-        return $this->oidIndex;
-    }
-
-    /**
-     * @param AbstractProcessorObject $ip
-     */
-    public function setIp(AbstractProcessorObject $ip)
-    {
-        $this->ip = $ip;
-    }
-
-    /**
-     * @return \SNMP\Manager\Objects\AbstractProcessorObject
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
-     * @param AbstractProcessorObject $name
-     */
-    public function setName(AbstractProcessorObject $name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return \SNMP\Manager\Objects\AbstractProcessorObject
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param \SNMP\Manager\Objects\AbstractProcessorObject $mac
-     */
-    public function setMac(AbstractProcessorObject $mac)
-    {
-        $this->mac = $mac;
-    }
-
-    /**
-     * @return \SNMP\Manager\Objects\AbstractProcessorObject
-     */
-    public function getMac()
-    {
-        return $this->mac;
-    }
-
-    /**
-     * @param string $oid
-     * @return int
-     */
-    public static function extractOidIndex($oid)
-    {
-        return intval(trim(str_replace('INTEGER: ', '', $oid)));
+        return intval(trim(str_replace('INTEGER: ', '', $oidValue)));
     }
 }

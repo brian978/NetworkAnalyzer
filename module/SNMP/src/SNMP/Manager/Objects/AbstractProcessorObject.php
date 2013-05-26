@@ -26,7 +26,7 @@ abstract class AbstractProcessorObject extends AbstractObject implements ObjectP
      * @param array $data
      * @return mixed
      */
-    abstract protected function processSingle(array $data);
+    abstract public function process(array $data);
 
     /**
      * @return array
@@ -45,22 +45,11 @@ abstract class AbstractProcessorObject extends AbstractObject implements ObjectP
     }
 
     /**
-     * The method is used to process a string of data provided by the ObjectManager
-     *
-     * @param array $data
-     * @return mixed
+     * @return array
      */
-    public function process(array $data)
+    public function __toString()
     {
-        if (count($data) > 1) {
-            foreach ($data as $oid => $value) {
-                $this->processSingle(array($oid => $value));
-            }
-        } else {
-            $this->processSingle($data);
-        }
-
-        return $this;
+        return strval($this->get());
     }
 
     /**
@@ -80,15 +69,19 @@ abstract class AbstractProcessorObject extends AbstractObject implements ObjectP
      */
     protected function bindToInterfaceObject($data)
     {
-        if ($this->parentObject instanceof Device) {
-            /** @var $device Device */
-            $device    = $this->parentObject;
-            $interface = $device->getInterfaceByOidIndex($this->getOidIndex(key($data)));
-
-            // The default parent object is the Device object, so we need to change it so
-            // it points to an Iface object
-            $this->parentObject = $interface;
+        if (is_array($data)) {
+            $oidIndex = $this->getOidIndex(key($data));
+        } else {
+            $oidIndex = $data;
         }
+
+        /** @var $device Device */
+        $device    = $this->parentObject;
+        $interface = $device->getInterfaceByOidIndex($oidIndex);
+
+        // The default parent object is the Device object, so we need to change it so
+        // it points to an Iface object
+        $this->parentObject = $interface;
 
         return $this;
     }

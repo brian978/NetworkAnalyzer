@@ -51,24 +51,25 @@ class ObjectManager
      */
     protected $objects = array(
         'device' => array(
-            'uptime' => '.1.3.6.1.2.1.1.3',
-            'contact' => '.1.3.6.1.2.1.1.4',
-            'name' => '.1.3.6.1.2.1.1.5',
-            'location' => '.1.3.6.1.2.1.1.6',
+            'uptime' => 'iso.3.6.1.2.1.1.3',
+            'contact' => 'iso.3.6.1.2.1.1.4',
+            'name' => 'iso.3.6.1.2.1.1.5',
+            'location' => 'iso.3.6.1.2.1.1.6',
         ),
         'iface' => array(
-            'ip' => '.1.3.6.1.2.1.4.20',
-            'name' => '.1.3.6.1.2.1.2.2.1.2',
-            'mac' => '.1.3.6.1.2.1.2.2.1.6',
+            'ip' => 'iso.3.6.1.2.1.4.20.1.1',
+            'ip_index' => 'iso.3.6.1.2.1.4.20.1.2',
+            'name' => 'iso.3.6.1.2.1.2.2.1.2',
+            'mac' => 'iso.3.6.1.2.1.2.2.1.6',
             // Octets
-            'in' => '.1.3.6.1.2.1.2.2.1.10',
+            'in' => 'iso.3.6.1.2.1.2.2.1.10',
             // Octets
-            'out' => '.1.3.6.1.2.1.2.2.1.16',
+            'out' => 'iso.3.6.1.2.1.2.2.1.16',
             // 1: up, 2: down, 3: testing
-            'admin_status' => '.1.3.6.1.2.1.2.2.1.7',
+            'admin_status' => 'iso.3.6.1.2.1.2.2.1.7',
             // 1: up, 2: down, 3: testing, 4: unknown, 5: dormant, 6: notPresent, 7: lowerLayerDown
-            'status' => '.1.3.6.1.2.1.2.2.1.8',
-            'queue_length' => '.1.3.6.1.2.1.2.2.1.21'
+            'status' => 'iso.3.6.1.2.1.2.2.1.8',
+            'queue_length' => 'iso.3.6.1.2.1.2.2.1.21'
         ),
     );
 
@@ -98,12 +99,10 @@ class ObjectManager
      */
     protected function collectData()
     {
-        $startTime = microtime(true);
-
         // Creating all the interfaces with minimal data so we can properly attach
         // the interface information to the proper interface instance
         $interfaces           = array();
-        $snmpInterfaceIndexes = $this->sessionManager->walk('1.3.6.1.2.1.2.2.1.1');
+        $snmpInterfaceIndexes = $this->sessionManager->walk('iso.3.6.1.2.1.2.2.1.1');
 
         foreach ($snmpInterfaceIndexes as $oid) {
             $oidIndex              = Iface::extractOidIndex($oid);
@@ -111,6 +110,8 @@ class ObjectManager
             $interfaces[$oidIndex] = $interface;
 
             $interface->setOidIndex($oidIndex);
+
+            $this->device->attachInterface($interface, $oidIndex);
         }
 
         if (count($interfaces) > 0) {
@@ -123,25 +124,22 @@ class ObjectManager
                     $className = $this->createClassName($type, $alias);
 
                     if (class_exists($className)) {
-                        echo $className . PHP_EOL;
-                        $snmpInfo    = $this->sessionManager->walk($oid);
-                        $classObject = new $className($this->device);
-                        $classObject->process($snmpInfo);
+                        $snmpInfo = $this->sessionManager->walk($oid);
+
+                        foreach ($snmpInfo as $oid => $value) {
+                            $classObject = new $className($this->device);
+                            $classObject->process(array($oid => $value));
+                        }
                     }
                 }
             }
         }
 
-        echo microtime(true) - $startTime;
-
-//        var_dump($this->device);
-//        var_dump($this->device->getInterfaceByOidIndex(1)->getMac());
-        var_dump($this->sessionManager->walk('.1.3.6.1.2.1.2.2.1.6'));
         return $this;
     }
 
     /**
-     * Wrapper for the getObjectOID (for now)
+     *
      *
      * @param $name
      * @throws \RuntimeException
@@ -154,6 +152,22 @@ class ObjectManager
         }
 
         $snmpInfo = $this->sessionManager->walk($this->getOID($name));
+
+        return $snmpInfo;
+    }
+
+    /**
+     * @param string $oid
+     * @return mixed
+     * @throws \RuntimeException
+     */
+    public function getByOID($oid)
+    {
+        if (!is_object($this->sessionManager)) {
+            throw new \RuntimeException('The session manager has not been set');
+        }
+
+        $snmpInfo = $this->sessionManager->walk($oid);
 
         return $snmpInfo;
     }
@@ -181,8 +195,11 @@ class ObjectManager
         if (strpos($objectName, '_') !== 0) {
             $pieces = explode('_', $objectName);
 
-            if (isset($this->objects[$pieces[0]][$pieces[1]])) {
-                $result = $this->objects[$pieces[0]][$pieces[1]];
+            $type  = array_shift($pieces);
+            $alias = implode('_', $pieces);
+
+            if (isset($this->objects[$type][$alias])) {
+                $result = $this->objects[$type][$alias];
             }
         }
 
@@ -214,6 +231,14 @@ class ObjectManager
     }
 
     /**
+     * @return Objects\Device|Device
+     */
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    /**
      * Creates a class name using a string
      *
      * @param $type
@@ -222,8 +247,15 @@ class ObjectManager
      */
     protected function createClassName($type, $alias)
     {
-        $type  = ucfirst($type);
-        $alias = ucfirst($alias);
+        $type = ucfirst($type);
+
+        $aliasPieces = explode('_', $alias);
+
+        foreach ($aliasPieces as $key => $piece) {
+            $aliasPieces[$key] = ucfirst($piece);
+        }
+
+        $alias = implode('', $aliasPieces);
 
         return __NAMESPACE__ . '\\' . $this->objectsNamespace . '\\' . $type . '\\' . $alias;
     }

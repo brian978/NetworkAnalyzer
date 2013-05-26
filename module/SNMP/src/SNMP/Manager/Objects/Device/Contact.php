@@ -7,25 +7,22 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace SNMP\Manager\Objects\Iface;
+namespace SNMP\Manager\Objects\Device;
 
 use SNMP\Manager\Objects\AbstractProcessorObject;
 
-/**
- * Class Name
- *
- * @package SNMP\Manager\Objects\Iface
- */
-class Name extends AbstractProcessorObject
+class Contact extends AbstractProcessorObject
 {
+
     /**
+     * Used to process a single array entry
+     *
      * @param array $data
-     * @return $this|mixed
+     * @return mixed
      */
     public function process(array $data)
     {
-        $this->bindToInterfaceObject($data);
-        $this->parentObject->setName($this);
+        $this->parentObject->setContact($this);
 
         $this->data = trim(str_replace('STRING: ', '', current($data)));
         $this->data = str_replace('"', '', $this->data);

@@ -22,7 +22,7 @@ class Uptime extends AbstractProcessorObject
      * @param array $data
      * @return $this|mixed
      */
-    protected function processSingle(array $data)
+    public function process(array $data)
     {
         $this->parentObject->setUptime($this);
 

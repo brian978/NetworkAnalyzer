@@ -37,6 +37,11 @@ class Device extends AbstractObject
     protected $location;
 
     /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $name;
+
+    /**
      * @var array
      */
     protected $interfaces;
@@ -50,76 +55,44 @@ class Device extends AbstractObject
     }
 
     /**
-     * @param AbstractProcessorObject $contact
+     * Made to avoid multiple setters and getters
+     *
+     * @param       $name
+     * @param array $arguments
+     * @return $this
      */
-    public function setContact(AbstractProcessorObject $contact)
+    public function __call($name, $arguments = array())
     {
-        $this->contact = $contact;
-    }
+        if (strpos($name, 'get') !== false) {
+            $name = str_replace('get', '', $name);
+            $name = lcfirst($name);
 
-    /**
-     * @return \SNMP\Manager\Objects\AbstractProcessorObject
-     */
-    public function getContact()
-    {
-        return $this->contact;
+            if (property_exists($this, $name)) {
+                return $this->$name;
+            }
+        } elseif (strpos($name, 'set') !== false) {
+            $name = str_replace('set', '', $name);
+            $name = lcfirst($name);
+
+            if (property_exists($this, $name)) {
+                $this->$name = $arguments[0];
+            }
+        }
+
+        return $this;
     }
 
     /**
      * @param Iface $interface
+     * @param int   $oidIndex
      */
-    public function attachInterface(Iface $interface)
+    public function attachInterface(Iface $interface, $oidIndex = null)
     {
-        $this->interfaces[] = $interface;
-    }
+        if ($oidIndex === null) {
+            $oidIndex = $interface->getOidIndex();
+        }
 
-    /**
-     * @param array $interfaces
-     */
-    public function setInterfaces($interfaces)
-    {
-        $this->interfaces = $interfaces;
-    }
-
-    /**
-     * @return \SNMP\Manager\Objects\AbstractProcessorObject
-     */
-    public function getInterfaces()
-    {
-        return $this->interfaces;
-    }
-
-    /**
-     * @param AbstractProcessorObject $location
-     */
-    public function setLocation(AbstractProcessorObject $location)
-    {
-        $this->location = $location;
-    }
-
-    /**
-     * @return \SNMP\Manager\Objects\AbstractProcessorObject
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     *
-     * @param AbstractProcessorObject $uptime
-     */
-    public function setUptime(AbstractProcessorObject $uptime)
-    {
-        $this->uptime = $uptime;
-    }
-
-    /**
-     * @return \SNMP\Manager\Objects\AbstractProcessorObject
-     */
-    public function getUptime()
-    {
-        return $this->uptime;
+        $this->interfaces[$oidIndex] = $interface;
     }
 
     /**
