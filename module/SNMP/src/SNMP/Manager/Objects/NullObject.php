@@ -9,7 +9,7 @@
 
 namespace SNMP\Manager\Objects;
 
-class Null implements ObjectProcessorInterface
+class NullObject implements ObjectProcessorInterface
 {
     /**
      * @return string

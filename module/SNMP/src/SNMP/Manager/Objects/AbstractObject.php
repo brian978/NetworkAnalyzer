@@ -63,7 +63,7 @@ abstract class AbstractObject
             return $this->$name;
         }
 
-        return new Null();
+        return new NullObject();
     }
 
     /**

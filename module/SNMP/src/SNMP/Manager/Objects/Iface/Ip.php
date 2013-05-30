@@ -10,6 +10,7 @@
 namespace SNMP\Manager\Objects\Iface;
 
 use SNMP\Manager\Objects\AbstractProcessorObject;
+use SNMP\Manager\Objects\NullObject;
 
 class Ip extends AbstractProcessorObject
 {
@@ -36,17 +37,17 @@ class Ip extends AbstractProcessorObject
 
         // There might be an interface with sub-interfaces so we need to make sure
         // that an IP hasn't already been set to that interface
-//        if($this->parentObject->getIp() == null) {
-        $this->parentObject->setIp($this);
-//        } else {
-//
-//            // Creating a new interface with all the characteristics
-//            // of the parent one and setting the IP to this one
-//            $newInterface = clone $this->parentObject;
-//            $newInterface->setIp($this);
-//
-//            $this->parentObject->attachInterface($newInterface);
-//        }
+        if ($this->parentObject->getIp() instanceof NullObject) {
+            $this->parentObject->setIp($this);
+        } else {
+
+            // Creating a new interface with all the characteristics
+            // of the parent one and setting the IP to this one
+            $newInterface = clone $this->parentObject;
+            $newInterface->setIp($this);
+
+            $this->parentObject->attachInterface($newInterface);
+        }
 
         return $this;
     }

@@ -27,8 +27,7 @@ class Name extends AbstractProcessorObject
         $this->bindToInterfaceObject($data);
         $this->parentObject->setName($this);
 
-        $this->data = trim(str_replace('STRING: ', '', current($data)));
-        $this->data = str_replace('"', '', $this->data);
+        $this->data = $this->processStringData($data);
 
         return $this;
     }

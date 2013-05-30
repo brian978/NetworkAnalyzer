@@ -29,6 +29,18 @@ abstract class AbstractProcessorObject extends AbstractObject implements ObjectP
     abstract public function process(array $data);
 
     /**
+     * @param array $data
+     * @return string
+     */
+    protected function processStringData(array $data)
+    {
+        $string = trim(str_replace('STRING: ', '', current($data)));
+        $string = str_replace('"', '', $string);
+
+        return $string;
+    }
+
+    /**
      * @return array
      */
     public function get()

@@ -25,10 +25,6 @@
                 <tbody>
                     <?php foreach ($this->device->getInterfaces() as $interface): ?>
                         <?php
-                        if ($interface->getMac()->get() == '') {
-                            continue;
-                        }
-
                         switch ($interface->getStatus()) {
                             case '1':
                                 $status = $this->translate('Up');

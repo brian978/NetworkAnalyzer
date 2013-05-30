@@ -103,6 +103,9 @@ class ObjectManager
      */
     protected function collectData()
     {
+//        $startTime = microtime(true);
+//        $startMem = memory_get_usage(true);
+
         // Creating all the interfaces with minimal data so we can properly attach
         // the interface information to the proper interface instance
         $interfaces           = 0;
@@ -142,7 +145,8 @@ class ObjectManager
             }
         }
 
-        var_dump($this->sessionManager->walk('iso.3.6.1.2.1.4.20.1.2'));
+//        echo (microtime(true) - $startTime) . 's <br>';
+//        echo ((memory_get_usage(true) - $startMem) / 1024 / 1024) . 'MB';
 
         return $this;
     }

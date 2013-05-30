@@ -75,6 +75,9 @@ class Iface extends AbstractObject
      */
     protected function propertySet($name, $arguments)
     {
+        // This will be passed to child interfaces
+        $callName = $name;
+
         $name = str_replace('set', '', $name);
         $name = lcfirst($name);
 
@@ -82,9 +85,9 @@ class Iface extends AbstractObject
             $this->$name = $arguments[0];
 
             // Setting the data for the other sub-interfaces as well
-            if ($name != 'setIp' && $this->hasInterfaces()) {
+            if ($name != 'ip' && $this->hasInterfaces()) {
                 foreach ($this->interfaces as $interface) {
-                    call_user_func_array(array($interface, $name), $arguments);
+                    call_user_func_array(array($interface, $callName), $arguments);
                 }
             }
         }

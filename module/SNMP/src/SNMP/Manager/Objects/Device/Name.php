@@ -22,10 +22,9 @@ class Name extends AbstractProcessorObject
      */
     public function process(array $data)
     {
-        $this->parentObject->setName($this);
+        $this->data = $this->processStringData($data);
 
-        $this->data = trim(str_replace('STRING: ', '', current($data)));
-        $this->data = str_replace('"', '', $this->data);
+        $this->parentObject->setName($this);
 
         return $this;
     }

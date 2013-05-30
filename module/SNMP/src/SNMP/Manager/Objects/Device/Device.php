@@ -67,10 +67,11 @@ class Device extends AbstractObject
         $interfaces = array();
 
         foreach ($interface->getInterfaces() as $subInterface) {
+
+            $interfaces[] = $subInterface;
+
             if ($subInterface->hasInterfaces()) {
                 $interfaces = array_merge($interfaces, $this->getSubInterfaces($subInterface));
-            } else {
-                $interfaces[] = $subInterface;
             }
         }
 
@@ -85,13 +86,14 @@ class Device extends AbstractObject
         $interfaces = array();
 
         foreach ($this->interfaces as $interface) {
+
+            $interfaces[] = $interface;
+
             if ($interface->hasInterfaces()) {
                 $interfaces = array_merge($interfaces, $this->getSubInterfaces($interface));
-            } else {
-                $interfaces[] = $interface;
             }
         }
-
+        echo count($interfaces);
         return $interfaces;
     }
 
