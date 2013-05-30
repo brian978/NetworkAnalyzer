@@ -17,7 +17,8 @@ class IndexController extends AbstractUiController
     public function updateAction()
     {
         // Updating the application
-        shell_exec('git pull');
+        var_dump(shell_exec('cd ' . getcwd() . ' && git pull'));
+        die();
 
         $this->redirect()->toRoute('home');
     }

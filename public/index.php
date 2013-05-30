@@ -4,7 +4,7 @@
  * to the application root now.
  */
 chdir(dirname(__DIR__));
-echo 'test';
+
 // Setup autoloading
 require 'init_autoloader.php';
 

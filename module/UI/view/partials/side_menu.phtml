@@ -9,9 +9,12 @@ $menuOptions = array(
     'ulClass' => 'toggle'
 );
 
+/** @var $acl \Zend\Permissions\Acl\Acl */
+$acl = $this->acl;
+
 /** @var $menu \Zend\View\Helper\Navigation\Menu */
 $menu = $this->nav->menu();
-$menu->setAcl($this->acl)
+$menu->setAcl($acl)
     ->setRole($this->userAuth->getRole());
 
 // Rendering the menus
@@ -32,18 +35,24 @@ $menus = array(
                onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
     </form>
     <hr/>
-    <?php if (!empty($menus['devices'])): ?><h3><?php echo $this->translate(
-        'Devices'
-    ) ?></h3><?php endif; ?>
+    <?php if (!empty($menus['devices'])): ?><h3><?php echo $this->translate('Devices') ?></h3><?php endif; ?>
     <?php echo $menus['devices']; ?>
-    <?php if (!empty($menus['users'])): ?><h3><?php echo $this->translate(
-        'Users'
-    ) ?></h3><?php endif; ?>
+    <?php if (!empty($menus['users'])): ?><h3><?php echo $this->translate('Users') ?></h3><?php endif; ?>
     <?php echo $menus['users']; ?>
-    <?php if (!empty($menus['admin'])): ?><h3><?php echo $this->translate(
-        'Admin'
-    ) ?></h3><?php endif; ?>
+    <?php if (!empty($menus['admin'])): ?><h3><?php echo $this->translate('Admin') ?></h3><?php endif; ?>
     <?php echo $menus['admin']; ?>
+
+    <?php if ($acl->isAllowed($this->userAuth->getRole(), 'admin', 'access')): ?>
+        <h3><?php echo $this->translate('Application updater') ?></h3>
+        <ul class="toggle">
+            <li>
+                <a class="icn_options"
+                   href="<?php echo $this->url('index/module', array('action' => 'update'), true) ?>">
+                    <?php echo $this->translate('Update') ?>
+                </a>
+            </li>
+        </ul>
+    <?php endif; ?>
     <footer>
         <hr/>
         <p>
