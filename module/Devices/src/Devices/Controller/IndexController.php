@@ -129,22 +129,23 @@ class IndexController extends AbstractController
             }
 
             foreach ($device->getInterfaces() as $interface) {
-                $identifier = $interface->getIp()->__toString();
-                $identifier .= $interface->getName()->__toString();
-
                 $speed = intval($interface->getSpeed()->get());
 
                 if ($speed > 0) {
 
+                    $identifier = $interface->getIp()->__toString();
+                    $identifier .= $interface->getName()->__toString();
+
                     // Calculating the bandwidth
                     if (isset($sessionContainer['devices'][$deviceId][$identifier])) {
 
+                        // Shortening the name
                         $interfaceData = $sessionContainer['devices'][$deviceId][$identifier];
 
                         $diffInOctets  = intval($interface->getIn()->get()) - $interfaceData['in'];
                         $diffOutOctets = intval($interface->getOut()->get()) - $interfaceData['out'];
 
-                        $bandwidth = ($diffInOctets * 8 * 100) / ($poolInterval * $speed);
+                        $bandwidth = ($diffInOctets * 8) / ((time() - $interfaceData['time']) * $speed);
 
                         $interface->setBandwidth(round($bandwidth, 2));
                     }
@@ -154,6 +155,7 @@ class IndexController extends AbstractController
                     $sessionContainer['devices'][$deviceId][$identifier] = array(
                         'out' => intval($interface->getOut()->get()),
                         'in' => intval($interface->getIn()->get()),
+                        'time' => time()
                     );
                 }
             }
