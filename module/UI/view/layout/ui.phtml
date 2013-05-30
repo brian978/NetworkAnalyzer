@@ -122,9 +122,12 @@ $this->nav->setTranslator(
 
         <?php echo $this->partial('partials/side_menu.phtml', $this->vars()) ?>
 
-        <?php echo $this->content ?>
+        <section id="main" class="column">
+            <!-- end of stats article -->
 
-        <div class="spacer"></div>
+            <?php echo $this->content ?>
+
+            <div class="spacer"></div>
         </section>
 
     </body>
