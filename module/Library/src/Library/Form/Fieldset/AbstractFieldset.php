@@ -144,18 +144,13 @@ abstract class AbstractFieldset extends Fieldset implements
      */
     protected function getValueOptions()
     {
-        $options = $this->getModel()->fetch();
+        $options = array(
+            0 => '...'
+        );
 
-        foreach ($options as $value => $row) {
+        foreach ($this->getModel()->fetch() as $value => $row) {
             $options[$value] = $row['name'];
         }
-
-        $options = array_merge(
-            array(
-                0 => '...'
-            ),
-            $options
-        );
 
         return $options;
     }
