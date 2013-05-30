@@ -20,7 +20,7 @@ class IndexController extends AbstractController
     /**
      * @var int
      */
-    protected $poolInterval = 1;
+    protected $poolInterval = 3;
 
     /**
      * @var \Zend\Session\Container
