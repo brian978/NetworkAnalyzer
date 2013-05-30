@@ -61,6 +61,11 @@ class IndexController extends AbstractController
 
     public function monitorAction()
     {
+        // Setting a refresh interval for the page
+        /** @var  $headers \Zend\Http\Headers */
+        $headers = $this->getResponse()->getHeaders();
+        $headers->addHeaderLine('Refresh', 3);
+
         /** @var $model \Library\Model\AbstractDbModel */
         $model      = $this->getModel();
         $deviceInfo = $model->getInfo(
@@ -79,7 +84,7 @@ class IndexController extends AbstractController
 
         return array(
             'device' => $device,
-            'deviceInfo' => $deviceInfo
+            'deviceInfo' => $deviceInfo,
         );
     }
 }
