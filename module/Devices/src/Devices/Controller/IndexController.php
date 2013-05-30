@@ -147,11 +147,17 @@ class IndexController extends AbstractController
                         $diffOutOctets = intval($interface->getOut()->get()) - $interfaceData['out'];
                         $diffTime      = time() - $interfaceData['time'];
 
-                        $bits      = (max($diffInOctets, $diffOutOctets) * 8);
-                        $bandwidth = $bits / ($diffTime * $speed);
-                        echo $bandwidth . '<br>';
+                        $bytes         = (max($diffInOctets, $diffOutOctets) * 8);
+                        $bandwidth     = $bytes / $diffTime;
+                        $bandwidthType = 0;
+
+                        while (floor($bandwidth) > 1024) {
+                            $bandwidth = $bandwidth / 1024;
+                            $bandwidthType++;
+                        }
 
                         $interface->setBandwidth(round($bandwidth, 2));
+                        $interface->setBandwidthType($bandwidthType);
                     }
 
                     // Storing some data to allow us to calculate the bandwidth

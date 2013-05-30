@@ -1,5 +1,6 @@
 <?php foreach ($this->device->getInterfaces() as $interface): ?>
     <?php
+
     switch ($interface->getStatus()) {
         case '1':
             $status = $this->translate('Up');
@@ -48,6 +49,20 @@
             break;
     }
 
+    switch ($interface->getBandwidthType()) {
+        case 1:
+            $bandwidthType = $this->translate('KB/s');
+            break;
+
+        case 2:
+            $bandwidthType = $this->translate('MB/s');
+            break;
+
+        default:
+            $bandwidthType = $this->translate('B/s');
+            break;
+    }
+
     ?>
 
     <tr>
@@ -59,7 +74,7 @@
         <td><?php echo $interface->getName() ?></td>
         <td><?php echo $interface->getIn() ?></td>
         <td><?php echo $interface->getOut() ?></td>
-        <td><?php echo $interface->getBandwidth() . ' ' . $this->translate('kbps') ?></td>
+        <td><?php echo $interface->getBandwidth() . ' ' . $bandwidthType ?></td>
         <td><?php echo $status ?></td>
         <td><?php echo $adminStatus ?></td>
         <td><?php echo $interface->getQueueLength() ?></td>
