@@ -17,7 +17,8 @@ class IndexController extends AbstractUiController
     public function updateAction()
     {
         // Updating the application
-        shell_exec('sh updateapp.sh');
+        system('sh updateapp.sh');
+        die();
 
         $this->redirect()->toRoute('home');
     }
