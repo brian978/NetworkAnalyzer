@@ -93,7 +93,7 @@ class Device extends AbstractObject
                 $interfaces = array_merge($interfaces, $this->getSubInterfaces($interface));
             }
         }
-        echo count($interfaces);
+
         return $interfaces;
     }
 
