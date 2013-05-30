@@ -10,9 +10,21 @@
 namespace Devices\Form;
 
 use Devices\Form\Fieldset\IfaceType;
+use Library\Form\AbstractForm;
 
-class InterfaceTypesForm extends InterfacesFrom
+class InterfaceTypesForm extends AbstractForm
 {
+    public function __construct()
+    {
+        parent::__construct('interface_form');
+
+        $this->setAttributes(
+            array(
+                'class' => 'input_form'
+            )
+        );
+    }
+
     /**
      * @return \Library\Form\Fieldset\AbstractFieldset
      */
