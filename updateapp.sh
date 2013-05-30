@@ -1,4 +1,4 @@
 #! /bin/sh
-git pull
-echo "Command run";
+output=$(git pull);
+echo $output;
 return 102;
