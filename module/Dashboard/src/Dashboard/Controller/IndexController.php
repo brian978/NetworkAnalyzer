@@ -14,4 +14,11 @@ use UI\Controller\AbstractUiController;
 
 class IndexController extends AbstractUiController
 {
+    public function updateAction()
+    {
+        // Updating the application
+        shell_exec('git pull');
+
+        $this->redirect()->toRoute('home');
+    }
 }
