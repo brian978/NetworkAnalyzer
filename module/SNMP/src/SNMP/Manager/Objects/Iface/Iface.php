@@ -60,6 +60,11 @@ class Iface extends AbstractObject
     protected $queueLength;
 
     /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $speed;
+
+    /**
      * @var int
      */
     protected $oidIndex;
@@ -68,6 +73,11 @@ class Iface extends AbstractObject
      * @var array
      */
     protected $interfaces = array();
+
+    /**
+     * @var float
+     */
+    protected $bandwidth = 0;
 
     /**
      * @param $name

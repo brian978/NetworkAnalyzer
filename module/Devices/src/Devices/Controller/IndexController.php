@@ -13,6 +13,7 @@ use Library\Form\AbstractForm;
 use SNMP\Manager\ObjectManager;
 use SNMP\Manager\SessionManager;
 use SNMP\Model\Session;
+use Zend\Session\Container;
 
 class IndexController extends AbstractController
 {
@@ -90,18 +91,26 @@ class IndexController extends AbstractController
 
     public function monitorAllAction()
     {
-        $devices = array();
+        $poolInterval = 1;
+        $devices      = array();
+
+        /** @var $sessionContainer \Zend\Session\Container */
+        $sessionContainer = $this->serviceLocator->get('session');
+
+        if (!isset($sessionContainer['devices'])) {
+            $sessionContainer['devices'] = array();
+        }
 
         // Setting a refresh interval for the page
         /** @var  $headers \Zend\Http\Headers */
         $headers = $this->getResponse()->getHeaders();
-        $headers->addHeaderLine('Refresh', 3);
+        $headers->addHeaderLine('Refresh', $poolInterval);
 
         /** @var $model \Library\Model\AbstractDbModel */
         $model      = $this->getModel();
         $allDevices = $model->fetch();
 
-        foreach ($allDevices as $deviceInfo) {
+        foreach ($allDevices as $deviceId => $deviceInfo) {
             $config = array(
                 'version' => $deviceInfo->snmp_version,
                 'hostname' => $deviceInfo->ip,
@@ -109,8 +118,45 @@ class IndexController extends AbstractController
             );
 
             // Manager objects
-            $objectManager       = new ObjectManager(new SessionManager(new Session($this->serviceLocator, $config)));
-            $devices[]['device'] = $objectManager->getDevice();
+            $objectManager = new ObjectManager(new SessionManager(new Session($this->serviceLocator, $config)));
+            $device        = $objectManager->getDevice();
+
+            $devices[$deviceId]['device'] = $device;
+
+            // Calculating the bandwidth utilization
+            if (!isset($sessionContainer['devices'][$deviceId])) {
+                $sessionContainer['devices'][$deviceId] = array();
+            }
+
+            foreach ($device->getInterfaces() as $interface) {
+                $identifier = $interface->getIp()->__toString();
+                $identifier .= $interface->getName()->__toString();
+
+                $speed = intval($interface->getSpeed()->get());
+
+                if ($speed > 0) {
+
+                    // Calculating the bandwidth
+                    if (isset($sessionContainer['devices'][$deviceId][$identifier])) {
+
+                        $interfaceData = $sessionContainer['devices'][$deviceId][$identifier];
+
+                        $diffInOctets  = intval($interface->getIn()->get()) - $interfaceData['in'];
+                        $diffOutOctets = intval($interface->getOut()->get()) - $interfaceData['out'];
+
+                        $bandwidth = ($diffInOctets * 8 * 100) / ($poolInterval * $speed);
+
+                        $interface->setBandwidth(round($bandwidth, 2));
+                    }
+
+                    // Storing some data to allow us to calculate the bandwidth
+                    // Maybe move this to DB?
+                    $sessionContainer['devices'][$deviceId][$identifier] = array(
+                        'out' => intval($interface->getOut()->get()),
+                        'in' => intval($interface->getIn()->get()),
+                    );
+                }
+            }
         }
 
         return array(
