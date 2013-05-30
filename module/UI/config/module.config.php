@@ -165,6 +165,16 @@ return array(
                         'resource' => 'devices',
                         'privilege' => 'view_devices'
                     ),
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'Monitor all devices',
+                        'route' => 'devices/module',
+                        'controller' => 'index',
+                        'action' => 'monitor-all',
+                        'class' => 'icn_categories',
+                        'resource' => 'devices',
+                        'privilege' => 'view_devices'
+                    ),
                     // Types
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',

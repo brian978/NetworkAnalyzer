@@ -87,4 +87,34 @@ class IndexController extends AbstractController
             'deviceInfo' => $deviceInfo,
         );
     }
+
+    public function monitorAllAction()
+    {
+        $devices = array();
+
+        // Setting a refresh interval for the page
+        /** @var  $headers \Zend\Http\Headers */
+        $headers = $this->getResponse()->getHeaders();
+        $headers->addHeaderLine('Refresh', 3);
+
+        /** @var $model \Library\Model\AbstractDbModel */
+        $model      = $this->getModel();
+        $allDevices = $model->fetch();
+
+        foreach ($allDevices as $deviceInfo) {
+            $config = array(
+                'version' => $deviceInfo->snmp_version,
+                'hostname' => $deviceInfo->ip,
+                'community' => $deviceInfo->snmp_community,
+            );
+
+            // Manager objects
+            $objectManager       = new ObjectManager(new SessionManager(new Session($this->serviceLocator, $config)));
+            $devices[]['device'] = $objectManager->getDevice();
+        }
+
+        return array(
+            'devices' => $devices,
+        );
+    }
 }

@@ -1,7 +1,7 @@
 <article class="module width_full">
     <header>
         <h3>
-            <?php echo $this->translate('Monitor device') . ' ' . $this->device->getName()->get() ?>
+            <?php echo $this->translate('Monitor all devices') ?>
         </h3>
     </header>
     <div class="module_content tableholder">
@@ -22,18 +22,9 @@
                         <th><?php echo $this->translate('Queue length') ?></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php
-                    echo $this->partialLoop(
-                        'devices/index/partials/monitor.phtml',
-                        array(
-                            array(
-                                'device' => $this->device
-                            )
-                        )
-                    );
-                    ?>
-                </tbody>
+                <?php
+                echo $this->partialLoop('devices/index/partials/monitor.phtml', $this->devices);
+                ?>
             </table>
         </div>
     </div>
