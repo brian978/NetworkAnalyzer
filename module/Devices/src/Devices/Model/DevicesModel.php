@@ -36,58 +36,6 @@ class DevicesModel extends AbstractModel
     }
 
     /**
-     * @param \ArrayObject $row
-     * @return object
-     */
-//    protected function processRow(\ArrayObject $row)
-//    {
-//        $hydrator = new ClassMethods();
-//        $data     = $row->getArrayCopy();
-//
-//        // Device type
-//        $data['type'] = array();
-//
-//        // Interface data
-//        $data['interface'] = array();
-//
-//        // Interface type data
-//        $data['interface']['type'] = array();
-//
-//        foreach ($data as $id => $value) {
-//            switch ($id) {
-//                case 'typeName':
-//                    $data['type']['name'] = $value;
-//                    break;
-//
-//                case 'type_id':
-//                    $data['type']['id'] = $value;
-//                    break;
-//
-//                case 'interface_type_id':
-//                    $data['interface']['type']['id'] = $value;
-//                    break;
-//
-//                case 'interfaceType':
-//                    $data['interface']['type']['name'] = $value;
-//                    break;
-//
-//                case 'ip':
-//                    $data['interface']['ip'] = $value;
-//                    break;
-//            }
-//        }
-//
-//        // Building the required objects for the device object
-//        $data['type']              = $hydrator->hydrate($data['type'], new Type());
-//        $data['interface']['type'] = $hydrator->hydrate($data['interface']['type'], new Type());
-//        $data['interface']         = $hydrator->hydrate($data['interface'], new Iface());
-//
-//        $device = $hydrator->hydrate($data, new Device());
-//
-//        return $device;
-//    }
-
-    /**
      * This returns the number of affected rows
      *
      * @param \Devices\Entity\Device $object

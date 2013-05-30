@@ -45,7 +45,7 @@ abstract class AbstractProcessorObject extends AbstractObject implements ObjectP
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function __toString()
     {
@@ -64,7 +64,7 @@ abstract class AbstractProcessorObject extends AbstractObject implements ObjectP
     }
 
     /**
-     * @param array $data
+     * @param mixed $data
      * @return $this
      */
     protected function bindToInterfaceObject($data)

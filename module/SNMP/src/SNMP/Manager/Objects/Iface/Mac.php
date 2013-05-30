@@ -10,7 +10,6 @@
 namespace SNMP\Manager\Objects\Iface;
 
 use SNMP\Manager\Objects\AbstractProcessorObject;
-use SNMP\Manager\Objects\Device\Device;
 
 /**
  * Class Mac
@@ -29,6 +28,7 @@ class Mac extends AbstractProcessorObject
         $this->parentObject->setMac($this);
 
         $this->data = trim(str_replace('Hex-STRING: ', '', current($data)));
+        $this->data = str_replace('"', '', $this->data);
 
         return $this;
     }

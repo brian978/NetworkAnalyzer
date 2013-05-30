@@ -6,7 +6,6 @@ return array(
         'Permissions',
         'Application',
         'AAA',
-        'Design',
         'UI',
         'Dashboard',
         'Devices',

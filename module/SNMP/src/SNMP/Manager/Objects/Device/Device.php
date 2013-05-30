@@ -55,31 +55,44 @@ class Device extends AbstractObject
     }
 
     /**
-     * Made to avoid multiple setters and getters
+     * Returns the sub interfaces of the given interface
      *
-     * @param       $name
-     * @param array $arguments
-     * @return $this
+     * This is recursive
+     *
+     * @param $interface
+     * @return array
      */
-    public function __call($name, $arguments = array())
+    protected function getSubInterfaces($interface)
     {
-        if (strpos($name, 'get') !== false) {
-            $name = str_replace('get', '', $name);
-            $name = lcfirst($name);
+        $interfaces = array();
 
-            if (property_exists($this, $name)) {
-                return $this->$name;
-            }
-        } elseif (strpos($name, 'set') !== false) {
-            $name = str_replace('set', '', $name);
-            $name = lcfirst($name);
-
-            if (property_exists($this, $name)) {
-                $this->$name = $arguments[0];
+        foreach ($interface->getInterfaces() as $subInterface) {
+            if ($subInterface->hasInterfaces()) {
+                $interfaces = array_merge($interfaces, $this->getSubInterfaces($subInterface));
+            } else {
+                $interfaces[] = $subInterface;
             }
         }
 
-        return $this;
+        return $interfaces;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInterfaces()
+    {
+        $interfaces = array();
+
+        foreach ($this->interfaces as $interface) {
+            if ($interface->hasInterfaces()) {
+                $interfaces = array_merge($interfaces, $this->getSubInterfaces($interface));
+            } else {
+                $interfaces[] = $interface;
+            }
+        }
+
+        return $interfaces;
     }
 
     /**
@@ -108,5 +121,24 @@ class Device extends AbstractObject
         }
 
         return $iface;
+    }
+
+    /**
+     * Returns an array with 1 or more interfaces by name
+     *
+     * @param $name
+     * @return array
+     */
+    public function getInterfacesByName($name)
+    {
+        $interfaces = array();
+
+        foreach ($this->interfaces as $oidIndex => $interface) {
+            if ($interface->getName()->get() == $name) {
+                $interfaces[$oidIndex] = $interface;
+            }
+        }
+
+        return $interfaces;
     }
 }

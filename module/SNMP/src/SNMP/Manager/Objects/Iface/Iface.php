@@ -65,31 +65,72 @@ class Iface extends AbstractObject
     protected $oidIndex;
 
     /**
-     * Made to avoid multiple setters and getters
-     *
-     * @param       $name
-     * @param array $arguments
-     * @return $this
+     * @var array
      */
-    public function __call($name, $arguments = array())
+    protected $interfaces = array();
+
+    /**
+     * @param $name
+     * @param $arguments
+     */
+    protected function propertySet($name, $arguments)
     {
-        if (strpos($name, 'get') !== false) {
-            $name = str_replace('get', '', $name);
-            $name = lcfirst($name);
+        $name = str_replace('set', '', $name);
+        $name = lcfirst($name);
 
-            if (property_exists($this, $name)) {
-                return $this->$name;
-            }
-        } elseif (strpos($name, 'set') !== false) {
-            $name = str_replace('set', '', $name);
-            $name = lcfirst($name);
+        if (property_exists($this, $name)) {
+            $this->$name = $arguments[0];
 
-            if (property_exists($this, $name)) {
-                $this->$name = $arguments[0];
+            // Setting the data for the other sub-interfaces as well
+            if ($name != 'setIp' && $this->hasInterfaces()) {
+                foreach ($this->interfaces as $interface) {
+                    call_user_func_array(array($interface, $name), $arguments);
+                }
             }
         }
+    }
 
-        return $this;
+    /**
+     * @param Iface $interface
+     */
+    public function attachInterface(Iface $interface)
+    {
+        $this->interfaces[] = $interface;
+    }
+
+    /**
+     * @param $index
+     * @return mixed
+     */
+    public function getInterface($index)
+    {
+        $iface = null;
+
+        if (isset($this->interfaces[$index])) {
+
+            /** @var $iface Iface */
+            $iface = $this->interfaces[$index];
+        }
+
+        return $iface;
+    }
+
+    /**
+     * Checks if the interface has other sub-interfaces
+     *
+     * @return bool
+     */
+    public function hasInterfaces()
+    {
+        return (bool)count($this->interfaces);
+    }
+
+    /**
+     * @return array
+     */
+    public function getInterfaces()
+    {
+        return $this->interfaces;
     }
 
     /**

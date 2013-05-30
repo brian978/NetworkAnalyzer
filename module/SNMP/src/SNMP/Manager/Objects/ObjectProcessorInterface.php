@@ -12,4 +12,10 @@ namespace SNMP\Manager\Objects;
 interface ObjectProcessorInterface
 {
     public function process(array $data);
+
+    public function get();
+
+    public function __invoke();
+
+    public function __toString();
 }

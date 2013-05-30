@@ -19,12 +19,13 @@
                         <th><?php echo $this->translate('In') ?></th>
                         <th><?php echo $this->translate('Out') ?></th>
                         <th><?php echo $this->translate('Status') ?></th>
+                        <th><?php echo $this->translate('Admin status') ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($this->device->getInterfaces() as $interface): ?>
                         <?php
-                        if ($interface->getName()->get() != 'eth0' && $interface->getName()->get() != 'eth1') {
+                        if ($interface->getMac()->get() == '') {
                             continue;
                         }
 
@@ -37,8 +38,42 @@
                                 $status = $this->translate('Down');
                                 break;
 
+                            case '3':
+                                $status = $this->translate('Testing');
+                                break;
+
                             default:
                                 $status = $this->translate('Unknown');
+                                break;
+                        }
+
+                        switch ($interface->getAdminStatus()) {
+                            case '1':
+                                $adminStatus = $this->translate('Up');
+                                break;
+
+                            case '2':
+                                $adminStatus = $this->translate('Down');
+                                break;
+
+                            case '3':
+                                $adminStatus = $this->translate('Testing');
+                                break;
+
+                            case '5':
+                                $adminStatus = $this->translate('Dormant');
+                                break;
+
+                            case '6':
+                                $adminStatus = $this->translate('Not present');
+                                break;
+
+                            case '7':
+                                $adminStatus = $this->translate('Lower layer down');
+                                break;
+
+                            default:
+                                $adminStatus = $this->translate('Unknown');
                                 break;
                         }
 
@@ -55,6 +90,7 @@
                             <td><?php echo $interface->getIn() ?></td>
                             <td><?php echo $interface->getOut() ?></td>
                             <td><?php echo $status ?></td>
+                            <td><?php echo $adminStatus ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

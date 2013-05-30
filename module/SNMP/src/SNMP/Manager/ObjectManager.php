@@ -11,6 +11,7 @@ namespace SNMP\Manager;
 
 use SNMP\Manager\Objects\Device\Device;
 use SNMP\Manager\Objects\Iface\Iface;
+use SNMP\Manager\Objects\Iface\Ip;
 
 /**
  * Class ObjectManager
@@ -57,9 +58,8 @@ class ObjectManager
             'location' => 'iso.3.6.1.2.1.1.6',
         ),
         'iface' => array(
-            'ip' => 'iso.3.6.1.2.1.4.20.1.1',
-            'ip_index' => 'iso.3.6.1.2.1.4.20.1.2',
             'name' => 'iso.3.6.1.2.1.2.2.1.2',
+            'ip' => 'iso.3.6.1.2.1.4.20.1.1',
             'mac' => 'iso.3.6.1.2.1.2.2.1.6',
             // Octets
             'in' => 'iso.3.6.1.2.1.2.2.1.10',
@@ -71,6 +71,10 @@ class ObjectManager
             'status' => 'iso.3.6.1.2.1.2.2.1.8',
             'queue_length' => 'iso.3.6.1.2.1.2.2.1.21'
         ),
+        // Special OID
+        'ip' => array(
+            'index' => 'iso.3.6.1.2.1.4.20.1.2',
+        )
     );
 
     /**
@@ -101,20 +105,23 @@ class ObjectManager
     {
         // Creating all the interfaces with minimal data so we can properly attach
         // the interface information to the proper interface instance
-        $interfaces           = array();
+        $interfaces           = 0;
         $snmpInterfaceIndexes = $this->sessionManager->walk('iso.3.6.1.2.1.2.2.1.1');
 
         foreach ($snmpInterfaceIndexes as $oid) {
-            $oidIndex              = Iface::extractOidIndex($oid);
-            $interface             = new Iface($this->device);
-            $interfaces[$oidIndex] = $interface;
 
+            // Getting the OID index of the interface and creating an interface object
+            $oidIndex  = Iface::extractOidIndex($oid);
+            $interface = new Iface($this->device);
+
+            // Attaching the interface with the proper data
             $interface->setOidIndex($oidIndex);
-
             $this->device->attachInterface($interface, $oidIndex);
+
+            $interfaces++;
         }
 
-        if (count($interfaces) > 0) {
+        if ($interfaces > 0) {
             foreach ($this->objects as $type => $objects) {
                 foreach ($objects as $alias => $oid) {
 
@@ -134,6 +141,8 @@ class ObjectManager
                 }
             }
         }
+
+        var_dump($this->sessionManager->walk('iso.3.6.1.2.1.4.20.1.2'));
 
         return $this;
     }
