@@ -129,6 +129,7 @@ class IndexController extends AbstractController
             }
 
             foreach ($device->getInterfaces() as $interface) {
+
                 $speed = intval($interface->getSpeed()->get());
 
                 if ($speed > 0) {
@@ -144,8 +145,11 @@ class IndexController extends AbstractController
 
                         $diffInOctets  = intval($interface->getIn()->get()) - $interfaceData['in'];
                         $diffOutOctets = intval($interface->getOut()->get()) - $interfaceData['out'];
+                        $diffTime      = time() - $interfaceData['time'];
 
-                        $bandwidth = ($diffInOctets * 8) / ((time() - $interfaceData['time']) * $speed);
+                        $bits      = (max($diffInOctets, $diffOutOctets) * 8);
+                        $bandwidth = $bits / ($diffTime * $speed);
+                        echo $bandwidth . '<br>';
 
                         $interface->setBandwidth(round($bandwidth, 2));
                     }
