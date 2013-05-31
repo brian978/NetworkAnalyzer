@@ -232,6 +232,11 @@ class IndexController extends AbstractController
      */
     protected function calculateBandwidth($octetsDiff, $timeDiff)
     {
+        // To avoid division by 0
+        if ($timeDiff == 0) {
+            $timeDiff = 1;
+        }
+
         $bytes     = $octetsDiff * 8;
         $bandwidth = $bytes / $timeDiff;
 
