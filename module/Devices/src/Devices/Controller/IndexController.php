@@ -20,7 +20,7 @@ class IndexController extends AbstractController
     /**
      * @var int
      */
-    protected $poolInterval = 3;
+    protected $poolInterval = 60;
 
     /**
      * @var \Zend\Session\Container
@@ -179,7 +179,11 @@ class IndexController extends AbstractController
                     $diffOutOctets = intval($interface->getOut()->get()) - $interfaceData['out'];
                     $diffTime      = time() - $interfaceData['time'];
 
-                    // Calculating the IN bandwidth
+                    /**
+                     * ------------------
+                     * IN BANDWIDTH
+                     * ------------------
+                     */
                     $bandwidthIn     = $this->calculateBandwidth($diffInOctets, $diffTime);
                     $bandwidthInType = 0;
 
@@ -192,7 +196,11 @@ class IndexController extends AbstractController
                     $interface->setBandwidthIn(round($bandwidthIn, 2));
                     $interface->setBandwidthInType($bandwidthInType);
 
-                    // Calculating the OUT bandwidth
+                    /**
+                     * ------------------
+                     * OUT BANDWIDTH
+                     * ------------------
+                     */
                     $bandwidthOut     = $this->calculateBandwidth($diffOutOctets, $diffTime);
                     $bandwidthOutType = 0;
 
