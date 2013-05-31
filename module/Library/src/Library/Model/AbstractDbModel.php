@@ -10,6 +10,7 @@
 namespace Library\Model;
 
 use Library\Entity\AbstractEntity;
+use Zend\Db\Sql\Select;
 
 abstract class AbstractDbModel extends AbstractDbHelperModel
 {
@@ -91,9 +92,19 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
         $rows   = array();
         $select = $this->getSql()->select()->where($this->where);
 
+        if (!empty($this->selectColumns)) {
+            $select->columns($this->selectColumns);
+        }
+
         // Adding the joins for the select
         foreach ($this->join as $join) {
             call_user_func_array(array($select, 'join'), $join);
+        }
+
+        // Something we might need to do something directly on the select
+        // object so we need to create a proxySelect method to handle this
+        if (method_exists($this, 'proxySelect')) {
+            $this->proxySelect($select);
         }
 
         try {

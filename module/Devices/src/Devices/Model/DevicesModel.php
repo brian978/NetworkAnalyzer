@@ -10,10 +10,6 @@
 namespace Devices\Model;
 
 use Devices\Entity\Device;
-use Devices\Entity\Iface;
-use Devices\Entity\Type;
-use Devices\Form\Fieldset\IfaceType;
-use Zend\Stdlib\Hydrator\ClassMethods;
 
 class DevicesModel extends AbstractModel
 {

@@ -51,6 +51,11 @@ class AbstractDbHelperModel extends AbstractTableGateway
     protected $fetchRun = false;
 
     /**
+     * @var array
+     */
+    protected $selectColumns = array();
+
+    /**
      * @param AdapterInterface $adapter
      */
     public function __construct(AdapterInterface $adapter)
@@ -86,6 +91,11 @@ class AbstractDbHelperModel extends AbstractTableGateway
      */
     protected function getWhere($field, $value, $table = null)
     {
+        // When the value is an object it's because of an expression
+        if (is_object($value)) {
+            return $value;
+        }
+
         if ($table === null) {
             $table = $this->table;
         }
@@ -103,9 +113,9 @@ class AbstractDbHelperModel extends AbstractTableGateway
     /**
      * Used to add a where condition
      *
-     * @param string     $field
-     * @param string|int $value
-     * @param string     $table
+     * @param string|array     $field
+     * @param string|int|bool  $value When this is set to true the $field param in an array
+     * @param string           $table
      *
      * @return $this
      */
@@ -116,7 +126,12 @@ class AbstractDbHelperModel extends AbstractTableGateway
             $this->resetSelectJoinWhere();
         }
 
-        $this->where[] = $this->getWhere($field, $value, $table);
+        // If an array was given we merge it with the global where
+        if (is_array($field) && $value === true) {
+            $this->where = array_merge($this->where, $field);
+        } else {
+            $this->where[] = $this->getWhere($field, $value, $table);
+        }
 
         return $this;
     }
@@ -161,7 +176,7 @@ class AbstractDbHelperModel extends AbstractTableGateway
      */
     public function addColumns(array $columns)
     {
-        $this->columns = array_merge($this->columns, $columns);
+        $this->selectColumns = array_merge($this->selectColumns, $columns);
 
         return $this;
     }

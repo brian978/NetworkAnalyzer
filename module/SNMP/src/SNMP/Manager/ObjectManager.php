@@ -11,7 +11,6 @@ namespace SNMP\Manager;
 
 use SNMP\Manager\Objects\Device\Device;
 use SNMP\Manager\Objects\Iface\Iface;
-use SNMP\Manager\Objects\Iface\Ip;
 
 /**
  * Class ObjectManager
@@ -36,7 +35,7 @@ class ObjectManager
     protected $objectsNamespace = 'Objects';
 
     /**
-     * @var SessionManager
+     * @var \SNMP\Manager\SessionManager
      */
     protected $sessionManager;
 

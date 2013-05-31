@@ -11,6 +11,12 @@ namespace SNMP\Manager;
 
 use SNMP\Model\Session;
 
+/**
+ * Class SessionManager
+ *
+ * @package SNMP\Manager
+ * @method walk($object_id, $suffix_keys = false, $max_repetitions = 0, $non_repeater = 0)
+ */
 class SessionManager
 {
     /**

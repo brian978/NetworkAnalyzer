@@ -9,23 +9,24 @@
 
 namespace Devices\Controller;
 
+use Devices\Entity\Device;
+use Devices\Entity\Iface;
+use Devices\Entity\Log;
+use Devices\Entity\Type;
+use Devices\Model\LogsModel;
 use Library\Form\AbstractForm;
 use SNMP\Manager\ObjectManager;
 use SNMP\Manager\SessionManager;
 use SNMP\Model\Session;
 use Zend\Session\Container;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class IndexController extends AbstractController
 {
     /**
      * @var int
      */
-    protected $poolInterval = 60;
-
-    /**
-     * @var \Zend\Session\Container
-     */
-    protected $sessionContainer;
+    protected $poolInterval = 3;
 
     /**
      * These parameters are used to create the required form
@@ -51,34 +52,48 @@ class IndexController extends AbstractController
         // Arranging the data properly so that the form would be auto-populated
         $form->setData(
             array(
-                'device' => array(
-                    'id' => $object->id,
-                    'name' => $object->name,
-                    'snmpVersion' => $object->snmp_version,
-                    'snmpCommunity' => $object->snmp_community,
-                    'type' => array(
-                        'id' => $object->type_id
-                    ),
-                    'interface' => array(
-                        'ip' => $object->ip,
-                        'type' => array(
-                            'id' => $object->interface_type_id
-                        )
-                    )
-                )
+                'device' => $this->extractDeviceData($object)
             )
         );
     }
 
-    public function monitorAction()
+    /**
+     * @param \ArrayAccess $object
+     * @param bool         $createObjects
+     * @return array
+     */
+    protected function extractDeviceData(\ArrayAccess $object, $createObjects = false)
     {
-        /** @var $sessionContainer \Zend\Session\Container */
-        $this->sessionContainer = $this->serviceLocator->get('session');
+        $deviceData = array(
+            'id' => $object->id,
+            'name' => $object->name,
+            'snmpVersion' => $object->snmp_version,
+            'snmpCommunity' => $object->snmp_community,
+            'type' => array(
+                'id' => $object->type_id
+            ),
+            'interface' => array(
+                'ip' => $object->ip,
+                'type' => array(
+                    'id' => $object->interface_type_id
+                )
+            )
+        );
 
-        if (!isset($this->sessionContainer['devices'])) {
-            $this->sessionContainer['devices'] = array();
+        if ($createObjects === true) {
+
+            $hydrator = new ClassMethods();
+
+            $deviceData['type']              = $hydrator->hydrate($deviceData['type'], new Type());
+            $deviceData['interface']['type'] = $hydrator->hydrate($deviceData['interface']['type'], new Type());
+            $deviceData['interface']         = $hydrator->hydrate($deviceData['interface'], new Iface());
         }
 
+        return $deviceData;
+    }
+
+    public function monitorAction()
+    {
         // Setting a refresh interval for the page
         /** @var  $headers \Zend\Http\Headers */
         $headers = $this->getResponse()->getHeaders();
@@ -95,11 +110,19 @@ class IndexController extends AbstractController
             'community' => $deviceInfo->snmp_community,
         );
 
+        $hydrator = new ClassMethods();
+
+        /** @var $deviceObject Device */
+        $deviceObject = $hydrator->hydrate(
+            $this->extractDeviceData($deviceInfo, true),
+            new Device()
+        );
+
         // Manager objects
         $objectManager = new ObjectManager(new SessionManager(new Session($this->serviceLocator, $config)));
         $device        = $objectManager->getDevice();
 
-        $this->calculateInterfaceBandwidth($deviceId, $device);
+        $this->calculateInterfaceBandwidth($deviceObject, $device);
 
         return array(
             'device' => $device,
@@ -111,13 +134,6 @@ class IndexController extends AbstractController
     {
         $devices = array();
 
-        /** @var $sessionContainer \Zend\Session\Container */
-        $this->sessionContainer = $this->serviceLocator->get('session');
-
-        if (!isset($this->sessionContainer['devices'])) {
-            $this->sessionContainer['devices'] = array();
-        }
-
         // Setting a refresh interval for the page
         /** @var  $headers \Zend\Http\Headers */
         $headers = $this->getResponse()->getHeaders();
@@ -127,11 +143,19 @@ class IndexController extends AbstractController
         $model      = $this->getModel();
         $allDevices = $model->fetch();
 
+        $hydrator = new ClassMethods();
+
         foreach ($allDevices as $deviceId => $deviceInfo) {
             $config = array(
                 'version' => $deviceInfo->snmp_version,
                 'hostname' => $deviceInfo->ip,
                 'community' => $deviceInfo->snmp_community,
+            );
+
+            /** @var $deviceObject Device */
+            $deviceObject = $hydrator->hydrate(
+                $this->extractDeviceData($deviceInfo, true),
+                new Device()
             );
 
             // Manager objects
@@ -140,12 +164,8 @@ class IndexController extends AbstractController
 
             $devices[$deviceId]['device'] = $device;
 
-            // Calculating the bandwidth utilization
-            if (!isset($this->sessionContainer['devices'][$deviceId])) {
-                $this->sessionContainer['devices'][$deviceId] = array();
-            }
-
-            $this->calculateInterfaceBandwidth($deviceId, $device);
+            // Calculating the bandwidth and inserting logs
+            $this->calculateInterfaceBandwidth($deviceObject, $device);
         }
 
         return array(
@@ -154,30 +174,61 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @param $deviceId
-     * @param $device
+     * @param Device $deviceObject
+     * @param        $device
      */
-    protected function calculateInterfaceBandwidth($deviceId, $device)
+    protected function calculateInterfaceBandwidth(Device $deviceObject, $device)
     {
+        $deviceId = $deviceObject->getId();
+
         foreach ($device->getInterfaces() as $interface) {
 
             $speed = intval($interface->getSpeed()->get());
 
             if ($speed > 0) {
 
-                $identifier = $interface->getIp()->__toString();
-                $identifier .= $interface->getName()->__toString();
+                // The logs model is required to retrieve the last data about an interface
+                $logsModel = new LogsModel($this->serviceLocator->get('Zend\Db\Adapter\Adapter'));
 
-                // Calculating the bandwidth
-                if (isset($this->sessionContainer['devices'][$deviceId][$identifier])) {
+                /**
+                 * -------------------------------------
+                 * LOGGING
+                 * -------------------------------------
+                 */
+                $executeSave = true;
 
-                    // Shortening the name
-                    $interfaceData = $this->sessionContainer['devices'][$deviceId][$identifier];
+                $logObject = new Log();
+                $logObject->setUptime($device->getUptime());
+                $logObject->setOidIndex($interface->getOidIndex());
+                $logObject->setDevice($deviceObject);
+                $logObject->setInterfaceName($interface->getName()->get());
+                $logObject->setMac($interface->getMac()->get());
+                $logObject->setOctetsIn(intval($interface->getIn()->get()));
+                $logObject->setOctetsOut(intval($interface->getOut()->get()));
+                $logObject->setTime(time());
+
+                /**
+                 * -------------------------------------
+                 * GETTING DATA AND CALCULATING
+                 * -------------------------------------
+                 */
+                $interfaceData = $logsModel->getLastEntries($interface->getOidIndex(), $deviceId);
+
+                // We need 2 logs to calculate properly
+                if (!empty($interfaceData) && count($interfaceData) == 2) {
+
+                    $last = array_shift($interfaceData);
+                    $prev = array_shift($interfaceData);
+
+                    // Queries with the same timestamp must not be saved
+                    if (strpos($last['uptime'], $prev['uptime']) === 0) {
+                        $executeSave = false;
+                    }
 
                     // Calculating the differences
-                    $diffInOctets  = intval($interface->getIn()->get()) - $interfaceData['in'];
-                    $diffOutOctets = intval($interface->getOut()->get()) - $interfaceData['out'];
-                    $diffTime      = time() - $interfaceData['time'];
+                    $diffInOctets  = intval($last['octets_in']) - intval($prev['octets_in']);
+                    $diffOutOctets = intval($last['octets_out']) - intval($prev['octets_out']);
+                    $diffTime      = intval($last['time']) - intval($prev['time']);
 
                     /**
                      * ------------------
@@ -187,7 +238,7 @@ class IndexController extends AbstractController
                     $bandwidthIn     = $this->calculateBandwidth($diffInOctets, $diffTime);
                     $bandwidthInType = 0;
 
-                    while (floor($bandwidthIn) > 1024) {
+                    while (floor($bandwidthIn) > 1024 && $bandwidthInType < 2) {
                         $bandwidthIn = $bandwidthIn / 1024;
                         $bandwidthInType++;
                     }
@@ -204,7 +255,7 @@ class IndexController extends AbstractController
                     $bandwidthOut     = $this->calculateBandwidth($diffOutOctets, $diffTime);
                     $bandwidthOutType = 0;
 
-                    while (floor($bandwidthOut) > 1024) {
+                    while (floor($bandwidthOut) > 1024 && $bandwidthOutType < 2) {
                         $bandwidthOut = $bandwidthOut / 1024;
                         $bandwidthOutType++;
                     }
@@ -214,13 +265,10 @@ class IndexController extends AbstractController
                     $interface->setBandwidthOutType($bandwidthOutType);
                 }
 
-                // Storing some data to allow us to calculate the bandwidth
-                // Maybe move this to DB?
-                $this->sessionContainer['devices'][$deviceId][$identifier] = array(
-                    'out' => intval($interface->getOut()->get()),
-                    'in' => intval($interface->getIn()->get()),
-                    'time' => time()
-                );
+                // Saving the data
+                if ($executeSave === true) {
+                    $logsModel->save($logObject);
+                }
             }
         }
     }
@@ -237,8 +285,7 @@ class IndexController extends AbstractController
             $timeDiff = 1;
         }
 
-        $bytes     = $octetsDiff * 8;
-        $bandwidth = $bytes / $timeDiff;
+        $bandwidth = ($octetsDiff * 8) / ($timeDiff);
 
         return $bandwidth;
     }
