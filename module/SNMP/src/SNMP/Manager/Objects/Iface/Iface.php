@@ -77,7 +77,7 @@ class Iface extends AbstractObject
     /**
      * @var float
      */
-    protected $bandwidth = 0;
+    protected $bandwidthIn = 0;
 
     /**
      * Determines if the bandwidth is in KB/s or in MB/s
@@ -88,7 +88,23 @@ class Iface extends AbstractObject
      *
      * @var int
      */
-    protected $bandwidthType = 0;
+    protected $bandwidthInType = 0;
+
+    /**
+     * @var float
+     */
+    protected $bandwidthOut = 0;
+
+    /**
+     * Determines if the bandwidth is in KB/s or in MB/s
+     *
+     * 0 - B/s
+     * 1 - KB/s
+     * 2 - MB/s
+     *
+     * @var int
+     */
+    protected $bandwidthOutType = 0;
 
     /**
      * @param $name

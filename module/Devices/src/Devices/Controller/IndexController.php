@@ -179,19 +179,31 @@ class IndexController extends AbstractController
                     $diffOutOctets = intval($interface->getOut()->get()) - $interfaceData['out'];
                     $diffTime      = time() - $interfaceData['time'];
 
-                    // Calculating the bandwidth
-                    $bytes         = (max($diffInOctets, $diffOutOctets) * 8);
-                    $bandwidth     = $bytes / $diffTime;
-                    $bandwidthType = 0;
+                    // Calculating the IN bandwidth
+                    $bandwidthIn     = $this->calculateBandwidth($diffInOctets, $diffTime);
+                    $bandwidthInType = 0;
 
-                    while (floor($bandwidth) > 1024) {
-                        $bandwidth = $bandwidth / 1024;
-                        $bandwidthType++;
+                    while (floor($bandwidthIn) > 1024) {
+                        $bandwidthIn = $bandwidthIn / 1024;
+                        $bandwidthInType++;
                     }
 
                     // Setting the data
-                    $interface->setBandwidth(round($bandwidth, 2));
-                    $interface->setBandwidthType($bandwidthType);
+                    $interface->setBandwidthIn(round($bandwidthIn, 2));
+                    $interface->setBandwidthInType($bandwidthInType);
+
+                    // Calculating the OUT bandwidth
+                    $bandwidthOut     = $this->calculateBandwidth($diffOutOctets, $diffTime);
+                    $bandwidthOutType = 0;
+
+                    while (floor($bandwidthOut) > 1024) {
+                        $bandwidthOut = $bandwidthOut / 1024;
+                        $bandwidthOutType++;
+                    }
+
+                    // Setting the data
+                    $interface->setBandwidthOut(round($bandwidthOut, 2));
+                    $interface->setBandwidthOutType($bandwidthOutType);
                 }
 
                 // Storing some data to allow us to calculate the bandwidth
@@ -203,5 +215,18 @@ class IndexController extends AbstractController
                 );
             }
         }
+    }
+
+    /**
+     * @param $octetsDiff
+     * @param $timeDiff
+     * @return float
+     */
+    protected function calculateBandwidth($octetsDiff, $timeDiff)
+    {
+        $bytes     = $octetsDiff * 8;
+        $bandwidth = $bytes / $timeDiff;
+
+        return $bandwidth;
     }
 }

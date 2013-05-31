@@ -1,67 +1,21 @@
 <?php foreach ($this->device->getInterfaces() as $interface): ?>
     <?php
 
-    switch ($interface->getStatus()) {
-        case '1':
-            $status = $this->translate('Up');
-            break;
+    $interfaceStatus = array(
+        1 => $this->translate('Up'),
+        2 => $this->translate('Down'),
+        3 => $this->translate('Testing'),
+        4 => $this->translate('Unknown'),
+        5 => $this->translate('Dormant'),
+        6 => $this->translate('Not present'),
+        7 => $this->translate('Lower layer down'),
+    );
 
-        case '2':
-            $status = $this->translate('Down');
-            break;
-
-        case '3':
-            $status = $this->translate('Testing');
-            break;
-
-        default:
-            $status = $this->translate('Unknown');
-            break;
-    }
-
-    switch ($interface->getAdminStatus()) {
-        case '1':
-            $adminStatus = $this->translate('Up');
-            break;
-
-        case '2':
-            $adminStatus = $this->translate('Down');
-            break;
-
-        case '3':
-            $adminStatus = $this->translate('Testing');
-            break;
-
-        case '5':
-            $adminStatus = $this->translate('Dormant');
-            break;
-
-        case '6':
-            $adminStatus = $this->translate('Not present');
-            break;
-
-        case '7':
-            $adminStatus = $this->translate('Lower layer down');
-            break;
-
-        default:
-            $adminStatus = $this->translate('Unknown');
-            break;
-    }
-
-    switch ($interface->getBandwidthType()) {
-        case 1:
-            $bandwidthType = $this->translate('KB/s');
-            break;
-
-        case 2:
-            $bandwidthType = $this->translate('MB/s');
-            break;
-
-        default:
-            $bandwidthType = $this->translate('B/s');
-            break;
-    }
+    $bandwidthType = array(
+        0 => $this->translate('B/s'),
+        1 => $this->translate('KB/s'),
+        2 => $this->translate('MB/s'),
+    );
 
     ?>
 
@@ -72,9 +26,10 @@
         <td><?php echo $interface->getIp() ?></td>
         <td><?php echo $interface->getMac() ?></td>
         <td><?php echo $interface->getName() ?></td>
-        <td><?php echo $interface->getBandwidth() . ' ' . $bandwidthType ?></td>
-        <td><?php echo $status ?></td>
-        <td><?php echo $adminStatus ?></td>
+        <td><?php echo $interface->getBandwidthIn() . ' ' . $bandwidthType[$interface->getBandwidthInType()] ?></td>
+        <td><?php echo $interface->getBandwidthOut() . ' ' . $bandwidthType[$interface->getBandwidthOutType()] ?></td>
+        <td><?php echo $interfaceStatus[$interface->getStatus()->get()] ?></td>
+        <td><?php echo $interfaceStatus[$interface->getAdminStatus()->get()] ?></td>
         <td><?php echo $interface->getQueueLength() ?></td>
     </tr>
 <?php endforeach; ?>

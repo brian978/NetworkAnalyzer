@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-11 19:41+0200\n"
-"PO-Revision-Date: 2013-05-11 19:41+0200\n"
+"POT-Creation-Date: 2013-05-31 07:48+0200\n"
+"PO-Revision-Date: 2013-05-31 07:48+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
@@ -16,32 +16,44 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../..\n"
 
-#: ../../UI/view/partials/side_menu.phtml:19
-#: ../../UI/view/partials/side_menu.phtml:32
+#: ../../UI/view/partials/form_generic_message.phtml:12
+msgid "An unkown error has occured"
+msgstr ""
+
+#: ../../UI/view/partials/side_menu.phtml:23
+#: ../../UI/view/partials/side_menu.phtml:38
 msgid "Devices"
 msgstr ""
 
-#: ../../UI/view/partials/side_menu.phtml:20
-#: ../../UI/view/partials/side_menu.phtml:34
+#: ../../UI/view/partials/side_menu.phtml:26
+#: ../../UI/view/partials/side_menu.phtml:40
 msgid "Users"
 msgstr ""
 
-#: ../../UI/view/partials/side_menu.phtml:21
-#: ../../UI/view/partials/side_menu.phtml:36
+#: ../../UI/view/partials/side_menu.phtml:27
+#: ../../UI/view/partials/side_menu.phtml:42
 msgid "Admin"
 msgstr ""
 
-#: ../../UI/view/partials/side_menu.phtml:42
+#: ../../UI/view/partials/side_menu.phtml:46
+msgid "Application updater"
+msgstr ""
+
+#: ../../UI/view/partials/side_menu.phtml:51
+msgid "Update"
+msgstr ""
+
+#: ../../UI/view/partials/side_menu.phtml:61
 msgid "All rights reserved."
 msgstr ""
 
-#: ../../UI/view/layout/ui.phtml:12
-#: ../../UI/view/layout/ui.phtml:76
+#: ../../UI/view/layout/ui.phtml:15
 #: ../../UI/view/layout/ui.phtml:91
+#: ../../UI/view/layout/ui.phtml:111
 msgid "Network Analyzer"
 msgstr ""
 
-#: ../../UI/view/layout/ui.phtml:80
+#: ../../UI/view/layout/ui.phtml:96
 msgid "Dashboard"
 msgstr ""
 
@@ -51,13 +63,11 @@ msgid "View devices"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/list.phtml:9
-#: ../../UI/view/devices/types/list.phtml:9
 msgid "Type name"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/list.phtml:10
-#: ../../UI/view/devices/index/list.phtml:12
-#: ../../UI/view/devices/types/list.phtml:10
+#: ../../UI/view/devices/index/list.phtml:13
 msgid "Options"
 msgstr ""
 
@@ -65,7 +75,7 @@ msgstr ""
 msgid "Edit the interface type"
 msgstr ""
 
-#: ../../UI/view/devices/interface-types/edit-form.phtml:24
+#: ../../UI/view/devices/interface-types/edit-form.phtml:32
 msgid "The interface info was changed"
 msgstr ""
 
@@ -73,17 +83,15 @@ msgstr ""
 msgid "Add new interface type"
 msgstr ""
 
-#: ../../UI/view/devices/interface-types/add-form.phtml:24
+#: ../../UI/view/devices/interface-types/add-form.phtml:32
 msgid "The interface type was added"
 msgstr ""
 
-#: ../../UI/view/devices/interface-types/partials/list.phtml:14
-#: ../../UI/view/devices/index/partials/list.phtml:16
+#: ../../UI/view/devices/interface-types/partials/list.phtml:23
 msgid "Edit"
 msgstr ""
 
-#: ../../UI/view/devices/interface-types/partials/list.phtml:18
-#: ../../UI/view/devices/index/partials/list.phtml:20
+#: ../../UI/view/devices/interface-types/partials/list.phtml:28
 msgid "Trash"
 msgstr ""
 
@@ -96,23 +104,118 @@ msgid "Device type"
 msgstr ""
 
 #: ../../UI/view/devices/index/list.phtml:11
-msgid "Location name"
+msgid "IP"
+msgstr ""
+
+#: ../../UI/view/devices/index/list.phtml:12
+msgid "Interface type"
 msgstr ""
 
 #: ../../UI/view/devices/index/edit-form.phtml:2
 msgid "Edit device"
 msgstr ""
 
-#: ../../UI/view/devices/index/edit-form.phtml:28
+#: ../../UI/view/devices/index/edit-form.phtml:40
 msgid "The device info was changed"
+msgstr ""
+
+#: ../../UI/view/devices/index/edit-form.phtml:53
+#: ../../UI/view/devices/index/add-form.phtml:51
+msgid "Interface"
 msgstr ""
 
 #: ../../UI/view/devices/index/add-form.phtml:2
 msgid "Add new device"
 msgstr ""
 
-#: ../../UI/view/devices/index/add-form.phtml:28
+#: ../../UI/view/devices/index/add-form.phtml:39
 msgid "The device was added"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor-all.phtml:4
+msgid "Monitor all devices"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor-all.phtml:14
+#: ../../UI/view/devices/index/monitor.phtml:14
+msgid "Location"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor-all.phtml:16
+#: ../../UI/view/devices/index/monitor.phtml:16
+msgid "MAC"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor-all.phtml:18
+#: ../../UI/view/devices/index/monitor.phtml:18
+msgid "Bandwidth"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor-all.phtml:19
+#: ../../UI/view/devices/index/monitor.phtml:19
+msgid "Status"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor-all.phtml:20
+#: ../../UI/view/devices/index/monitor.phtml:20
+msgid "Admin status"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor-all.phtml:21
+#: ../../UI/view/devices/index/monitor.phtml:21
+msgid "Queue length"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:4
+msgid "Monitor device"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/list.phtml:31
+msgid "Monitor"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:6
+#: ../../UI/view/devices/index/partials/monitor.phtml:24
+msgid "Up"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:10
+#: ../../UI/view/devices/index/partials/monitor.phtml:28
+msgid "Down"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:14
+#: ../../UI/view/devices/index/partials/monitor.phtml:32
+msgid "Testing"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:18
+#: ../../UI/view/devices/index/partials/monitor.phtml:48
+msgid "Unknown"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:36
+msgid "Dormant"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:40
+msgid "Not present"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:44
+msgid "Lower layer down"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:54
+msgid "KB/s"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:58
+msgid "MB/s"
+msgstr ""
+
+#: ../../UI/view/devices/index/partials/monitor.phtml:62
+msgid "B/s"
 msgstr ""
 
 #: ../../UI/view/devices/types/list.phtml:2
@@ -123,7 +226,7 @@ msgstr ""
 msgid "Edit type"
 msgstr ""
 
-#: ../../UI/view/devices/types/edit-form.phtml:24
+#: ../../UI/view/devices/types/edit-form.phtml:31
 msgid "The type info was changed"
 msgstr ""
 
@@ -131,64 +234,40 @@ msgstr ""
 msgid "Add new type"
 msgstr ""
 
-#: ../../UI/view/devices/types/add-form.phtml:24
+#: ../../UI/view/devices/types/add-form.phtml:30
 msgid "The type was added"
 msgstr ""
 
-#: ../../UI/view/devices/interfaces/list.phtml:2
-msgid "View interfaces"
+#: ../../UI/view/users/index/list.phtml:2
+msgid "View users"
 msgstr ""
 
-#: ../../UI/view/devices/interfaces/list.phtml:10
-msgid "Interface name"
+#: ../../UI/view/users/index/list.phtml:9
+msgid "User name"
 msgstr ""
 
-#: ../../UI/view/devices/interfaces/list.phtml:11
-msgid "MAC"
+#: ../../UI/view/users/index/list.phtml:10
+msgid "User email"
 msgstr ""
 
-#: ../../UI/view/devices/interfaces/list.phtml:12
-msgid "IP"
+#: ../../UI/view/users/index/list.phtml:11
+msgid "User role"
 msgstr ""
 
-#: ../../UI/view/devices/interfaces/list.phtml:13
-msgid "Type"
+#: ../../UI/view/users/index/edit-form.phtml:2
+msgid "Edit user"
 msgstr ""
 
-#: ../../UI/view/devices/interfaces/edit-form.phtml:2
-msgid "Edit interface"
-msgstr ""
-
-#: ../../UI/view/devices/interfaces/add-form.phtml:2
-msgid "Add new interface"
-msgstr ""
-
-#: ../../UI/view/devices/interfaces/add-form.phtml:28
-msgid "The interface was added"
-msgstr ""
-
-#: ../../UI/view/devices/locations/list.phtml:2
-msgid "View locations"
-msgstr ""
-
-#: ../../UI/view/devices/locations/edit-form.phtml:2
-msgid "Edit location"
-msgstr ""
-
-#: ../../UI/view/devices/locations/edit-form.phtml:24
-msgid "The location info was changed"
-msgstr ""
-
-#: ../../UI/view/devices/locations/add-form.phtml:2
-msgid "Add new location"
-msgstr ""
-
-#: ../../UI/view/devices/locations/add-form.phtml:24
-msgid "The location was added"
+#: ../../UI/view/users/index/edit-form.phtml:34
+msgid "The user info was updated"
 msgstr ""
 
 #: ../../UI/view/users/index/add-form.phtml:2
 msgid "Add new user"
+msgstr ""
+
+#: ../../UI/view/users/index/add-form.phtml:33
+msgid "The user was added"
 msgstr ""
 
 #: ../../UI/view/error/404.phtml:1
@@ -199,55 +278,64 @@ msgstr ""
 msgid "The requested controller was unable to dispatch the request."
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:15
+#: ../../UI/view/error/404.phtml:16
 msgid "The requested controller could not be mapped to an existing controller class."
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:19
+#: ../../UI/view/error/404.phtml:21
 msgid "The requested controller was not dispatchable."
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:22
+#: ../../UI/view/error/404.phtml:26
 msgid "The requested URL could not be matched by routing."
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:25
+#: ../../UI/view/error/404.phtml:31
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:37
+#: ../../UI/view/error/404.phtml:44
 msgid "Controller"
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:46
+#: ../../UI/view/error/404.phtml:52
 #, php-format
 msgid "resolves to %s"
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:60
+#: ../../UI/view/error/404.phtml:66
+#: ../../UI/view/error/index.phtml:8
 msgid "Additional information"
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:63
-#: ../../UI/view/error/404.phtml:91
+#: ../../UI/view/error/404.phtml:69
+#: ../../UI/view/error/404.phtml:100
+#: ../../UI/view/error/index.phtml:11
+#: ../../UI/view/error/index.phtml:42
 msgid "File"
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:69
-#: ../../UI/view/error/404.phtml:97
+#: ../../UI/view/error/404.phtml:76
+#: ../../UI/view/error/404.phtml:107
+#: ../../UI/view/error/index.phtml:18
+#: ../../UI/view/error/index.phtml:49
 msgid "Message"
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:74
-#: ../../UI/view/error/404.phtml:102
+#: ../../UI/view/error/404.phtml:82
+#: ../../UI/view/error/404.phtml:113
+#: ../../UI/view/error/index.phtml:24
+#: ../../UI/view/error/index.phtml:55
 msgid "Stack trace"
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:85
+#: ../../UI/view/error/404.phtml:94
+#: ../../UI/view/error/index.phtml:36
 msgid "Previous exceptions"
 msgstr ""
 
-#: ../../UI/view/error/404.phtml:119
+#: ../../UI/view/error/404.phtml:131
+#: ../../UI/view/error/index.phtml:73
 msgid "No Exception available"
 msgstr ""
 
