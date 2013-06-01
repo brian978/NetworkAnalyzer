@@ -71,6 +71,10 @@ class ObjectManager
             'status' => 'iso.3.6.1.2.1.2.2.1.8',
             'queue_length' => 'iso.3.6.1.2.1.2.2.1.21'
         ),
+        'tcp' => array(
+            'local_address' => 'iso.3.6.1.2.1.6.13.1.2',
+            'remote_address' => 'iso.3.6.1.2.1.6.13.1.4',
+        ),
         // Special OID
         'ip' => array(
             'index' => 'iso.3.6.1.2.1.4.20.1.2',

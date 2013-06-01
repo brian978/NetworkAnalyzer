@@ -9,9 +9,7 @@
 
 namespace SNMP\Manager\Objects\Iface;
 
-use SNMP\Manager\Objects\AbstractProcessorObject;
-
-class QueueLength extends AbstractProcessorObject
+class QueueLength extends AbstractIfaceHelper
 {
     /**
      * Used to process a single array entry

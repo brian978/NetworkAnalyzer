@@ -11,7 +11,7 @@ namespace SNMP\Manager\Objects\Iface;
 
 use SNMP\Manager\Objects\AbstractProcessorObject;
 
-class AdminStatus extends AbstractProcessorObject
+class AdminStatus extends AbstractIfaceHelper
 {
 
     /**

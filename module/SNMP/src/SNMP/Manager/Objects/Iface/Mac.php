@@ -9,14 +9,12 @@
 
 namespace SNMP\Manager\Objects\Iface;
 
-use SNMP\Manager\Objects\AbstractProcessorObject;
-
 /**
  * Class Mac
  *
  * @package SNMP\Manager\Objects\Iface
  */
-class Mac extends AbstractProcessorObject
+class Mac extends AbstractIfaceHelper
 {
     /**
      * @param array $data

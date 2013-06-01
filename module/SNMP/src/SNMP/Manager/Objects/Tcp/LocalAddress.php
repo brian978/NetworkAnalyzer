@@ -7,21 +7,20 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace SNMP\Manager\Objects\Iface;
+namespace SNMP\Manager\Objects\Tcp;
 
-class Name extends AbstractIfaceHelper
+use SNMP\Manager\Objects\AbstractProcessorObject;
+
+class LocalAddress extends AbstractProcessorObject
 {
     /**
+     * Used to process a single array entry
+     *
      * @param array $data
-     * @return $this|mixed
+     * @return mixed
      */
     public function process(array $data)
     {
-        $this->bindToInterfaceObject($data);
-        $this->parentObject->setName($this);
-
-        $this->data = $this->processStringData($data);
-
-        return $this;
+        // TODO: Implement process() method.
     }
 }

@@ -74,27 +74,4 @@ abstract class AbstractProcessorObject extends AbstractObject implements ObjectP
 
         return array_pop($pieces);
     }
-
-    /**
-     * @param mixed $data
-     * @return $this
-     */
-    protected function bindToInterfaceObject($data)
-    {
-        if (is_array($data)) {
-            $oidIndex = $this->getOidIndex(key($data));
-        } else {
-            $oidIndex = $data;
-        }
-
-        /** @var $device Device */
-        $device    = $this->parentObject;
-        $interface = $device->getInterfaceByOidIndex($oidIndex);
-
-        // The default parent object is the Device object, so we need to change it so
-        // it points to an Iface object
-        $this->parentObject = $interface;
-
-        return $this;
-    }
 }

@@ -9,9 +9,7 @@
 
 namespace SNMP\Manager\Objects\Iface;
 
-use SNMP\Manager\Objects\AbstractProcessorObject;
-
-class Out extends AbstractProcessorObject
+class Out extends AbstractIfaceHelper
 {
     /**
      * Used to process a single array entry

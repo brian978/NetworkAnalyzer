@@ -9,9 +9,7 @@
 
 namespace SNMP\Manager\Objects\Iface;
 
-use SNMP\Manager\Objects\AbstractProcessorObject;
-
-class Speed extends AbstractProcessorObject
+class Speed extends AbstractIfaceHelper
 {
     /**
      * Used to process a single array entry

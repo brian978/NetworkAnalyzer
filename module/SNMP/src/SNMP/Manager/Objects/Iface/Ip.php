@@ -9,10 +9,9 @@
 
 namespace SNMP\Manager\Objects\Iface;
 
-use SNMP\Manager\Objects\AbstractProcessorObject;
 use SNMP\Manager\Objects\NullObject;
 
-class Ip extends AbstractProcessorObject
+class Ip extends AbstractIfaceHelper
 {
 
     /**
