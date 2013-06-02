@@ -7,4 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-var_dump(shell_exec('java -jar NetworkAnalyzerClient.jar "tcpdump -i eth0 -nqt -c 50"'));die();
+$output = shell_exec('java -jar client.jar "tcpdump -i eth0 -nqt -c 20"');
+$output = explode(chr(13) . chr(10), $output);
+
+var_dump($output);
