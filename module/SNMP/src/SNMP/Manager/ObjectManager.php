@@ -11,6 +11,7 @@ namespace SNMP\Manager;
 
 use SNMP\Manager\Objects\Device\Device;
 use SNMP\Manager\Objects\Iface\Iface;
+use SNMP\Manager\Objects\Tcp\Connection;
 
 /**
  * Class ObjectManager
@@ -72,8 +73,7 @@ class ObjectManager
             'queue_length' => 'iso.3.6.1.2.1.2.2.1.21'
         ),
         'tcp' => array(
-            'local_address' => 'iso.3.6.1.2.1.6.13.1.2',
-            'remote_address' => 'iso.3.6.1.2.1.6.13.1.4',
+            'connection' => 'iso.3.6.1.2.1.6.13.1.2',
         ),
         // Special OID
         'ip' => array(
@@ -127,6 +127,10 @@ class ObjectManager
 
         if ($interfaces > 0) {
             foreach ($this->objects as $type => $objects) {
+                if ($type != 'device' && $type != 'iface') {
+                    continue;
+                }
+
                 foreach ($objects as $alias => $oid) {
 
                     // Creating the class name using the type of
@@ -143,6 +147,16 @@ class ObjectManager
                         }
                     }
                 }
+            }
+
+            // Collecting the data about the TCP connections
+            $snmpConnections = $this->sessionManager->walk($this->objects['tcp']['connection']);
+
+            foreach ($snmpConnections as $key => $value) {
+                $tcpConnection = new Connection($this->device);
+
+                $tcpConnection->process(array($key => $value));
+                $this->device->attachTcpConnection($tcpConnection);
             }
         }
 

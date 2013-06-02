@@ -85,6 +85,8 @@ class Iface extends AbstractObject
      * 0 - B/s
      * 1 - KB/s
      * 2 - MB/s
+     * 3 - GB/s
+     * 4 - TB/s
      *
      * @var int
      */
@@ -101,6 +103,8 @@ class Iface extends AbstractObject
      * 0 - B/s
      * 1 - KB/s
      * 2 - MB/s
+     * 3 - GB/s
+     * 4 - TB/s
      *
      * @var int
      */

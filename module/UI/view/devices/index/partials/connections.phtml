@@ -1,0 +1,9 @@
+<?php foreach ($this->connections as $connection): ?>
+    <tr>
+        <td></td>
+        <td><?php echo $connection->localAddress ?></td>
+        <td><?php echo $connection->localPort ?></td>
+        <td><?php echo $connection->remoteAddress ?></td>
+        <td><?php echo $connection->remotePort ?></td>
+    </tr>
+<?php endforeach; ?>

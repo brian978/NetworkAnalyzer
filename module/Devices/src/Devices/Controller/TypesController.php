@@ -18,11 +18,10 @@ class TypesController extends AbstractController
      *
      * @var array
      */
-    protected $formSpecs
-        = array(
-            'type' => '\Devices\Form\TypesFrom',
-            'object' => '\Devices\Entity\Type',
-            'model' => 'Devices\Model\TypesModel',
-            'dataKey' => 'type',
-        );
+    protected $formSpecs = array(
+        'type' => '\Devices\Form\TypesFrom',
+        'object' => '\Devices\Entity\Type',
+        'model' => 'Devices\Model\TypesModel',
+        'dataKey' => 'type',
+    );
 }

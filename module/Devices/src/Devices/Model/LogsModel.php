@@ -9,10 +9,11 @@
 
 namespace Devices\Model;
 
+use SNMP\Logs\LogsInterface;
 use Zend\Db\Sql\Predicate\Expression;
 use Zend\Db\Sql\Select;
 
-class LogsModel extends AbstractModel
+class LogsModel extends AbstractModel implements LogsInterface
 {
     protected $table = 'logs';
 

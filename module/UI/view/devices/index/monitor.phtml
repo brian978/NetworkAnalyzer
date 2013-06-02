@@ -1,40 +1,65 @@
 <article class="module width_full">
     <header>
         <h3>
-            <?php echo $this->translate('Monitor device') . ' ' . $this->device->getName()->get() ?>
+            <?php echo $this->translate('Information') . ' for "' . $this->device->getName()->get() . '"' ?>
         </h3>
     </header>
     <div class="module_content tableholder">
-        <div id="tab1" class="tab_content">
-            <table class="tablesorter" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th><?php echo $this->translate('Device name') ?></th>
-                        <th><?php echo $this->translate('Location') ?></th>
-                        <th><?php echo $this->translate('IP') ?></th>
-                        <th><?php echo $this->translate('MAC') ?></th>
-                        <th><?php echo $this->translate('Interface') ?></th>
-                        <th><?php echo $this->translate('Bandwidth In') ?></th>
-                        <th><?php echo $this->translate('Bandwidth Out') ?></th>
-                        <th><?php echo $this->translate('Status') ?></th>
-                        <th><?php echo $this->translate('Admin status') ?></th>
-                        <th><?php echo $this->translate('Queue length') ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    echo $this->partialLoop(
-                        'devices/index/partials/monitor.phtml',
-                        array(
-                            array(
-                                'device' => $this->device
-                            )
-                        )
-                    );
-                    ?>
-                </tbody>
-            </table>
-        </div>
+        <table class="tablesorter" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><?php echo $this->translate('Device name') ?></th>
+                    <th><?php echo $this->translate('Location') ?></th>
+                    <th><?php echo $this->translate('IP') ?></th>
+                    <th><?php echo $this->translate('MAC') ?></th>
+                    <th><?php echo $this->translate('Interface') ?></th>
+                    <th><?php echo $this->translate('Bandwidth In') ?></th>
+                    <th><?php echo $this->translate('Bandwidth Out') ?></th>
+                    <th><?php echo $this->translate('Status') ?></th>
+                    <th><?php echo $this->translate('Admin status') ?></th>
+                    <th><?php echo $this->translate('Queue length') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                echo $this->partial(
+                    'devices/index/partials/monitor.phtml',
+                    array(
+                        'device' => $this->device
+                    )
+                );
+                ?>
+            </tbody>
+        </table>
+    </div>
+</article>
+
+<article class="module width_full">
+    <header>
+        <h3>
+            <?php echo $this->translate('TCP Connections') . ' for "' . $this->device->getName()->get() . '"' ?>
+        </h3>
+    </header>
+    <div class="module_content tableholder">
+        <table class="tablesorter" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><?php echo $this->translate('Local IP Address') ?></th>
+                    <th><?php echo $this->translate('Local Port') ?></th>
+                    <th><?php echo $this->translate('Remote IP Address') ?></th>
+                    <th><?php echo $this->translate('Remote Port') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                echo $this->partial(
+                    'devices/index/partials/connections.phtml',
+                    array('connections' => $this->device->getTcpConnections())
+                );
+                ?>
+            </tbody>
+        </table>
     </div>
 </article>

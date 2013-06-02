@@ -9,8 +9,6 @@
 
 namespace SNMP\Manager\Objects;
 
-use SNMP\Manager\Objects\Device\Device;
-
 abstract class AbstractProcessorObject extends AbstractObject implements ObjectProcessorInterface
 {
     /**

@@ -13,6 +13,7 @@ use SNMP\Manager\ObjectManager;
 use SNMP\Manager\Objects\AbstractObject;
 use SNMP\Manager\Objects\AbstractProcessorObject;
 use SNMP\Manager\Objects\Iface\Iface;
+use SNMP\Manager\Objects\Tcp\Connection;
 
 /**
  * Class Device
@@ -45,6 +46,16 @@ class Device extends AbstractObject
      * @var array
      */
     protected $interfaces;
+
+    /**
+     * @var array
+     */
+    protected $tcpConnections;
+
+    /**
+     * @var \Devices\Entity\Device
+     */
+    protected $deviceEntity;
 
     /**
      * The device is the master object so it has the ObjectManager as it's parent
@@ -100,14 +111,36 @@ class Device extends AbstractObject
     /**
      * @param Iface $interface
      * @param int   $oidIndex
+     * @return $this
      */
-    public function attachInterface(Iface $interface, $oidIndex = null)
+    public function attachInterface(Iface $interface, $oidIndex = 0)
     {
-        if ($oidIndex === null) {
+        if ($oidIndex === 0) {
             $oidIndex = $interface->getOidIndex();
         }
 
         $this->interfaces[$oidIndex] = $interface;
+
+        return $this;
+    }
+
+    /**
+     * @param Connection $connection
+     * @return $this
+     */
+    public function attachTcpConnection(Connection $connection)
+    {
+        $this->tcpConnections[] = $connection;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTcpConnections()
+    {
+        return $this->tcpConnections;
     }
 
     /**
