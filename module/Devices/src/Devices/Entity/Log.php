@@ -52,6 +52,69 @@ class Log extends AbstractEntity
     protected $uptime;
 
     /**
+     * @var string
+     */
+    protected $ip;
+
+    /**
+     * @var string
+     */
+    protected $netmask;
+
+    /**
+     * @var string
+     */
+    protected $discontinuity_counter;
+
+    /**
+     * @param string $discontinuity_counter
+     */
+    public function setDiscontinuityCounter($discontinuity_counter)
+    {
+        $this->discontinuity_counter = $discontinuity_counter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscontinuityCounter()
+    {
+        return $this->discontinuity_counter;
+    }
+
+    /**
+     * @param string $netmask
+     */
+    public function setNetmask($netmask)
+    {
+        $this->netmask = $netmask;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNetmask()
+    {
+        return $this->netmask;
+    }
+
+    /**
+     * @param string $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
      * @param string $uptime
      */
     public function setUptime($uptime)

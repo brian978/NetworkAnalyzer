@@ -15,7 +15,7 @@ use Zend\Db\Sql\Select;
 
 class LogsModel extends AbstractModel implements LogsInterface
 {
-    protected $table = 'logs';
+    protected $table = 'bandwidth_logs';
 
     /**
      * @param $oidIndex
@@ -30,12 +30,15 @@ class LogsModel extends AbstractModel implements LogsInterface
         );
 
         // Building the SELECT for the INNER JOIN
-        $select = new Select('logs');
+        $select = new Select($this->table);
         $select->columns(array('oid_index', 'maxtime' => new Expression('MAX(time)')));
         $select->where($where);
 
         // Adding the rest of the conditions
-        $this->addJoin(array('ss' => $select), 'logs.oid_index = ss.oid_index AND logs.time = ss.maxtime');
+        $this->addJoin(
+            array('ss' => $select),
+            $this->table . '.oid_index = ss.oid_index AND ' . $this->table . '.time = ss.maxtime'
+        );
         $this->addWhere($where, true);
 
         return parent::fetch();
@@ -70,15 +73,18 @@ class LogsModel extends AbstractModel implements LogsInterface
     {
         $result = 0;
 
-        $data                   = array();
-        $data['uptime']         = $object->getUptime();
-        $data['time']           = $object->getTime();
-        $data['oid_index']      = $object->getOidIndex();
-        $data['interface_name'] = $object->getInterfaceName();
-        $data['octets_in']      = $object->getOctetsIn();
-        $data['octets_out']     = $object->getOctetsOut();
-        $data['mac']            = $object->getMac();
-        $data['device_id']      = $object->getDevice()->getId();
+        $data                          = array();
+        $data['uptime']                = $object->getUptime();
+        $data['time']                  = $object->getTime();
+        $data['oid_index']             = $object->getOidIndex();
+        $data['interface_name']        = $object->getInterfaceName();
+        $data['ip']                    = $object->getIp();
+        $data['netmask']               = $object->getNetmask();
+        $data['octets_in']             = $object->getOctetsIn();
+        $data['octets_out']            = $object->getOctetsOut();
+        $data['mac']                   = $object->getMac();
+        $data['discontinuity_counter'] = $object->getDiscontinuityCounter();
+        $data['device_id']             = $object->getDevice()->getId();
 
         try {
             // If successful will return the number of rows

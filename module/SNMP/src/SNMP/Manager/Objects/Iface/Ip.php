@@ -40,12 +40,15 @@ class Ip extends AbstractIfaceHelper
             $this->parentObject->setIp($this);
         } else {
 
+            /** @var $interface Iface */
+            $interface = $this->getParentObject();
+
             // Creating a new interface with all the characteristics
             // of the parent one and setting the IP to this one
-            $newInterface = clone $this->parentObject;
+            $newInterface = clone $interface;
             $newInterface->setIp($this);
 
-            $this->parentObject->attachInterface($newInterface);
+            $interface->attachInterface($newInterface);
         }
 
         return $this;

@@ -176,4 +176,23 @@ class Device extends AbstractObject
 
         return $interfaces;
     }
+
+    /**
+     * Returns an array 1 interface by IP
+     *
+     * @param $ipAddress
+     * @return array|null
+     */
+    public function getInterfaceByIP($ipAddress)
+    {
+        $interface = null;
+
+        foreach ($this->interfaces as $interfaceObject) {
+            if ($interfaceObject->getIp()->get() == $ipAddress) {
+                $interface = $interfaceObject;
+            }
+        }
+
+        return $interface;
+    }
 }

@@ -123,7 +123,7 @@ class InterfaceBandwidth implements HelperInterface
 
                 $this->logData(
                     $this->createLogsObject($deviceObject, $interface),
-                    $logData
+                    $logData // Just a flag that tells if to log or not
                 );
             }
         }
@@ -146,7 +146,10 @@ class InterfaceBandwidth implements HelperInterface
         $logObject->setMac($interface->getMac()->get());
         $logObject->setOctetsIn(intval($interface->getIn()->get()));
         $logObject->setOctetsOut(intval($interface->getOut()->get()));
+        $logObject->setIp($interface->getIp()->get());
+        $logObject->setNetmask($interface->getNetmask()->get());
         $logObject->setTime(time());
+        $logObject->setDiscontinuityCounter($interface->getDiscontinuityCounter()->get());
 
         return $logObject;
     }

@@ -27,6 +27,11 @@ class Iface extends AbstractObject
     /**
      * @var \SNMP\Manager\Objects\AbstractProcessorObject
      */
+    protected $netmask;
+
+    /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
     protected $name;
 
     /**
@@ -63,6 +68,11 @@ class Iface extends AbstractObject
      * @var \SNMP\Manager\Objects\AbstractProcessorObject
      */
     protected $speed;
+
+    /**
+     * @var \SNMP\Manager\Objects\AbstractProcessorObject
+     */
+    protected $discontinuityCounter;
 
     /**
      * @var int

@@ -26,7 +26,7 @@ abstract class AbstractIfaceHelper extends AbstractProcessorObject
         }
 
         /** @var $device Device */
-        $device    = $this->parentObject;
+        $device    = $this->getParentObject();
         $interface = $device->getInterfaceByOidIndex($oidIndex);
 
         // The default parent object is the Device object, so we need to change it so

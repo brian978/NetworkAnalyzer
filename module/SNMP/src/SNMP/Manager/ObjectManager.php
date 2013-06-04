@@ -60,6 +60,7 @@ class ObjectManager
         'iface' => array(
             'name' => 'iso.3.6.1.2.1.2.2.1.2',
             'ip' => 'iso.3.6.1.2.1.4.20.1.1',
+            'netmask' => 'iso.3.6.1.2.1.4.20.1.3',
             'mac' => 'iso.3.6.1.2.1.2.2.1.6',
             // Octets
             'in' => 'iso.3.6.1.2.1.2.2.1.10',
@@ -70,7 +71,8 @@ class ObjectManager
             'admin_status' => 'iso.3.6.1.2.1.2.2.1.7',
             // 1: up, 2: down, 3: testing, 4: unknown, 5: dormant, 6: notPresent, 7: lowerLayerDown
             'status' => 'iso.3.6.1.2.1.2.2.1.8',
-            'queue_length' => 'iso.3.6.1.2.1.2.2.1.21'
+            'queue_length' => 'iso.3.6.1.2.1.2.2.1.21',
+            'discontinuity_counter' => 'iso.3.6.1.2.1.31.1.1.1.19',
         ),
         'tcp' => array(
             'connection' => 'iso.3.6.1.2.1.6.13.1.2',
@@ -109,6 +111,54 @@ class ObjectManager
     {
         // Creating all the interfaces with minimal data so we can properly attach
         // the interface information to the proper interface instance
+        $interfaces = $this->attachDeviceInterfaces();
+
+        if ($interfaces > 0) {
+            foreach ($this->objects as $type => $objects) {
+                if ($type != 'device' && $type != 'iface') {
+                    continue;
+                }
+
+                foreach ($objects as $alias => $oid) {
+
+                    // Creating the class name using the type of
+                    // object (device or iface) and alias
+                    // of the OID object
+                    $className = $this->createClassName($type, $alias);
+
+                    if (class_exists($className)) {
+
+                        // This is not best practice but we don't need to know
+                        // about the warning
+                        $snmpInfo = @$this->sessionManager->walk($oid);
+
+                        if (is_array($snmpInfo)) {
+                            foreach ($snmpInfo as $oid => $value) {
+                                $classObject = new $className($this->device);
+                                $classObject->process(array($oid => $value));
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Collecting the data about the TCP connections
+            $this->attachDeviceTcpConnections();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Attaches all the interfaces it can find to the device
+     * The attached interfaces only contain minimal data (like the OID index)
+     *
+     * The method returns the total number of attached interfaces
+     *
+     * @return int
+     */
+    protected function attachDeviceInterfaces()
+    {
         $interfaces           = 0;
         $snmpInterfaceIndexes = $this->sessionManager->walk('iso.3.6.1.2.1.2.2.1.1');
 
@@ -125,42 +175,30 @@ class ObjectManager
             $interfaces++;
         }
 
-        if ($interfaces > 0) {
-            foreach ($this->objects as $type => $objects) {
-                if ($type != 'device' && $type != 'iface') {
-                    continue;
-                }
+        return $interfaces;
+    }
 
-                foreach ($objects as $alias => $oid) {
+    /**
+     * Attaches all the active TCP connections to the device and returns
+     * the total number of TCP connection
+     *
+     * @return int
+     */
+    protected function attachDeviceTcpConnections()
+    {
+        $connections     = 0;
+        $snmpConnections = $this->sessionManager->walk($this->objects['tcp']['connection']);
 
-                    // Creating the class name using the type of
-                    // object (device or iface) and alias
-                    // of the OID object
-                    $className = $this->createClassName($type, $alias);
+        foreach ($snmpConnections as $key => $value) {
+            $tcpConnection = new Connection($this->device);
+            $tcpConnection->process(array($key => $value));
 
-                    if (class_exists($className)) {
-                        $snmpInfo = $this->sessionManager->walk($oid);
+            $this->device->attachTcpConnection($tcpConnection);
 
-                        foreach ($snmpInfo as $oid => $value) {
-                            $classObject = new $className($this->device);
-                            $classObject->process(array($oid => $value));
-                        }
-                    }
-                }
-            }
-
-            // Collecting the data about the TCP connections
-            $snmpConnections = $this->sessionManager->walk($this->objects['tcp']['connection']);
-
-            foreach ($snmpConnections as $key => $value) {
-                $tcpConnection = new Connection($this->device);
-
-                $tcpConnection->process(array($key => $value));
-                $this->device->attachTcpConnection($tcpConnection);
-            }
+            $connections++;
         }
 
-        return $this;
+        return $connections;
     }
 
     /**
