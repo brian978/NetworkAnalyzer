@@ -7,10 +7,9 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace SNMP;
+namespace Sniffer;
 
 use Library\Module as MainModule;
-use Zend\Session\Container;
 
 class Module extends MainModule
 {

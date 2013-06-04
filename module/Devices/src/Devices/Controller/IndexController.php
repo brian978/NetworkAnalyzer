@@ -68,6 +68,19 @@ class IndexController extends AbstractController
         return $deviceData->extract($createObjects);
     }
 
+    public function snifferAction()
+    {
+        $command = 'java -jar ' . getcwd() . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"';
+        $output  = shell_exec($command);
+//        $output = explode(chr(13) . chr(10), $output);
+
+        var_dump($command);
+
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        return $response;
+    }
+
     public function monitorAction()
     {
         $logsModel          = new LogsModel($this->serviceLocator->get('Zend\Db\Adapter\Adapter'));
