@@ -7,7 +7,12 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-$output = shell_exec('java -jar proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"');
+$output  = '';
+$command = '/usr/lib/java -jar ' . getcwd(
+) . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"';
+
+system($command, $output);
 $output = explode(chr(13) . chr(10), $output);
 
 var_dump($output);
+var_dump($command);
