@@ -8,6 +8,7 @@ return array(
         'AAA',
         'UI',
         'Dashboard',
+        'Sniffer',
         'Devices',
         'Users',
         'Settings',

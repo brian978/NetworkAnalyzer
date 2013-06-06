@@ -25,7 +25,7 @@ class IndexController extends AbstractUiController
     /**
      * @var int
      */
-    protected $poolInterval = 3;
+    protected $pollInterval = 3;
 
     public function indexAction()
     {
@@ -38,7 +38,7 @@ class IndexController extends AbstractUiController
         // Setting a refresh interval for the page
         /** @var  $headers \Zend\Http\Headers */
         $headers = $this->getResponse()->getHeaders();
-        $headers->addHeaderLine('Refresh', $this->poolInterval);
+        $headers->addHeaderLine('Refresh', $this->pollInterval);
 
         /** @var $model \Devices\Model\DevicesModel */
         $model      = $this->serviceLocator->get('Devices\Model\DevicesModel');

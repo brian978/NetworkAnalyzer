@@ -11,6 +11,15 @@ $monitorUrl = $this->url(
 <?php foreach ($this->device->getInterfaces() as $interface): ?>
     <?php
 
+    $snifferUrl = $this->url(
+        'sniffer/module',
+        array(
+            'device' => $this->device->getDeviceEntity()->getId(),
+            'interface' => $interface->getName()->get()
+        ),
+        true
+    );
+
     $interfaceStatus = array(
         1 => $this->translate('Up'),
         2 => $this->translate('Down'),
@@ -38,7 +47,9 @@ $monitorUrl = $this->url(
         <td><?php echo $interface->getIp() ?></td>
         <td><?php echo $interface->getNetmask() ?></td>
         <td><?php echo $interface->getMac() ?></td>
-        <td><?php echo $interface->getName() ?></td>
+        <td>
+        <td><a href="<?php echo $snifferUrl ?>"><?php echo $interface->getName() ?></a></td>
+        </td>
         <td><?php echo $interface->getBandwidthIn() . ' ' . $bandwidthType[$interface->getBandwidthInType()] ?></td>
         <td><?php echo $interface->getBandwidthOut() . ' ' . $bandwidthType[$interface->getBandwidthOutType()] ?></td>
         <td><?php echo $interfaceStatus[$interface->getStatus()->get()] ?></td>

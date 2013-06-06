@@ -26,7 +26,7 @@ class IndexController extends AbstractController
     /**
      * @var int
      */
-    protected $poolInterval = 3000000000000000000000000000000000000;
+    protected $pollInterval = 1;
 
     /**
      * These parameters are used to create the required form
@@ -89,7 +89,7 @@ class IndexController extends AbstractController
         // Setting a refresh interval for the page
         /** @var  $headers \Zend\Http\Headers */
         $headers = $this->getResponse()->getHeaders();
-        $headers->addHeaderLine('Refresh', $this->poolInterval);
+        $headers->addHeaderLine('Refresh', $this->pollInterval);
 
         /** @var $model \Library\Model\AbstractDbModel */
         $model      = $this->getModel();
@@ -113,6 +113,8 @@ class IndexController extends AbstractController
         // Manager objects
         $objectManager = new ObjectManager(new SessionManager(new Session($this->serviceLocator, $config)));
         $device        = $objectManager->getDevice();
+
+        $device->setDeviceEntity($deviceObject);
 
         $interfaceBandwidth($deviceObject, $device);
 

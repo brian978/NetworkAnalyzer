@@ -86,11 +86,11 @@ class LogsModel extends AbstractModel implements LogsInterface
         $data['discontinuity_counter'] = $object->getDiscontinuityCounter();
         $data['device_id']             = $object->getDevice()->getId();
 
-        try {
-            // If successful will return the number of rows
-            $result = $this->insert($data);
-        } catch (\Exception $e) {
-        }
+//        try {
+        // If successful will return the number of rows
+        $result = $this->insert($data);
+//        } catch (\Exception $e) {
+//        }
 
         return $result;
     }

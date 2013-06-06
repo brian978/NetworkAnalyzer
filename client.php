@@ -8,11 +8,12 @@
  */
 
 $output  = '';
-$command = '/usr/lib/java -jar ' . getcwd(
-) . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"';
+$command = 'java -jar ' . getcwd() . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth1 -nqt -c 20"';
 
-system($command, $output);
+$output = shell_exec($command);
 $output = explode(chr(13) . chr(10), $output);
 
+array_pop($output);
 var_dump($output);
-var_dump($command);
+
+
