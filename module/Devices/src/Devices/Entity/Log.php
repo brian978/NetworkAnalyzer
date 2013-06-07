@@ -37,6 +37,16 @@ class Log extends AbstractEntity
     protected $octetsOut;
 
     /**
+     * @var float
+     */
+    protected $bandwidthIn;
+
+    /**
+     * @var float
+     */
+    protected $bandwidthOut;
+
+    /**
      * @var string
      */
     protected $mac;
@@ -240,5 +250,37 @@ class Log extends AbstractEntity
     public function getTime()
     {
         return $this->time;
+    }
+
+    /**
+     * @param float $bandwidthIn
+     */
+    public function setBandwidthIn($bandwidthIn)
+    {
+        $this->bandwidthIn = $bandwidthIn;
+    }
+
+    /**
+     * @return float
+     */
+    public function getBandwidthIn()
+    {
+        return $this->bandwidthIn;
+    }
+
+    /**
+     * @param float $bandwidthOut
+     */
+    public function setBandwidthOut($bandwidthOut)
+    {
+        $this->bandwidthOut = $bandwidthOut;
+    }
+
+    /**
+     * @return float
+     */
+    public function getBandwidthOut()
+    {
+        return $this->bandwidthOut;
     }
 }

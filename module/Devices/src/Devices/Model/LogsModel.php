@@ -82,6 +82,8 @@ class LogsModel extends AbstractModel implements LogsInterface
         $data['netmask']               = $object->getNetmask();
         $data['octets_in']             = $object->getOctetsIn();
         $data['octets_out']            = $object->getOctetsOut();
+        $data['bandwidth_in']          = $object->getBandwidthIn();
+        $data['bandwidth_out']         = $object->getBandwidthOut();
         $data['mac']                   = $object->getMac();
         $data['discontinuity_counter'] = $object->getDiscontinuityCounter();
         $data['device_id']             = $object->getDevice()->getId();

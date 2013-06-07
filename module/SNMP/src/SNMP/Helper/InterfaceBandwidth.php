@@ -141,6 +141,9 @@ class InterfaceBandwidth implements HelperInterface
     {
         $device = $interface->getParentObject();
 
+        $bandwidthIn  = floatval($interface->getBandwidthIn()) * (pow(1000, $interface->getBandwidthInType()));
+        $bandwidthOut = floatval($interface->getBandwidthOut()) * (pow(1000, $interface->getBandwidthOutType()));
+
         $logObject = new Log();
         $logObject->setUptime($device->getUptime());
         $logObject->setOidIndex($interface->getOidIndex());
@@ -149,6 +152,8 @@ class InterfaceBandwidth implements HelperInterface
         $logObject->setMac($interface->getMac()->get());
         $logObject->setOctetsIn(floatval($interface->getIn()->get()));
         $logObject->setOctetsOut(floatval($interface->getOut()->get()));
+        $logObject->setBandwidthIn($bandwidthIn);
+        $logObject->setBandwidthOut($bandwidthOut);
         $logObject->setIp($interface->getIp()->get());
         $logObject->setNetmask($interface->getNetmask()->get());
         $logObject->setTime($this->logTime);
@@ -166,7 +171,7 @@ class InterfaceBandwidth implements HelperInterface
     {
         // Saving the data
         if ($save === true) {
-            $this->logsModel->save($logObject);
+//            $this->logsModel->save($logObject);
         }
 
         return $this;
