@@ -28,6 +28,11 @@ class InterfaceBandwidth implements HelperInterface
     protected $logsModel;
 
     /**
+     * @var int
+     */
+    protected $logTime;
+
+    /**
      * @param BandwidthCalculator      $calculator
      * @param \Devices\Model\LogsModel $logsModel
      */
@@ -60,6 +65,8 @@ class InterfaceBandwidth implements HelperInterface
         $args         = func_get_args();
         $deviceObject = $args[0];
         $device       = $args[1];
+
+        $this->logTime = time();
 
         if ($deviceObject instanceof Device == false) {
             $message = 'The device object must be of type %s, %s given';
@@ -148,7 +155,7 @@ class InterfaceBandwidth implements HelperInterface
         $logObject->setOctetsOut(intval($interface->getOut()->get()));
         $logObject->setIp($interface->getIp()->get());
         $logObject->setNetmask($interface->getNetmask()->get());
-        $logObject->setTime(time());
+        $logObject->setTime($this->logTime);
         $logObject->setDiscontinuityCounter($interface->getDiscontinuityCounter()->get());
 
         return $logObject;
@@ -163,7 +170,7 @@ class InterfaceBandwidth implements HelperInterface
     {
         // Saving the data
         if ($save === true) {
-            $this->logsModel->save($logObject);
+//            $this->logsModel->save($logObject);
         }
 
         return $this;

@@ -26,7 +26,7 @@ class IndexController extends AbstractController
     /**
      * @var int
      */
-    protected $pollInterval = 1;
+    protected $pollInterval = 10000;
 
     /**
      * These parameters are used to create the required form
