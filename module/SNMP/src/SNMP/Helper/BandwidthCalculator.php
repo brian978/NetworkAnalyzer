@@ -24,8 +24,8 @@ class BandwidthCalculator implements HelperInterface
         }
 
         // The interfaces should only support TB speeds
-        while (floor($octetsDiff) > 1024 && $bandwidthType < 4) {
-            $octetsDiff /= 1024;
+        while (floor($octetsDiff) > 1000 && $bandwidthType < 4) {
+            $octetsDiff /= 1000;
             $bandwidthType++;
         }
 
