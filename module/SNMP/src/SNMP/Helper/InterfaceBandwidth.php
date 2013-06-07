@@ -94,7 +94,7 @@ class InterfaceBandwidth implements HelperInterface
 
                     // Queries with the same timestamp must not be saved
                     if (strpos($last['uptime'], $prev['uptime']) === 0) {
-//                        $logData = false;
+                        $logData = false;
                     }
 
                     // Calculating the differences
