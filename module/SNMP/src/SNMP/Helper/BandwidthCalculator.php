@@ -23,13 +23,13 @@ class BandwidthCalculator implements HelperInterface
             $timeDiff = 1;
         }
 
-        // The interfaces should only support TB speeds
-        while ($octetsDiff > 1000 && $bandwidthType < 4) {
+        // Converting from B/s to the highest unit available up to TB/s speeds
+        while (floor($octetsDiff) > 1000 && $bandwidthType < 4) {
             $octetsDiff /= 1000;
             $bandwidthType++;
         }
 
-        $bandwidth = ($octetsDiff) / ($timeDiff);
+        $bandwidth = $octetsDiff / $timeDiff;
 
         return array(
             'bandwidth' => round($bandwidth, 2),

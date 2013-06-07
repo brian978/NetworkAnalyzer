@@ -62,11 +62,11 @@ class InterfaceBandwidth implements HelperInterface
      */
     public function __invoke()
     {
+        $this->logTime = time();
+
         $args         = func_get_args();
         $deviceObject = $args[0];
         $device       = $args[1];
-
-        $this->logTime = time();
 
         if ($deviceObject instanceof Device == false) {
             $message = 'The device object must be of type %s, %s given';
@@ -78,61 +78,57 @@ class InterfaceBandwidth implements HelperInterface
 
         foreach ($device->getInterfaces() as $interface) {
 
-            // Some interfaces have speed 0 so we don't need to log those
-            if (intval($interface->getSpeed()->get()) > 0) {
+            $logData = true;
 
-                $logData = true;
+            /**
+             * -------------------------------------
+             * GETTING DATA AND CALCULATING
+             * -------------------------------------
+             */
+            $interfaceData = $this->logsModel->getLastEntries(
+                $interface->getOidIndex(),
+                $deviceId
+            );
 
-                /**
-                 * -------------------------------------
-                 * GETTING DATA AND CALCULATING
-                 * -------------------------------------
-                 */
-                $interfaceData = $this->logsModel->getLastEntries(
-                    $interface->getOidIndex(),
-                    $deviceId
-                );
+            // We need 2 logs to calculate properly
+            if (!empty($interfaceData) && count($interfaceData) == 2) {
 
-                // We need 2 logs to calculate properly
-                if (!empty($interfaceData) && count($interfaceData) == 2) {
+                $last = array_shift($interfaceData);
+                $prev = array_shift($interfaceData);
 
-                    $last = array_shift($interfaceData);
-                    $prev = array_shift($interfaceData);
-
-                    // Queries with the same timestamp must not be saved
-                    if (strpos($last['uptime'], $prev['uptime']) === 0) {
-                        $logData = false;
-                    }
-
-                    // Calculating the differences
-                    $diffInOctets  = intval($last['octets_in']) - intval($prev['octets_in']);
-                    $diffOutOctets = intval($last['octets_out']) - intval($prev['octets_out']);
-                    $diffTime      = intval($last['time']) - intval($prev['time']);
-
-                    /**
-                     * ------------------
-                     * IN BANDWIDTH
-                     * ------------------
-                     */
-                    $inData = $this->calculator($diffInOctets, $diffTime);
-                    $interface->setBandwidthIn($inData['bandwidth']);
-                    $interface->setBandwidthInType($inData['type']);
-
-                    /**
-                     * ------------------
-                     * OUT BANDWIDTH
-                     * ------------------
-                     */
-                    $outData = $this->calculator($diffOutOctets, $diffTime);
-                    $interface->setBandwidthIn($outData['bandwidth']);
-                    $interface->setBandwidthInType($outData['type']);
+                // Queries with the same timestamp must not be saved
+                if (strpos($last['uptime'], $prev['uptime']) === 0) {
+                    $logData = false;
                 }
 
-                $this->logData(
-                    $this->createLogsObject($deviceObject, $interface),
-                    $logData // Just a flag that tells if to log or not
-                );
+                // Calculating the differences
+                $diffInOctets  = intval($last['octets_in']) - intval($prev['octets_in']);
+                $diffOutOctets = intval($last['octets_out']) - intval($prev['octets_out']);
+                $diffTime      = intval($last['time']) - intval($prev['time']);
+
+                /**
+                 * ------------------
+                 * IN BANDWIDTH
+                 * ------------------
+                 */
+                $inData = $this->calculator($diffInOctets, $diffTime);
+                $interface->setBandwidthIn($inData['bandwidth']);
+                $interface->setBandwidthInType($inData['type']);
+
+                /**
+                 * ------------------
+                 * OUT BANDWIDTH
+                 * ------------------
+                 */
+                $outData = $this->calculator($diffOutOctets, $diffTime);
+                $interface->setBandwidthOut($outData['bandwidth']);
+                $interface->setBandwidthOutType($outData['type']);
             }
+
+            $this->logData(
+                $this->createLogsObject($deviceObject, $interface),
+                $logData // Just a flag that tells if to log or not
+            );
         }
     }
 
@@ -151,8 +147,8 @@ class InterfaceBandwidth implements HelperInterface
         $logObject->setDevice($deviceObject);
         $logObject->setInterfaceName($interface->getName()->get());
         $logObject->setMac($interface->getMac()->get());
-        $logObject->setOctetsIn(intval($interface->getIn()->get()));
-        $logObject->setOctetsOut(intval($interface->getOut()->get()));
+        $logObject->setOctetsIn(floatval($interface->getIn()->get()));
+        $logObject->setOctetsOut(floatval($interface->getOut()->get()));
         $logObject->setIp($interface->getIp()->get());
         $logObject->setNetmask($interface->getNetmask()->get());
         $logObject->setTime($this->logTime);
@@ -170,7 +166,7 @@ class InterfaceBandwidth implements HelperInterface
     {
         // Saving the data
         if ($save === true) {
-//            $this->logsModel->save($logObject);
+            $this->logsModel->save($logObject);
         }
 
         return $this;
