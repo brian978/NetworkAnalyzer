@@ -158,7 +158,7 @@ class IndexController extends AbstractController
         }
 
         // Getting some statistics for the last 60 seconds
-        $stats = $logsModel->getLastSeconds(60);
+        $stats = $logsModel->getLastSeconds(60, $device->getDeviceEntity()->getId());
 
         foreach ($stats as $log) {
             $interfaceName = $log['interface_name'];

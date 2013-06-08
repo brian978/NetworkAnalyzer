@@ -27,11 +27,12 @@ class LogsModel extends AbstractModel implements LogsInterface
      */
     public $limit = 0;
 
-    public function getLastSeconds($seconds)
+    public function getLastSeconds($seconds, $deviceId)
     {
         $where = $this->getWhere('time', time() - $seconds, null, '>');
 
         $this->addWhere($where, true);
+        $this->addWhere('device_id', $deviceId);
 
         return parent::fetch();
     }
