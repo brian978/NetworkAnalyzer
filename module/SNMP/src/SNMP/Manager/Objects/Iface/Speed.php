@@ -22,7 +22,7 @@ class Speed extends AbstractIfaceHelper
         $this->bindToInterfaceObject($data);
         $this->parentObject->setSpeed($this);
 
-        $this->data = doubleval(trim(str_replace('Gauge32: ', '', current($data))));
+        $this->data = trim(str_replace('Gauge32: ', '', current($data)));
 
         return $this;
     }
