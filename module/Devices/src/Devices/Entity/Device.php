@@ -9,7 +9,9 @@
 
 namespace Devices\Entity;
 
-class Device extends AbstractEntity
+use SNMP\Model\Entity\EntityInterface;
+
+class Device extends AbstractEntity implements EntityInterface
 {
     /**
      * @var Type
@@ -114,5 +116,13 @@ class Device extends AbstractEntity
     public function getInterface()
     {
         return $this->interface;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHostname()
+    {
+        return $this->interface->getIp();
     }
 }

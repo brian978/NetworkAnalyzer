@@ -11,8 +11,9 @@ namespace Devices\Controller;
 
 use Devices\Entity\Device;
 use Devices\Helper\DeviceData;
-use Devices\Model\LogsModel;
+use Devices\Model\BandwidthLogs;
 use Library\Form\AbstractForm;
+use Poller\Model\SnmpPoller;
 use SNMP\Helper\BandwidthCalculator;
 use SNMP\Helper\InterfaceBandwidth;
 use SNMP\Manager\ObjectManager;
@@ -71,54 +72,34 @@ class IndexController extends AbstractController
 
     public function monitorAction()
     {
-        $logsModel          = new LogsModel($this->serviceLocator->get('Zend\Db\Adapter\Adapter'));
-        $interfaceBandwidth = new InterfaceBandwidth(new BandwidthCalculator(), $logsModel);
-
         // Setting a refresh interval for the page
         /** @var  $headers \Zend\Http\Headers */
         $headers = $this->getResponse()->getHeaders();
         $headers->addHeaderLine('Refresh', $this->pollInterval);
 
-        /** @var $model \Library\Model\AbstractDbModel */
-        $model      = $this->getModel();
-        $deviceId   = $this->getEvent()->getRouteMatch()->getParam('id');
-        $deviceInfo = $model->getInfo($deviceId);
+        /** @var $adapter \Zend\Db\Adapter\Adapter */
+        $adapter   = $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
+        $logsModel = new BandwidthLogs($adapter);
 
-        $config = array(
-            'version' => $deviceInfo->snmp_version,
-            'hostname' => $deviceInfo->ip,
-            'community' => $deviceInfo->snmp_community,
-        );
+        $poller = new SnmpPoller();
+        $poller->setServiceLocator($this->serviceLocator);
 
-        $hydrator = new ClassMethods();
-
-        /** @var $deviceObject Device */
-        $deviceObject = $hydrator->hydrate(
-            $this->extractDeviceData($deviceInfo, true),
-            new Device()
-        );
-
-        // Manager objects
-        $objectManager = new ObjectManager(new SessionManager(new Session($this->serviceLocator, $config)));
-        $device        = $objectManager->getDevice();
-
-        $device->setDeviceEntity($deviceObject);
-
-        $interfaceBandwidth($deviceObject, $device);
+        $deviceId = $this->getEvent()->getRouteMatch()->getParam('id');
+        $devices  = $poller->bandwidthPoll(false, $deviceId);
+        $device   = $devices[$deviceId]['device'];
 
         return array(
             'device' => $device,
-            'deviceInfo' => $deviceInfo,
             'stats' => $this->buildStats($device, $logsModel)
         );
     }
 
     /**
-     * @param SnmpDevice                          $device
-     * @param LogsModel                           $logsModel
+     * @param SnmpDevice    $device
+     * @param BandwidthLogs $logsModel
      * @return array
      */
-    protected function buildStats(SnmpDevice $device, LogsModel $logsModel)
+    protected function buildStats(SnmpDevice $device, BandwidthLogs $logsModel)
     {
         $result = array();
         $min    = new \stdClass();

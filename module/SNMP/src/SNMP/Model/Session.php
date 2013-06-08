@@ -9,6 +9,8 @@
 
 namespace SNMP\Model;
 
+use SNMP\Model\Entity\EntityInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 
@@ -30,12 +32,16 @@ class Session implements ServiceManagerAwareInterface
     protected $config = array();
 
     /**
-     * @param ServiceManager $serviceManager
-     * @param                $config
+     * @param ServiceManager|\Zend\ServiceManager\ServiceLocatorInterface $serviceManager
+     * @param Entity\EntityInterface                                      $entity
      */
-    public function __construct(ServiceManager $serviceManager, $config)
+    public function __construct(ServiceManager $serviceManager, EntityInterface $entity)
     {
-        $this->config = $config;
+        $this->config = array(
+            'hostname' => $entity->getHostname(),
+            'version' => $entity->getSnmpVersion(),
+            'community' => $entity->getSnmpCommunity(),
+        );
 
         $this->setServiceManager($serviceManager);
         $this->open();

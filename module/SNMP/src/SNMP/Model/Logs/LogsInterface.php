@@ -7,11 +7,15 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace SNMP\Logs;
+namespace SNMP\Model\Logs;
 
 use Library\Entity\AbstractEntity;
 
 interface LogsInterface
 {
+    public function setLimit($limit);
+
     public function save(AbstractEntity $object);
+
+    public function getLastEntries($oidIndex, $deviceId);
 }

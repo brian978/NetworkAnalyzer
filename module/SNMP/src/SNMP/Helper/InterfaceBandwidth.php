@@ -9,9 +9,10 @@
 
 namespace SNMP\Helper;
 
-use Devices\Entity\Device;
+use Devices\Entity\Device as DeviceEntity;
 use Devices\Entity\Log;
-use Devices\Model\LogsModel;
+use Devices\Model\BandwidthLogs;
+use SNMP\Manager\Objects\Device\Device;
 use SNMP\Manager\Objects\Iface\Iface;
 use Zend\Db\Adapter\Adapter;
 
@@ -23,7 +24,7 @@ class InterfaceBandwidth implements HelperInterface
     protected $calculator;
 
     /**
-     * @var LogsModel
+     * @var BandwidthLogs
      */
     protected $logsModel;
 
@@ -33,28 +34,18 @@ class InterfaceBandwidth implements HelperInterface
     protected $logTime;
 
     /**
-     * @param BandwidthCalculator      $calculator
-     * @param \Devices\Model\LogsModel $logsModel
+     * @var bool
      */
-    public function __construct(BandwidthCalculator $calculator, LogsModel $logsModel)
+    public $doLogging = false;
+
+    /**
+     * @param BandwidthCalculator          $calculator
+     * @param \Devices\Model\BandwidthLogs $logsModel
+     */
+    public function __construct(BandwidthCalculator $calculator, BandwidthLogs $logsModel)
     {
         $this->calculator = $calculator;
         $this->logsModel  = $logsModel;
-    }
-
-    /**
-     * @param $name
-     * @param $arguments
-     * @return mixed
-     */
-    public function __call($name, $arguments)
-    {
-        if (property_exists($this, $name)
-            && is_object($this->$name)
-            && $this->$name instanceof HelperInterface
-        ) {
-            return call_user_func_array(array($this->$name, '__invoke'), $arguments);
-        }
     }
 
     /**
@@ -66,77 +57,93 @@ class InterfaceBandwidth implements HelperInterface
         $deviceObject = $args[0];
         $device       = $args[1];
 
-        if ($deviceObject instanceof Device == false) {
+        if ($deviceObject instanceof DeviceEntity == false) {
             $message = 'The device object must be of type %s, %s given';
             $message = sprintf($message, '\Devices\Entity\Device', get_class($deviceObject));
             throw new \InvalidArgumentException($message);
         }
 
-        $this->logTime = time();
-
-        $deviceId = $deviceObject->getId();
-
         foreach ($device->getInterfaces() as $interface) {
-
-            $logData = true;
+            $logData = $this->doLogging;
 
             /**
              * -------------------------------------
              * GETTING DATA AND CALCULATING
              * -------------------------------------
              */
-            $this->logsModel->limit = 1;
+            $data = $this->getLogData($interface);
 
-            $interfaceData = $this->logsModel->getLastEntries(
-                $interface->getOidIndex(),
-                $deviceId
-            );
-
-            // We need 2 logs to calculate properly
-            if (!empty($interfaceData)) {
-
-                $last = array();
-                $prev = array();
-
-                if (count($interfaceData) == 1) {
-                    $last = array(
-                        'uptime' => $device->getUptime(),
-                        'octets_in' => $interface->getIn()->get(),
-                        'octets_out' => $interface->getOut()->get(),
-                        'time' => $this->logTime
-                    );
-
-                    $prev = array_shift($interfaceData);
-                }
-
-                if (!empty($last) && !empty($prev)) {
-                    $logData = $this->setInterfaceData($interface, $last, $prev);
+            if (!empty($data)) {
+                if (!empty($data['last']) && !empty($data['prev'])) {
+                    $this->setInterfaceData($interface, $data['last'], $data['prev']);
                 }
             }
 
-            $this->logData(
-                $this->createLogsObject($deviceObject, $interface),
-                $logData // Just a flag that tells if to log or not
-            );
+            if ($logData === true) {
+                $this->logData($this->createLogsObject($deviceObject, $interface));
+            }
         }
+    }
+
+    /**
+     * @param Iface $interface
+     * @return array
+     */
+    protected function getLogData(Iface $interface)
+    {
+        if ($this->doLogging === false) {
+            $this->logsModel->setLimit(2);
+        } else {
+            $this->logTime = time();
+            $this->logsModel->setLimit(1);
+        }
+
+        /** @var $device Device */
+        $device = $interface->getParentObject();
+
+        $last     = array();
+        $prev     = array();
+        $deviceId = $device->getDeviceEntity()->getId();
+        $data     = $this->logsModel->getLastEntries(
+            $interface->getOidIndex(),
+            $deviceId
+        );
+
+        // We need 2 logs to calculate properly
+        if (!empty($data) && is_array($data)) {
+            if (count($data) == 1) {
+                $prev = array_shift($data);
+                $last = array(
+                    'uptime' => $device->getUptime(),
+                    'octets_in' => $interface->getIn()->get(),
+                    'octets_out' => $interface->getOut()->get(),
+                    'time' => $this->logTime
+                );
+            } else if (count($data) === 2) {
+                $last = array_shift($data);
+                $prev = array_shift($data);
+            }
+        }
+
+        return array(
+            'last' => $last,
+            'prev' => $prev,
+        );
     }
 
     /**
      * @param Iface $interface
      * @param       $last
      * @param       $prev
-     * @return bool
+     * @return $this
      */
     protected function setInterfaceData(Iface $interface, $last, $prev)
     {
-        $logData = true;
-
-        // Queries with the same timestamp must not be saved
-        if (strpos($last['uptime'], $prev['uptime']) === 0) {
-            $logData = false;
-        }
-
-        // Calculating the differences
+        /**
+         * ------------------
+         * DIFFS
+         * ------------------
+         */
         $diffInOctets  = $last['octets_in'] - $prev['octets_in'];
         $diffOutOctets = $last['octets_out'] - $prev['octets_out'];
         $diffTime      = $last['time'] - $prev['time'];
@@ -146,7 +153,7 @@ class InterfaceBandwidth implements HelperInterface
          * IN BANDWIDTH
          * ------------------
          */
-        $inData = $this->calculator($diffInOctets, $diffTime);
+        $inData = $this->calculator->__invoke($diffInOctets, $diffTime);
         $interface->setBandwidthIn($inData['bandwidth']);
         $interface->setBandwidthInType($inData['type']);
 
@@ -155,19 +162,19 @@ class InterfaceBandwidth implements HelperInterface
          * OUT BANDWIDTH
          * ------------------
          */
-        $outData = $this->calculator($diffOutOctets, $diffTime);
+        $outData = $this->calculator->__invoke($diffOutOctets, $diffTime);
         $interface->setBandwidthOut($outData['bandwidth']);
         $interface->setBandwidthOutType($outData['type']);
 
-        return $logData;
+        return $this;
     }
 
     /**
-     * @param Device $deviceObject
-     * @param Iface  $interface
+     * @param DeviceEntity $deviceObject
+     * @param Iface        $interface
      * @return Log
      */
-    protected function createLogsObject(Device $deviceObject, Iface $interface)
+    protected function createLogsObject(DeviceEntity $deviceObject, Iface $interface)
     {
         $device = $interface->getParentObject();
 
@@ -194,15 +201,12 @@ class InterfaceBandwidth implements HelperInterface
 
     /**
      * @param Log  $logObject
-     * @param bool $save
      * @return $this
      */
-    protected function logData(Log $logObject, $save = true)
+    protected function logData(Log $logObject)
     {
         // Saving the data
-        if ($save === true) {
-            $this->logsModel->save($logObject);
-        }
+        $this->logsModel->save($logObject);
 
         return $this;
     }

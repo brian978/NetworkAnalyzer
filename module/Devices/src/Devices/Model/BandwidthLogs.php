@@ -9,11 +9,11 @@
 
 namespace Devices\Model;
 
-use SNMP\Logs\LogsInterface;
+use SNMP\Model\Logs\LogsInterface;
 use Zend\Db\Sql\Predicate\Expression;
 use Zend\Db\Sql\Select;
 
-class LogsModel extends AbstractModel implements LogsInterface
+class BandwidthLogs extends AbstractModel implements LogsInterface
 {
     /**
      * @var string
@@ -25,7 +25,16 @@ class LogsModel extends AbstractModel implements LogsInterface
      *
      * @var int
      */
-    public $limit = 0;
+    protected $limit = 0;
+
+    /**
+     * @param $limit
+     * @return void
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+    }
 
     public function getLastSeconds($seconds, $deviceId)
     {

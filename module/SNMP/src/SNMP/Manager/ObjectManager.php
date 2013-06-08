@@ -299,7 +299,7 @@ class ObjectManager
     }
 
     /**
-     * @return Objects\Device|Device
+     * @return \SNMP\Manager\Objects\Device\Device
      */
     public function getDevice()
     {

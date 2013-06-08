@@ -19,6 +19,7 @@ use SNMP\Manager\Objects\Tcp\Connection;
  * Class Device
  *
  * @package SNMP\Manager\Objects
+ * @method setDeviceEntity(\Devices\Entity\Device $device)
  */
 class Device extends AbstractObject
 {

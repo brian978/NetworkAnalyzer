@@ -7,6 +7,7 @@ return array(
         'Application',
         'AAA',
         'UI',
+        'Poller',
         'Dashboard',
         'Sniffer',
         'Devices',

@@ -23,7 +23,7 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
     /**
      * @param $id
      *
-     * @return array
+     * @return \ArrayObject
      */
     public function getInfo($id)
     {
