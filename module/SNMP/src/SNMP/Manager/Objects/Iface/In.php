@@ -22,7 +22,7 @@ class In extends AbstractIfaceHelper
         $this->bindToInterfaceObject($data);
         $this->parentObject->setIn($this);
 
-        $this->data = trim(str_replace('Counter32: ', '', current($data)));
+        $this->data = doubleval(trim(str_replace('Counter32: ', '', current($data))));
 
         return $this;
     }

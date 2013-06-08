@@ -89,7 +89,7 @@ class AbstractDbHelperModel extends AbstractTableGateway
      *
      * @return string
      */
-    protected function getWhere($field, $value, $table = null)
+    protected function getWhere($field, $value, $table = null, $sign = '=')
     {
         // When the value is an object it's because of an expression
         if (is_object($value)) {
@@ -107,7 +107,7 @@ class AbstractDbHelperModel extends AbstractTableGateway
 
         return $this->platform->quoteIdentifierChain(
             $identifierChain
-        ) . '=' . $this->platform->quoteValue($value);
+        ) . $sign . $this->platform->quoteValue($value);
     }
 
     /**
@@ -126,10 +126,11 @@ class AbstractDbHelperModel extends AbstractTableGateway
             $this->resetSelectJoinWhere();
         }
 
-        // If an array was given we merge it with the global where
-        if (is_array($field) && $value === true) {
+        if (is_array($field) && $value === true) { // We have an array of where conditions
             $this->where = array_merge($this->where, $field);
-        } else {
+        } else if (is_string($field) && $value === true) { // The string has already been made
+            $this->where[] = $field;
+        } else { // We build the where "manually"
             $this->where[] = $this->getWhere($field, $value, $table);
         }
 

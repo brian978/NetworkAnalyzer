@@ -15,4 +15,9 @@ return array(
     'controllers' => array(
         'invokables' => array()
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'bandwidth' => 'SNMP\View\Helper\BandwidthCalculator'
+        )
+    )
 );

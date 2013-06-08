@@ -39,6 +39,44 @@
 <article class="module width_full">
     <header>
         <h3>
+            <?php echo $this->translate('Interfaces statistics') . ' for "' . $this->device->getName()->get() . '"' ?>
+        </h3>
+    </header>
+    <div class="module_content tableholder">
+        <table class="tablesorter" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><?php echo $this->translate('Interface name') ?></th>
+                    <th><?php echo $this->translate('Minimum in') ?></th>
+                    <th><?php echo $this->translate('Minimum out') ?></th>
+                    <th><?php echo $this->translate('Average in') ?></th>
+                    <th><?php echo $this->translate('Average out') ?></th>
+                    <th><?php echo $this->translate('Maximum in') ?></th>
+                    <th><?php echo $this->translate('Maximum out') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->stats as $interfaceName => $statistic): ?>
+                    <tr>
+                        <td></td>
+                        <td><?php echo $interfaceName ?></td>
+                        <td><?php echo $this->bandwidth($statistic['min']->{$interfaceName}->in) ?></td>
+                        <td><?php echo $this->bandwidth($statistic['min']->{$interfaceName}->out) ?></td>
+                        <td><?php echo $this->bandwidth($statistic['avg']->{$interfaceName}->in) ?></td>
+                        <td><?php echo $this->bandwidth($statistic['avg']->{$interfaceName}->out) ?></td>
+                        <td><?php echo $this->bandwidth($statistic['max']->{$interfaceName}->in) ?></td>
+                        <td><?php echo $this->bandwidth($statistic['max']->{$interfaceName}->out) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</article>
+
+<article class="module width_full">
+    <header>
+        <h3>
             <?php echo $this->translate('TCP Connections') . ' for "' . $this->device->getName()->get() . '"' ?>
         </h3>
     </header>

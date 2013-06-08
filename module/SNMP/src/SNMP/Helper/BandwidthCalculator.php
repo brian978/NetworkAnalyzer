@@ -15,7 +15,7 @@ class BandwidthCalculator implements HelperInterface
     {
         $args          = func_get_args();
         $octetsDiff    = $args[0];
-        $timeDiff      = $args[1];
+        $timeDiff      = isset($args[1]) ? $args[1] : 1;
         $bandwidthType = 0;
 
         // To avoid division by 0
@@ -23,13 +23,13 @@ class BandwidthCalculator implements HelperInterface
             $timeDiff = 1;
         }
 
+        $bandwidth = $octetsDiff / $timeDiff;
+
         // Converting from B/s to the highest unit available up to TB/s speeds
-        while (floor($octetsDiff) > 1000 && $bandwidthType < 4) {
-            $octetsDiff /= 1000;
+        while (floor($bandwidth) > 1000 && $bandwidthType < 4) {
+            $bandwidth /= 1000;
             $bandwidthType++;
         }
-
-        $bandwidth = $octetsDiff / $timeDiff;
 
         return array(
             'bandwidth' => round($bandwidth, 2),

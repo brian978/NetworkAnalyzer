@@ -16,6 +16,7 @@ use Library\Form\AbstractForm;
 use SNMP\Helper\BandwidthCalculator;
 use SNMP\Helper\InterfaceBandwidth;
 use SNMP\Manager\ObjectManager;
+use SNMP\Manager\Objects\Device\Device as SnmpDevice;
 use SNMP\Manager\SessionManager;
 use SNMP\Model\Session;
 use Zend\Session\Container;
@@ -70,11 +71,11 @@ class IndexController extends AbstractController
 
     public function snifferAction()
     {
-        $command = 'java -jar ' . getcwd() . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"';
-        $output  = shell_exec($command);
+//        $command = 'java -jar ' . getcwd() . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"';
+//        $output  = shell_exec($command);
 //        $output = explode(chr(13) . chr(10), $output);
-
-        var_dump($command);
+//
+//        var_dump($command);
 
         $response = $this->getResponse();
         $response->setStatusCode(200);
@@ -121,6 +122,56 @@ class IndexController extends AbstractController
         return array(
             'device' => $device,
             'deviceInfo' => $deviceInfo,
+            'stats' => $this->buildStats($device, $logsModel)
         );
+    }
+
+    /**
+     * @param SnmpDevice                          $device
+     * @param LogsModel                           $logsModel
+     * @return array
+     */
+    protected function buildStats(SnmpDevice $device, LogsModel $logsModel)
+    {
+        $result = array();
+        $min    = new \stdClass();
+        $avg    = new \stdClass();
+        $max    = new \stdClass();
+
+        // Adding the interfaces to the result
+        foreach ($device->getInterfaces() as $interface) {
+            $interfaceName = $interface->getName()->get();
+
+            $result[$interfaceName] = array(
+                'min' => $min,
+                'avg' => $avg,
+                'max' => $max,
+            );
+
+            $inOut      = new \stdClass();
+            $inOut->in  = 0;
+            $inOut->out = 0;
+
+            $min->{$interfaceName} = $inOut;
+            $avg->{$interfaceName} = clone $inOut;
+            $max->{$interfaceName} = clone $inOut;
+        }
+
+        // Getting some statistics for the last 60 seconds
+        $stats = $logsModel->getLastSeconds(60);
+
+        foreach ($stats as $log) {
+            $interfaceName = $log['interface_name'];
+
+            if (isset($result[$interfaceName])) {
+                $avg->{$interfaceName}->in  = round(($avg->{$interfaceName}->in + $log['bandwidth_in']) / 2, 2);
+                $avg->{$interfaceName}->out = round(($avg->{$interfaceName}->out + $log['bandwidth_out']) / 2, 2);
+
+                $max->{$interfaceName}->in  = floatval(max($max->{$interfaceName}->in, $log['bandwidth_in']));
+                $max->{$interfaceName}->out = floatval(max($max->{$interfaceName}->out, $log['bandwidth_out']));
+            }
+        }
+
+        return $result;
     }
 }

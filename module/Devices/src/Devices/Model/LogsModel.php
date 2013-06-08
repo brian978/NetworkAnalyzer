@@ -15,7 +15,26 @@ use Zend\Db\Sql\Select;
 
 class LogsModel extends AbstractModel implements LogsInterface
 {
+    /**
+     * @var string
+     */
     protected $table = 'bandwidth_logs';
+
+    /**
+     * The number of results to return
+     *
+     * @var int
+     */
+    public $limit = 0;
+
+    public function getLastSeconds($seconds)
+    {
+        $where = $this->getWhere('time', time() - $seconds, null, '>');
+
+        $this->addWhere($where, true);
+
+        return parent::fetch();
+    }
 
     /**
      * @param $oidIndex
@@ -62,7 +81,13 @@ class LogsModel extends AbstractModel implements LogsInterface
     protected function proxySelect(Select $select)
     {
         $select->order('time DESC');
-        $select->limit(2);
+
+        if (is_numeric($this->limit) && $this->limit > 0) {
+            $select->limit($this->limit);
+
+            // Resetting the limit
+            $this->limit = 0;
+        }
     }
 
     /**

@@ -74,14 +74,14 @@ class Log extends AbstractEntity
     /**
      * @var string
      */
-    protected $discontinuity_counter;
+    protected $discontinuityCounter;
 
     /**
-     * @param string $discontinuity_counter
+     * @param string $discontinuityCounter
      */
-    public function setDiscontinuityCounter($discontinuity_counter)
+    public function setDiscontinuityCounter($discontinuityCounter)
     {
-        $this->discontinuity_counter = $discontinuity_counter;
+        $this->discontinuityCounter = $discontinuityCounter;
     }
 
     /**
@@ -89,7 +89,7 @@ class Log extends AbstractEntity
      */
     public function getDiscontinuityCounter()
     {
-        return $this->discontinuity_counter;
+        return $this->discontinuityCounter;
     }
 
     /**
