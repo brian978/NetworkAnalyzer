@@ -160,7 +160,7 @@ return array(
                         'label' => 'View devices',
                         'route' => 'devices/module',
                         'controller' => 'index',
-                        'action' => 'list',
+                        'action' => 'index',
                         'class' => 'icn_categories',
                         'resource' => 'devices',
                         'privilege' => 'view_devices'
@@ -191,7 +191,7 @@ return array(
                         'label' => 'View types',
                         'route' => 'devices/module',
                         'controller' => 'types',
-                        'action' => 'list',
+                        'action' => 'index',
                         'class' => 'icn_categories',
                         'resource' => 'devices',
                         'privilege' => 'view_types'
@@ -212,7 +212,7 @@ return array(
                         'label' => 'View the interface types',
                         'route' => 'devices/module',
                         'controller' => 'interfaceTypes',
-                        'action' => 'list',
+                        'action' => 'index',
                         'class' => 'icn_categories',
                         'resource' => 'devices',
                         'privilege' => 'view_interface_types'
@@ -241,7 +241,7 @@ return array(
                         'label' => 'View users',
                         'route' => 'users/module',
                         'controller' => 'index',
-                        'action' => 'list',
+                        'action' => 'index',
                         'class' => 'icn_view_users',
                         'resource' => 'users',
                         'privilege' => 'view_users',

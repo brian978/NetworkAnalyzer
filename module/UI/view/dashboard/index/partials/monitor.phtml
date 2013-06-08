@@ -14,6 +14,7 @@ $monitorUrl = $this->url(
     $snifferUrl = $this->url(
         'sniffer/module',
         array(
+            'action' => 'index',
             'device' => $this->device->getDeviceEntity()->getId(),
             'interface' => $interface->getName()->get()
         ),

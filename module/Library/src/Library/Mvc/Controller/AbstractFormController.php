@@ -94,6 +94,19 @@ abstract class AbstractFormController extends AbstractUiController
     }
 
     /**
+     * @return array
+     */
+    public function indexAction()
+    {
+        /** @var $model \Library\Model\AbstractDbModel */
+        $model = $this->getModel();
+
+        return array(
+            'items' => $model->fetch()
+        );
+    }
+
+    /**
      * The method is only used to show the form
      *
      * @return array
@@ -222,19 +235,6 @@ abstract class AbstractFormController extends AbstractUiController
     {
         /** @var $model \Library\Model\AbstractDbModel */
         return $this->serviceLocator->get($this->formSpecs['model']);
-    }
-
-    /**
-     * @return array
-     */
-    public function listAction()
-    {
-        /** @var $model \Library\Model\AbstractDbModel */
-        $model = $this->getModel();
-
-        return array(
-            'items' => $model->fetch()
-        );
     }
 
     public function deleteAction()

@@ -1,1 +1,23 @@
-<?php
+<article class="module width_full">
+    <header><h3><?php echo $this->translate('View devices') ?></h3></header>
+    <div class="module_content tableholder">
+        <table class="tablesorter" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><?php echo $this->translate('Device name') ?></th>
+                    <th><?php echo $this->translate('Device type') ?></th>
+                    <th><?php echo $this->translate('IP') ?></th>
+                    <th><?php echo $this->translate('Interface type') ?></th>
+                    <th><?php echo $this->translate('Options') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php echo $this->partialLoop(
+                    'devices/index/partials/list.phtml',
+                    $this->items
+                ); ?>
+            </tbody>
+        </table>
+    </div>
+</article>

@@ -26,12 +26,12 @@ return array(
                     'module' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action[/:device/:interface]]]',
+                            'route' => '/[:controller[/:action[/:device[/:interface]]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'interface' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'device' => '[0-9]*',
-                                'interface' => '[0-9]*',
                                 'id' => '[0-9]*',
                             ),
                             'defaults' => array(
