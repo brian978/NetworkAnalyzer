@@ -11,5 +11,4 @@ namespace Library\Entity;
 
 interface EntityInterface
 {
-
 }

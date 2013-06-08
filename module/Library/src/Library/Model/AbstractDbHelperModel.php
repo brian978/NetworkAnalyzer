@@ -128,7 +128,7 @@ class AbstractDbHelperModel extends AbstractTableGateway
 
         if (is_array($field) && $value === true) { // We have an array of where conditions
             $this->where = array_merge($this->where, $field);
-        } else if (is_string($field) && $value === true) { // The string has already been made
+        } elseif (is_string($field) && $value === true) { // The string has already been made
             $this->where[] = $field;
         } else { // We build the where "manually"
             $this->where[] = $this->getWhere($field, $value, $table);

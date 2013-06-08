@@ -119,7 +119,7 @@ class InterfaceBandwidth implements HelperInterface
                     'octets_out' => $interface->getOut()->get(),
                     'time' => $this->logTime
                 );
-            } else if (count($data) === 2) {
+            } elseif (count($data) === 2) {
                 $last = array_shift($data);
                 $prev = array_shift($data);
             }
