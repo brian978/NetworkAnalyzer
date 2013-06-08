@@ -8,6 +8,23 @@
  */
 
 return array(
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'poll-snmp-devices' => array(
+                    'options' => array(
+                        'route' => 'poll snmp devices',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Dashboard\Controller',
+                            'controller' => 'index',
+                            'action' => 'index',
+                            'lang' => 'en'
+                        )
+                    )
+                )
+            )
+        )
+    ),
     'router' => array(
         'routes' => array(
             'home' => array(

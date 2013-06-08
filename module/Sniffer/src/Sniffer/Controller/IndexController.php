@@ -23,6 +23,14 @@ class IndexController extends AbstractUiController
 
         if ($interfaceName === null) {
             $noInterface = true;
+        } else {
+
+            $command = 'java -jar ' . getcwd(
+            ) . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"';
+            $output  = shell_exec($command);
+            $output  = explode(chr(13) . chr(10), $output);
+
+            var_dump($output);
         }
 
         return array(

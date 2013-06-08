@@ -18,6 +18,7 @@ use SNMP\Manager\ObjectManager;
 use SNMP\Manager\SessionManager;
 use SNMP\Model\Session;
 use UI\Controller\AbstractUiController;
+use Zend\Console\Request as ConsoleRequest;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
 class IndexController extends AbstractUiController
@@ -29,16 +30,22 @@ class IndexController extends AbstractUiController
 
     public function indexAction()
     {
+        $requestType = 'http';
+
         $deviceData = new DeviceData();
         $devices    = array();
 
         $logsModel          = new LogsModel($this->serviceLocator->get('Zend\Db\Adapter\Adapter'));
         $interfaceBandwidth = new InterfaceBandwidth(new BandwidthCalculator(), $logsModel);
 
-        // Setting a refresh interval for the page
-        /** @var  $headers \Zend\Http\Headers */
-        $headers = $this->getResponse()->getHeaders();
-        $headers->addHeaderLine('Refresh', $this->pollInterval);
+        // Setting a refresh interval for the page when accessed through the web
+        if ($this->getRequest() instanceof ConsoleRequest == false) {
+            /** @var  $headers \Zend\Http\Headers */
+            $headers = $this->getResponse()->getHeaders();
+            $headers->addHeaderLine('Refresh', $this->pollInterval);
+        } else {
+            $requestType = 'console';
+        }
 
         /** @var $model \Devices\Model\DevicesModel */
         $model      = $this->serviceLocator->get('Devices\Model\DevicesModel');
@@ -73,16 +80,12 @@ class IndexController extends AbstractUiController
             $interfaceBandwidth($deviceObject, $device);
         }
 
-        return array(
-            'devices' => $devices,
-        );
-    }
-
-    public function updateAction()
-    {
-        // Updating the application
-        system('sh updateapp.sh');
-
-        $this->redirect()->toRoute('home');
+        if ($requestType == 'http') {
+            return array(
+                'devices' => $devices,
+            );
+        } else {
+            return 'Poll done';
+        }
     }
 }
