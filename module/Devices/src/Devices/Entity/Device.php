@@ -123,6 +123,12 @@ class Device extends AbstractEntity implements EntityInterface
      */
     public function getHostname()
     {
-        return $this->interface->getIp();
+        $hostname = '';
+
+        if (is_object($this->interface)) {
+            $hostname = $this->interface->getIp();
+        }
+
+        return $hostname;
     }
 }

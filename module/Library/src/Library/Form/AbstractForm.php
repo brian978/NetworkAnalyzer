@@ -44,7 +44,7 @@ abstract class AbstractForm extends Form implements
 
     /**
      * @param  null|int|string $name    Optional name for the element
-     * @param  array $options Optional options for the element
+     * @param  array           $options Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -66,12 +66,15 @@ abstract class AbstractForm extends Form implements
      */
     final protected function setupBaseFieldsetObject(AbstractFieldset $object)
     {
-        $object->setUseAsBaseFieldset(true)->setServiceLocator(
-            $this->serviceLocator
-        );
+        $object->setUseAsBaseFieldset(true)
+            ->setServiceLocator($this->serviceLocator);
 
         if ($this->mode == self::MODE_ADD) {
             $object->setDenyFilters(array('id'));
+        }
+
+        if ($object instanceof TranslatorAwareInterface) {
+            $object->setTranslator($this->getTranslator());
         }
 
         $object->loadElements();
@@ -112,7 +115,7 @@ abstract class AbstractForm extends Form implements
      *
      * @param  Translator $translator  [optional] translator.
      *                                 Default is null, which sets no translator.
-     * @param  string $textDomain  [optional] text domain
+     * @param  string     $textDomain  [optional] text domain
      *                                 Default is null, which skips setTranslatorTextDomain
      *
      * @return TranslatorAwareInterface

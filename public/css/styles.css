@@ -1,3 +1,14 @@
+.input_form {
+    display: table;
+}
+
+.input_form h4.alert_info {
+    display: table-cell !important;
+    width: auto !important;
+    margin: 2px 3% 2px 7px !important;
+    text-indent: 32px !important;
+}
+
 .input_form .form_row {
     display: table-row;
 }
@@ -9,7 +20,11 @@
 
 .form_row > input, .form_row > select {
     display: table-cell;
-    width: 100%;
+    width: 200px;
+}
+
+.form_row > select {
+    width: 205px;
 }
 
 .input_form input[type="submit"] {

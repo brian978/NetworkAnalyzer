@@ -30,7 +30,7 @@ class Type extends AbstractFieldset
                 'type' => 'Zend\Form\Element\Select',
                 'name' => 'id',
                 'options' => array(
-                    'label' => 'Type',
+                    'label' => $this->translator->translate('Type'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -46,7 +46,7 @@ class Type extends AbstractFieldset
             array(
                 'name' => 'name',
                 'options' => array(
-                    'label' => 'Name',
+                    'label' => $this->translator->translate('Name'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -73,7 +73,7 @@ class Type extends AbstractFieldset
                         'name' => 'greater_than',
                         'options' => array(
                             'min' => 0,
-                            'message' => 'You must select a value'
+                            'message' => $this->translator->translate('You must select a value')
                         )
                     )
                 )

@@ -28,7 +28,7 @@ class Iface extends AbstractFieldset
             array(
                 'name' => 'ip',
                 'options' => array(
-                    'label' => 'IP',
+                    'label' => $this->translator->translate('IP'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),

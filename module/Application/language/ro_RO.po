@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-31 08:04+0200\n"
-"PO-Revision-Date: 2013-05-31 08:06+0200\n"
+"POT-Creation-Date: 2013-06-09 23:27+0200\n"
+"PO-Revision-Date: 2013-06-09 23:27+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
@@ -15,6 +15,47 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../..\n"
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:59
+msgid "B/s"
+msgstr "B/s"
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:60
+msgid "KB/s"
+msgstr "KB/s"
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:61
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:63
+msgid "MB/s"
+msgstr "MB/s"
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:62
+msgid "GB/s"
+msgstr "GB/s"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:35
+msgid "Name"
+msgstr "Nume"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:51
+msgid "SNMP Version"
+msgstr "Versiunea de SNMP"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:71
+msgid "SNMP Community"
+msgstr "Comunitatea SNMP"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Type.php:33
+msgid "Type"
+msgstr "Tip"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Type.php:76
+msgid "You must select a value"
+msgstr "Trebuie sa selectati o valoare"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Iface.php:31
+msgid "IP"
+msgstr "IP"
 
 #: ../../UI/view/partials/form_generic_message.phtml:12
 msgid "An unkown error has occured"
@@ -47,6 +88,34 @@ msgstr "Actualizeaza"
 msgid "All rights reserved."
 msgstr "Toate drepturile rezervate."
 
+#: ../../UI/view/sniffer/index/index.phtml:2
+msgid "An interface must be selected"
+msgstr "O interfata trebuie sa fie selectata"
+
+#: ../../UI/view/sniffer/index/index.phtml:7
+msgid "TCP Traffic"
+msgstr "Trafic TCP"
+
+#: ../../UI/view/sniffer/index/index.phtml:15
+msgid "Traffic type"
+msgstr "Tip interfata"
+
+#: ../../UI/view/sniffer/index/index.phtml:16
+msgid "Local IP Address"
+msgstr "Adresa IP locala"
+
+#: ../../UI/view/sniffer/index/index.phtml:17
+msgid "Local Port"
+msgstr "Port local"
+
+#: ../../UI/view/sniffer/index/index.phtml:18
+msgid "Remote IP Address"
+msgstr "Adresa IP destinatie"
+
+#: ../../UI/view/sniffer/index/index.phtml:19
+msgid "Remote Port"
+msgstr "Port destinatie"
+
 #: ../../UI/view/layout/ui.phtml:15
 #: ../../UI/view/layout/ui.phtml:91
 #: ../../UI/view/layout/ui.phtml:111
@@ -57,17 +126,19 @@ msgstr "Analizator retea"
 msgid "Dashboard"
 msgstr "Panou de control"
 
-#: ../../UI/view/devices/interface-types/list.phtml:2
-#: ../../UI/view/devices/index/list.phtml:2
+#: ../../UI/view/devices/interface-types/index.phtml:2
+#: ../../UI/view/devices/index/index.phtml:2
 msgid "View devices"
 msgstr "Vizualizeaza echipamentele"
 
-#: ../../UI/view/devices/interface-types/list.phtml:9
+#: ../../UI/view/devices/interface-types/index.phtml:8
+#: ../../UI/view/devices/types/index.phtml:8
 msgid "Type name"
 msgstr "Tip"
 
-#: ../../UI/view/devices/interface-types/list.phtml:10
-#: ../../UI/view/devices/index/list.phtml:13
+#: ../../UI/view/devices/interface-types/index.phtml:9
+#: ../../UI/view/devices/index/index.phtml:12
+#: ../../UI/view/devices/types/index.phtml:9
 msgid "Options"
 msgstr "Optiuni"
 
@@ -88,26 +159,28 @@ msgid "The interface type was added"
 msgstr "Tipul de interfata a fost adaugat"
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:23
+#: ../../UI/view/devices/index/partials/list.phtml:36
+#: ../../UI/view/devices/types/partials/list.phtml:23
 msgid "Edit"
 msgstr "Editeaza"
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:28
+#: ../../UI/view/devices/index/partials/list.phtml:41
+#: ../../UI/view/devices/types/partials/list.phtml:28
 msgid "Trash"
 msgstr "Sterge"
 
-#: ../../UI/view/devices/index/list.phtml:9
+#: ../../UI/view/devices/index/index.phtml:8
+#: ../../UI/view/devices/index/monitor.phtml:12
+#: ../../UI/view/dashboard/index/index.phtml:13
 msgid "Device name"
 msgstr "Nume echipament"
 
-#: ../../UI/view/devices/index/list.phtml:10
+#: ../../UI/view/devices/index/index.phtml:9
 msgid "Device type"
 msgstr "Tip echipament"
 
-#: ../../UI/view/devices/index/list.phtml:11
-msgid "IP"
-msgstr "IP"
-
-#: ../../UI/view/devices/index/list.phtml:12
+#: ../../UI/view/devices/index/index.phtml:11
 msgid "Interface type"
 msgstr "Tip interfata"
 
@@ -120,7 +193,8 @@ msgid "The device info was changed"
 msgstr "Informatiile despre dispozitiv au fost schimbate"
 
 #: ../../UI/view/devices/index/edit-form.phtml:53
-#: ../../UI/view/devices/index/add-form.phtml:51
+#: ../../UI/view/devices/index/monitor.phtml:17
+#: ../../UI/view/dashboard/index/index.phtml:18
 msgid "Interface"
 msgstr "Interfata"
 
@@ -132,93 +206,119 @@ msgstr "Adauga un echipament nou"
 msgid "The device was added"
 msgstr "Echipamentul a fost adaugat"
 
-#: ../../UI/view/devices/index/monitor-all.phtml:4
-msgid "Monitor all devices"
-msgstr "Monitorizeaza toate echipamentele"
+#: ../../UI/view/devices/index/monitor.phtml:4
+msgid "Information"
+msgstr "Locatie"
 
-#: ../../UI/view/devices/index/monitor-all.phtml:14
-#: ../../UI/view/devices/index/monitor.phtml:14
+#: ../../UI/view/devices/index/monitor.phtml:13
+#: ../../UI/view/dashboard/index/index.phtml:14
 msgid "Location"
 msgstr "Locatie"
 
-#: ../../UI/view/devices/index/monitor-all.phtml:16
+#: ../../UI/view/devices/index/monitor.phtml:15
+#: ../../UI/view/dashboard/index/index.phtml:16
+msgid "Netmask"
+msgstr "Masca de retea"
+
 #: ../../UI/view/devices/index/monitor.phtml:16
+#: ../../UI/view/dashboard/index/index.phtml:17
 msgid "MAC"
 msgstr "MAC"
 
-#: ../../UI/view/devices/index/monitor-all.phtml:18
 #: ../../UI/view/devices/index/monitor.phtml:18
-msgid "Bandwidth"
+#: ../../UI/view/dashboard/index/index.phtml:19
+msgid "Bandwidth In"
 msgstr "Latime de banda"
 
-#: ../../UI/view/devices/index/monitor-all.phtml:19
 #: ../../UI/view/devices/index/monitor.phtml:19
+#: ../../UI/view/dashboard/index/index.phtml:20
+msgid "Bandwidth Out"
+msgstr "Latime de banda"
+
+#: ../../UI/view/devices/index/monitor.phtml:20
+#: ../../UI/view/dashboard/index/index.phtml:21
 msgid "Status"
 msgstr "Stare"
 
-#: ../../UI/view/devices/index/monitor-all.phtml:20
-#: ../../UI/view/devices/index/monitor.phtml:20
+#: ../../UI/view/devices/index/monitor.phtml:21
+#: ../../UI/view/dashboard/index/index.phtml:22
 msgid "Admin status"
 msgstr "Stare administrativa"
 
-#: ../../UI/view/devices/index/monitor-all.phtml:21
-#: ../../UI/view/devices/index/monitor.phtml:21
+#: ../../UI/view/devices/index/monitor.phtml:22
+#: ../../UI/view/dashboard/index/index.phtml:23
 msgid "Queue length"
 msgstr "Lungimea stivei"
 
-#: ../../UI/view/devices/index/monitor.phtml:4
-msgid "Monitor device"
-msgstr "Monitorizeaza echipamentul"
+#: ../../UI/view/devices/index/monitor.phtml:43
+msgid "Interfaces statistics for the last 60 seconds"
+msgstr "Statistici pentru intrerfete din ultimele 60 de secunde"
+
+#: ../../UI/view/devices/index/monitor.phtml:51
+msgid "Interface name"
+msgstr "Tip interfata"
+
+#: ../../UI/view/devices/index/monitor.phtml:52
+msgid "Minimum in"
+msgstr "Minim intrat"
+
+#: ../../UI/view/devices/index/monitor.phtml:53
+msgid "Minimum out"
+msgstr "Minim iesit"
+
+#: ../../UI/view/devices/index/monitor.phtml:54
+msgid "Average in"
+msgstr "Media intrat"
+
+#: ../../UI/view/devices/index/monitor.phtml:55
+msgid "Average out"
+msgstr "Media iesit"
+
+#: ../../UI/view/devices/index/monitor.phtml:56
+msgid "Maximum in"
+msgstr "Maxim intrat"
+
+#: ../../UI/view/devices/index/monitor.phtml:57
+msgid "Maximum out"
+msgstr "Maxim iesit"
+
+#: ../../UI/view/devices/index/monitor.phtml:81
+msgid "TCP Connections"
+msgstr "Conexiuni actuale TCP"
 
 #: ../../UI/view/devices/index/partials/list.phtml:31
 msgid "Monitor"
 msgstr "Monitorizeaza"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:6
-#: ../../UI/view/devices/index/partials/monitor.phtml:24
+#: ../../UI/view/devices/index/partials/monitor.phtml:25
 msgid "Up"
 msgstr "Pornita"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:10
-#: ../../UI/view/devices/index/partials/monitor.phtml:28
+#: ../../UI/view/devices/index/partials/monitor.phtml:26
 msgid "Down"
 msgstr "Oprita"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:14
-#: ../../UI/view/devices/index/partials/monitor.phtml:32
+#: ../../UI/view/devices/index/partials/monitor.phtml:27
 msgid "Testing"
 msgstr "In testare"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:18
-#: ../../UI/view/devices/index/partials/monitor.phtml:48
+#: ../../UI/view/devices/index/partials/monitor.phtml:28
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:36
+#: ../../UI/view/devices/index/partials/monitor.phtml:29
 msgid "Dormant"
 msgstr "Adormita"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:40
+#: ../../UI/view/devices/index/partials/monitor.phtml:30
 msgid "Not present"
 msgstr "Inexistenta"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:44
+#: ../../UI/view/devices/index/partials/monitor.phtml:31
 msgid "Lower layer down"
 msgstr "Nivel inferior cazut"
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:54
-msgid "KB/s"
-msgstr "KB/s"
-
-#: ../../UI/view/devices/index/partials/monitor.phtml:58
-msgid "MB/s"
-msgstr "MB/s"
-
-#: ../../UI/view/devices/index/partials/monitor.phtml:62
-msgid "B/s"
-msgstr "B/s"
-
-#: ../../UI/view/devices/types/list.phtml:2
+#: ../../UI/view/devices/types/index.phtml:2
 msgid "View types"
 msgstr "Vizualizeaza tipurile"
 
@@ -238,19 +338,23 @@ msgstr "Adauga un tip nou"
 msgid "The type was added"
 msgstr "Tipul a fost adaugat"
 
-#: ../../UI/view/users/index/list.phtml:2
+#: ../../UI/view/dashboard/index/index.phtml:4
+msgid "Monitor all devices"
+msgstr "Monitorizeaza toate echipamentele"
+
+#: ../../UI/view/users/index/index.phtml:2
 msgid "View users"
 msgstr "Vizualizeaza utilizatorii"
 
-#: ../../UI/view/users/index/list.phtml:9
+#: ../../UI/view/users/index/index.phtml:9
 msgid "User name"
 msgstr "Nume utilizator"
 
-#: ../../UI/view/users/index/list.phtml:10
+#: ../../UI/view/users/index/index.phtml:10
 msgid "User email"
 msgstr "Email utilizator"
 
-#: ../../UI/view/users/index/list.phtml:11
+#: ../../UI/view/users/index/index.phtml:11
 msgid "User role"
 msgstr "Rol utilizator"
 
@@ -272,7 +376,7 @@ msgstr "Utilizatorul a fost adaugat"
 
 #: ../../UI/view/error/404.phtml:1
 msgid "A 404 error occurred"
-msgstr ""
+msgstr "O eroare 404 a aparut"
 
 #: ../../UI/view/error/404.phtml:11
 msgid "The requested controller was unable to dispatch the request."
@@ -342,6 +446,9 @@ msgstr ""
 #: ../../UI/view/error/index.phtml:1
 msgid "An error occurred"
 msgstr "O erroare a fost intalnita"
+
+#~ msgid "Monitor device"
+#~ msgstr "Monitorizeaza echipamentul"
 
 #, fuzzy
 #~ msgid "Add new interface"

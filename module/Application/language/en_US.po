@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-31 07:48+0200\n"
-"PO-Revision-Date: 2013-05-31 07:48+0200\n"
+"POT-Creation-Date: 2013-06-09 23:27+0200\n"
+"PO-Revision-Date: 2013-06-09 23:27+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <dbrian89@yahoo.com>\n"
 "Language: \n"
@@ -15,6 +15,47 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../..\n"
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:59
+msgid "B/s"
+msgstr ""
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:60
+msgid "KB/s"
+msgstr ""
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:61
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:63
+msgid "MB/s"
+msgstr ""
+
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:62
+msgid "GB/s"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:35
+msgid "Name"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:51
+msgid "SNMP Version"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:71
+msgid "SNMP Community"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Type.php:33
+msgid "Type"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Type.php:76
+msgid "You must select a value"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Iface.php:31
+msgid "IP"
+msgstr ""
 
 #: ../../UI/view/partials/form_generic_message.phtml:12
 msgid "An unkown error has occured"
@@ -47,6 +88,34 @@ msgstr ""
 msgid "All rights reserved."
 msgstr ""
 
+#: ../../UI/view/sniffer/index/index.phtml:2
+msgid "An interface must be selected"
+msgstr ""
+
+#: ../../UI/view/sniffer/index/index.phtml:7
+msgid "TCP Traffic"
+msgstr ""
+
+#: ../../UI/view/sniffer/index/index.phtml:15
+msgid "Traffic type"
+msgstr ""
+
+#: ../../UI/view/sniffer/index/index.phtml:16
+msgid "Local IP Address"
+msgstr ""
+
+#: ../../UI/view/sniffer/index/index.phtml:17
+msgid "Local Port"
+msgstr ""
+
+#: ../../UI/view/sniffer/index/index.phtml:18
+msgid "Remote IP Address"
+msgstr ""
+
+#: ../../UI/view/sniffer/index/index.phtml:19
+msgid "Remote Port"
+msgstr ""
+
 #: ../../UI/view/layout/ui.phtml:15
 #: ../../UI/view/layout/ui.phtml:91
 #: ../../UI/view/layout/ui.phtml:111
@@ -57,17 +126,19 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: ../../UI/view/devices/interface-types/list.phtml:2
-#: ../../UI/view/devices/index/list.phtml:2
+#: ../../UI/view/devices/interface-types/index.phtml:2
+#: ../../UI/view/devices/index/index.phtml:2
 msgid "View devices"
 msgstr ""
 
-#: ../../UI/view/devices/interface-types/list.phtml:9
+#: ../../UI/view/devices/interface-types/index.phtml:8
+#: ../../UI/view/devices/types/index.phtml:8
 msgid "Type name"
 msgstr ""
 
-#: ../../UI/view/devices/interface-types/list.phtml:10
-#: ../../UI/view/devices/index/list.phtml:13
+#: ../../UI/view/devices/interface-types/index.phtml:9
+#: ../../UI/view/devices/index/index.phtml:12
+#: ../../UI/view/devices/types/index.phtml:9
 msgid "Options"
 msgstr ""
 
@@ -88,26 +159,28 @@ msgid "The interface type was added"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:23
+#: ../../UI/view/devices/index/partials/list.phtml:36
+#: ../../UI/view/devices/types/partials/list.phtml:23
 msgid "Edit"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:28
+#: ../../UI/view/devices/index/partials/list.phtml:41
+#: ../../UI/view/devices/types/partials/list.phtml:28
 msgid "Trash"
 msgstr ""
 
-#: ../../UI/view/devices/index/list.phtml:9
+#: ../../UI/view/devices/index/index.phtml:8
+#: ../../UI/view/devices/index/monitor.phtml:12
+#: ../../UI/view/dashboard/index/index.phtml:13
 msgid "Device name"
 msgstr ""
 
-#: ../../UI/view/devices/index/list.phtml:10
+#: ../../UI/view/devices/index/index.phtml:9
 msgid "Device type"
 msgstr ""
 
-#: ../../UI/view/devices/index/list.phtml:11
-msgid "IP"
-msgstr ""
-
-#: ../../UI/view/devices/index/list.phtml:12
+#: ../../UI/view/devices/index/index.phtml:11
 msgid "Interface type"
 msgstr ""
 
@@ -120,7 +193,8 @@ msgid "The device info was changed"
 msgstr ""
 
 #: ../../UI/view/devices/index/edit-form.phtml:53
-#: ../../UI/view/devices/index/add-form.phtml:51
+#: ../../UI/view/devices/index/monitor.phtml:17
+#: ../../UI/view/dashboard/index/index.phtml:18
 msgid "Interface"
 msgstr ""
 
@@ -132,93 +206,119 @@ msgstr ""
 msgid "The device was added"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor-all.phtml:4
-msgid "Monitor all devices"
+#: ../../UI/view/devices/index/monitor.phtml:4
+msgid "Information"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor-all.phtml:14
-#: ../../UI/view/devices/index/monitor.phtml:14
+#: ../../UI/view/devices/index/monitor.phtml:13
+#: ../../UI/view/dashboard/index/index.phtml:14
 msgid "Location"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor-all.phtml:16
+#: ../../UI/view/devices/index/monitor.phtml:15
+#: ../../UI/view/dashboard/index/index.phtml:16
+msgid "Netmask"
+msgstr ""
+
 #: ../../UI/view/devices/index/monitor.phtml:16
+#: ../../UI/view/dashboard/index/index.phtml:17
 msgid "MAC"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor-all.phtml:18
 #: ../../UI/view/devices/index/monitor.phtml:18
-msgid "Bandwidth"
+#: ../../UI/view/dashboard/index/index.phtml:19
+msgid "Bandwidth In"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor-all.phtml:19
 #: ../../UI/view/devices/index/monitor.phtml:19
+#: ../../UI/view/dashboard/index/index.phtml:20
+msgid "Bandwidth Out"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:20
+#: ../../UI/view/dashboard/index/index.phtml:21
 msgid "Status"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor-all.phtml:20
-#: ../../UI/view/devices/index/monitor.phtml:20
+#: ../../UI/view/devices/index/monitor.phtml:21
+#: ../../UI/view/dashboard/index/index.phtml:22
 msgid "Admin status"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor-all.phtml:21
-#: ../../UI/view/devices/index/monitor.phtml:21
+#: ../../UI/view/devices/index/monitor.phtml:22
+#: ../../UI/view/dashboard/index/index.phtml:23
 msgid "Queue length"
 msgstr ""
 
-#: ../../UI/view/devices/index/monitor.phtml:4
-msgid "Monitor device"
+#: ../../UI/view/devices/index/monitor.phtml:43
+msgid "Interfaces statistics for the last 60 seconds"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:51
+msgid "Interface name"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:52
+msgid "Minimum in"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:53
+msgid "Minimum out"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:54
+msgid "Average in"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:55
+msgid "Average out"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:56
+msgid "Maximum in"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:57
+msgid "Maximum out"
+msgstr ""
+
+#: ../../UI/view/devices/index/monitor.phtml:81
+msgid "TCP Connections"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/list.phtml:31
 msgid "Monitor"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:6
-#: ../../UI/view/devices/index/partials/monitor.phtml:24
+#: ../../UI/view/devices/index/partials/monitor.phtml:25
 msgid "Up"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:10
-#: ../../UI/view/devices/index/partials/monitor.phtml:28
+#: ../../UI/view/devices/index/partials/monitor.phtml:26
 msgid "Down"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:14
-#: ../../UI/view/devices/index/partials/monitor.phtml:32
+#: ../../UI/view/devices/index/partials/monitor.phtml:27
 msgid "Testing"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:18
-#: ../../UI/view/devices/index/partials/monitor.phtml:48
+#: ../../UI/view/devices/index/partials/monitor.phtml:28
 msgid "Unknown"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:36
+#: ../../UI/view/devices/index/partials/monitor.phtml:29
 msgid "Dormant"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:40
+#: ../../UI/view/devices/index/partials/monitor.phtml:30
 msgid "Not present"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:44
+#: ../../UI/view/devices/index/partials/monitor.phtml:31
 msgid "Lower layer down"
 msgstr ""
 
-#: ../../UI/view/devices/index/partials/monitor.phtml:54
-msgid "KB/s"
-msgstr ""
-
-#: ../../UI/view/devices/index/partials/monitor.phtml:58
-msgid "MB/s"
-msgstr ""
-
-#: ../../UI/view/devices/index/partials/monitor.phtml:62
-msgid "B/s"
-msgstr ""
-
-#: ../../UI/view/devices/types/list.phtml:2
+#: ../../UI/view/devices/types/index.phtml:2
 msgid "View types"
 msgstr ""
 
@@ -238,19 +338,23 @@ msgstr ""
 msgid "The type was added"
 msgstr ""
 
-#: ../../UI/view/users/index/list.phtml:2
+#: ../../UI/view/dashboard/index/index.phtml:4
+msgid "Monitor all devices"
+msgstr ""
+
+#: ../../UI/view/users/index/index.phtml:2
 msgid "View users"
 msgstr ""
 
-#: ../../UI/view/users/index/list.phtml:9
+#: ../../UI/view/users/index/index.phtml:9
 msgid "User name"
 msgstr ""
 
-#: ../../UI/view/users/index/list.phtml:10
+#: ../../UI/view/users/index/index.phtml:10
 msgid "User email"
 msgstr ""
 
-#: ../../UI/view/users/index/list.phtml:11
+#: ../../UI/view/users/index/index.phtml:11
 msgid "User role"
 msgstr ""
 

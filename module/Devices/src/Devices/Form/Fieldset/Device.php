@@ -32,7 +32,7 @@ class Device extends AbstractFieldset
             array(
                 'name' => 'name',
                 'options' => array(
-                    'label' => 'Name',
+                    'label' => $this->translator->translate('Name'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -48,7 +48,7 @@ class Device extends AbstractFieldset
                 'name' => 'snmpVersion',
                 'type' => '\Zend\Form\Element\Select',
                 'options' => array(
-                    'label' => 'SNMP Version',
+                    'label' => $this->translator->translate('SNMP Version'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -68,7 +68,7 @@ class Device extends AbstractFieldset
             array(
                 'name' => 'snmpCommunity',
                 'options' => array(
-                    'label' => 'SNMP Community',
+                    'label' => $this->translator->translate('SNMP Community'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),

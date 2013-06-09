@@ -76,9 +76,10 @@ abstract class AbstractFormController extends AbstractUiController
         $factory = $this->serviceLocator->get('TranslatableFormFactory');
 
         /** @var $form \Library\Form\AbstractForm */
-        $form   = $factory->createForm(
+        $form = $factory->createForm(
             array('type' => $this->formSpecs['type'])
         );
+
         $object = new $this->formSpecs['object']();
 
         // The form mode must be set before the loadElements because it's used when retrieving the baseFieldset
