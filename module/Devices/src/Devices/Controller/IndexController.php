@@ -9,19 +9,13 @@
 
 namespace Devices\Controller;
 
-use Devices\Entity\Device;
 use Devices\Helper\DeviceData;
 use Devices\Model\BandwidthLogs;
 use Library\Form\AbstractForm;
 use Poller\Model\SnmpPoller;
-use SNMP\Helper\BandwidthCalculator;
-use SNMP\Helper\InterfaceBandwidth;
-use SNMP\Manager\ObjectManager;
+use Poller\Model\TrafficPoller;
 use SNMP\Manager\Objects\Device\Device as SnmpDevice;
-use SNMP\Manager\SessionManager;
-use SNMP\Model\Session;
 use Zend\Session\Container;
-use Zend\Stdlib\Hydrator\ClassMethods;
 
 class IndexController extends AbstractController
 {
@@ -88,8 +82,14 @@ class IndexController extends AbstractController
         $devices  = $poller->bandwidthPoll(true, $deviceId);
         $device   = $devices[$deviceId]['device'];
 
+        $trafficPoller  = new TrafficPoller($poller);
+        $trafficFeature = array(
+            $deviceId => $trafficPoller->isServerAvailable($device->getDeviceEntity()->getInterface()->getIp())
+        );
+
         return array(
             'device' => $device,
+            'trafficFeature' => $trafficFeature,
             'stats' => $this->buildStats($device, $logsModel)
         );
     }

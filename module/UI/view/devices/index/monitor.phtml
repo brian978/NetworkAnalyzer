@@ -27,7 +27,8 @@
                 echo $this->partial(
                     'devices/index/partials/monitor.phtml',
                     array(
-                        'device' => $this->device
+                        'device' => $this->device,
+                        'trafficFeature' => $this->trafficFeature,
                     )
                 );
                 ?>

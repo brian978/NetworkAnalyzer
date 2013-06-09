@@ -24,7 +24,7 @@ class IndexController extends AbstractActionController
 
     public function trafficAction()
     {
-        set_time_limit(300);
+        set_time_limit(120);
 
         $poller = new TrafficPoller(new SnmpPoller());
         $poller->setServiceLocator($this->serviceLocator);

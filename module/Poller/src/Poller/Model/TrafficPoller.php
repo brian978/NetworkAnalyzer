@@ -52,33 +52,47 @@ class TrafficPoller extends AbstractModel
     public function tcpPoll($doLogging = true, $deviceId = 0, $interfaceName = '')
     {
         $connections = array();
-
-        $devices = $this->snmpPoller->bandwidthPoll(false, $deviceId);
+        $devices     = $this->snmpPoller->bandwidthPoll(false, $deviceId);
 
         if ($interfaceName !== '') {
             if (isset($devices[$deviceId])) {
+
                 $interface = $devices[$deviceId]['device']->getInterfacesByName($interfaceName);
 
+                /** @var $deviceEntity Device */
+                $deviceEntity = $devices[$deviceId]['device']->getDeviceEntity();
+
                 // Getting the connections for the requested interface
-                if (count($interface) == 1) {
-                    $interface              = current($interface);
-                    $connections[$deviceId] = $this->getConnections($interface);
+                if ($this->isServerAvailable($deviceEntity->getInterface()->getIp())) {
+                    if (count($interface) == 1) {
+                        $interface              = current($interface);
+                        $connections[$deviceId] = $this->getConnections($interface);
+                    }
                 }
             }
         } else {
 
             // Getting the data for all the interfaces
             foreach ($devices as $id => $deviceArray) {
-                foreach ($deviceArray['device']->getInterfaces() as $interface) {
-                    $interfaceIp = $interface->getIp()->get();
 
+                $connections[$id] = array();
+
+                /** @var $deviceEntity \Devices\Entity\Device */
+                $deviceEntity = $deviceArray['device']->getDeviceEntity();
+
+                foreach ($deviceArray['device']->getInterfaces() as $interface) {
+
+                    $interfaceIp = $interface->getIp()->get();
                     if ($interfaceIp == '127.0.0.1' || empty($interfaceIp)) {
                         continue;
                     }
 
-                    /** @var $deviceEntity \Devices\Entity\Device */
-                    $deviceEntity     = $interface->getParentObject()->getDeviceEntity();
-                    $connections[$id] = $this->getConnections($interface, $deviceEntity);
+                    if ($this->isServerAvailable($deviceEntity->getInterface()->getIp())) {
+                        $connections[$id] = array_merge(
+                            $connections[$id],
+                            $this->getConnections($interface, $deviceEntity)
+                        );
+                    }
                 }
             }
         }
@@ -113,10 +127,11 @@ class TrafficPoller extends AbstractModel
 
         $connections = array();
         $ifaceName   = $interface->getName()->get();
-        $output      = $this->runCommand($ifaceName);
+        $output      = $this->runCommand($deviceEntity->getInterface()->getIp(), $ifaceName);
 
         // Processing the connections
         foreach ($output as $conn) {
+
             $connection = new Connection($conn);
 
             if ($connection->isValid()) {
@@ -130,17 +145,39 @@ class TrafficPoller extends AbstractModel
     }
 
     /**
+     * @param $address
+     * @return bool
+     */
+    public function isServerAvailable($address)
+    {
+        $jarCommand = 'java -jar proxy/dispatcher.jar -mode client -check -address ' . $address;
+        $output     = shell_exec($jarCommand);
+
+        if (trim($output) == 'Connected to server') {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Runs the command for a specific interface and fetches certain number of connections
      *
+     * @param     $address
      * @param     $interfaceName
      * @param int $count
      * @return array
      */
-    protected function runCommand($interfaceName, $count = 20)
+    protected function runCommand($address, $interfaceName, $count = 20)
     {
         $command    = 'tcpdump -i ' . $interfaceName . ' -nqt -c ' . $count;
-        $jarCommand = 'java -jar proxy/dispatcher.jar -mode client -command "' . $command . '"';
+        $jarCommand = 'java -jar proxy/dispatcher.jar -mode client -command "' . $command . '" -address ' . $address;
         $output     = explode(chr(13) . chr(10), shell_exec($jarCommand));
+
+        $log = array(
+            '$jarCommand' => $jarCommand,
+            '$output' => $output
+        );
 
         return $output;
     }

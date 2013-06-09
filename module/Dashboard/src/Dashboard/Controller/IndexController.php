@@ -10,8 +10,8 @@
 namespace Dashboard\Controller;
 
 use Poller\Model\SnmpPoller;
+use Poller\Model\TrafficPoller;
 use UI\Controller\AbstractUiController;
-use Zend\Console\Request as ConsoleRequest;
 
 class IndexController extends AbstractUiController
 {
@@ -30,7 +30,13 @@ class IndexController extends AbstractUiController
         $poller = new SnmpPoller();
         $poller->setServiceLocator($this->serviceLocator);
 
-        $devices = $poller->bandwidthPoll();
+        $devices       = $poller->bandwidthPoll();
+        $trafficPoller = new TrafficPoller($poller);
+
+        foreach ($devices as $deviceId => $device) {
+            $deviceIp                             = $device['device']->getDeviceEntity()->getInterface()->getIp();
+            $devices[$deviceId]['trafficFeature'] = $trafficPoller->isServerAvailable($deviceIp);
+        }
 
         return array(
             'devices' => $devices,

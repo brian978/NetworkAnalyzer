@@ -1,15 +1,20 @@
-<?php foreach ($this->device->getInterfaces() as $interface): ?>
-    <?php
+<?php
 
-    $snifferUrl = $this->url(
-        'sniffer/module',
-        array(
-            'action' => 'index',
-            'device' => $this->device->getDeviceEntity()->getId(),
-            'interface' => $interface->getName()->get()
-        ),
-        true
-    );
+$addSnifferUrl = $this->trafficFeature[$this->device->getDeviceEntity()->getId()];
+
+foreach ($this->device->getInterfaces() as $interface):
+
+    if ($addSnifferUrl) {
+        $snifferUrl = $this->url(
+            'sniffer/module',
+            array(
+                'action' => 'index',
+                'device' => $this->device->getDeviceEntity()->getId(),
+                'interface' => $interface->getName()->get()
+            ),
+            true
+        );
+    }
 
     $interfaceStatus = array(
         1 => $this->translate('Up'),
@@ -38,7 +43,15 @@
         <td><?php echo $interface->getIp() ?></td>
         <td><?php echo $interface->getNetmask() ?></td>
         <td><?php echo $interface->getMac() ?></td>
-        <td><a href="<?php echo $snifferUrl ?>"><?php echo $interface->getName() ?></a></td>
+        <td>
+            <?php
+            if ($addSnifferUrl) {
+                echo '<a href="' . $snifferUrl . '">' . $interface->getName() . '</a>';
+            } else {
+                echo $interface->getName();
+            }
+            ?>
+        </td>
         <td><?php echo $interface->getBandwidthIn() . ' ' . $bandwidthType[$interface->getBandwidthInType()] ?></td>
         <td><?php echo $interface->getBandwidthOut() . ' ' . $bandwidthType[$interface->getBandwidthOutType()] ?></td>
         <td><?php echo $interfaceStatus[$interface->getStatus()->get()] ?></td>
