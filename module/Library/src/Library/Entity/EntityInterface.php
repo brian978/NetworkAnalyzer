@@ -11,4 +11,5 @@ namespace Library\Entity;
 
 interface EntityInterface
 {
+    public function getId();
 }

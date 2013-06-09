@@ -10,8 +10,9 @@
 namespace SNMP\Manager\Objects\Tcp;
 
 use SNMP\Manager\Objects\AbstractObject;
+use SNMP\Manager\Objects\ObjectProcessorInterface;
 
-class Connection extends AbstractObject
+class Connection extends AbstractObject implements ObjectProcessorInterface
 {
     protected $oid = 'iso.3.6.1.2.1.6.13.1.2';
 
@@ -66,5 +67,29 @@ class Connection extends AbstractObject
         }
 
         return $value;
+    }
+
+    /**
+     * @return null
+     */
+    public function get()
+    {
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function __invoke()
+    {
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return "";
     }
 }

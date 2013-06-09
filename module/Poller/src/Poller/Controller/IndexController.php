@@ -10,6 +10,7 @@
 namespace Poller\Controller;
 
 use Poller\Model\SnmpPoller;
+use Poller\Model\TrafficPoller;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
@@ -23,5 +24,10 @@ class IndexController extends AbstractActionController
 
     public function trafficAction()
     {
+        set_time_limit(300);
+
+        $poller = new TrafficPoller(new SnmpPoller());
+        $poller->setServiceLocator($this->serviceLocator);
+        $poller->tcpPoll(true);
     }
 }

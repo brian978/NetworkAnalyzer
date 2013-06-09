@@ -51,6 +51,9 @@ class SnmpPoller extends AbstractModel
         }
 
         foreach ($allDevices as $id => $deviceInfo) {
+            if (empty($deviceInfo)) {
+                continue;
+            }
 
             $deviceData->setData($deviceInfo);
 

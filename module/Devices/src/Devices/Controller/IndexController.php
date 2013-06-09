@@ -85,7 +85,7 @@ class IndexController extends AbstractController
         $poller->setServiceLocator($this->serviceLocator);
 
         $deviceId = $this->getEvent()->getRouteMatch()->getParam('id');
-        $devices  = $poller->bandwidthPoll(false, $deviceId);
+        $devices  = $poller->bandwidthPoll(true, $deviceId);
         $device   = $devices[$deviceId]['device'];
 
         return array(

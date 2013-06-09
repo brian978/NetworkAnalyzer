@@ -5,7 +5,7 @@
         'sniffer/module',
         array(
             'action' => 'index',
-            'device' => 1,
+            'device' => $this->device->getDeviceEntity()->getId(),
             'interface' => $interface->getName()->get()
         ),
         true

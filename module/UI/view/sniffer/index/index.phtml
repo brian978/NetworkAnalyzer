@@ -1,4 +1,39 @@
 <?php if ($this->noInterface): ?>
     <?php echo '<br><div align="center">' . $this->translate('An interface must be selected') . '</div>' ?>
 <?php else: ?>
+    <article class="module width_full">
+        <header>
+            <h3>
+                <?php echo $this->translate('TCP Traffic') ?>
+            </h3>
+        </header>
+        <div class="module_content tableholder">
+            <table class="tablesorter" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><?php echo $this->translate('Traffic type') ?></th>
+                        <th><?php echo $this->translate('Local IP Address') ?></th>
+                        <th><?php echo $this->translate('Local Port') ?></th>
+                        <th><?php echo $this->translate('Remote IP Address') ?></th>
+                        <th><?php echo $this->translate('Remote Port') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->connections as $connectionsArray): ?>
+                        <?php foreach ($connectionsArray as $connection): ?>
+                            <tr>
+                                <td></td>
+                                <td><?php echo $connection->type ?></td>
+                                <td><?php echo $connection->srcIp ?></td>
+                                <td><?php echo $connection->srcPort ?></td>
+                                <td><?php echo $connection->dstIp ?></td>
+                                <td><?php echo $connection->dstPort ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </article>
 <?php endif; ?>

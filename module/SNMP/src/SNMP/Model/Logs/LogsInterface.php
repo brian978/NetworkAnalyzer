@@ -9,13 +9,11 @@
 
 namespace SNMP\Model\Logs;
 
-use Library\Entity\AbstractEntity;
+use Library\Entity\EntityInterface;
 
 interface LogsInterface
 {
     public function setLimit($limit);
 
-    public function save(AbstractEntity $object);
-
-    public function getLastEntries($oidIndex, $deviceId);
+    public function save(EntityInterface $object);
 }

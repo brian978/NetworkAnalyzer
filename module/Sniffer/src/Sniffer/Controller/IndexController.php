@@ -9,6 +9,8 @@
 
 namespace Sniffer\Controller;
 
+use Poller\Model\SnmpPoller;
+use Poller\Model\TrafficPoller;
 use UI\Controller\AbstractUiController;
 
 class IndexController extends AbstractUiController
@@ -16,8 +18,8 @@ class IndexController extends AbstractUiController
     public function indexAction()
     {
         $noInterface = false;
+        $connections = array();
 
-        $model         = $this->getServiceLocator()->get('Devices\Model\DevicesModel');
         $deviceId      = $this->getEvent()->getRouteMatch()->getParam('device');
         $interfaceName = $this->getEvent()->getRouteMatch()->getParam('interface');
 
@@ -25,16 +27,14 @@ class IndexController extends AbstractUiController
             $noInterface = true;
         } else {
 
-            $command = 'java -jar ' . getcwd(
-            ) . '/proxy/dispatcher.jar -mode client -command "tcpdump -i eth0 -nqt -c 20"';
-            $output  = shell_exec($command);
-            $output  = explode(chr(13) . chr(10), $output);
-
-            var_dump($output);
+            $poller = new TrafficPoller(new SnmpPoller());
+            $poller->setServiceLocator($this->serviceLocator);
+            $connections = $poller->tcpPoll(false, $deviceId, $interfaceName);
         }
 
         return array(
             'noInterface' => $noInterface,
+            'connections' => $connections
         );
     }
 }

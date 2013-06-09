@@ -10,6 +10,7 @@
 namespace Library\Model;
 
 use Library\Entity\AbstractEntity;
+use Library\Entity\EntityInterface;
 use Zend\Db\Sql\Select;
 
 abstract class AbstractDbModel extends AbstractDbHelperModel
@@ -29,16 +30,22 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
     {
         $this->addWhere('id', $id);
 
-        return current($this->fetch());
+        $entity = current($this->fetch());
+
+        if (empty($entity)) {
+            $entity = array();
+        }
+
+        return $entity;
     }
 
     /**
      *
-     * @param AbstractEntity $object
+     * @param EntityInterface $object
      *
      * @return int
      */
-    public function save(AbstractEntity $object)
+    public function save(EntityInterface $object)
     {
         if ($object->getId() === 0) {
             $result = $this->doInsert($object);
