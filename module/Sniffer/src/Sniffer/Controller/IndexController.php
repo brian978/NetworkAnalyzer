@@ -9,8 +9,11 @@
 
 namespace Sniffer\Controller;
 
+use Library\Object\ArrayObject\Helper\ObjectConverter;
 use Poller\Model\SnmpPoller;
 use Poller\Model\TrafficPoller;
+use Sniffer\Model\TrafficLogs;
+use Sniffer\Object\Traffic\Connection;
 use UI\Controller\AbstractUiController;
 
 class IndexController extends AbstractUiController
@@ -27,9 +30,24 @@ class IndexController extends AbstractUiController
             $noInterface = true;
         } else {
 
-            $poller = new TrafficPoller(new SnmpPoller());
-            $poller->setServiceLocator($this->serviceLocator);
-            $connections = $poller->tcpPoll(false, $deviceId, $interfaceName);
+            /** @var $adapter \Zend\Db\Adapter\Adapter */
+            $adapter   = $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
+            $logsModel = new TrafficLogs($adapter);
+
+            $logsModel->addWhere('iface_name', $interfaceName);
+            $dbConnections = $logsModel->getLastSeconds(60, $deviceId);
+
+            if (empty($dbConnections)) {
+                $poller = new TrafficPoller(new SnmpPoller());
+                $poller->setServiceLocator($this->serviceLocator);
+                $connections = $poller->tcpPoll(true, $deviceId, $interfaceName);
+            } else {
+                foreach ($dbConnections as $connection) {
+
+                    $objectConverter          = new ObjectConverter($connection, new Connection());
+                    $connections[$deviceId][] = $objectConverter->convert();
+                }
+            }
         }
 
         return array(

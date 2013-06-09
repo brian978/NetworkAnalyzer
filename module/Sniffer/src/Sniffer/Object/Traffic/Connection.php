@@ -7,7 +7,7 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Poller\Object\Traffic;
+namespace Sniffer\Object\Traffic;
 
 use Devices\Entity\Device as DeviceEntity;
 use Library\Entity\EntityInterface;
@@ -72,14 +72,14 @@ class Connection implements EntityInterface
     /**
      * @param string $connection
      */
-    public function __construct($connection)
+    public function __construct($connection = '')
     {
         if ((stripos($connection, ': tcp') !== false
             || stripos($connection, ': udp') !== false)
             && strpos($connection, 'IP') !== false
         ) {
             $this->process($connection);
-        } else {
+        } elseif ($connection !== '') {
             $this->valid = false;
         }
     }
@@ -126,14 +126,6 @@ class Connection implements EntityInterface
     }
 
     /**
-     * @return bool
-     */
-    public function isValid()
-    {
-        return $this->valid;
-    }
-
-    /**
      * @param $name
      * @return mixed
      */
@@ -146,6 +138,94 @@ class Connection implements EntityInterface
         }
 
         return $value;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @param string $dstIp
+     */
+    public function setDstIp($dstIp)
+    {
+        $this->dstIp = $dstIp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDstIp()
+    {
+        return $this->dstIp;
+    }
+
+    /**
+     * @param string $dstPort
+     */
+    public function setDstPort($dstPort)
+    {
+        $this->dstPort = $dstPort;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDstPort()
+    {
+        return $this->dstPort;
+    }
+
+    /**
+     * @param string $srcIp
+     */
+    public function setSrcIp($srcIp)
+    {
+        $this->srcIp = $srcIp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSrcIp()
+    {
+        return $this->srcIp;
+    }
+
+    /**
+     * @param string $srcPort
+     */
+    public function setSrcPort($srcPort)
+    {
+        $this->srcPort = $srcPort;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSrcPort()
+    {
+        return $this->srcPort;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

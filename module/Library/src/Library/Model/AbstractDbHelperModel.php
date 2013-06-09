@@ -86,7 +86,7 @@ class AbstractDbHelperModel extends AbstractTableGateway
      * @param string     $field
      * @param string|int $value
      * @param string     $table
-     *
+     * @param string     $sign
      * @return string
      */
     protected function getWhere($field, $value, $table = null, $sign = '=')

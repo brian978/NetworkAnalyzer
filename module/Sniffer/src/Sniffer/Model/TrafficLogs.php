@@ -7,12 +7,13 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace Devices\Model;
+namespace Sniffer\Model;
 
+use Library\Model\AbstractDbModel;
 use SNMP\Model\Logs\LogsInterface;
 use Zend\Db\Sql\Select;
 
-class TrafficLogs extends AbstractModel implements LogsInterface
+class TrafficLogs extends AbstractDbModel implements LogsInterface
 {
     /**
      * @var string
@@ -25,6 +26,21 @@ class TrafficLogs extends AbstractModel implements LogsInterface
      * @var int
      */
     protected $limit = 0;
+
+    /**
+     * @param $seconds
+     * @param $deviceId
+     * @return array
+     */
+    public function getLastSeconds($seconds, $deviceId)
+    {
+        $where = $this->getWhere('time', time() - $seconds, null, '>');
+
+        $this->addWhere($where, true);
+        $this->addWhere('device_id', $deviceId);
+
+        return parent::fetch();
+    }
 
     /**
      * @param $limit
@@ -73,5 +89,27 @@ class TrafficLogs extends AbstractModel implements LogsInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @param $object
+     * @return int
+     */
+    protected function doUpdate($object)
+    {
+        unset($object);
+
+        return 1;
+    }
+
+    /**
+     * @param $object
+     * @return int
+     */
+    public function doDelete($object)
+    {
+        unset($object);
+
+        return 1;
     }
 }

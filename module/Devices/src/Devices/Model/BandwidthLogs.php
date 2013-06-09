@@ -36,6 +36,11 @@ class BandwidthLogs extends AbstractModel implements LogsInterface
         $this->limit = $limit;
     }
 
+    /**
+     * @param $seconds
+     * @param $deviceId
+     * @return array
+     */
     public function getLastSeconds($seconds, $deviceId)
     {
         $where = $this->getWhere('time', time() - $seconds, null, '>');

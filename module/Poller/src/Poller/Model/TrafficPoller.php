@@ -10,8 +10,8 @@
 namespace Poller\Model;
 
 use Devices\Entity\Device;
-use Devices\Model\TrafficLogs;
-use Poller\Object\Traffic\Connection;
+use Sniffer\Model\TrafficLogs;
+use Sniffer\Object\Traffic\Connection;
 use SNMP\Manager\Objects\Iface\Iface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

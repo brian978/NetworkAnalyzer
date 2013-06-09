@@ -10,9 +10,14 @@ $monitorUrl = $this->url(
 
 <?php
 
-$addSnifferUrl = $this->trafficFeature;
-
 foreach ($this->device->getInterfaces() as $interface):
+
+    $addSnifferUrl = $this->trafficFeature;
+    $ipAddress     = $interface->getIp()->get();
+
+    if (empty($ipAddress)) {
+        $addSnifferUrl = false;
+    }
 
     if ($addSnifferUrl) {
         $snifferUrl = $this->url(
@@ -50,7 +55,7 @@ foreach ($this->device->getInterfaces() as $interface):
         <td></td>
         <td><a href="<?php echo $monitorUrl ?>"><?php echo $this->device->getName() ?></a></td>
         <td><?php echo $this->device->getLocation() ?></td>
-        <td><?php echo $interface->getIp() ?></td>
+        <td><?php echo $ipAddress ?></td>
         <td><?php echo $interface->getNetmask() ?></td>
         <td><?php echo $interface->getMac() ?></td>
         <td>

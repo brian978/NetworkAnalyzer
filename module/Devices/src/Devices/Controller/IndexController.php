@@ -83,9 +83,7 @@ class IndexController extends AbstractController
         $device   = $devices[$deviceId]['device'];
 
         $trafficPoller  = new TrafficPoller($poller);
-        $trafficFeature = array(
-            $deviceId => $trafficPoller->isServerAvailable($device->getDeviceEntity()->getInterface()->getIp())
-        );
+        $trafficFeature = $trafficPoller->isServerAvailable($device->getDeviceEntity()->getInterface()->getIp());
 
         return array(
             'device' => $device,
