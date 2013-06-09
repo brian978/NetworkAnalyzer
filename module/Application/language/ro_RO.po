@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-09 23:27+0200\n"
-"PO-Revision-Date: 2013-06-09 23:27+0200\n"
+"POT-Creation-Date: 2013-06-09 23:36+0200\n"
+"PO-Revision-Date: 2013-06-09 23:39+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
-"Language-Team: brian978 <dbrian89@yahoo.com>\n"
+"Language-Team: brian978 <andrei.dincescu@hotmail.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,7 +98,7 @@ msgstr "Trafic TCP"
 
 #: ../../UI/view/sniffer/index/index.phtml:15
 msgid "Traffic type"
-msgstr "Tip interfata"
+msgstr "Tip trafic"
 
 #: ../../UI/view/sniffer/index/index.phtml:16
 msgid "Local IP Address"
@@ -127,9 +127,8 @@ msgid "Dashboard"
 msgstr "Panou de control"
 
 #: ../../UI/view/devices/interface-types/index.phtml:2
-#: ../../UI/view/devices/index/index.phtml:2
-msgid "View devices"
-msgstr "Vizualizeaza echipamentele"
+msgid "View the interface types"
+msgstr "Vizualizeaza tipurile de interfete"
 
 #: ../../UI/view/devices/interface-types/index.phtml:8
 #: ../../UI/view/devices/types/index.phtml:8
@@ -143,7 +142,7 @@ msgid "Options"
 msgstr "Optiuni"
 
 #: ../../UI/view/devices/interface-types/edit-form.phtml:2
-msgid "Edit the interface type"
+msgid "Edit interface type"
 msgstr "Editeaza tipul interfetei"
 
 #: ../../UI/view/devices/interface-types/edit-form.phtml:32
@@ -169,6 +168,10 @@ msgstr "Editeaza"
 #: ../../UI/view/devices/types/partials/list.phtml:28
 msgid "Trash"
 msgstr "Sterge"
+
+#: ../../UI/view/devices/index/index.phtml:2
+msgid "View devices"
+msgstr "Vizualizeaza echipamentele"
 
 #: ../../UI/view/devices/index/index.phtml:8
 #: ../../UI/view/devices/index/monitor.phtml:12
@@ -319,20 +322,20 @@ msgid "Lower layer down"
 msgstr "Nivel inferior cazut"
 
 #: ../../UI/view/devices/types/index.phtml:2
-msgid "View types"
-msgstr "Vizualizeaza tipurile"
+msgid "View the device types"
+msgstr "Vizualizeaza tipurile de echipamente"
 
 #: ../../UI/view/devices/types/edit-form.phtml:2
-msgid "Edit type"
-msgstr "Editeaza tipul"
+msgid "Edit device type"
+msgstr "Editeaza tipul echipamentului"
 
 #: ../../UI/view/devices/types/edit-form.phtml:31
 msgid "The type info was changed"
 msgstr "Informatiile despre tip au fost schimbate"
 
 #: ../../UI/view/devices/types/add-form.phtml:2
-msgid "Add new type"
-msgstr "Adauga un tip nou"
+msgid "Add new device type"
+msgstr "Adauga un tip de echipament"
 
 #: ../../UI/view/devices/types/add-form.phtml:30
 msgid "The type was added"
@@ -446,6 +449,15 @@ msgstr ""
 #: ../../UI/view/error/index.phtml:1
 msgid "An error occurred"
 msgstr "O erroare a fost intalnita"
+
+#~ msgid "View types"
+#~ msgstr "Vizualizeaza tipurile"
+
+#~ msgid "Edit type"
+#~ msgstr "Editeaza tipul"
+
+#~ msgid "Add new type"
+#~ msgstr "Adauga un tip nou"
 
 #~ msgid "Monitor device"
 #~ msgstr "Monitorizeaza echipamentul"

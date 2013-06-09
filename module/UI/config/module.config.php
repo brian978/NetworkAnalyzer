@@ -178,7 +178,7 @@ return array(
                     // Types
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
-                        'label' => 'Add new type',
+                        'label' => 'Add new device type',
                         'route' => 'devices/module',
                         'controller' => 'types',
                         'action' => 'addForm',
@@ -188,7 +188,7 @@ return array(
                     ),
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
-                        'label' => 'View types',
+                        'label' => 'View the device types',
                         'route' => 'devices/module',
                         'controller' => 'types',
                         'action' => 'index',

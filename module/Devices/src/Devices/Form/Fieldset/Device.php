@@ -81,12 +81,14 @@ class Device extends AbstractFieldset
 
         $type = new Type();
         $type->setServiceLocator($this->serviceLocator);
+        $type->setTranslator($this->translator);
         $type->setDenyFilters(array('name'));
         $type->loadElements();
         $this->add($type);
 
         $interface = new Iface();
         $interface->setServiceLocator($this->serviceLocator);
+        $interface->setTranslator($this->translator);
         $interface->setDenyFilters(array('id'));
         $interface->loadElements();
         $this->add($interface);

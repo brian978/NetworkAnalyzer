@@ -41,6 +41,7 @@ class Iface extends AbstractFieldset
 
         $type = new IfaceType();
         $type->setServiceLocator($this->serviceLocator);
+        $type->setTranslator($this->translator);
         $type->setDenyFilters(array('name'));
         $type->loadElements();
         $this->add($type);
