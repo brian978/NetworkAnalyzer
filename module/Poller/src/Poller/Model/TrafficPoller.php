@@ -136,7 +136,7 @@ class TrafficPoller extends AbstractModel
      * @param int $count
      * @return array
      */
-    protected function runCommand($interfaceName, $count = 5)
+    protected function runCommand($interfaceName, $count = 20)
     {
         $command    = 'tcpdump -i ' . $interfaceName . ' -nqt -c ' . $count;
         $jarCommand = 'java -jar proxy/dispatcher.jar -mode client -command "' . $command . '"';
