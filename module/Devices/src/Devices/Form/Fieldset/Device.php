@@ -10,9 +10,9 @@
 namespace Devices\Form\Fieldset;
 
 use Devices\Entity\Device as DeviceEntity;
-use Library\Form\Fieldset\AbstractFieldset;
+use Library\Form\Fieldset\AbstractDbFieldset;
 
-class Device extends AbstractFieldset
+class Device extends AbstractDbFieldset
 {
     protected $modelName = 'Devices\Model\DevicesModel';
 
@@ -79,18 +79,30 @@ class Device extends AbstractFieldset
             )
         );
 
-        $type = new Type();
-        $type->setServiceLocator($this->serviceLocator);
-        $type->setTranslator($this->translator);
+        /**
+         * -------------------------
+         * DEVICE TYPE FIELDSET
+         * -------------------------
+         */
+        $type = $this->buildFieldset(new Type());
         $type->setDenyFilters(array('name'));
         $type->loadElements();
         $this->add($type);
 
-        $interface = new Iface();
-        $interface->setServiceLocator($this->serviceLocator);
-        $interface->setTranslator($this->translator);
+        // Changing the label of the type field
+        $type->get('id')->setLabel($this->translator->translate('Device type'));
+
+        /**
+         * -------------------------
+         * INTERFACE FIELDSET
+         * -------------------------
+         */
+        $interface = $this->buildFieldset(new Iface());
         $interface->setDenyFilters(array('id'));
         $interface->loadElements();
         $this->add($interface);
+
+        // Changing the label of the interface type field
+        $interface->get('type')->get('id')->setLabel($this->translator->translate('Interface type'));
     }
 }

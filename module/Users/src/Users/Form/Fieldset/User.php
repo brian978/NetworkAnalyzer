@@ -9,10 +9,10 @@
 
 namespace Users\Form\Fieldset;
 
-use Library\Form\Fieldset\AbstractFieldset;
+use Library\Form\Fieldset\AbstractDbFieldset;
 use Users\Entity\User as UserEntity;
 
-class User extends AbstractFieldset
+class User extends AbstractDbFieldset
 {
     public function __construct()
     {
@@ -63,8 +63,7 @@ class User extends AbstractFieldset
             )
         );
 
-        $role = new Role();
-        $role->setServiceLocator($this->getServiceLocator());
+        $role = $this->buildFieldset(new Role());
         $role->setDenyFilters(array('name'));
         $role->mode = Role::MODE_SELECT;
         $role->loadElements();

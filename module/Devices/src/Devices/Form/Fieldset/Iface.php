@@ -10,9 +10,9 @@
 namespace Devices\Form\Fieldset;
 
 use Devices\Entity\Iface as IfaceEntity;
-use Library\Form\Fieldset\AbstractFieldset;
+use Library\Form\Fieldset\AbstractDbFieldset;
 
-class Iface extends AbstractFieldset
+class Iface extends AbstractDbFieldset
 {
     public function __construct()
     {
@@ -39,9 +39,7 @@ class Iface extends AbstractFieldset
             )
         );
 
-        $type = new IfaceType();
-        $type->setServiceLocator($this->serviceLocator);
-        $type->setTranslator($this->translator);
+        $type = $this->buildFieldset(new IfaceType());
         $type->setDenyFilters(array('name'));
         $type->loadElements();
         $this->add($type);

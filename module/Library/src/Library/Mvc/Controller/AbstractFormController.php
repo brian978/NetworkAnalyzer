@@ -10,6 +10,7 @@
 namespace Library\Mvc\Controller;
 
 use Library\Form\AbstractForm;
+use Library\Model\ModelAwareInterface;
 use UI\Controller\AbstractUiController;
 
 abstract class AbstractFormController extends AbstractUiController
@@ -77,19 +78,25 @@ abstract class AbstractFormController extends AbstractUiController
 
         /** @var $form \Library\Form\AbstractForm */
         $form = $factory->createForm(
-            array('type' => $this->formSpecs['type'])
+            array(
+                'type' => $this->formSpecs['type']
+            )
         );
 
-        $object = new $this->formSpecs['object']();
+        // Injecting dependencies
+        if ($form instanceof DbModelAwareInterface) {
+            $form->setModel($this->getModel());
+        }
 
-        // The form mode must be set before the loadElements because it's used when retrieving the baseFieldset
+        // The form "mode" must be set before the loadElements
+        // because it's used when retrieving the baseFieldset
         if (isset($params['form_mode'])) {
             $form->mode = $params['form_mode'];
         }
 
         $form->loadElements()
-            ->bind($object)
-            ->setData($data);
+        ->bind(new $this->formSpecs['object']())
+        ->setData($data);
 
         return $form;
     }

@@ -22,13 +22,13 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
     abstract public function doDelete($object);
 
     /**
-     * @param $id
+     * @param $entityId
      *
      * @return \ArrayObject
      */
-    public function getInfo($id)
+    public function getInfo($entityId)
     {
-        $this->addWhere('id', $id);
+        $this->addWhere('id', $entityId);
 
         $entity = current($this->fetch());
 

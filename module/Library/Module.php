@@ -30,12 +30,9 @@ class Module
             'factories' => array(
                 'TranslatableFormFactory' => function ($serviceManager) {
                     $formElementManager = new FormElementManager();
-                    $factory            = new Factory($formElementManager);
-
-                    // Injecting the serviceLocator into the formElementManager
                     $formElementManager->setServiceLocator($serviceManager);
 
-                    return $factory;
+                    return new Factory($formElementManager);
                 }
             )
         );

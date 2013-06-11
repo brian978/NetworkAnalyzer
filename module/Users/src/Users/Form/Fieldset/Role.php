@@ -9,10 +9,10 @@
 
 namespace Users\Form\Fieldset;
 
-use Library\Form\Fieldset\AbstractFieldset;
+use Library\Form\Fieldset\AbstractDbFieldset;
 use Users\Entity\Role as RoleEntity;
 
-class Role extends AbstractFieldset
+class Role extends AbstractDbFieldset
 {
     protected $modelName = 'Users\Model\RolesModel';
 
@@ -53,8 +53,7 @@ class Role extends AbstractFieldset
         $options = array();
 
         if (is_object($this->model)) {
-            $locale = $this->getServiceLocator()->get('translator')->getLocale(
-            );
+            $locale = $this->getServiceLocator()->get('translator')->getLocale();
 
             $options = $this->model->fetch();
 

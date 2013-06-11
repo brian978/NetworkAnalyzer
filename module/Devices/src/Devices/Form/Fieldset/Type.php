@@ -10,9 +10,9 @@
 namespace Devices\Form\Fieldset;
 
 use Devices\Entity\Type as TypeEntity;
-use Library\Form\Fieldset\AbstractFieldset;
+use Library\Form\Fieldset\AbstractDbFieldset;
 
-class Type extends AbstractFieldset
+class Type extends AbstractDbFieldset
 {
     public function __construct()
     {
@@ -23,7 +23,7 @@ class Type extends AbstractFieldset
 
     public function loadElements()
     {
-        $this->setModel('Devices\Model\TypesModel');
+        $this->initModel('Devices\Model\TypesModel');
 
         $this->add(
             array(

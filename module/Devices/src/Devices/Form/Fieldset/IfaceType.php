@@ -13,7 +13,7 @@ class IfaceType extends Type
 {
     public function loadElements()
     {
-        $this->setModel('Devices\Model\InterfaceTypesModel', true);
+        $this->initModel('Devices\Model\InterfaceTypesModel', true);
 
         parent::loadElements();
     }

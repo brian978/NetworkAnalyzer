@@ -22,8 +22,7 @@ abstract class AbstractFieldset extends Fieldset implements
     ServiceLocatorAwareInterface,
     TranslatorAwareInterface
 {
-    const MODE_SELECT = 1;
-    const MODE_ADMIN  = 2;
+    const MODE_ADMIN = 1;
 
     /**
      * Depending on this mode the object will add the ID element differently
@@ -31,23 +30,6 @@ abstract class AbstractFieldset extends Fieldset implements
      * @var int
      */
     public $mode = self::MODE_ADMIN;
-
-    /**
-     * This is used when the setModel() method is called twice (like when extending a form)
-     *
-     * @var boolean
-     */
-    protected $lockModel = false;
-
-    /**
-     * @var \Library\Model\AbstractDbModel
-     */
-    protected $model;
-
-    /**
-     * @var string
-     */
-    protected $modelName = '';
 
     /**
      * @var \Zend\ServiceManager\ServiceLocatorInterface
@@ -73,6 +55,18 @@ abstract class AbstractFieldset extends Fieldset implements
         parent::__construct($name, $options);
 
         $this->setHydrator(new ClassMethods(false));
+    }
+
+    /**
+     * @param AbstractFieldset $fieldset
+     * @return AbstractFieldset
+     */
+    protected function buildFieldset(AbstractFieldset $fieldset)
+    {
+        $fieldset->setServiceLocator($this->serviceLocator);
+        $fieldset->setTranslator($this->translator);
+
+        return $fieldset;
     }
 
     /**
@@ -112,75 +106,6 @@ abstract class AbstractFieldset extends Fieldset implements
     }
 
     /**
-     * @return \Devices\Model\AbstractModel
-     */
-    protected function getModel()
-    {
-        if (!is_object($this->model)) {
-            $this->setModel($this->modelName);
-        }
-
-        return $this->model;
-    }
-
-    /**
-     * Initialized the model required for the database
-     *
-     * @param      $serviceName
-     * @param bool $lockModel
-     *
-     * @return $this
-     */
-    protected function setModel($serviceName, $lockModel = false)
-    {
-        // By default it can be changed any time so we only need to set it when it's true
-        if ($lockModel === true) {
-            $this->lockModel = $lockModel;
-        }
-
-        if (!is_object($this->model) || $this->lockModel === false) {
-            $this->model = $this->serviceLocator->get($serviceName);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Builds an array of options for the select box
-     *
-     * @return array
-     */
-    protected function getValueOptions()
-    {
-        $options = array(
-            0 => '...'
-        );
-
-        foreach ($this->getModel()->fetch() as $value => $row) {
-            $options[$value] = $row['name'];
-        }
-
-        return $options;
-    }
-
-    /**
-     *
-     * @param string $label
-     *
-     * @return array
-     */
-    protected function getIdElement($label)
-    {
-        if ($this->mode == self::MODE_SELECT) {
-            $element = $this->getSelectId($label);
-        } else {
-            $element = $this->getHiddenId();
-        }
-
-        return $element;
-    }
-
-    /**
      *
      * @return array
      */
@@ -196,30 +121,7 @@ abstract class AbstractFieldset extends Fieldset implements
     }
 
     /**
-     * @param $label
-     *
-     * @return array
-     */
-    protected function getSelectId($label)
-    {
-        return array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'id',
-            'options' => array(
-                'label' => $label,
-                'label_attributes' => array(
-                    'class' => 'form_row'
-                ),
-                'value_options' => $this->getValueOptions()
-            ),
-            'attributes' => array(
-                'required' => true
-            )
-        );
-    }
-
-
-    /**
+     * These are a set of input filters that are used by most forms
      *
      * @return array
      */

@@ -50,8 +50,8 @@ abstract class AbstractForm extends Form implements
     {
         parent::__construct($name, $options);
 
-        $this->setHydrator(new ClassMethods(false))
-            ->setInputFilter(new InputFilter());
+        $this->setHydrator(new ClassMethods(false));
+        $this->setInputFilter(new InputFilter());
     }
 
     abstract protected function getBaseFieldsetObject();
@@ -66,11 +66,14 @@ abstract class AbstractForm extends Form implements
      */
     final protected function setupBaseFieldsetObject(AbstractFieldset $object)
     {
-        $object->setUseAsBaseFieldset(true)
-            ->setServiceLocator($this->serviceLocator);
+        $object->setUseAsBaseFieldset(true);
 
         if ($this->mode == self::MODE_ADD) {
             $object->setDenyFilters(array('id'));
+        }
+
+        if ($object instanceof ServiceLocatorAwareInterface) {
+            $object->setServiceLocator($this->serviceLocator);
         }
 
         if ($object instanceof TranslatorAwareInterface) {
@@ -83,6 +86,8 @@ abstract class AbstractForm extends Form implements
     }
 
     /**
+     * Initializes the elements of the form
+     *
      * @return $this
      */
     public function loadElements()
@@ -120,13 +125,11 @@ abstract class AbstractForm extends Form implements
      *
      * @return TranslatorAwareInterface
      */
-    public function setTranslator(
-        Translator $translator = null,
-        $textDomain = null
-    ) {
+    public function setTranslator(Translator $translator = null, $textDomain = null)
+    {
         $this->translator = $translator;
 
-        // not used to unset
+        // noting to set
         unset($textDomain);
 
         return $this;
@@ -149,6 +152,7 @@ abstract class AbstractForm extends Form implements
      */
     public function hasTranslator()
     {
+        return is_object($this->translator);
     }
 
     /**
@@ -163,6 +167,8 @@ abstract class AbstractForm extends Form implements
     {
         // nothing to set
         unset($enabled);
+
+        return $this->translator;
     }
 
     /**
@@ -172,6 +178,7 @@ abstract class AbstractForm extends Form implements
      */
     public function isTranslatorEnabled()
     {
+        return true;
     }
 
     /**
@@ -185,6 +192,8 @@ abstract class AbstractForm extends Form implements
     {
         // nothing to set
         unset($textDomain);
+
+        return $this->translator;
     }
 
     /**
@@ -194,6 +203,7 @@ abstract class AbstractForm extends Form implements
      */
     public function getTranslatorTextDomain()
     {
+        return '';
     }
 
     /**

@@ -10,24 +10,25 @@
 namespace Library\Form;
 
 use Zend\Form\Factory as ZendFormFactory;
+use Zend\Form\FormElementManager;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 class Factory extends ZendFormFactory
 {
     /**
-     * @var \Zend\I18n\Translator\Translator
+     * @var ServiceLocatorInterface
      */
-    protected $translator;
+    protected $serviceLocator;
 
-    protected function getTranslator()
+    /**
+     * @param FormElementManager $formElementManager
+     */
+    public function __construct(FormElementManager $formElementManager = null)
     {
-        if (!is_object($this->translator)) {
-            $this->translator = $this->getFormElementManager(
-            )->getServiceLocator()->get('translator');
-        }
+        parent::__construct($formElementManager);
 
-        return $this->translator;
+        $this->serviceLocator = $this->getFormElementManager()->getServiceLocator();
     }
 
     /**
@@ -46,13 +47,11 @@ class Factory extends ZendFormFactory
         $form = parent::create($spec);
 
         if ($form instanceof TranslatorAwareInterface) {
-            $form->setTranslator($this->getTranslator());
+            $form->setTranslator($this->serviceLocator->get('translator'));
         }
 
         if ($form instanceof ServiceLocatorAwareInterface) {
-            $form->setServiceLocator(
-                $this->getFormElementManager()->getServiceLocator()
-            );
+            $form->setServiceLocator($this->serviceLocator);
         }
 
         return $form;
