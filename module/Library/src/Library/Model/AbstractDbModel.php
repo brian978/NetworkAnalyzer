@@ -22,6 +22,11 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
     abstract public function doDelete($object);
 
     /**
+     * @var \Zend\Db\Sql\Select
+     */
+    protected $select;
+
+    /**
      * @param $entityId
      *
      * @return \ArrayObject
@@ -54,6 +59,22 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
         }
 
         return $result;
+    }
+
+    /**
+     * @return Select
+     */
+    protected function getSelect()
+    {
+        if ($this->select instanceof Select === false) {
+            $this->select = $this->getSql()->select()->where($this->where);
+
+            if (!empty($this->selectColumns)) {
+                $this->select->columns($this->selectColumns);
+            }
+        }
+
+        return $this->select;
     }
 
     /**
@@ -97,11 +118,7 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
     public function fetch()
     {
         $rows   = array();
-        $select = $this->getSql()->select()->where($this->where);
-
-        if (!empty($this->selectColumns)) {
-            $select->columns($this->selectColumns);
-        }
+        $select = $this->getSelect();
 
         // Adding the joins for the select
         foreach ($this->join as $join) {

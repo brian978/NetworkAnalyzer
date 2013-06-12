@@ -14,18 +14,33 @@ $acl = $this->acl;
 
 /** @var $menu \Zend\View\Helper\Navigation\Menu */
 $menu = $this->nav->menu();
-$menu->setAcl($acl)
-    ->setRole($this->userAuth->getRole());
+$menu->setAcl($acl)->setRole($this->userAuth->getRole());
 
 // Rendering the menus
 $menus = array(
-    'devices' => $menu->renderMenu(
-        $nav->findOneByLabel('Devices'),
-        $menuOptions
+    'devices' => array(
+        'container' => $nav->findOneByLabel('Devices'),
+        'title' => $this->translate('Devices'),
     ),
-    'users' => $menu->renderMenu($nav->findOneByLabel('Users'), $menuOptions),
-    'admin' => $menu->renderMenu($nav->findOneByLabel('Admin'), $menuOptions)
-)
+    'reports' => array(
+        'container' => $nav->findOneByLabel('Reports'),
+        'title' => $this->translate('Reports'),
+    ),
+    'users' => array(
+        'container' => $nav->findOneByLabel('Users'),
+        'title' => $this->translate('Users'),
+    ),
+    'admin' => array(
+        'container' => $nav->findOneByLabel('Admin'),
+        'title' => $this->translate('Admin'),
+    ),
+);
+
+foreach ($menus as $name => $menuData) {
+    if ($menuData['container'] != null) {
+        $menus[$name]['container'] = $menu->renderMenu($menuData['container'], $menuOptions);
+    }
+}
 
 ?>
 
@@ -35,24 +50,14 @@ $menus = array(
                onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
     </form>
     <hr/>
-    <?php if (!empty($menus['devices'])): ?><h3><?php echo $this->translate('Devices') ?></h3><?php endif; ?>
-    <?php echo $menus['devices']; ?>
-    <?php if (!empty($menus['users'])): ?><h3><?php echo $this->translate('Users') ?></h3><?php endif; ?>
-    <?php echo $menus['users']; ?>
-    <?php if (!empty($menus['admin'])): ?><h3><?php echo $this->translate('Admin') ?></h3><?php endif; ?>
-    <?php echo $menus['admin']; ?>
-
-    <?php if ($acl->isAllowed($this->userAuth->getRole(), 'admin', 'access')): ?>
-        <h3><?php echo $this->translate('Application updater') ?></h3>
-        <ul class="toggle">
-            <li>
-                <a class="icn_options"
-                   href="<?php echo $this->url('index/module', array('action' => 'update'), true) ?>">
-                    <?php echo $this->translate('Update') ?>
-                </a>
-            </li>
-        </ul>
-    <?php endif; ?>
+    <?php
+    foreach ($menus as $menuName => $menuData) {
+        if (!empty($menuData['container'])) {
+            echo '<h3>' . $menuData['title'] . '</h3>';
+            echo $menuData['container'];
+        }
+    }
+    ?>
     <footer>
         <hr/>
         <p>

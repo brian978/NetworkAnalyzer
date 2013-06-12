@@ -52,6 +52,20 @@ class BandwidthLogs extends AbstractModel implements LogsInterface
     }
 
     /**
+     * @param int $deviceId
+     * @return array
+     */
+    public function getAvailableInterfaces($deviceId)
+    {
+        $this->addWhere('device_id', intval($deviceId));
+        $this->getSelect();
+
+        $this->select->group('interface_name');
+
+        return parent::fetch();
+    }
+
+    /**
      * @param $oidIndex
      * @param $deviceId
      * @return array

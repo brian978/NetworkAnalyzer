@@ -12,7 +12,7 @@ namespace Library\Form\Fieldset;
 use Library\Model\AbstractDbModel;
 use Library\Model\DbModelAwareInterface;
 
-class AbstractDbFieldset extends AbstractFieldset implements DbModelAwareInterface
+abstract class AbstractDbFieldset extends AbstractFieldset implements DbModelAwareInterface
 {
     const MODE_SELECT = 2;
 

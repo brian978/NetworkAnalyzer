@@ -10,6 +10,7 @@
 namespace Library\Mvc\Controller;
 
 use Library\Form\AbstractForm;
+use Library\Model\DbModelAwareInterface;
 use Library\Model\ModelAwareInterface;
 use UI\Controller\AbstractUiController;
 
@@ -20,13 +21,12 @@ abstract class AbstractFormController extends AbstractUiController
      *
      * @var array
      */
-    protected $formSpecs
-        = array(
-            'type' => '',
-            'object' => '',
-            'model' => '',
-            'dataKey' => '',
-        );
+    protected $formSpecs = array(
+        'type' => '',
+        'object' => '',
+        'model' => '',
+        'dataKey' => '',
+    );
 
     /**
      * @param AbstractForm $form
@@ -94,9 +94,13 @@ abstract class AbstractFormController extends AbstractUiController
             $form->mode = $params['form_mode'];
         }
 
-        $form->loadElements()
-        ->bind(new $this->formSpecs['object']())
-        ->setData($data);
+        $form->loadElements();
+
+        if (!empty($this->formSpecs['object'])) {
+            $form->bind(new $this->formSpecs['object']());
+        }
+
+        $form->setData($data);
 
         return $form;
     }

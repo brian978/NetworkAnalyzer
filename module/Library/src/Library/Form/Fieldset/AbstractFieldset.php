@@ -57,6 +57,8 @@ abstract class AbstractFieldset extends Fieldset implements
         $this->setHydrator(new ClassMethods(false));
     }
 
+    abstract public function loadElements();
+
     /**
      * @param AbstractFieldset $fieldset
      * @return AbstractFieldset
