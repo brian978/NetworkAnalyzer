@@ -5,12 +5,12 @@
 
         $report = $form->get('interface_traffic');
 
-        $devicesNames = $report->get('id');
+        $devicesNames = $report->get('device')->get('id');
 
         /** @var $form \Reports\Form\InterfaceTraffic */
         $form->setAttribute(
             'action',
-            $this->url('reports/module', array('action' => 'generate'), true)
+            $this->url('reports/module', array('action' => 'generate', 'dispatch' => 'interfaceTraffic'), true)
         )->prepare();
 
         // Rendering the form

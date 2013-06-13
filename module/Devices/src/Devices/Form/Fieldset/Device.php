@@ -26,7 +26,7 @@ class Device extends AbstractDbFieldset
     public function loadElements()
     {
         // Adding the elements to the fieldset
-        $this->add($this->getHiddenId());
+        $this->add($this->getIdElement($this->translator->translate('Device')));
 
         $this->add(
             array(

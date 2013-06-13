@@ -9,8 +9,6 @@
 
 namespace Reports\Controller;
 
-use Devices\Model\BandwidthLogs;
-use Devices\Model\DevicesModel;
 use Library\Mvc\Controller\AbstractFormController;
 
 class IndexController extends AbstractFormController
@@ -34,6 +32,29 @@ class IndexController extends AbstractFormController
         return array(
             'form' => $form,
         );
+    }
+
+    /**
+     * This is a dispatcher for various reports
+     *
+     * @return array
+     */
+    public function generateAction()
+    {
+        $dispatch = $this->getEvent()->getRouteMatch()->getParam('dispatch');
+
+        return $this->{$dispatch . 'Report'}();
+    }
+
+    /**
+     * @return array
+     */
+    protected function interfaceTrafficReport()
+    {
+        // We should have an interface_traffic entry in the $_POST
+        $device_id = '';
+
+        return array();
     }
 
     /**
