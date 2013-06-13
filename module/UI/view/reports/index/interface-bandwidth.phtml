@@ -1,0 +1,47 @@
+<article class="module width_full">
+    <header><h3><?php echo $this->translate('Interface bandwidth report') ?></h3></header>
+    <div class="module_content">
+        <?php
+
+        // Retrieving all the messages so we have what to show
+        $messages = $form->getMessages();
+
+        // We want to render the errors manually
+        $this->formRow()->setRenderErrors(false);
+
+        $report = $form->get('interface_bandwidth');
+
+        $devicesNames = $report->get('device')->get('id');
+
+        /** @var $form \Reports\Form\InterfaceBandwidth */
+        $form->setAttribute(
+            'action',
+            $this->url('reports/module', array('action' => 'generate', 'dispatch' => 'interfaceBandwidth'), true)
+        )->prepare();
+
+        // Messages
+        echo $this->partial(
+            'partials/form_generic_message.phtml',
+            array(
+                'success' => $this->success,
+                'messages' => $messages,
+                'successMessage' => '',
+            )
+        );
+
+        // Rendering the form
+        echo $this->form()->openTag($form);
+
+        echo $this->showInputError($devicesNames) . $this->formRow($devicesNames);
+        ?>
+
+        <?php
+        echo $this->formHidden($form->get('csrf'));
+        echo $this->formElement($form->get('submit'));
+
+        echo $this->form()->closeTag();
+
+        ?>
+        <div class="clear"></div>
+    </div>
+</article>

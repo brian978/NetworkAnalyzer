@@ -129,8 +129,6 @@ abstract class AbstractFieldset extends Fieldset implements
      */
     protected function getGenericInputFilterSpecs()
     {
-        $translator = $this->serviceLocator->get('translator');
-
         $filters = array(
             'id' => array(
                 'validators' => array(
@@ -138,7 +136,7 @@ abstract class AbstractFieldset extends Fieldset implements
                         'name' => 'greater_than',
                         'options' => array(
                             'min' => 0,
-                            'message' => $translator->translate('You must select a value')
+                            'message' => $this->translator->translate('You must select a value')
                         )
                     )
                 )

@@ -17,22 +17,28 @@ class BandwidthCalculator implements HelperInterface
         $octetsDiff    = $args[0];
         $timeDiff      = isset($args[1]) ? $args[1] : 1;
         $bandwidthType = 0;
+        $bandwidth     = 0;
 
-        // To avoid division by 0
-        if ($timeDiff == 0) {
-            $timeDiff = 1;
-        }
+        if ($octetsDiff > 0) {
 
-        $bandwidth = $octetsDiff / $timeDiff;
+            // To avoid division by 0
+            if ($timeDiff == 0) {
+                $timeDiff = 1;
+            }
 
-        // Converting from B/s to the highest unit available up to TB/s speeds
-        while (floor($bandwidth) > 1000 && $bandwidthType < 4) {
-            $bandwidth /= 1000;
-            $bandwidthType++;
+            $bandwidth = $octetsDiff / $timeDiff;
+
+            // Converting from B/s to the highest unit available up to TB/s speeds
+            while (floor($bandwidth) > 1000 && $bandwidthType < 4) {
+                $bandwidth /= 1000;
+                $bandwidthType++;
+            }
+
+            $bandwidth = round($bandwidth, 2);
         }
 
         return array(
-            'bandwidth' => round($bandwidth, 2),
+            'bandwidth' => $bandwidth,
             'type' => $bandwidthType,
         );
     }

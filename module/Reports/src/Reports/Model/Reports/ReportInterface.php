@@ -9,6 +9,8 @@
 
 namespace Reports\Model\Reports;
 
+use Library\Model\AbstractDbModel;
+
 /**
  * Class ReportInterface
  *
@@ -16,6 +18,8 @@ namespace Reports\Model\Reports;
  */
 interface ReportInterface
 {
+    public function setModel(AbstractDbModel $model);
+
     public function setData(array $data);
 
     public function getReport();

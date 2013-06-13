@@ -26,6 +26,13 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
      */
     protected $select;
 
+    protected function resetSelectJoinWhere()
+    {
+        $this->select = null;
+
+        return parent::resetSelectJoinWhere();
+    }
+
     /**
      * @param $entityId
      *

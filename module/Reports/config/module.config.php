@@ -26,14 +26,12 @@ return array(
                     'status' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action[/:id[/:success]]]]',
+                            'route' => '/[:controller[/:action[/:success]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id' => '[0-9]*',
                             ),
                             'defaults' => array(
-                                'id' => '0',
                                 'success' => 'invalid'
                             )
                         )
@@ -41,15 +39,13 @@ return array(
                     'module' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action[/:id]]]',
+                            'route' => '/[:controller[/:action[/:dispatch]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id' => '[0-9]*',
+                                'dispatch' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
-                            'defaults' => array(
-                                'id' => '0',
-                            )
+                            'defaults' => array()
                         )
                     )
                 )
@@ -97,10 +93,10 @@ return array(
                 'pages' => array(
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
-                        'label' => 'Interface traffic report',
+                        'label' => 'Interface bandwidth report',
                         'route' => 'reports/module',
                         'controller' => 'index',
-                        'action' => 'interfaceTraffic',
+                        'action' => 'interfaceBandwidth',
                         'class' => 'icn_new_article',
                         'resource' => 'reports',
                         'privilege' => 'generate_reports'

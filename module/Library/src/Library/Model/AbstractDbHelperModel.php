@@ -113,9 +113,9 @@ class AbstractDbHelperModel extends AbstractTableGateway
     /**
      * Used to add a where condition
      *
-     * @param string|array     $field
-     * @param string|int|bool  $value When this is set to true the $field param in an array
-     * @param string           $table
+     * @param string|array    $field
+     * @param string|int|bool $value When this is set to true the $field param in an array
+     * @param string          $table
      *
      * @return $this
      */
