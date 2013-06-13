@@ -37,7 +37,7 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
 
     public function getReport()
     {
-        ini_set('memory_limit', '256M');
+        ini_set('memory_limit', '512M');
 
         if (!isset($this->data['device']['id'])) {
             throw new \InvalidArgumentException('The device ID was not found in the provided data');
