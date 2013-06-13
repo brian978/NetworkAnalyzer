@@ -67,6 +67,7 @@ class IndexController extends AbstractFormController
         $dispatch   = $this->getEvent()->getRouteMatch()->getParam('dispatch');
         $translator = $this->serviceLocator->get('translator');
         $model      = null;
+        $reportData = array();
 
         switch ($dispatch) {
             case 'interfaceBandwidth':
@@ -91,9 +92,11 @@ class IndexController extends AbstractFormController
                 $hasFailed = false;
                 $className = '\Reports\Model\Reports\\' . ucfirst($dispatch);
 
+                /** @var $reportObject \Reports\Model\Reports\ReportInterface */
                 $reportObject = new $className();
                 $reportObject->setModel($model);
                 $reportObject->setData($this->getRequest()->getPost()->toArray());
+                $reportData = $reportObject->getReport();
             }
         }
 
@@ -103,6 +106,7 @@ class IndexController extends AbstractFormController
 
         return array(
             'reportTitle' => $reportTitle,
+            'reportData' => $reportData,
         );
     }
 

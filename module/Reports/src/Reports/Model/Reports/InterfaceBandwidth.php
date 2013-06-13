@@ -37,7 +37,40 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
 
     public function getReport()
     {
-        // TODO: Implement getReport() method.
+        ini_set('memory_limit', '256M');
+
+        if (!isset($this->data['device']['id'])) {
+            throw new \InvalidArgumentException('The device ID was not found in the provided data');
+        }
+        $startTime        = microtime(true);
+        $xDaysSeconds     = 432000; // For now five days
+        $currentTime      = time();
+        $timeFromMidnight = strtotime(date('Y-m-d', $currentTime) . ' 00:00:00');
+        $lastXDays        = $currentTime - ($currentTime - $timeFromMidnight) - $xDaysSeconds;
+
+        $result = $this->model->getLastSeconds($lastXDays, $this->data['device']['id'], 0);
+
+        $secondsIn24 = 24 * 60 * 60;
+        $days        = array();
+
+        foreach ($result as $data) {
+            $date          = $data['date'];
+            $interfaceName = $data['interface_name'];
+
+            if (isset($days[$date][$interfaceName])) {
+                $days[$date][$interfaceName]['octets_in'] += $data['octets_in'];
+                $days[$date][$interfaceName]['octets_out'] += $data['octets_out'];
+            } else {
+                $days[$date][$interfaceName] = array(
+                    'octets_in' => 0,
+                    'octets_out' => 0,
+                );
+            }
+        }
+        echo microtime(true) - $startTime;
+        echo '<pre>' . print_r($days, 1) . '</pre>';
+
+        return $days;
     }
 
     /**
@@ -49,7 +82,6 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
         if (isset($data['interface_bandwidth'])) {
             $this->data = $data['interface_bandwidth'];
         }
-        var_dump($this->data);
 
         return $this;
     }

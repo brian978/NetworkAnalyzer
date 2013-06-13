@@ -65,15 +65,17 @@ class TrafficLogs extends AbstractDbModel implements LogsInterface
     }
 
     /**
-     * @param \Poller\Object\Traffic\Connection $object
+     * @param \Sniffer\Object\Traffic\Connection $object
      * @return int
      */
     protected function doInsert($object)
     {
         $result = 0;
+        $time   = time();
 
         $data               = array();
-        $data['time']       = time();
+        $data['date']       = date('Y-m-d', $time);
+        $data['time']       = $time;
         $data['type']       = $object->type;
         $data['src_ip']     = $object->srcIp;
         $data['src_port']   = $object->srcPort;

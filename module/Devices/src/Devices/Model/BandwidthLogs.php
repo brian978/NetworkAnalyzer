@@ -37,13 +37,18 @@ class BandwidthLogs extends AbstractModel implements LogsInterface
     }
 
     /**
-     * @param $seconds
-     * @param $deviceId
+     * @param      $seconds
+     * @param      $deviceId
+     * @param null $currentTime
      * @return array
      */
-    public function getLastSeconds($seconds, $deviceId)
+    public function getLastSeconds($seconds, $deviceId, $currentTime = null)
     {
-        $where = $this->getWhere('time', time() - $seconds, null, '>');
+        if ($currentTime === null) {
+            $currentTime = time();
+        }
+
+        $where = $this->getWhere('time', $currentTime - $seconds, null, '>');
 
         $this->addWhere($where, true);
         $this->addWhere('device_id', $deviceId);
@@ -129,6 +134,7 @@ class BandwidthLogs extends AbstractModel implements LogsInterface
 
         $data                          = array();
         $data['uptime']                = $object->getUptime();
+        $data['date']                  = date('Y-m-d', $object->getTime());
         $data['time']                  = $object->getTime();
         $data['oid_index']             = $object->getOidIndex();
         $data['interface_name']        = $object->getInterfaceName();
