@@ -39,41 +39,32 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
     {
         ini_set('memory_limit', '-1');
 
-        if (!isset($this->data['device']['id']))
-        {
+        if (!isset($this->data['device']['id'])) {
             throw new \InvalidArgumentException('The device ID was not found in the provided data');
         }
 
-        $startTime        = microtime(true);
+        $days             = array();
         $xDaysSeconds     = 432000; // For now five days
         $currentTime      = time();
         $timeFromMidnight = strtotime(date('Y-m-d', $currentTime) . ' 00:00:00');
         $lastXDays        = $currentTime - ($currentTime - $timeFromMidnight) - $xDaysSeconds;
 
-        $days   = array();
         $result = $this->model->getLastSeconds($lastXDays, $this->data['device']['id'], 0);
 
-        foreach ($result as $data)
-        {
+        foreach ($result as $data) {
             $date          = $data['date'];
             $interfaceName = $data['interface_name'];
 
-            if (isset($days[$date][$interfaceName]))
-            {
+            if (isset($days[$date][$interfaceName])) {
                 $days[$date][$interfaceName]['octets_in'] += $data['octets_in'];
                 $days[$date][$interfaceName]['octets_out'] += $data['octets_out'];
-            }
-            else
-            {
+            } else {
                 $days[$date][$interfaceName] = array(
                     'octets_in' => 0,
                     'octets_out' => 0,
                 );
             }
         }
-        echo microtime(true) - $startTime;
-        echo '<pre>' . print_r($days, 1) . '</pre>';
-        mail('brian@brian.hopto.org', 'memory peak', memory_get_peak_usage(true));
 
         return $days;
     }
@@ -84,8 +75,7 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
      */
     public function setData(array $data)
     {
-        if (isset($data['interface_bandwidth']))
-        {
+        if (isset($data['interface_bandwidth'])) {
             $this->data = $data['interface_bandwidth'];
         }
 
