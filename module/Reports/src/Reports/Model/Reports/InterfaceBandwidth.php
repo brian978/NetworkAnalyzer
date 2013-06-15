@@ -44,6 +44,7 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
         }
 
         $days             = array();
+        $interfaces       = array();
         $xDaysSeconds     = 432000; // For now five days
         $currentTime      = time();
         $timeFromMidnight = strtotime(date('Y-m-d', $currentTime) . ' 00:00:00');
@@ -52,8 +53,9 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
         $result = $this->model->getLastSeconds($lastXDays, $this->data['device']['id'], 0);
 
         foreach ($result as $data) {
-            $date          = $data['date'];
-            $interfaceName = $data['interface_name'];
+            $date                       = $data['date'];
+            $interfaceName              = $data['interface_name'];
+            $interfaces[$interfaceName] = $data['oid_index'];
 
             if (isset($days[$date][$interfaceName])) {
                 $days[$date][$interfaceName]['octets_in'] += $data['octets_in'];
@@ -66,7 +68,10 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
             }
         }
 
-        return $days;
+        return array(
+            'days' => $days,
+            'interfaces' => $interfaces,
+        );
     }
 
     /**

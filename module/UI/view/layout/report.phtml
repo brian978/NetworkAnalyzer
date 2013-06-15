@@ -75,51 +75,11 @@ $this->nav->setTranslator(
         </script>
     </head>
     <body>
-        <header id="header">
-            <hgroup>
-                <h1 class="site_title">
-                    <a href="<?php echo $this->url('home', array(), true) ?>">
-                        <?php echo $this->translate('Network Analyzer') ?>
-                    </a>
-                </h1>
 
-                <h2 class="section_title"><?php echo $this->translate(
-                        'Dashboard'
-                    ) ?></h2>
-                <?php echo $this->partial(
-                    'partials/language.phtml',
-                    $this->vars()
-                ) ?>
-            </hgroup>
-        </header>
-        <!-- end of header bar -->
-
-        <section id="secondary_bar">
-            <div class="user"></div>
-            <div class="breadcrumbs_container">
-                <article class="breadcrumbs">
-                    <a href="<?php echo $this->url('index', array(), true) ?>">
-                        <?php echo $this->translate('Network Analyzer') ?>
-                    </a>
-
-                    <?php echo $this->nav->breadcrumbs()->setMinDepth(
-                                   0
-                               )->setPartial('partials/breadcrumb.phtml'); ?>
-
-                </article>
-            </div>
-        </section>
-        <!-- end of secondary bar -->
-
-        <?php echo $this->partial('partials/side_menu.phtml', $this->vars()) ?>
-
-        <section id="main" class="column">
-            <!-- end of stats article -->
-
+        <div class="report">
             <?php echo $this->content ?>
+        </div>
 
-            <div class="spacer"></div>
-        </section>
 
     </body>
 </html>

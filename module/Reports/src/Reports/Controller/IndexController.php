@@ -11,6 +11,7 @@ namespace Reports\Controller;
 
 use Devices\Model\BandwidthLogs;
 use Library\Mvc\Controller\AbstractFormController;
+use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractFormController
 {
@@ -84,7 +85,9 @@ class IndexController extends AbstractFormController
         }
 
         if ($this->request->isPost() && $model !== null) {
-            $form    = $this->getForm($this->request->getPost()->toArray());
+            $post = $this->request->getPost()->toArray();
+
+            $form    = $this->getForm($post);
             $isValid = $form->isValid();
 
             // Redirect regarding if valid or not but with different params
@@ -95,19 +98,31 @@ class IndexController extends AbstractFormController
                 /** @var $reportObject \Reports\Model\Reports\ReportInterface */
                 $reportObject = new $className();
                 $reportObject->setModel($model);
-                $reportObject->setData($this->getRequest()->getPost()->toArray());
+                $reportObject->setData($post);
                 $reportData = $reportObject->getReport();
+
+                /** @var $devicesModel \Devices\Model\DevicesModel */
+                $devicesModel = $this->serviceLocator->get('Devices\Model\DevicesModel');
+                $deviceInfo   = $devicesModel->getInfo($post['interface_bandwidth']['device']['id']);
+
+                // View stuff
+                $this->layout('layout/report.phtml');
+
+                $viewModel = new ViewModel(array(
+                    'reportTitle' => $reportTitle,
+                    'reportData' => $reportData,
+                    'deviceInfo' => $deviceInfo,
+                ));
+
+                $viewModel->setTemplate('reports/index/' . $dispatch . 'Report');
+
+                return $viewModel;
             }
         }
 
         if ($hasFailed === true) {
             $this->redirectOnFail(array('action' => $dispatch));
         }
-
-        return array(
-            'reportTitle' => $reportTitle,
-            'reportData' => $reportData,
-        );
     }
 
     /**

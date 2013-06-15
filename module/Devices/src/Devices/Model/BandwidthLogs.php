@@ -48,7 +48,11 @@ class BandwidthLogs extends AbstractModel implements LogsInterface
             $currentTime = time();
         }
 
-        $where = $this->getWhere('time', $currentTime - $seconds, null, '>');
+        if ($currentTime > 0) {
+            $seconds = $currentTime - $seconds;
+        }
+
+        $where = $this->getWhere('time', $seconds, null, '>');
 
         $this->addWhere($where, true);
         $this->addWhere('device_id', $deviceId);

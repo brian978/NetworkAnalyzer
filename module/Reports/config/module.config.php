@@ -52,6 +52,11 @@ return array(
             )
         )
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'convertUnit' => 'Reports\View\Helper\UnitConverter'
+        )
+    ),
     'controllers' => array(
         'invokables' => array(
             'Reports\Controller\Index' => 'Reports\Controller\IndexController',

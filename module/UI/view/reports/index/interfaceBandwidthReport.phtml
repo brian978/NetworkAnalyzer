@@ -1,0 +1,46 @@
+<?php
+
+?>
+
+<article class="module width_full">
+    <header>
+        <h3>
+            <?php echo $this->reportTitle . ' ' . $this->deviceInfo->name; ?>
+        </h3>
+    </header>
+    <div class="module_content tableholder">
+        <table class="tablesorter" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><?php echo $this->translate('Day') ?></th>
+                    <?php foreach ($this->reportData['interfaces'] as $interfaceName => $oidIndex): ?>
+                        <th colspan="2"><?php echo $interfaceName ?></th>
+                    <?php endforeach; ?>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <?php foreach ($this->reportData['interfaces'] as $oidIndex): ?>
+                        <th><?php echo $this->translate('Octets in') ?></th>
+                        <th><?php echo $this->translate('Octets out') ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->reportData['days'] as $day => $dayData): ?>
+                    <tr>
+                        <td></td>
+                        <td><?php echo $day ?></td>
+                        <?php
+                        foreach ($dayData as $octets) {
+                            echo '<td>' . $this->convertUnit($octets['octets_in']) . '</td>';
+                            echo '<td>' . $this->convertUnit($octets['octets_out']) . '</td>';
+                        }
+                        ?>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</article>

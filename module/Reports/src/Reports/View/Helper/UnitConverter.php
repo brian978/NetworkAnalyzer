@@ -7,15 +7,14 @@
  * @license   Creative Commons Attribution-ShareAlike 3.0
  */
 
-namespace SNMP\View\Helper;
+namespace Reports\View\Helper;
 
-use SNMP\Helper\BandwidthCalculator as BaseBandwidthCalculator;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\View\Helper\HelperInterface;
 use Zend\View\Renderer\RendererInterface as Renderer;
 
-class BandwidthCalculator extends BaseBandwidthCalculator implements HelperInterface, TranslatorAwareInterface
+class UnitConverter implements HelperInterface, TranslatorAwareInterface
 {
     /**
      * @var \Zend\View\Model\ViewModel
@@ -53,17 +52,26 @@ class BandwidthCalculator extends BaseBandwidthCalculator implements HelperInter
      */
     public function __invoke()
     {
-        $result = call_user_func_array(array('parent', '__invoke'), func_get_args());
+        $args   = func_get_args();
+        $amount = $args[0];
+        $type   = 0;
 
-        $bandwidthType = array(
-            0 => $this->translator->translate('B/s'),
-            1 => $this->translator->translate('KB/s'),
-            2 => $this->translator->translate('MB/s'),
-            3 => $this->translator->translate('GB/s'),
-            4 => $this->translator->translate('TB/s'),
+        $unitType = array(
+            0 => $this->translator->translate('B'),
+            1 => $this->translator->translate('KB'),
+            2 => $this->translator->translate('MB'),
+            3 => $this->translator->translate('GB'),
+            4 => $this->translator->translate('TB'),
+            5 => $this->translator->translate('PB'),
         );
 
-        return $result['bandwidth'] . ' ' . $bandwidthType[$result['type']];
+        // Converting from B/s to the highest unit available up to TB/s speeds
+        while (floor($amount) > 1024 && $type < 5) {
+            $amount /= 1024;
+            $type++;
+        }
+
+        return round($amount, 2) . ' ' . $unitType[$type];
     }
 
     /**
