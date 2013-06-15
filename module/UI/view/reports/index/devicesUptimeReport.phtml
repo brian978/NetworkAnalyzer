@@ -1,0 +1,33 @@
+<article class="module width_full">
+    <header>
+        <h3>
+            <?php echo $this->translate('Devices uptime'); ?>
+        </h3>
+    </header>
+    <div class="module_content tableholder">
+        <table class="tablesorter" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><?php echo $this->translate('Day') ?></th>
+                    <?php foreach ($this->reportData['devices'] as $name): ?>
+                        <th><?php echo $this->translate('Recorded at') ?></th>
+                        <th><?php echo $name ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->reportData['uptimes'] as $date => $devices): ?>
+                    <tr>
+                        <td></td>
+                        <td><?php echo $date ?></td>
+                        <?php foreach ($devices as $deviceId => $data): ?>
+                            <td><?php echo date('H:i:s', $data['time']) ?></td>
+                            <td><?php echo $data['uptime'] ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</article>

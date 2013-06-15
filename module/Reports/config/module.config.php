@@ -98,10 +98,30 @@ return array(
                 'pages' => array(
                     array(
                         'type' => 'Library\Navigation\Page\Mvc',
-                        'label' => 'Interface bandwidth report',
+                        'label' => 'Interfaces traffic',
                         'route' => 'reports/module',
                         'controller' => 'index',
-                        'action' => 'interfaceBandwidth',
+                        'action' => 'interfacesTraffic',
+                        'class' => 'icn_new_article',
+                        'resource' => 'reports',
+                        'privilege' => 'generate_reports'
+                    ),
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'Devices uptime',
+                        'route' => 'reports/module',
+                        'controller' => 'index',
+                        'action' => 'devicesUptime',
+                        'class' => 'icn_new_article',
+                        'resource' => 'reports',
+                        'privilege' => 'generate_reports'
+                    ),
+                    array(
+                        'type' => 'Library\Navigation\Page\Mvc',
+                        'label' => 'Devices traffic',
+                        'route' => 'reports/module',
+                        'controller' => 'index',
+                        'action' => 'devicesTraffic',
                         'class' => 'icn_new_article',
                         'resource' => 'reports',
                         'privilege' => 'generate_reports'

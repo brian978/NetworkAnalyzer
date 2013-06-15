@@ -71,10 +71,10 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
     /**
      * @return Select
      */
-    protected function getSelect()
+    public function getSelect()
     {
         if ($this->select instanceof Select === false) {
-            $this->select = $this->getSql()->select()->where($this->where);
+            $this->select = $this->getSql()->select();
 
             if (!empty($this->selectColumns)) {
                 $this->select->columns($this->selectColumns);
@@ -126,6 +126,8 @@ abstract class AbstractDbModel extends AbstractDbHelperModel
     {
         $rows   = array();
         $select = $this->getSelect();
+
+        $select->where($this->where);
 
         // Adding the joins for the select
         foreach ($this->join as $join) {

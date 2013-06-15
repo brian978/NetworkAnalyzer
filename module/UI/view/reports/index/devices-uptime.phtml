@@ -1,0 +1,49 @@
+<article class="module width_full">
+    <header><h3><?php echo $this->translate('Devices uptime') ?></h3></header>
+    <div class="module_content">
+        <?php
+
+        // Retrieving all the messages so we have what to show
+        $messages = $form->getMessages();
+
+        // We want to render the errors manually
+        $this->formRow()->setRenderErrors(false);
+
+        $report = $form->get('devices_uptime');
+
+        $devicesNames = $report->get('devices');
+        $days = $report->get('days');
+
+        /** @var $form \Reports\Form\DevicesUptime */
+        $form->setAttribute(
+            'action',
+            $this->url('reports/module', array('action' => 'generate', 'dispatch' => 'devicesUptime'), true)
+        )->prepare();
+
+        // Messages
+        echo $this->partial(
+            'partials/form_generic_message.phtml',
+            array(
+                'success' => $this->success,
+                'messages' => $messages,
+                'successMessage' => '',
+            )
+        );
+
+        // Rendering the form
+        echo $this->form()->openTag($form);
+
+        echo $this->showInputError($devicesNames) . $this->formRow($devicesNames);
+        echo $this->showInputError($days) . $this->formRow($days);
+        ?>
+
+        <?php
+        echo $this->formHidden($form->get('csrf'));
+        echo $this->formElement($form->get('submit'));
+
+        echo $this->form()->closeTag();
+
+        ?>
+        <div class="clear"></div>
+    </div>
+</article>

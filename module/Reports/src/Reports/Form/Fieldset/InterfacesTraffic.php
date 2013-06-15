@@ -13,7 +13,7 @@ use Devices\Form\Fieldset\Device;
 use Library\Form\Fieldset\AbstractDbFieldset;
 use Reports\Entity\Report;
 
-class InterfaceBandwidth extends AbstractDbFieldset
+class InterfacesTraffic extends AbstractDbFieldset
 {
     public function __construct()
     {
@@ -29,5 +29,27 @@ class InterfaceBandwidth extends AbstractDbFieldset
         $devices->setDenyFilters(array('name', 'snmpVersion', 'snmpCommunity'));
         $devices->loadElements();
         $this->add($devices);
+
+        $values       = range(1, 7);
+        $valueOptions = array();
+
+        foreach ($values as $value) {
+            $valueOptions[$value] = $value;
+        }
+
+        $this->add(
+            array(
+                'name' => 'days',
+                'type' => '\Zend\Form\Element\Select',
+                'options' => array(
+                    'label' => $this->translator->translate('Days no.'),
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                    'value_options' => $valueOptions
+                ),
+                'attributes' => array()
+            )
+        );
     }
 }

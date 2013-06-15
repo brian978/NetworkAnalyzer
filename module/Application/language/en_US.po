@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-09 23:36+0200\n"
-"PO-Revision-Date: 2013-06-09 23:36+0200\n"
+"POT-Creation-Date: 2013-06-15 10:34+0200\n"
+"PO-Revision-Date: 2013-06-15 10:34+0200\n"
 "Last-Translator: brian978 <dbrian89@gmail.com>\n"
 "Language-Team: brian978 <andrei.dincescu@hotmail.com>\n"
 "Language: \n"
@@ -25,7 +25,6 @@ msgid "KB/s"
 msgstr ""
 
 #: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:61
-#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:63
 msgid "MB/s"
 msgstr ""
 
@@ -33,16 +32,61 @@ msgstr ""
 msgid "GB/s"
 msgstr ""
 
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:35
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:63
+msgid "TB/s"
+msgstr ""
+
+#: ../../Reports/src/Reports/Controller/IndexController.php:75
+msgid "Interface bandwidth report"
+msgstr ""
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:60
+msgid "B"
+msgstr ""
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:61
+msgid "KB"
+msgstr ""
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:62
+msgid "MB"
+msgstr ""
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:63
+msgid "GB"
+msgstr ""
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:64
+msgid "TB"
+msgstr ""
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:65
+msgid "PB"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:29
+msgid "Device"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:36
+#: ../../Devices/src/Devices/Form/Fieldset/Type.php:49
 msgid "Name"
 msgstr ""
 
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:51
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:52
 msgid "SNMP Version"
 msgstr ""
 
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:71
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:70
 msgid "SNMP Community"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:92
+msgid "Device type"
+msgstr ""
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:105
+msgid "Interface type"
 msgstr ""
 
 #: ../../Devices/src/Devices/Form/Fieldset/Type.php:33
@@ -61,30 +105,27 @@ msgstr ""
 msgid "An unkown error has occured"
 msgstr ""
 
+#: ../../UI/view/partials/side_menu.phtml:22
 #: ../../UI/view/partials/side_menu.phtml:23
-#: ../../UI/view/partials/side_menu.phtml:38
 msgid "Devices"
 msgstr ""
 
 #: ../../UI/view/partials/side_menu.phtml:26
-#: ../../UI/view/partials/side_menu.phtml:40
+#: ../../UI/view/partials/side_menu.phtml:27
+msgid "Reports"
+msgstr ""
+
+#: ../../UI/view/partials/side_menu.phtml:30
+#: ../../UI/view/partials/side_menu.phtml:31
 msgid "Users"
 msgstr ""
 
-#: ../../UI/view/partials/side_menu.phtml:27
-#: ../../UI/view/partials/side_menu.phtml:42
+#: ../../UI/view/partials/side_menu.phtml:34
+#: ../../UI/view/partials/side_menu.phtml:35
 msgid "Admin"
 msgstr ""
 
-#: ../../UI/view/partials/side_menu.phtml:46
-msgid "Application updater"
-msgstr ""
-
-#: ../../UI/view/partials/side_menu.phtml:51
-msgid "Update"
-msgstr ""
-
-#: ../../UI/view/partials/side_menu.phtml:61
+#: ../../UI/view/partials/side_menu.phtml:66
 msgid "All rights reserved."
 msgstr ""
 
@@ -116,13 +157,14 @@ msgstr ""
 msgid "Remote Port"
 msgstr ""
 
-#: ../../UI/view/layout/ui.phtml:15
-#: ../../UI/view/layout/ui.phtml:91
-#: ../../UI/view/layout/ui.phtml:111
+#: ../../UI/view/layout/report.phtml:14
+#: ../../UI/view/layout/ui.phtml:14
+#: ../../UI/view/layout/ui.phtml:82
+#: ../../UI/view/layout/ui.phtml:102
 msgid "Network Analyzer"
 msgstr ""
 
-#: ../../UI/view/layout/ui.phtml:96
+#: ../../UI/view/layout/ui.phtml:87
 msgid "Dashboard"
 msgstr ""
 
@@ -131,13 +173,10 @@ msgid "View the interface types"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/index.phtml:8
-#: ../../UI/view/devices/types/index.phtml:8
 msgid "Type name"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/index.phtml:9
-#: ../../UI/view/devices/index/index.phtml:12
-#: ../../UI/view/devices/types/index.phtml:9
 msgid "Options"
 msgstr ""
 
@@ -158,14 +197,10 @@ msgid "The interface type was added"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:23
-#: ../../UI/view/devices/index/partials/list.phtml:36
-#: ../../UI/view/devices/types/partials/list.phtml:23
 msgid "Edit"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:28
-#: ../../UI/view/devices/index/partials/list.phtml:41
-#: ../../UI/view/devices/types/partials/list.phtml:28
 msgid "Trash"
 msgstr ""
 
@@ -177,14 +212,6 @@ msgstr ""
 #: ../../UI/view/devices/index/monitor.phtml:12
 #: ../../UI/view/dashboard/index/index.phtml:13
 msgid "Device name"
-msgstr ""
-
-#: ../../UI/view/devices/index/index.phtml:9
-msgid "Device type"
-msgstr ""
-
-#: ../../UI/view/devices/index/index.phtml:11
-msgid "Interface type"
 msgstr ""
 
 #: ../../UI/view/devices/index/edit-form.phtml:2
@@ -294,30 +321,37 @@ msgid "Monitor"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:25
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:35
 msgid "Up"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:26
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:36
 msgid "Down"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:27
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:37
 msgid "Testing"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:28
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:38
 msgid "Unknown"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:29
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:39
 msgid "Dormant"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:30
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:40
 msgid "Not present"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:31
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:41
 msgid "Lower layer down"
 msgstr ""
 
@@ -448,5 +482,21 @@ msgstr ""
 
 #: ../../UI/view/error/index.phtml:1
 msgid "An error occurred"
+msgstr ""
+
+#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:16
+msgid "Day"
+msgstr ""
+
+#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:25
+msgid "In"
+msgstr ""
+
+#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:26
+msgid "Out"
+msgstr ""
+
+#: ../../UI/view/reports/index/interface-bandwidth.phtml:2
+msgid "Interfaces traffic"
 msgstr ""
 

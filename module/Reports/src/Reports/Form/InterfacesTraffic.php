@@ -12,9 +12,9 @@ namespace Reports\Form;
 use Library\Form\AbstractForm;
 use Library\Model\AbstractDbModel;
 use Library\Model\DbModelAwareInterface;
-use Reports\Form\Fieldset\InterfaceBandwidth as InterfaceBandwidthFieldset;
+use Reports\Form\Fieldset\InterfacesTraffic as InterfacesTrafficFieldset;
 
-class InterfaceBandwidth extends AbstractForm implements DbModelAwareInterface
+class InterfacesTraffic extends AbstractForm implements DbModelAwareInterface
 {
     /**
      * @var \Library\Model\AbstractDbModel;
@@ -37,7 +37,7 @@ class InterfaceBandwidth extends AbstractForm implements DbModelAwareInterface
      */
     protected function getBaseFieldsetObject()
     {
-        $fieldset = new InterfaceBandwidthFieldset();
+        $fieldset = new InterfacesTrafficFieldset();
         $fieldset->setModel($this->model);
         $fieldset->setDenyFilters(array('id', 'name'));
 

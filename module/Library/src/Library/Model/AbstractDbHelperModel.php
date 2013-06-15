@@ -89,7 +89,7 @@ class AbstractDbHelperModel extends AbstractTableGateway
      * @param string     $sign
      * @return string
      */
-    protected function getWhere($field, $value, $table = null, $sign = '=')
+    public function getWhere($field, $value, $table = null, $sign = '=')
     {
         // When the value is an object it's because of an expression
         if (is_object($value)) {

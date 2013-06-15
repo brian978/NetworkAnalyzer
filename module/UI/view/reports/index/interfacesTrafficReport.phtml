@@ -1,11 +1,7 @@
-<?php
-
-?>
-
 <article class="module width_full">
     <header>
         <h3>
-            <?php echo $this->reportTitle . ' ' . $this->deviceInfo->name; ?>
+            <?php echo $this->translate('Interfaces traffic') . ' ' . $this->deviceInfo->name; ?>
         </h3>
     </header>
     <div class="module_content tableholder">
@@ -22,8 +18,8 @@
                     <th></th>
                     <th></th>
                     <?php foreach ($this->reportData['interfaces'] as $oidIndex): ?>
-                        <th><?php echo $this->translate('Octets in') ?></th>
-                        <th><?php echo $this->translate('Octets out') ?></th>
+                        <th><?php echo $this->translate('In') ?></th>
+                        <th><?php echo $this->translate('Out') ?></th>
                     <?php endforeach; ?>
                 </tr>
             </thead>

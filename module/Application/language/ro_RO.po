@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-09 23:36+0200\n"
-"PO-Revision-Date: 2013-06-09 23:39+0200\n"
+"POT-Creation-Date: 2013-06-15 10:37+0200\n"
+"PO-Revision-Date: 2013-06-15 10:37+0200\n"
 "Last-Translator: brian978 <dbrian89@yahoo.com>\n"
 "Language-Team: brian978 <andrei.dincescu@hotmail.com>\n"
 "Language: \n"
@@ -25,7 +25,6 @@ msgid "KB/s"
 msgstr "KB/s"
 
 #: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:61
-#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:63
 msgid "MB/s"
 msgstr "MB/s"
 
@@ -33,17 +32,58 @@ msgstr "MB/s"
 msgid "GB/s"
 msgstr "GB/s"
 
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:35
+#: ../../SNMP/src/SNMP/View/Helper/BandwidthCalculator.php:63
+msgid "TB/s"
+msgstr "TB/s"
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:60
+msgid "B"
+msgstr "B"
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:61
+msgid "KB"
+msgstr "KB"
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:62
+msgid "MB"
+msgstr "MB"
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:63
+msgid "GB"
+msgstr "GB"
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:64
+msgid "TB"
+msgstr "TB"
+
+#: ../../Reports/src/Reports/View/Helper/UnitConverter.php:65
+msgid "PB"
+msgstr "PB"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:29
+msgid "Device"
+msgstr "Dispozitiv"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:36
+#: ../../Devices/src/Devices/Form/Fieldset/Type.php:49
 msgid "Name"
 msgstr "Nume"
 
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:51
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:52
 msgid "SNMP Version"
 msgstr "Versiunea de SNMP"
 
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:71
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:70
 msgid "SNMP Community"
 msgstr "Comunitatea SNMP"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:92
+msgid "Device type"
+msgstr "Tip echipament"
+
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:105
+msgid "Interface type"
+msgstr "Tip interfata"
 
 #: ../../Devices/src/Devices/Form/Fieldset/Type.php:33
 msgid "Type"
@@ -61,30 +101,27 @@ msgstr "IP"
 msgid "An unkown error has occured"
 msgstr "O erroare a fost intalnita"
 
+#: ../../UI/view/partials/side_menu.phtml:22
 #: ../../UI/view/partials/side_menu.phtml:23
-#: ../../UI/view/partials/side_menu.phtml:38
 msgid "Devices"
 msgstr "Dispozitive"
 
 #: ../../UI/view/partials/side_menu.phtml:26
-#: ../../UI/view/partials/side_menu.phtml:40
+#: ../../UI/view/partials/side_menu.phtml:27
+msgid "Reports"
+msgstr "Rapoarte"
+
+#: ../../UI/view/partials/side_menu.phtml:30
+#: ../../UI/view/partials/side_menu.phtml:31
 msgid "Users"
 msgstr "Utilizatori"
 
-#: ../../UI/view/partials/side_menu.phtml:27
-#: ../../UI/view/partials/side_menu.phtml:42
+#: ../../UI/view/partials/side_menu.phtml:34
+#: ../../UI/view/partials/side_menu.phtml:35
 msgid "Admin"
 msgstr "Admin"
 
-#: ../../UI/view/partials/side_menu.phtml:46
-msgid "Application updater"
-msgstr "Actualizare aplicatie"
-
-#: ../../UI/view/partials/side_menu.phtml:51
-msgid "Update"
-msgstr "Actualizeaza"
-
-#: ../../UI/view/partials/side_menu.phtml:61
+#: ../../UI/view/partials/side_menu.phtml:66
 msgid "All rights reserved."
 msgstr "Toate drepturile rezervate."
 
@@ -116,13 +153,14 @@ msgstr "Adresa IP destinatie"
 msgid "Remote Port"
 msgstr "Port destinatie"
 
-#: ../../UI/view/layout/ui.phtml:15
-#: ../../UI/view/layout/ui.phtml:91
-#: ../../UI/view/layout/ui.phtml:111
+#: ../../UI/view/layout/report.phtml:14
+#: ../../UI/view/layout/ui.phtml:14
+#: ../../UI/view/layout/ui.phtml:82
+#: ../../UI/view/layout/ui.phtml:102
 msgid "Network Analyzer"
 msgstr "Analizator retea"
 
-#: ../../UI/view/layout/ui.phtml:96
+#: ../../UI/view/layout/ui.phtml:87
 msgid "Dashboard"
 msgstr "Panou de control"
 
@@ -131,13 +169,10 @@ msgid "View the interface types"
 msgstr "Vizualizeaza tipurile de interfete"
 
 #: ../../UI/view/devices/interface-types/index.phtml:8
-#: ../../UI/view/devices/types/index.phtml:8
 msgid "Type name"
 msgstr "Tip"
 
 #: ../../UI/view/devices/interface-types/index.phtml:9
-#: ../../UI/view/devices/index/index.phtml:12
-#: ../../UI/view/devices/types/index.phtml:9
 msgid "Options"
 msgstr "Optiuni"
 
@@ -158,14 +193,10 @@ msgid "The interface type was added"
 msgstr "Tipul de interfata a fost adaugat"
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:23
-#: ../../UI/view/devices/index/partials/list.phtml:36
-#: ../../UI/view/devices/types/partials/list.phtml:23
 msgid "Edit"
 msgstr "Editeaza"
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:28
-#: ../../UI/view/devices/index/partials/list.phtml:41
-#: ../../UI/view/devices/types/partials/list.phtml:28
 msgid "Trash"
 msgstr "Sterge"
 
@@ -178,14 +209,6 @@ msgstr "Vizualizeaza echipamentele"
 #: ../../UI/view/dashboard/index/index.phtml:13
 msgid "Device name"
 msgstr "Nume echipament"
-
-#: ../../UI/view/devices/index/index.phtml:9
-msgid "Device type"
-msgstr "Tip echipament"
-
-#: ../../UI/view/devices/index/index.phtml:11
-msgid "Interface type"
-msgstr "Tip interfata"
 
 #: ../../UI/view/devices/index/edit-form.phtml:2
 msgid "Edit device"
@@ -294,30 +317,37 @@ msgid "Monitor"
 msgstr "Monitorizeaza"
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:25
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:35
 msgid "Up"
 msgstr "Pornita"
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:26
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:36
 msgid "Down"
 msgstr "Oprita"
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:27
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:37
 msgid "Testing"
 msgstr "In testare"
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:28
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:38
 msgid "Unknown"
 msgstr "Necunoscut"
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:29
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:39
 msgid "Dormant"
 msgstr "Adormita"
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:30
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:40
 msgid "Not present"
 msgstr "Inexistenta"
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:31
+#: ../../UI/view/dashboard/index/partials/monitor.phtml:41
 msgid "Lower layer down"
 msgstr "Nivel inferior cazut"
 
@@ -449,6 +479,32 @@ msgstr ""
 #: ../../UI/view/error/index.phtml:1
 msgid "An error occurred"
 msgstr "O erroare a fost intalnita"
+
+#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:8
+#: ../../UI/view/reports/index/interface-bandwidth.phtml:2
+msgid "Interfaces traffic"
+msgstr "Date interfata"
+
+#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:16
+msgid "Day"
+msgstr "Zi"
+
+#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:25
+msgid "In"
+msgstr "Intrat"
+
+#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:26
+msgid "Out"
+msgstr "Iesit"
+
+#~ msgid "Interface bandwidth report"
+#~ msgstr "Trafic interfata"
+
+#~ msgid "Application updater"
+#~ msgstr "Actualizare aplicatie"
+
+#~ msgid "Update"
+#~ msgstr "Actualizeaza"
 
 #~ msgid "View types"
 #~ msgstr "Vizualizeaza tipurile"

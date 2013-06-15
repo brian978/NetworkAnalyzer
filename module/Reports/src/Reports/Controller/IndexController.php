@@ -11,6 +11,7 @@ namespace Reports\Controller;
 
 use Devices\Model\BandwidthLogs;
 use Library\Mvc\Controller\AbstractFormController;
+use Sniffer\Model\TrafficLogs;
 use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractFormController
@@ -21,13 +22,15 @@ class IndexController extends AbstractFormController
      * @var array
      */
     protected $formSpecs = array(
-        'type' => '\Reports\Form\InterfaceBandwidth',
         'object' => '\Reports\Entity\Report',
         'model' => 'Devices\Model\DevicesModel',
         'dataKey' => 'report',
     );
 
-    public function interfaceBandwidthAction()
+    /**
+     * @return array
+     */
+    protected function getViewParams()
     {
         $viewParams   = array();
         $post         = array();
@@ -57,6 +60,27 @@ class IndexController extends AbstractFormController
         return $viewParams;
     }
 
+    public function interfacesTrafficAction()
+    {
+        $this->formSpecs['type'] = '\Reports\Form\InterfacesTraffic';
+
+        return $this->getViewParams();
+    }
+
+    public function devicesUptimeAction()
+    {
+        $this->formSpecs['type'] = '\Reports\Form\DevicesUptime';
+
+        return $this->getViewParams();
+    }
+
+    public function devicesTrafficAction()
+    {
+        $this->formSpecs['type'] = '\Reports\Form\DevicesTraffic';
+
+        return $this->getViewParams();
+    }
+
     /**
      * This is a dispatcher for various reports
      *
@@ -64,23 +88,35 @@ class IndexController extends AbstractFormController
      */
     public function generateAction()
     {
-        $hasFailed  = true;
-        $dispatch   = $this->getEvent()->getRouteMatch()->getParam('dispatch');
-        $translator = $this->serviceLocator->get('translator');
-        $model      = null;
-        $reportData = array();
+        $dispatch = $this->getEvent()->getRouteMatch()->getParam('dispatch');
+        $model    = null;
 
         switch ($dispatch) {
-            case 'interfaceBandwidth':
-                $reportTitle = $translator->translate('Interface bandwidth report');
+            case 'interfacesTraffic':
+                $this->formSpecs['type'] = '\Reports\Form\InterfacesTraffic';
 
                 /** @var $adapter \Zend\Db\Adapter\Adapter */
                 $adapter = $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
                 $model   = new BandwidthLogs($adapter);
                 break;
 
+            case 'devicesUptime':
+                $this->formSpecs['type'] = '\Reports\Form\DevicesUptime';
+
+                /** @var $adapter \Zend\Db\Adapter\Adapter */
+                $adapter = $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
+                $model   = new BandwidthLogs($adapter);
+                break;
+
+            case 'devicesTraffic':
+                $this->formSpecs['type'] = '\Reports\Form\DevicesTraffic';
+
+                /** @var $adapter \Zend\Db\Adapter\Adapter */
+                $adapter = $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
+                $model   = new TrafficLogs($adapter);
+                break;
+
             default:
-                $reportTitle = '';
                 break;
         }
 
@@ -92,7 +128,6 @@ class IndexController extends AbstractFormController
 
             // Redirect regarding if valid or not but with different params
             if ($isValid === true) {
-                $hasFailed = false;
                 $className = '\Reports\Model\Reports\\' . ucfirst($dispatch);
 
                 /** @var $reportObject \Reports\Model\Reports\ReportInterface */
@@ -101,15 +136,20 @@ class IndexController extends AbstractFormController
                 $reportObject->setData($post);
                 $reportData = $reportObject->getReport();
 
-                /** @var $devicesModel \Devices\Model\DevicesModel */
-                $devicesModel = $this->serviceLocator->get('Devices\Model\DevicesModel');
-                $deviceInfo   = $devicesModel->getInfo($post['interface_bandwidth']['device']['id']);
+                $deviceInfo = '';
+
+                if (isset($post['interface_bandwidth']) || isset($post['devices_traffic'])) {
+                    $deviceData = current($post);
+
+                    /** @var $devicesModel \Devices\Model\DevicesModel */
+                    $devicesModel = $this->serviceLocator->get('Devices\Model\DevicesModel');
+                    $deviceInfo   = $devicesModel->getInfo($deviceData['device']['id']);
+                }
 
                 // View stuff
                 $this->layout('layout/report.phtml');
 
                 $viewModel = new ViewModel(array(
-                    'reportTitle' => $reportTitle,
                     'reportData' => $reportData,
                     'deviceInfo' => $deviceInfo,
                 ));
@@ -120,9 +160,7 @@ class IndexController extends AbstractFormController
             }
         }
 
-        if ($hasFailed === true) {
-            $this->redirectOnFail(array('action' => $dispatch));
-        }
+        $this->redirectOnFail(array('action' => $dispatch));
     }
 
     /**

@@ -1,5 +1,5 @@
 <article class="module width_full">
-    <header><h3><?php echo $this->translate('Interface bandwidth report') ?></h3></header>
+    <header><h3><?php echo $this->translate('Interfaces traffic') ?></h3></header>
     <div class="module_content">
         <?php
 
@@ -12,11 +12,12 @@
         $report = $form->get('interface_bandwidth');
 
         $devicesNames = $report->get('device')->get('id');
+        $days = $report->get('days');
 
         /** @var $form \Reports\Form\InterfaceBandwidth */
         $form->setAttribute(
             'action',
-            $this->url('reports/module', array('action' => 'generate', 'dispatch' => 'interfaceBandwidth'), true)
+            $this->url('reports/module', array('action' => 'generate', 'dispatch' => 'interfacesTraffic'), true)
         )->prepare();
 
         // Messages
@@ -33,6 +34,7 @@
         echo $this->form()->openTag($form);
 
         echo $this->showInputError($devicesNames) . $this->formRow($devicesNames);
+        echo $this->showInputError($days) . $this->formRow($days);
         ?>
 
         <?php

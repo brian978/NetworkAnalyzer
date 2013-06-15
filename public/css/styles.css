@@ -11,6 +11,7 @@
 
 .input_form .form_row {
     display: table-row;
+    float: none !important;
 }
 
 .form_row > span:first-child {
@@ -18,7 +19,7 @@
     padding-right: 5px;
 }
 
-.form_row > input, .form_row > select {
+.form_row > input[type="text"], .form_row > select {
     display: table-cell;
     width: 200px;
 }
@@ -34,4 +35,8 @@
 .tableholder {
     margin: 0px !important;
     padding: 0px !important;
+}
+
+.input_form fieldset {
+    padding: 10px;
 }

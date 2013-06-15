@@ -9,46 +9,57 @@
 
 namespace Reports\Model\Reports;
 
-use Library\Model\AbstractDbModel;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-
 /**
- * Class InterfaceBandwidth
+ * Class InterfacesTraffic
  *
  * @package Reports\Model\Reports
  */
-class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterface
+class InterfacesTraffic extends AbstractReport
 {
-    /**
-     * @var \Devices\Model\BandwidthLogs
-     */
-    protected $model;
-
     /**
      * @var \Zend\ServiceManager\ServiceLocatorInterface
      */
     protected $serviceLocator;
 
     /**
-     * @var array
+     * @param array $data
+     * @return $this
      */
-    protected $data = array();
+    public function setData(array $data)
+    {
+        if (isset($data['interface_bandwidth'])) {
+            $this->data = $data['interface_bandwidth'];
+        }
 
+        return $this;
+    }
+
+    /**
+     * @return array
+     * @throws \InvalidArgumentException
+     */
     public function getReport()
     {
-        ini_set('memory_limit', '-1');
-
         if (!isset($this->data['device']['id'])) {
             throw new \InvalidArgumentException('The device ID was not found in the provided data');
         }
 
+        $noDays = 1;
+
+        if (isset($this->data['days'])) {
+            $noDays = $this->data['days'];
+        }
+
         $days             = array();
         $interfaces       = array();
-        $xDaysSeconds     = 432000; // For now five days
+        $oneDaySeconds    = 86400;
+        $xDaysSeconds     = $noDays * $oneDaySeconds;
         $currentTime      = time();
         $timeFromMidnight = strtotime(date('Y-m-d', $currentTime) . ' 00:00:00');
         $lastXDays        = $currentTime - ($currentTime - $timeFromMidnight) - $xDaysSeconds;
+
+        $timeTo = $this->model->getWhere('time', $timeFromMidnight, 'bandwidth_logs', '<');
+        $this->model->addWhere($timeTo, true);
 
         $result = $this->model->getLastSeconds($lastXDays, $this->data['device']['id'], 0);
 
@@ -72,46 +83,5 @@ class InterfaceBandwidth implements ReportInterface, ServiceLocatorAwareInterfac
             'days' => $days,
             'interfaces' => $interfaces,
         );
-    }
-
-    /**
-     * @param array $data
-     * @return $this
-     */
-    public function setData(array $data)
-    {
-        if (isset($data['interface_bandwidth'])) {
-            $this->data = $data['interface_bandwidth'];
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set service locator
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-    /**
-     * Get service locator
-     *
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    /**
-     * @param AbstractDbModel $model
-     */
-    public function setModel(AbstractDbModel $model)
-    {
-        $this->model = $model;
     }
 }

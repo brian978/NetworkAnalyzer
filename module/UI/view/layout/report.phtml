@@ -28,9 +28,9 @@ $this->nav->setTranslator(
                        )
                    )
                    ->prependStylesheet($this->basePath() . '/css/ie.css', 'screen', 'lt IE 9')
-                   ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css')
-                   ->prependStylesheet($this->basePath() . '/css/layout.css')
-                   ->prependStylesheet($this->basePath() . '/css/styles.css')
+                   ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.2.custom.min.css', 'all')
+                   ->prependStylesheet($this->basePath() . '/css/layout.css', 'all')
+                   ->prependStylesheet($this->basePath() . '/css/styles.css', 'all')
         ?>
 
         <!-- Le scripts -->
