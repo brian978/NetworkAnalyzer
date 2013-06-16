@@ -105,6 +105,18 @@ class User extends AbstractDbFieldset
             )
         );
 
+        $filters['password'] = array(
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 8,
+                    )
+                )
+            )
+        );
+
         // Removing the un-required filters (this is useful when you don't show all the fields)
         return $this->processDenyFilters($filters);
     }
