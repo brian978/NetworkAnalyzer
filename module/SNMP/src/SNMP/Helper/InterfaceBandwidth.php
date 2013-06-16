@@ -200,7 +200,7 @@ class InterfaceBandwidth implements HelperInterface
     }
 
     /**
-     * @param Log  $logObject
+     * @param Log $logObject
      * @return $this
      */
     protected function logData(Log $logObject)
