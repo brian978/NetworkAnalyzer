@@ -22,7 +22,7 @@ class IndexController extends AbstractController
     /**
      * @var int
      */
-    protected $pollInterval = 1;
+    protected $pollInterval = 60;
 
     /**
      * These parameters are used to create the required form
@@ -123,8 +123,8 @@ class IndexController extends AbstractController
             $max->{$interfaceName} = clone $inOut;
         }
 
-        // Getting some statistics for the last 60 seconds
-        $stats = $logsModel->getLastSeconds(60, $device->getDeviceEntity()->getId());
+        // Getting some statistics for the last 10 minutes
+        $stats = $logsModel->getLastSeconds(600, $device->getDeviceEntity()->getId());
 
         foreach ($stats as $log) {
             $interfaceName = $log['interface_name'];

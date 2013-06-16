@@ -10,6 +10,7 @@
 namespace Users\Controller;
 
 use Library\Form\AbstractForm;
+use Users\Model\Users;
 
 class IndexController extends AbstractController
 {
@@ -42,6 +43,7 @@ class IndexController extends AbstractController
                 $this->formSpecs['dataKey'] => array(
                     'id' => $object->id,
                     'name' => $object->name,
+                    'password' => $object->password,
                     'email' => $object->email,
                     'role' => array(
                         'id' => $object->role_id,
@@ -53,13 +55,13 @@ class IndexController extends AbstractController
 
     public function listAction()
     {
-        /** @var $model \Library\Model\AbstractDbModel */
+        /** @var $model Users */
         $model = $this->serviceLocator->get($this->formSpecs['model']);
 
+        $model->locale = $this->getServiceLocator()->get('translator')->getLocale();
+
         return array(
-            'items' => $model->fetch(
-                $this->getServiceLocator()->get('translator')->getLocale()
-            )
+            'items' => $model->fetch()
         );
     }
 

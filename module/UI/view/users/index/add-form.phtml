@@ -15,6 +15,7 @@
 
         // Retrieving the form elements
         $userName = $user->get('name');
+        $password = $user->get('password');
         $userEmail = $user->get('email');
         $userRole = $role->get('id');
 
@@ -38,11 +39,12 @@
         echo $this->form()->openTag($form);
 
         echo $this->showInputError($userName) . $this->formRow($userName);
+        echo $this->showInputError($password) . $this->formRow($password);
         echo $this->showInputError($userEmail) . $this->formRow($userEmail);
         echo $this->showInputError($userRole) . $this->formRow($userRole);
 
         echo $this->formHidden($form->get('csrf'));
-        echo $this->formElement($form->get('submit'));
+        echo $this->formElement($form->get('submit')->setValue($this->translate('Submit')));
 
         echo $this->form()->closeTag();
         ?>

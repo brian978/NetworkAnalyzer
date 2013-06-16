@@ -33,13 +33,13 @@ abstract class AbstractController extends AbstractFormController
      */
     protected function redirectOnFail(array $data)
     {
-        $this->PostRedirectGet(
-            $this->url()->fromRoute(
-                'users/status',
-                array('action' => $data['action'], 'success' => 'false'),
-                true
-            ),
+        $url = $this->url()->fromRoute(
+            'users/status',
+            array('action' => $data['action'], 'success' => 'false'),
             true
         );
+
+        $this->PostRedirectGet($url, true);
+        $this->redirect()->toUrl($url);
     }
 }

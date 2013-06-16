@@ -174,11 +174,6 @@ class TrafficPoller extends AbstractModel
         $jarCommand = 'java -jar proxy/dispatcher.jar -mode client -command "' . $command . '" -address ' . $address;
         $output     = explode(chr(13) . chr(10), shell_exec($jarCommand));
 
-        $log = array(
-            '$jarCommand' => $jarCommand,
-            '$output' => $output
-        );
-
         return $output;
     }
 }

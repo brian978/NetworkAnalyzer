@@ -37,7 +37,7 @@ class User extends AbstractDbFieldset
             array(
                 'name' => 'name',
                 'options' => array(
-                    'label' => 'Name',
+                    'label' => $this->translator->translate('Name'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -50,9 +50,24 @@ class User extends AbstractDbFieldset
 
         $this->add(
             array(
+                'name' => 'password',
+                'type' => '\Zend\Form\Element\Password',
+                'options' => array(
+                    'label' => $this->translator->translate('Password'),
+                    'label_attributes' => array(
+                        'class' => 'form_row'
+                    ),
+                ),
+                'attributes' => array(
+                )
+            )
+        );
+
+        $this->add(
+            array(
                 'name' => 'email',
                 'options' => array(
-                    'label' => 'Email',
+                    'label' => $this->translator->translate('Email'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -85,6 +100,18 @@ class User extends AbstractDbFieldset
             'validators' => array(
                 array(
                     'name' => 'EmailAddress'
+                )
+            )
+        );
+
+        $filters['password'] = array(
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 8,
+                    )
                 )
             )
         );

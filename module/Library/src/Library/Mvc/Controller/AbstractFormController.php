@@ -13,6 +13,7 @@ use Library\Form\AbstractForm;
 use Library\Model\DbModelAwareInterface;
 use Library\Model\ModelAwareInterface;
 use UI\Controller\AbstractUiController;
+use Zend\Form\FormInterface;
 
 abstract class AbstractFormController extends AbstractUiController
 {
@@ -210,10 +211,11 @@ abstract class AbstractFormController extends AbstractUiController
         $hasFailed = true;
 
         if ($this->request->isPost()) {
-            $form    = $this->getForm($this->request->getPost()->toArray());
+            $post    = $this->request->getPost()->toArray();
+            $form    = $this->getForm($post);
             $isValid = $form->isValid();
 
-            if ($form->getObject()->getId() !== 0) {
+            if ($form->getObject()->getId() !== 0 || isset($post['form_mode'])) {
                 $action = 'editForm';
             } else {
                 $action = 'addForm';
@@ -251,17 +253,21 @@ abstract class AbstractFormController extends AbstractUiController
 
     public function deleteAction()
     {
-        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        $routeMatch = $this->getEvent()->getRouteMatch();
+        $id         = $routeMatch->getParam('id');
 
-        /** @var $model \Library\Model\AbstractDbModel */
-        $model = $this->getModel();
+        if ($id != null) {
 
-        $result = $model->doDelete($model->getInfo($id));
+            /** @var $model \Library\Model\AbstractDbModel */
+            $model = $this->getModel();
 
-        if ($result === 0) {
-            $this->redirectOnFail(array('action' => 'list'));
-        } else {
-            $this->redirectOnSuccess(array('action' => 'list'));
+            $result = $model->doDelete($model->getInfo($id));
+
+            if (is_numeric($result) && $result > 0) {
+                $this->redirectOnSuccess(array('action' => 'index'));
+            }
         }
+
+        $this->redirectOnFail(array('action' => 'index'));
     }
 }

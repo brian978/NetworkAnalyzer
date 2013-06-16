@@ -246,16 +246,16 @@ return array(
                         'resource' => 'users',
                         'privilege' => 'view_users',
                     ),
-                    array(
-                        'type' => 'Library\Navigation\Page\Mvc',
-                        'label' => 'Profile',
-                        'route' => 'users/module',
-                        'controller' => 'index',
-                        'action' => 'profile',
-                        'class' => 'icn_profile',
-                        'resource' => 'users',
-                        'privilege' => 'profile'
-                    )
+//                    array(
+//                        'type' => 'Library\Navigation\Page\Mvc',
+//                        'label' => 'Profile',
+//                        'route' => 'users/module',
+//                        'controller' => 'index',
+//                        'action' => 'profile',
+//                        'class' => 'icn_profile',
+//                        'resource' => 'users',
+//                        'privilege' => 'profile'
+//                    )
                 )
             ),
             // Admin pages

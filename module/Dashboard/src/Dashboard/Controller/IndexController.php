@@ -18,7 +18,7 @@ class IndexController extends AbstractUiController
     /**
      * @var int
      */
-    protected $pollInterval = 5;
+    protected $pollInterval = 60;
 
     public function indexAction()
     {

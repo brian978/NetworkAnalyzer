@@ -41,7 +41,7 @@
 
         echo $this->formHidden($type->get('id'));
         echo $this->formHidden($form->get('csrf'));
-        echo $this->formElement($form->get('submit'));
+        echo $this->formElement($form->get('submit')->setValue($this->translate('Submit')));
 
         echo $this->form()->closeTag();
         ?>
