@@ -9,6 +9,7 @@
 
 namespace AAA\Controller;
 
+use AAA\Model\Authentication;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 
@@ -39,6 +40,8 @@ class IndexController extends AbstractActionController
         $success = false;
 
         if ($this->request->isPost()) {
+
+            /** @var $auth Authentication */
             $auth = $this->serviceLocator->get('AAA\Authentication');
             $auth->setCredentials($this->getRequest()->getPost()->toArray());
             $result = $auth->authenticate();
