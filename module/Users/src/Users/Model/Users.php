@@ -125,6 +125,5 @@ class Users extends AbstractDbModel
 
     public function doDelete($object)
     {
-        // TODO: Implement doDelete() method.
     }
 }
