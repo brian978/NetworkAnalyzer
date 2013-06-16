@@ -123,7 +123,19 @@ class Users extends AbstractDbModel
         return $this->executeUpdateById($data, $object);
     }
 
+    /**
+     * @param \ArrayObject $object
+     * @return int
+     */
     public function doDelete($object)
     {
+        $result = 0;
+
+        try {
+            $result = $this->delete($this->getWhere('id', $object->id));
+        } catch (\Exception $e) {
+        }
+
+        return $result;
     }
 }
