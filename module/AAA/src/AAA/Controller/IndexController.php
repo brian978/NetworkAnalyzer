@@ -9,7 +9,6 @@
 
 namespace AAA\Controller;
 
-use AAA\Model\Authentication;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 
