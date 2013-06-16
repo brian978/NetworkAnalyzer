@@ -251,17 +251,21 @@ abstract class AbstractFormController extends AbstractUiController
 
     public function deleteAction()
     {
-        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        $routeMatch = $this->getEvent()->getRouteMatch();
+        $id         = $routeMatch->getParam('id');
 
-        /** @var $model \Library\Model\AbstractDbModel */
-        $model = $this->getModel();
+        if ($id != null) {
 
-        $result = $model->doDelete($model->getInfo($id));
+            /** @var $model \Library\Model\AbstractDbModel */
+            $model = $this->getModel();
 
-        if ($result === 0) {
-            $this->redirectOnFail(array('action' => 'list'));
-        } else {
-            $this->redirectOnSuccess(array('action' => 'list'));
+            $result = $model->doDelete($model->getInfo($id));
+
+            if (is_numeric($result) && $result > 0) {
+                $this->redirectOnSuccess(array('action' => 'index'));
+            }
         }
+
+        $this->redirectOnFail(array('action' => 'index'));
     }
 }
