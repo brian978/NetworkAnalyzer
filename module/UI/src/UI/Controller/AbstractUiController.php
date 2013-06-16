@@ -33,7 +33,7 @@ abstract class AbstractUiController extends AbstractActionController
      *
      * @events dispatch.pre, dispatch.post
      *
-     * @param  Request $request
+     * @param  Request       $request
      * @param  null|Response $response
      *
      * @return Response|mixed
@@ -95,7 +95,7 @@ abstract class AbstractUiController extends AbstractActionController
 
         // If there is not permission set for a given controller we allow the response
         if (!isset($permissions[$controller])) {
-            $allow = true;
+            $allow = false;
         } else {
             if (!isset($permissions[$controller]['resource']) || !isset($permissions[$controller]['privileges'])) {
                 throw new \RuntimeException('Configuration invalid, missing "resource" or "privileges" entry');

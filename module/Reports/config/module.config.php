@@ -72,17 +72,22 @@ return array(
                 'inherits' => 'user',
                 'resources' => array(
                     'reports' => array(
-                        'allow' => null,
+                        'allow' => array(
+                            'generate_reports'
+                        ),
                     ),
                 )
             )
         ),
         // This section is used by the main controller to determine if the request should be allowed
         'controllers' => array(
-            'Reports\Controller\Reports' => array(
+            'Reports\Controller\Index' => array(
                 'resource' => 'reports',
                 'privileges' => array(
-                    'trafficReport' => 'generate_reports',
+                    'interfacesTraffic' => 'generate_reports',
+                    'devicesUptime' => 'generate_reports',
+                    'devicesTraffic' => 'generate_reports',
+                    'generate' => 'generate_reports',
                 )
             ),
         )

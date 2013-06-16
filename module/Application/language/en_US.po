@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-15 10:34+0200\n"
-"PO-Revision-Date: 2013-06-15 10:34+0200\n"
+"POT-Creation-Date: 2013-06-16 18:21+0200\n"
+"PO-Revision-Date: 2013-06-16 18:21+0200\n"
 "Last-Translator: brian978 <dbrian89@gmail.com>\n"
 "Language-Team: brian978 <andrei.dincescu@hotmail.com>\n"
 "Language: \n"
@@ -36,8 +36,33 @@ msgstr ""
 msgid "TB/s"
 msgstr ""
 
-#: ../../Reports/src/Reports/Controller/IndexController.php:75
-msgid "Interface bandwidth report"
+#: ../../Users/src/Users/Form/Fieldset/User.php:40
+msgid "Name"
+msgstr ""
+
+#: ../../Users/src/Users/Form/Fieldset/User.php:56
+msgid "Password"
+msgstr ""
+
+#: ../../Users/src/Users/Form/Fieldset/User.php:70
+msgid "Email"
+msgstr ""
+
+#: ../../Users/src/Users/Form/Fieldset/Role.php:37
+msgid "Role name"
+msgstr ""
+
+#: ../../Reports/src/Reports/Form/Fieldset/DevicesTraffic.php:38
+msgid "Traffic type"
+msgstr ""
+
+#: ../../Reports/src/Reports/Form/Fieldset/DevicesTraffic.php:65
+msgid "Days no."
+msgstr ""
+
+#: ../../Reports/src/Reports/Form/Fieldset/DevicesUptime.php:32
+#: ../../Devices/src/Devices/Form/Fieldset/Device.php:29
+msgid "Device"
 msgstr ""
 
 #: ../../Reports/src/Reports/View/Helper/UnitConverter.php:60
@@ -62,15 +87,6 @@ msgstr ""
 
 #: ../../Reports/src/Reports/View/Helper/UnitConverter.php:65
 msgid "PB"
-msgstr ""
-
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:29
-msgid "Device"
-msgstr ""
-
-#: ../../Devices/src/Devices/Form/Fieldset/Device.php:36
-#: ../../Devices/src/Devices/Form/Fieldset/Type.php:49
-msgid "Name"
 msgstr ""
 
 #: ../../Devices/src/Devices/Form/Fieldset/Device.php:52
@@ -99,6 +115,15 @@ msgstr ""
 
 #: ../../Devices/src/Devices/Form/Fieldset/Iface.php:31
 msgid "IP"
+msgstr ""
+
+#: ../../AAA/view/aaa/index/index.phtml:10
+msgid "Submit"
+msgstr ""
+
+#: ../../AAA/view/layout/aaa.phtml:5
+#: ../../UI/view/layout/report.phtml:14
+msgid "Network Analyzer"
 msgstr ""
 
 #: ../../UI/view/partials/form_generic_message.phtml:12
@@ -134,11 +159,7 @@ msgid "An interface must be selected"
 msgstr ""
 
 #: ../../UI/view/sniffer/index/index.phtml:7
-msgid "TCP Traffic"
-msgstr ""
-
-#: ../../UI/view/sniffer/index/index.phtml:15
-msgid "Traffic type"
+msgid "IP Traffic"
 msgstr ""
 
 #: ../../UI/view/sniffer/index/index.phtml:16
@@ -157,13 +178,6 @@ msgstr ""
 msgid "Remote Port"
 msgstr ""
 
-#: ../../UI/view/layout/report.phtml:14
-#: ../../UI/view/layout/ui.phtml:14
-#: ../../UI/view/layout/ui.phtml:82
-#: ../../UI/view/layout/ui.phtml:102
-msgid "Network Analyzer"
-msgstr ""
-
 #: ../../UI/view/layout/ui.phtml:87
 msgid "Dashboard"
 msgstr ""
@@ -173,10 +187,13 @@ msgid "View the interface types"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/index.phtml:8
+#: ../../UI/view/devices/types/index.phtml:8
 msgid "Type name"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/index.phtml:9
+#: ../../UI/view/devices/index/index.phtml:12
+#: ../../UI/view/devices/types/index.phtml:9
 msgid "Options"
 msgstr ""
 
@@ -197,10 +214,12 @@ msgid "The interface type was added"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:23
+#: ../../UI/view/devices/index/partials/list.phtml:36
 msgid "Edit"
 msgstr ""
 
 #: ../../UI/view/devices/interface-types/partials/list.phtml:28
+#: ../../UI/view/devices/index/partials/list.phtml:41
 msgid "Trash"
 msgstr ""
 
@@ -210,7 +229,6 @@ msgstr ""
 
 #: ../../UI/view/devices/index/index.phtml:8
 #: ../../UI/view/devices/index/monitor.phtml:12
-#: ../../UI/view/dashboard/index/index.phtml:13
 msgid "Device name"
 msgstr ""
 
@@ -222,12 +240,6 @@ msgstr ""
 msgid "The device info was changed"
 msgstr ""
 
-#: ../../UI/view/devices/index/edit-form.phtml:53
-#: ../../UI/view/devices/index/monitor.phtml:17
-#: ../../UI/view/dashboard/index/index.phtml:18
-msgid "Interface"
-msgstr ""
-
 #: ../../UI/view/devices/index/add-form.phtml:2
 msgid "Add new device"
 msgstr ""
@@ -237,51 +249,47 @@ msgid "The device was added"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:4
-msgid "Information"
+msgid "Information for"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:13
-#: ../../UI/view/dashboard/index/index.phtml:14
 msgid "Location"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:15
-#: ../../UI/view/dashboard/index/index.phtml:16
 msgid "Netmask"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:16
-#: ../../UI/view/dashboard/index/index.phtml:17
 msgid "MAC"
 msgstr ""
 
+#: ../../UI/view/devices/index/monitor.phtml:17
+msgid "Interface"
+msgstr ""
+
 #: ../../UI/view/devices/index/monitor.phtml:18
-#: ../../UI/view/dashboard/index/index.phtml:19
 msgid "Bandwidth In"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:19
-#: ../../UI/view/dashboard/index/index.phtml:20
 msgid "Bandwidth Out"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:20
-#: ../../UI/view/dashboard/index/index.phtml:21
 msgid "Status"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:21
-#: ../../UI/view/dashboard/index/index.phtml:22
 msgid "Admin status"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:22
-#: ../../UI/view/dashboard/index/index.phtml:23
 msgid "Queue length"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:43
-msgid "Interfaces statistics for the last 60 seconds"
+msgid "Interfaces statistics for the last 10 minutes"
 msgstr ""
 
 #: ../../UI/view/devices/index/monitor.phtml:51
@@ -321,37 +329,30 @@ msgid "Monitor"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:25
-#: ../../UI/view/dashboard/index/partials/monitor.phtml:35
 msgid "Up"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:26
-#: ../../UI/view/dashboard/index/partials/monitor.phtml:36
 msgid "Down"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:27
-#: ../../UI/view/dashboard/index/partials/monitor.phtml:37
 msgid "Testing"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:28
-#: ../../UI/view/dashboard/index/partials/monitor.phtml:38
 msgid "Unknown"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:29
-#: ../../UI/view/dashboard/index/partials/monitor.phtml:39
 msgid "Dormant"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:30
-#: ../../UI/view/dashboard/index/partials/monitor.phtml:40
 msgid "Not present"
 msgstr ""
 
 #: ../../UI/view/devices/index/partials/monitor.phtml:31
-#: ../../UI/view/dashboard/index/partials/monitor.phtml:41
 msgid "Lower layer down"
 msgstr ""
 
@@ -399,7 +400,7 @@ msgstr ""
 msgid "Edit user"
 msgstr ""
 
-#: ../../UI/view/users/index/edit-form.phtml:34
+#: ../../UI/view/users/index/edit-form.phtml:35
 msgid "The user info was updated"
 msgstr ""
 
@@ -407,7 +408,7 @@ msgstr ""
 msgid "Add new user"
 msgstr ""
 
-#: ../../UI/view/users/index/add-form.phtml:33
+#: ../../UI/view/users/index/add-form.phtml:34
 msgid "The user was added"
 msgstr ""
 
@@ -484,19 +485,49 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
-#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:16
+#: ../../UI/view/reports/index/devices-uptime.phtml:2
+msgid "Devices uptime"
+msgstr ""
+
+#: ../../UI/view/reports/index/interfacesTrafficReport.phtml:4
+#: ../../UI/view/reports/index/interfaces-traffic.phtml:2
+msgid "Interfaces traffic"
+msgstr ""
+
+#: ../../UI/view/reports/index/interfacesTrafficReport.phtml:12
 msgid "Day"
 msgstr ""
 
-#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:25
+#: ../../UI/view/reports/index/interfacesTrafficReport.phtml:21
 msgid "In"
 msgstr ""
 
-#: ../../UI/view/reports/index/interfaceBandwidthReport.phtml:26
+#: ../../UI/view/reports/index/interfacesTrafficReport.phtml:22
 msgid "Out"
 msgstr ""
 
-#: ../../UI/view/reports/index/interface-bandwidth.phtml:2
-msgid "Interfaces traffic"
+#: ../../UI/view/reports/index/devicesTrafficReport.phtml:10
+#: ../../UI/view/reports/index/devices-traffic.phtml:2
+msgid "Devices traffic"
+msgstr ""
+
+#: ../../UI/view/reports/index/devicesTrafficReport.phtml:18
+msgid "Date"
+msgstr ""
+
+#: ../../UI/view/reports/index/devicesTrafficReport.phtml:19
+msgid "Time"
+msgstr ""
+
+#: ../../UI/view/reports/index/devicesTrafficReport.phtml:20
+msgid "Source socket"
+msgstr ""
+
+#: ../../UI/view/reports/index/devicesTrafficReport.phtml:21
+msgid "Destination socket"
+msgstr ""
+
+#: ../../UI/view/reports/index/devicesUptimeReport.phtml:14
+msgid "Recorded at"
 msgstr ""
 

@@ -9,12 +9,15 @@
 
 namespace AAA\Services;
 
+use AAA\Model\Authentication;
 use AAA\Model\Authorization;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class AuthorizationFactory implements FactoryInterface
 {
+    protected $modelService = 'Users\Model\UsersModel';
+
     /**
      * Create service
      *
@@ -24,6 +27,11 @@ class AuthorizationFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new Authorization($serviceLocator);
+        $usersModel = $serviceLocator->get($this->modelService);
+
+        /** @var $auth Authentication */
+        $auth = $serviceLocator->get('AAA\Authentication');
+
+        return new Authorization($usersModel, $auth);
     }
 }

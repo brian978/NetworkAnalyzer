@@ -20,6 +20,23 @@ class Users extends AbstractDbModel
      */
     public $locale = 'en_US';
 
+    /**
+     * @param $identity
+     * @return array
+     */
+    public function getRole($identity)
+    {
+        $this->addJoin(
+            'user_roles',
+            'user_roles.id = users.role_id',
+            array('roleName' => 'role_name')
+        );
+
+        $this->addWhere('email', $identity);
+
+        return parent::fetch();
+    }
+
     public function fetch()
     {
         $this->addJoin(

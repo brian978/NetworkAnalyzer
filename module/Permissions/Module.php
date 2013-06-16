@@ -9,6 +9,7 @@
 
 namespace Permissions;
 
+use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Library\Module as MainModule;
 
@@ -28,14 +29,16 @@ class Module extends MainModule
     {
         $eventManager = $e->getApplication()->getEventManager();
 
-        // Events
-        $eventManager->attach(
-            MvcEvent::EVENT_DISPATCH,
-            array(
-                $this,
-                'injectLayoutVariables'
-            )
-        );
+        if ($e->getRequest() instanceof Request) {
+            // Events
+            $eventManager->attach(
+                MvcEvent::EVENT_DISPATCH,
+                array(
+                    $this,
+                    'injectLayoutVariables'
+                )
+            );
+        }
     }
 
     public function injectLayoutVariables(MvcEvent $e)
@@ -44,6 +47,7 @@ class Module extends MainModule
         $layoutModel    = $e->getViewModel();
 
         $layoutModel->setVariable('acl', $serviceManager->get('acl'));
+
         $layoutModel->setVariable(
             'userAuth',
             $serviceManager->get('authorization')

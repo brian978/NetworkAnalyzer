@@ -1,1 +1,11 @@
-This is the index page of the auth controller.
+<form action="<?php echo $this->loginUrl ?>" method="POST" class="input_form">
+    <label class="form_row" for="email">
+        <span><?php echo $this->translate('Email') ?></span>
+        <input type="text" name="email">
+    </label>
+    <label class="form_row" for="password">
+        <span><?php echo $this->translate('Password') ?></span>
+        <input type="password" name="password">
+    </label>
+    <input type="submit" value="<?php echo $this->translate('Submit') ?>">
+</form>

@@ -73,17 +73,14 @@ return array(
                 )
             ),
             'technical' => array(
-                'inherits' => 'user',
+                'inherits' => 'admin',
                 'resources' => array(
                     'devices' => array(
-
-                        // Empty array to allow all the permission
                         'allow' => array()
                     ),
                     'users' => array(
                         'allow' => array(
                             'access',
-                            'view_users'
                         )
                     )
                 )
@@ -91,13 +88,52 @@ return array(
         ),
         // This section is used by the main controller to determine if the request should be allowed
         'controllers' => array(
-            'Dashboard\Controller\Devices' => array(
+            'Devices\Controller\Index' => array(
                 'resource' => 'devices',
                 'privileges' => array(
                     'index' => 'view_devices',
                     'addForm' => 'admin_devices',
                     'editForm' => 'editForm',
-                    'list' => 'view_devices'
+                    'process' => 'addForm',
+                    'monitor' => 'admin_devices',
+                    'delete' => 'addForm',
+                )
+            ),
+            'Sniffer\Controller\Index' => array(
+                'resource' => 'devices',
+                'privileges' => array(
+                    'index' => 'view_devices',
+                    'addForm' => 'admin_devices',
+                    'editForm' => 'editForm',
+                    'process' => 'addForm',
+                    'monitor' => 'admin_devices',
+                    'delete' => 'addForm',
+                )
+            ),
+            'Dashboard\Controller\Index' => array(
+                'resource' => 'devices',
+                'privileges' => array(
+                    'index' => 'view_devices',
+                )
+            ),
+            'Devices\Controller\Types' => array(
+                'resource' => 'devices',
+                'privileges' => array(
+                    'index' => 'view_devices',
+                    'addForm' => 'admin_devices',
+                    'process' => 'addForm',
+                    'editForm' => 'editForm',
+                    'delete' => 'addForm',
+                )
+            ),
+            'Devices\Controller\InterfaceTypes' => array(
+                'resource' => 'devices',
+                'privileges' => array(
+                    'index' => 'view_devices',
+                    'addForm' => 'admin_devices',
+                    'process' => 'addForm',
+                    'editForm' => 'editForm',
+                    'delete' => 'addForm',
                 )
             ),
             'Settings\Controller\Index' => array(
@@ -118,16 +154,17 @@ return array(
                     'all' => 'access'
                 )
             ),
-            'Settings\Controller\Users' => array(
+            'Users\Controller\Index' => array(
                 'resource' => 'users',
                 'privileges' => array(
                     'profile' => 'profile',
                     'addForm' => 'admin_users',
                     'editForm' => 'addForm',
                     // Inherit from addForm
-                    'processForm' => 'addForm',
+                    'process' => 'addForm',
+                    'delete' => 'addForm',
                     // Inherit from addForm
-                    'list' => 'view_users'
+                    'index' => 'admin_users'
                 )
             ),
         )

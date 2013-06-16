@@ -27,6 +27,9 @@ class Authentication extends AuthenticationService
      */
     public function __construct(ServiceLocatorInterface $serviceLocator)
     {
+        // We register this object on the service locator because we will need it for the authorization
+        $serviceLocator->setService('AAA\Authentication', $this);
+
         /** @var $dbAdapter \Zend\Db\Adapter\Adapter */
         $dbAdapter = $serviceLocator->get('Zend\Db\Adapter\Adapter');
 
@@ -35,7 +38,7 @@ class Authentication extends AuthenticationService
             new DbTable(
                 $dbAdapter,
                 'users',
-                'username',
+                'email',
                 'password'
             )
         );
@@ -52,15 +55,15 @@ class Authentication extends AuthenticationService
     public function setCredentials(array $credentials)
     {
         $defaults = array(
-            'username' => 'dummy',
+            'email' => 'dummy',
             'password' => ''
         );
 
         $credentials = array_merge($defaults, $credentials);
 
         $this->adapter
-            ->setIdentity($credentials['username'])
-            ->setCredential($this->createPassword($credentials));
+            ->setIdentity($credentials['email'])
+        ->setCredential($this->createPassword($credentials));
 
         return $this;
     }
@@ -81,8 +84,8 @@ class Authentication extends AuthenticationService
         /** @var $select \Zend\Db\Sql\Select */
         $select = $this->adapter->getDbSelect();
         $select->from('users')
-            ->where(
-                'username = ' . $platform->quoteValue($credentials['username'])
+        ->where(
+                'email = ' . $platform->quoteValue($credentials['email'])
             );
 
         try {
