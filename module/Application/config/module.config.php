@@ -30,7 +30,7 @@ return array(
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/',
+                    'route' => '[/:lang]/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'index',
