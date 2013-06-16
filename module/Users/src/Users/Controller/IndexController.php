@@ -43,6 +43,7 @@ class IndexController extends AbstractController
                 $this->formSpecs['dataKey'] => array(
                     'id' => $object->id,
                     'name' => $object->name,
+                    'password' => $object->password,
                     'email' => $object->email,
                     'role' => array(
                         'id' => $object->role_id,

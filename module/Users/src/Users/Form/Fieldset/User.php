@@ -59,7 +59,6 @@ class User extends AbstractDbFieldset
                     ),
                 ),
                 'attributes' => array(
-                    'required' => 'true'
                 )
             )
         );

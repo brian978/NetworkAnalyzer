@@ -13,6 +13,7 @@ use Library\Form\AbstractForm;
 use Library\Model\DbModelAwareInterface;
 use Library\Model\ModelAwareInterface;
 use UI\Controller\AbstractUiController;
+use Zend\Form\FormInterface;
 
 abstract class AbstractFormController extends AbstractUiController
 {
@@ -210,10 +211,11 @@ abstract class AbstractFormController extends AbstractUiController
         $hasFailed = true;
 
         if ($this->request->isPost()) {
-            $form    = $this->getForm($this->request->getPost()->toArray());
+            $post    = $this->request->getPost()->toArray();
+            $form    = $this->getForm($post);
             $isValid = $form->isValid();
 
-            if ($form->getObject()->getId() !== 0) {
+            if ($form->getObject()->getId() !== 0 || isset($post['form_mode'])) {
                 $action = 'editForm';
             } else {
                 $action = 'addForm';

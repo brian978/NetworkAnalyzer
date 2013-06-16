@@ -39,7 +39,7 @@ abstract class AbstractController extends AbstractFormController
             true
         );
 
-        $this->PostRedirectGet($url);
+        $this->PostRedirectGet($url, true);
         $this->redirect()->toUrl($url);
     }
 }

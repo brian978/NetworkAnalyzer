@@ -16,11 +16,6 @@ class User extends AbstractEntity
     /**
      * @var string
      */
-    protected $name;
-
-    /**
-     * @var string
-     */
     protected $password;
 
     /**
@@ -32,19 +27,6 @@ class User extends AbstractEntity
      * @var \Users\Entity\Role
      */
     protected $role;
-
-    /**
-     * @param $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * @param string $password

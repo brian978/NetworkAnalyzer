@@ -90,13 +90,17 @@ class Users extends AbstractDbModel
      */
     protected function doInsert($object)
     {
-        $result = 0;
+        $result   = 0;
+        $password = $object->getPassword();
 
-        $data             = array();
-        $data['name']     = $object->getName();
-        $data['password'] = self::generatePasswordHash($object->getPassword());
-        $data['email']    = $object->getEmail();
-        $data['role_id']  = $object->getRole()->getId();
+        $data            = array();
+        $data['name']    = $object->getName();
+        $data['email']   = $object->getEmail();
+        $data['role_id'] = $object->getRole()->getId();
+
+        if (!empty($password)) {
+            $data['password'] = self::generatePasswordHash($password);
+        }
 
         try {
             // If successful will return the number of rows
@@ -114,11 +118,16 @@ class Users extends AbstractDbModel
      */
     protected function doUpdate($object)
     {
-        $data             = array();
-        $data['name']     = $object->getName();
-        $data['password'] = self::generatePasswordHash($object->getPassword());
-        $data['email']    = $object->getEmail();
-        $data['role_id']  = $object->getRole()->getId();
+        $password = $object->getPassword();
+
+        $data            = array();
+        $data['name']    = $object->getName();
+        $data['email']   = $object->getEmail();
+        $data['role_id'] = $object->getRole()->getId();
+
+        if (!empty($password)) {
+            $data['password'] = self::generatePasswordHash($password);
+        }
 
         return $this->executeUpdateById($data, $object);
     }
