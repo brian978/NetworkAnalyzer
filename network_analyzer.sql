@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `project_network_analyzer`
+-- Database: `network_analyzer`
 --
-CREATE DATABASE IF NOT EXISTS `project_network_analyzer` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `project_network_analyzer`;
+CREATE DATABASE IF NOT EXISTS `network_analyzer` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `network_analyzer`;
 
 -- --------------------------------------------------------
 
