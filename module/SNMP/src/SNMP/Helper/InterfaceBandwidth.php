@@ -147,7 +147,7 @@ class InterfaceBandwidth implements HelperInterface
         $diffInOctets  = $last['octets_in'] - $prev['octets_in'];
         $diffOutOctets = $last['octets_out'] - $prev['octets_out'];
         $diffTime      = $last['time'] - $prev['time'];
-
+        var_dump($diffInOctets);
         /**
          * ------------------
          * IN BANDWIDTH
@@ -200,7 +200,7 @@ class InterfaceBandwidth implements HelperInterface
     }
 
     /**
-     * @param Log  $logObject
+     * @param Log $logObject
      * @return $this
      */
     protected function logData(Log $logObject)
