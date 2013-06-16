@@ -14,6 +14,9 @@ use Users\Entity\Role as RoleEntity;
 
 class Role extends AbstractDbFieldset
 {
+    /**
+     * @var string
+     */
     protected $modelName = 'Users\Model\RolesModel';
 
     public function __construct()
@@ -31,7 +34,7 @@ class Role extends AbstractDbFieldset
             array(
                 'name' => 'name',
                 'options' => array(
-                    'label' => 'Name',
+                    'label' => $this->translator->translate('Role name'),
                     'label_attributes' => array(
                         'class' => 'form_row'
                     ),
@@ -52,12 +55,16 @@ class Role extends AbstractDbFieldset
     {
         $options = array();
 
+        if(!is_object($this->model)) {
+            $this->initModel($this->modelName);
+        }
+
         if (is_object($this->model)) {
             $locale = $this->getServiceLocator()->get('translator')->getLocale();
 
-            $options = $this->model->fetch();
+            $result = $this->model->fetch();
 
-            foreach ($options as $value => $row) {
+            foreach ($result as $value => $row) {
                 $options[$value] = $row['name_' . $locale];
             }
         }

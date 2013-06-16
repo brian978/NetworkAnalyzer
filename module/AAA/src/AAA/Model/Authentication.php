@@ -98,10 +98,7 @@ class Authentication extends AuthenticationService
             if ($result->count() === 1) {
                 $row      = $result->current();
                 $data     = Users::processPasswordHash($row['password']);
-                $password = Users::generatePasswordHash(
-                    $credentials['password'],
-                    $data
-                );
+                $password = Users::generatePasswordHash($credentials['password'], $data);
             }
         }
 

@@ -17,11 +17,13 @@ class Roles extends AbstractDbModel
 
     protected function doInsert($object)
     {
-        // TODO: Implement doInsert() method.
     }
 
     protected function doUpdate($object)
     {
-        // TODO: Implement doUpdate() method.
+    }
+
+    public function doDelete($object)
+    {
     }
 }

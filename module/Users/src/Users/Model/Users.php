@@ -9,19 +9,23 @@
 
 namespace Users\Model;
 
-use Library\Entity\AbstractEntity;
 use Library\Model\AbstractDbModel;
 
 class Users extends AbstractDbModel
 {
     protected $table = 'users';
 
-    public function fetch($locale, $params = array())
+    /**
+     * @var string
+     */
+    public $locale = 'en_US';
+
+    public function fetch()
     {
         $this->addJoin(
             'user_roles',
             'user_roles.id = users.role_id',
-            array('roleName' => 'name_' . $locale)
+            array('roleName' => 'name_' . $this->locale)
         );
 
         return parent::fetch();
@@ -56,7 +60,7 @@ class Users extends AbstractDbModel
      * Hashes the password with a new salt or an existing one
      *
      * @param string $password
-     * @param array $data
+     * @param array  $data This is the data received from the password hash processing
      *
      * @return string
      */
@@ -74,10 +78,7 @@ class Users extends AbstractDbModel
 
         $hashCutLen = strlen((string)$hashCut);
         $hash       = hash('sha512', $password . $salt);
-        $hash       = substr($hash, 0, $hashCut) . $salt . substr(
-            $hash,
-            $hashCut
-        ) . $saltLen . $hashCut . $hashCutLen;
+        $hash       = substr($hash, 0, $hashCut) . $salt . substr($hash, $hashCut) . $saltLen . $hashCut . $hashCutLen;
 
         return $hash;
     }
@@ -91,10 +92,11 @@ class Users extends AbstractDbModel
     {
         $result = 0;
 
-        $data            = array();
-        $data['name']    = $object->getName();
-        $data['email']   = $object->getEmail();
-        $data['role_id'] = $object->getRole()->getId();
+        $data             = array();
+        $data['name']     = $object->getName();
+        $data['password'] = self::generatePasswordHash($object->getPassword());
+        $data['email']    = $object->getEmail();
+        $data['role_id']  = $object->getRole()->getId();
 
         try {
             // If successful will return the number of rows
@@ -112,11 +114,17 @@ class Users extends AbstractDbModel
      */
     protected function doUpdate($object)
     {
-        $data            = array();
-        $data['name']    = $object->getName();
-        $data['email']   = $object->getEmail();
-        $data['role_id'] = $object->getRole()->getId();
+        $data             = array();
+        $data['name']     = $object->getName();
+        $data['password'] = self::generatePasswordHash($object->getPassword());
+        $data['email']    = $object->getEmail();
+        $data['role_id']  = $object->getRole()->getId();
 
         return $this->executeUpdateById($data, $object);
+    }
+
+    public function doDelete($object)
+    {
+        // TODO: Implement doDelete() method.
     }
 }

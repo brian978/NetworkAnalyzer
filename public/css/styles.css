@@ -19,7 +19,9 @@
     padding-right: 5px;
 }
 
-.form_row > input[type="text"], .form_row > select {
+.form_row > input[type="text"],
+.form_row > input[type="password"],
+.form_row > select {
     display: table-cell;
     width: 200px;
 }
