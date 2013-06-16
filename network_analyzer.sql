@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2013 at 09:21 AM
+-- Generation Time: Jun 16, 2013 at 10:13 AM
 -- Server version: 5.5.30-1.1
 -- PHP Version: 5.4.4-14
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `bandwidth_logs` (
   `device_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `device_id` (`device_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=182353 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=183029 ;
 
 -- --------------------------------------------------------
 
@@ -109,8 +109,9 @@ CREATE TABLE IF NOT EXISTS `traffic_logs` (
   `dst_port` int(11) NOT NULL,
   `iface_name` varchar(50) NOT NULL,
   `device_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=116488 ;
+  PRIMARY KEY (`id`),
+  KEY `device_id` (`device_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=117067 ;
 
 -- --------------------------------------------------------
 
@@ -161,6 +162,12 @@ ALTER TABLE `devices`
   ADD CONSTRAINT `devices_ibfk_2` FOREIGN KEY (`interface_type_id`) REFERENCES `interface_types` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `devices_ibfk_3` FOREIGN KEY (`type_id`) REFERENCES `device_types` (`id`),
   ADD CONSTRAINT `devices_ibfk_4` FOREIGN KEY (`type_id`) REFERENCES `device_types` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `traffic_logs`
+--
+ALTER TABLE `traffic_logs`
+  ADD CONSTRAINT `traffic_logs_ibfk_1` FOREIGN KEY (`device_id`) REFERENCES `devices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
