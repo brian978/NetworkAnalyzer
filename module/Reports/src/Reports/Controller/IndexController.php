@@ -150,6 +150,7 @@ class IndexController extends AbstractFormController
                 $this->layout('layout/report.phtml');
 
                 $viewModel = new ViewModel(array(
+                    'postData' => $post,
                     'reportData' => $reportData,
                     'deviceInfo' => $deviceInfo,
                 ));

@@ -1,7 +1,13 @@
+<?php
+
+$data = $this->postData['devices_traffic'];
+
+?>
+
 <article class="module width_full">
     <header>
         <h3>
-            <?php echo $this->translate('Devices traffic') . ' ' . $this->deviceInfo->name; ?>
+            <?php echo $this->translate('Devices traffic') . ' "' . $this->deviceInfo->name . '" - ' . strtoupper($data['traffic_type']); ?>
         </h3>
     </header>
     <div class="module_content tableholder">

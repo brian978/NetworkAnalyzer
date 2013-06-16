@@ -52,6 +52,7 @@ class InterfacesTraffic extends AbstractReport
 
         $days             = array();
         $interfaces       = array();
+        $trafficData      = array();
         $oneDaySeconds    = 86400;
         $xDaysSeconds     = $noDays * $oneDaySeconds;
         $currentTime      = time();
@@ -63,20 +64,51 @@ class InterfacesTraffic extends AbstractReport
 
         $result = $this->model->getLastSeconds($lastXDays, $this->data['device']['id'], 0);
 
+        // Getting the minimum octets IN/OUT
+        foreach ($result as $data) {
+            $date          = $data['date'];
+            $interfaceName = $data['interface_name'];
+
+            if (!isset($trafficData[$date][$interfaceName])) {
+                $trafficData[$date][$interfaceName] = array(
+                    'octets_in' => $data['octets_in'],
+                    'octets_out' => $data['octets_out'],
+                );
+            } else {
+                if ($data['octets_in'] < $trafficData[$date][$interfaceName]['octets_in']) {
+                    $trafficData[$date][$interfaceName]['octets_in'] = $data['octets_in'];
+                }
+
+                if ($data['octets_out'] < $trafficData[$date][$interfaceName]['octets_out']) {
+                    $trafficData[$date][$interfaceName]['octets_out'] = $data['octets_out'];
+                }
+            }
+        }
+
+        // Calculating the traffic data
         foreach ($result as $data) {
             $date                       = $data['date'];
             $interfaceName              = $data['interface_name'];
             $interfaces[$interfaceName] = $data['oid_index'];
 
-            if (isset($days[$date][$interfaceName])) {
-                $days[$date][$interfaceName]['octets_in'] += $data['octets_in'];
-                $days[$date][$interfaceName]['octets_out'] += $data['octets_out'];
-            } else {
+            if (!isset($days[$date][$interfaceName])) {
                 $days[$date][$interfaceName] = array(
                     'octets_in' => 0,
                     'octets_out' => 0,
                 );
             }
+
+            if (isset($trafficData[$date][$interfaceName]['octets_in'])) {
+                $data['octets_in'] -= $trafficData[$date][$interfaceName]['octets_in'];
+            }
+
+            if (isset($trafficData[$date][$interfaceName]['octets_out'])) {
+                $data['octets_out'] -= $trafficData[$date][$interfaceName]['octets_out'];
+            }
+
+            $days[$date][$interfaceName]['octets_in'] += $data['octets_in'];
+            $days[$date][$interfaceName]['octets_out'] += $data['octets_out'];
+
         }
 
         return array(
