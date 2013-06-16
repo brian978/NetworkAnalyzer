@@ -44,4 +44,26 @@ class Iface extends AbstractDbFieldset
         $type->loadElements();
         $this->add($type);
     }
+
+    /**
+     * Should return an array specification compatible with
+     * {@link Zend\InputFilter\Factory::createInputFilter()}.
+     *
+     * @return array
+     */
+    public function getInputFilterSpecification()
+    {
+        $filters = $this->getGenericInputFilterSpecs();
+
+        $filters['ip'] = array(
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'Ip',
+                )
+            )
+        );
+
+        return $this->processDenyFilters($filters);
+    }
 }
