@@ -49,9 +49,14 @@ return array(
             'guest' => array(
                 'inherits' => null,
                 'resources' => array(
-                    'dashboard' => array(
+                    'devices' => array(
                         'allow' => array(
                             'access'
+                        )
+                    ),
+                    'admin' => array(
+                        'allow' => array(
+                            'logout'
                         )
                     )
                 )
@@ -59,6 +64,11 @@ return array(
             'user' => array(
                 'inherits' => 'guest',
                 'resources' => array(
+                    'devices' => array(
+                        'allow' => array(
+                            'view_devices'
+                        )
+                    ),
                     'users' => array(
                         'allow' => array(
                             'access',
@@ -113,7 +123,7 @@ return array(
             'Dashboard\Controller\Index' => array(
                 'resource' => 'devices',
                 'privileges' => array(
-                    'index' => 'view_devices',
+                    'index' => 'access',
                 )
             ),
             'Devices\Controller\Types' => array(

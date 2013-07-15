@@ -77,7 +77,7 @@ return array(
         'locale' => array(
             'ro_RO',
             // Fallback locale
-            'en_US'
+//            'en_US'
         ),
         'translation_file_patterns' => array(
             array(
