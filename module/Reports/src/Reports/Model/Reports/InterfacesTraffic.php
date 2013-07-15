@@ -59,7 +59,9 @@ class InterfacesTraffic extends AbstractReport
         $timeFromMidnight = strtotime(date('Y-m-d', $currentTime) . ' 00:00:00');
         $lastXDays        = $currentTime - ($currentTime - $timeFromMidnight) - $xDaysSeconds;
 
-        $timeTo = $this->model->getWhere('time', $timeFromMidnight, 'bandwidth_logs', '<');
+//        $timeTo = $this->model->getWhere('time', $timeFromMidnight, 'bandwidth_logs', '<');
+        $timeTo = $this->model->getWhere('time', time(), $this->model->getTable(), '<');
+
         $this->model->addWhere($timeTo, true);
 
         $result = $this->model->getLastSeconds($lastXDays, $this->data['device']['id'], 0);
@@ -99,7 +101,7 @@ class InterfacesTraffic extends AbstractReport
                 );
 
                 if (isset($trafficData[$date][$interfaceName]['octets_in'])) {
-                    $days[$date][$interfaceName]['octets_id'] -= $trafficData[$date][$interfaceName]['octets_in'];
+                    $days[$date][$interfaceName]['octets_in'] -= $trafficData[$date][$interfaceName]['octets_in'];
                 }
 
                 if (isset($trafficData[$date][$interfaceName]['octets_out'])) {
@@ -107,12 +109,12 @@ class InterfacesTraffic extends AbstractReport
                 }
             }
 
-            if($data['id'] != $trafficData[$date][$interfaceName]['id']) {
-                if($days[$date][$interfaceName]['octets_in'] < $data['octets_in']) {
+            if ($data['id'] != $trafficData[$date][$interfaceName]['id']) {
+                if ($days[$date][$interfaceName]['octets_in'] < $data['octets_in']) {
                     $days[$date][$interfaceName]['octets_in'] = $data['octets_in'];
                 }
 
-                if($days[$date][$interfaceName]['octets_out'] < $data['octets_out']) {
+                if ($days[$date][$interfaceName]['octets_out'] < $data['octets_out']) {
                     $days[$date][$interfaceName]['octets_out'] = $data['octets_out'];
                 }
             }

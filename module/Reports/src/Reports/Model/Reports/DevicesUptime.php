@@ -44,7 +44,8 @@ class DevicesUptime extends AbstractReport
         $lastXDays        = $currentTime - ($currentTime - $timeFromMidnight) - $xDaysSeconds;
 
         $timeFrom = $this->model->getWhere('time', $lastXDays, $this->model->getTable(), '>');
-        $timeTo   = $this->model->getWhere('time', $timeFromMidnight, $this->model->getTable(), '<');
+//        $timeTo   = $this->model->getWhere('time', $timeFromMidnight, $this->model->getTable(), '<');
+        $timeTo = $this->model->getWhere('time', time(), $this->model->getTable(), '<');
 
         $select = $this->model->getSelect();
         $select->columns(array('id', 'uptime', 'date', 'time'));
