@@ -75,7 +75,7 @@ return array(
     ),
     'translator' => array(
         'locale' => array(
-            'en_US',
+            'ro_RO',
             // Fallback locale
             'en_US'
         ),
