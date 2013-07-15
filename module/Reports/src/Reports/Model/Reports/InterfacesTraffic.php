@@ -73,6 +73,7 @@ class InterfacesTraffic extends AbstractReport
                 $trafficData[$date][$interfaceName] = array(
                     'octets_in' => $data['octets_in'],
                     'octets_out' => $data['octets_out'],
+                    'id' => $data['id'],
                 );
             } else {
                 if ($data['octets_in'] < $trafficData[$date][$interfaceName]['octets_in']) {
@@ -96,19 +97,25 @@ class InterfacesTraffic extends AbstractReport
                     'octets_in' => 0,
                     'octets_out' => 0,
                 );
+
+                if (isset($trafficData[$date][$interfaceName]['octets_in'])) {
+                    $days[$date][$interfaceName]['octets_id'] -= $trafficData[$date][$interfaceName]['octets_in'];
+                }
+
+                if (isset($trafficData[$date][$interfaceName]['octets_out'])) {
+                    $days[$date][$interfaceName]['octets_out'] -= $trafficData[$date][$interfaceName]['octets_out'];
+                }
             }
 
-            if (isset($trafficData[$date][$interfaceName]['octets_in'])) {
-                $data['octets_in'] -= $trafficData[$date][$interfaceName]['octets_in'];
+            if($data['id'] != $trafficData[$date][$interfaceName]['id']) {
+                if($days[$date][$interfaceName]['octets_in'] < $data['octets_in']) {
+                    $days[$date][$interfaceName]['octets_in'] = $data['octets_in'];
+                }
+
+                if($days[$date][$interfaceName]['octets_out'] < $data['octets_out']) {
+                    $days[$date][$interfaceName]['octets_out'] = $data['octets_out'];
+                }
             }
-
-            if (isset($trafficData[$date][$interfaceName]['octets_out'])) {
-                $data['octets_out'] -= $trafficData[$date][$interfaceName]['octets_out'];
-            }
-
-            $days[$date][$interfaceName]['octets_in'] += $data['octets_in'];
-            $days[$date][$interfaceName]['octets_out'] += $data['octets_out'];
-
         }
 
         return array(
